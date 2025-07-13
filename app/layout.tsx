@@ -1,6 +1,9 @@
-import type { Metadata } from "next";
-import { Recursive } from "next/font/google";
+import Header from "@/components/Header";
+import Footer from "@/components/Footer";
 import "./globals.css";
+import { Recursive } from "next/font/google";
+import type { Metadata } from "next";
+import clsx from 'clsx';
 
 const recursive = Recursive({
   variable: "--font-recursive",
@@ -22,9 +25,16 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body
-        className={`${recursive.variable} antialiased `}
+        className={clsx(
+          'min-h-[100dvh] flex flex-col',
+          `${recursive.variable} antialiased`,
+        )}
       >
-        {children}
+        <Header />
+        <main className='p-10'>
+          {children}
+        </main>
+        <Footer />
       </body>
     </html>
   );
