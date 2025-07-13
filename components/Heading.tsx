@@ -10,8 +10,8 @@ export default function Heading({ children, level = 1 }: HeadingProps) {
 
   // Define explicit class mappings so Tailwind can detect them
   const headingStyles = {
-    1: "text-4xl font-bold mb-4",
-    2: "text-3xl font-bold mb-4",
+    1: "text-4xl font-black mb-4",
+    2: "text-3xl font-extrabold my-4",
     3: "text-2xl font-bold mb-4",
     4: "text-xl font-bold mb-4",
     5: "text-lg font-bold mb-4",
