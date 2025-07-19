@@ -12,11 +12,11 @@ export default function Social({ platform }: SocialProps) {
   const instagramUrl = 'https://www.instagram.com/urbantechcreative/';
   const youtubeUrl = 'https://www.youtube.com/@xlwerks6486';
 
-  const buttonStyle = 'hover:text-white';
+  const anchorStyle = 'w-4 h-4 sm:w-6 sm:h-6 hover:text-white';
 
   if (platform === 'linkedin') {
     return (
-      <a href={linkedInUrl} target="_blank" rel="noopener noreferrer" className={buttonStyle}>
+      <a href={linkedInUrl} target="_blank" rel="noopener noreferrer" className={anchorStyle}>
         <LinkedInIcon />
       </a>
     );
@@ -24,7 +24,7 @@ export default function Social({ platform }: SocialProps) {
 
   if (platform === 'instagram') {
     return (
-      <a href={instagramUrl} target="_blank" rel="noopener noreferrer" className={buttonStyle}>
+      <a href={instagramUrl} target="_blank" rel="noopener noreferrer" className={anchorStyle}>
         <InstagramIcon />
       </a>
     );
@@ -32,7 +32,7 @@ export default function Social({ platform }: SocialProps) {
 
   if (platform === 'youtube') {
     return (
-      <a href={youtubeUrl} target="_blank" rel="noopener noreferrer" className={buttonStyle}>
+      <a href={youtubeUrl} target="_blank" rel="noopener noreferrer" className={anchorStyle}>
         <YouTubeIcon />
       </a>
     );
