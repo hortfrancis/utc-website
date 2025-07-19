@@ -1,15 +1,16 @@
 'use client';
 
+import { usePathname } from 'next/navigation';
 import Link from 'next/link';
 import { clsx } from 'clsx';
-import { usePathname } from 'next/navigation';
 
-interface NavLinkProps {
+export interface NavLinkProps {
   href: string;
-  children: React.ReactNode;
+  label: string;
+  onClick?: () => void;
 }
 
-export default function NavLink({ href, children }: NavLinkProps) {
+export default function NavLink({ href, label, onClick }: NavLinkProps) {
   const pathname = usePathname();
   const isActive = href !== '/' && pathname.startsWith(href);
 
@@ -24,8 +25,9 @@ export default function NavLink({ href, children }: NavLinkProps) {
         href={href}
         className={styles}
         aria-current={isActive ? 'page' : undefined}
+        onClick={onClick}
       >
-        {children}
+        {label}
       </Link>
     </li>
   );

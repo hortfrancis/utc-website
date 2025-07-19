@@ -1,14 +1,16 @@
 import Logo from './Logo';
-import Nav from './Nav';
+import Nav from './Nav/Nav';
 import clsx from 'clsx';
 
 export default function Header() {
   return (
-    <header className={clsx(
-      'flex items-center justify-between',
-      'px-10 py-4',
-      'border-b'
-    )}>
+    <header
+      className={clsx(
+        'flex items-center justify-between',
+        'h-16 px-10',
+        'border-b'
+      )}
+    >
       <Logo />
       <Nav />
     </header>
