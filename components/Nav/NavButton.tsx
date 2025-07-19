@@ -10,7 +10,8 @@ export default function NavButton({ onClick }: NavButtonProps) {
     'w-8 h-8',
     'text-gray-700',
     'hover:text-gray-900',
-    'focus:outline-none focus:bg-gray-200 rounded-sm'
+    'focus:outline-none focus:bg-gray-200 rounded-sm',
+    'cursor-pointer',
   );
 
   return (

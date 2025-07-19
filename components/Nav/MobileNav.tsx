@@ -1,6 +1,6 @@
 'use client';
 
-import { useState } from 'react';
+import { useState, useRef, useEffect } from 'react';
 import clsx from 'clsx';
 import NavLink from './NavLink';
 import NavButton from './NavButton';
@@ -12,6 +12,23 @@ export interface MobileNavProps {
 
 export default function MobileNav({ links }: MobileNavProps) {
   const [isOpen, setIsOpen] = useState(false);
+  const navRef = useRef<HTMLElement>(null);
+
+  useEffect(() => {
+    function handleClickOutside(event: MouseEvent) {
+      if (navRef.current && !navRef.current.contains(event.target as Node)) {
+        closeMenu();
+      }
+    }
+
+    if (isOpen) {
+      document.addEventListener('mousedown', handleClickOutside);
+    }
+
+    return () => {
+      document.removeEventListener('mousedown', handleClickOutside);
+    };
+  }, [isOpen]);
 
   function handleButtonClick() {
     setIsOpen((prev) => !prev);
@@ -22,7 +39,7 @@ export default function MobileNav({ links }: MobileNavProps) {
   }
 
   return (
-    <nav className='sm:hidden'>
+    <nav className='sm:hidden' ref={navRef}>
       <NavButton onClick={handleButtonClick} />
 
       {isOpen && (
