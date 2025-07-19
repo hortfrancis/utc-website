@@ -1,24 +1,25 @@
 import Heading from '@/components/Heading';
+import Section from '@/components/Section';
 
 export default function XRPage() {
   return (
     <div className=''>
       <Heading level={1}>XR: Extended Reality</Heading>
 
-      <section id='what-is-xr'>
+      <Section id='what-is-xr'>
         <Heading level={2}>What is XR?</Heading>
         <p>[Explanation of what XR is...]</p>
-      </section>
+      </Section>
 
-      <section id='what-is-vr'>
+      <Section id='what-is-vr'>
         <Heading level={2}>What is VR?</Heading>
         <p>[Explanation of what VR is...]</p>
-      </section>
+      </Section>
 
-      <section id='what-is-ar'>
+      <Section id='what-is-ar'>
         <Heading level={2}>What is AR?</Heading>
         <p>[Explanation of what AR is...]</p>
-      </section>
+      </Section>
     </div>
   );
 }
