@@ -41,6 +41,11 @@ export default function WorkPage() {
             href="/work/tracing-the-footprint" className={linkStyle}>
             Tracing the Footprint</Link>
         </li>
+        <li>
+          <Link
+            href="/work/afghan-project" className={linkStyle}>
+            Afghan Project</Link>
+        </li>
       </ul>
     </div>
   )
