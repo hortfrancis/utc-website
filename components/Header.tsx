@@ -8,7 +8,7 @@ export default function Header() {
       className={clsx(
         'flex items-center justify-between',
         'h-30 px-10',
-        'border-b'
+        'bg-background border-b'
       )}
     >
       <Logo cubeSize={40} />
