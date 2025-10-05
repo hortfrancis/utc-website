@@ -1,7 +1,7 @@
 import Square from './Square';
 
 export type GridSquare = {
-  background: 'opaque' | 'clear';
+  colour: 'opaque' | 'clear';
   corner?: 'top-left' | 'top-right' | 'bottom-left' | 'bottom-right';
 }
 
@@ -29,7 +29,7 @@ export default function Grid({
         <div
           key={index}
         >
-          <Square opaque={square.background === 'opaque'} corner={square.corner} />
+          <Square colour={square.colour} corner={square.corner} />
         </div>
       ))}
     </div>

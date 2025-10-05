@@ -1,20 +1,20 @@
 import clsx from 'clsx';
 
 interface SquareProps {
-  opaque: boolean;
+  colour: 'opaque' | 'clear';
   corner?: 'top-left' | 'top-right' | 'bottom-left' | 'bottom-right';
 }
 
 export default function Square({
-  opaque = false,
+  colour = 'clear',
   corner
 }: SquareProps) {
 
   const style = clsx(
     'w-full h-full',
     {
-      'bg-black': opaque,
-      'bg-white': !opaque
+      'bg-black': colour === 'opaque',
+      'bg-transparent': colour === 'clear'
     },
     corner === 'top-left' && ('rounded-tl-lg'),
     corner === 'top-right' && ('rounded-tr-lg'),
