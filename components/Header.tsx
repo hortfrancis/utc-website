@@ -1,4 +1,4 @@
-import Logo from './Logo';
+import Logo from './Logo/Logo';
 import Nav from './Nav/Nav';
 import clsx from 'clsx';
 
@@ -7,11 +7,11 @@ export default function Header() {
     <header
       className={clsx(
         'flex items-center justify-between',
-        'h-16 px-10',
+        'h-30 px-10',
         'border-b'
       )}
     >
-      <Logo />
+      <Logo cubeSize={40} />
       <Nav />
     </header>
   );
