@@ -13,7 +13,7 @@ export default function Square({
   const style = clsx(
     'w-full h-full',
     {
-      'bg-black': colour === 'opaque',
+      'bg-foreground': colour === 'opaque',
       'bg-transparent': colour === 'clear'
     },
     corner === 'top-left' && ('rounded-tl-lg'),

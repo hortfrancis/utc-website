@@ -15,8 +15,8 @@ export default function NavLink({ href, label, onClick }: NavLinkProps) {
   const isActive = href !== '/' && pathname.startsWith(href);
 
   const styles = clsx({
-    'text-blue-600 font-semibold border-b-2 border-blue-600': isActive,
-    'text-gray-700 hover:text-blue-600': !isActive,
+    'text-theme-purple font-semibold border-b-2 border-theme-purple': isActive,
+    'text-foreground hover:text-theme-purple': !isActive,
   });
 
   return (
