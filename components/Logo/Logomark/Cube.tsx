@@ -22,7 +22,7 @@ export default function Cube({
       // 'U' in 'UTC'
       { background: 'opaque' },
       { background: 'clear' },
-      { background: 'opaque' },
+      { background: 'opaque', corner: 'top-left' },
       { background: 'opaque' },
       { background: 'clear' },
       { background: 'opaque' },
@@ -34,7 +34,7 @@ export default function Cube({
       // 'T' in 'UTC'
       { background: 'opaque' },
       { background: 'opaque' },
-      { background: 'opaque' },
+      { background: 'opaque', corner: 'bottom-right' },
       { background: 'clear' },
       { background: 'opaque' },
       { background: 'clear' },
@@ -46,13 +46,13 @@ export default function Cube({
       // 'C' in 'UTC'
       { background: 'opaque' },
       { background: 'opaque' },
-      { background: 'opaque' },
+      { background: 'opaque', corner: 'top-right' },
       { background: 'opaque' },
       { background: 'clear' },
       { background: 'clear' },
       { background: 'opaque' },
       { background: 'opaque' },
-      { background: 'opaque' },
+      { background: 'opaque', corner: 'bottom-right' },
     ],
   }
 

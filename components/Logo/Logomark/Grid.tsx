@@ -1,5 +1,8 @@
+import Square from './Square';
+
 export type GridSquare = {
   background: 'opaque' | 'clear';
+  corner?: 'top-left' | 'top-right' | 'bottom-left' | 'bottom-right';
 }
 
 interface GridProps {
@@ -25,8 +28,9 @@ export default function Grid({
       {squares.map((square, index) => (
         <div
           key={index}
-          className={`w-full h-full ${square.background === 'opaque' ? 'bg-black' : 'bg-white'}`}
-        />
+        >
+          <Square opaque={square.background === 'opaque'} corner={square.corner} />
+        </div>
       ))}
     </div>
   );
