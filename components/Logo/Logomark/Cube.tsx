@@ -1,5 +1,6 @@
 import Face from './Face';
 import type { GridSquare } from './Grid';
+import './spin-cube.css';
 
 type GridSquares = {
   front: GridSquare[];
@@ -9,10 +10,12 @@ type GridSquares = {
 
 interface CubeProps {
   size: number
+  spin: boolean; // Experimental
 }
 
 export default function Cube({
   size,
+  spin,
 }: CubeProps) {
 
   const gridGap = size / 30;
@@ -57,7 +60,7 @@ export default function Cube({
   }
 
   return <div
-    className='relative transform-3d'
+    className={`relative transform-3d ${spin ? 'logomark-cube--spin' : ''}`}
     style={{
       width: `${size}px`,
       height: `${size}px`,

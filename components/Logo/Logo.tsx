@@ -1,5 +1,7 @@
-// import Link from "next/link";
-// import Square from "./Logomark/Square";
+'use client';
+
+import { useState } from 'react';
+import Link from 'next/link';
 import Logomark from './Logomark';
 import Logotype from './Logotype';
 
@@ -17,10 +19,17 @@ export default function Logo({
   textLayout = 'stacked', // One line per word 
 }: LogoProps) {
 
+  const [spin, setSpin] = useState(false);
+
   return (
-    <div className={`flex items-center ${lockup === 'horizontal' ? 'flex-row' : 'flex-col'} gap-6`}>
-      <Logomark cubeSize={cubeSize} />
+    <Link
+      href="/"
+      className={`flex items-center ${lockup === 'horizontal' ? 'flex-row' : 'flex-col'} gap-6 p-2`}
+      onMouseEnter={() => setSpin(true)}
+      onMouseLeave={() => setSpin(false)}
+    >
+      <Logomark cubeSize={cubeSize} spin={spin} />
       <Logotype textLayout={textLayout} />
-    </div>
+    </Link>
   );
 }

@@ -1,0 +1,14 @@
+.logomark-cube--spin {
+  animation: spin-cube 10s linear infinite;
+  transform-style: preserve-3d;
+}
+
+@keyframes spin-cube {
+  from {
+    transform: rotateX(-33deg) rotateY(45deg);
+  }
+
+  to {
+    transform: rotateX(-33deg) rotateY(405deg);
+  }
+}
