@@ -46,3 +46,8 @@ body {
   color: var(--foreground);
   font-family: var(--font-recursive), ui-sans-serif, system-ui, sans-serif;
 }
+
+a strong {
+  /* Tailwind default is 900 -- a bit much */
+  font-weight: 700;
+}
