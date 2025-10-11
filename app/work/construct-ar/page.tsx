@@ -1,11 +1,9 @@
-import Heading from '@/components/Heading';
+import Content from '@/content/work/construct-ar.mdx';
 
 export default function ConstructARPage() {
   return (
     <div>
-      <Heading level={1}>Construct AR</Heading>
-      <p>[Description of Construct AR...]</p>
-
+      <Content />
     </div>
   );
 }

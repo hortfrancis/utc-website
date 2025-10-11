@@ -6,7 +6,7 @@ export default function BTUrbanARLayout({ children }: { children: React.ReactNod
       <Breadcrumbs
         items={[
           { label: 'Work', path: '/work' },
-          { label: 'BT Urban AR', current: true },
+          { label: 'BT Urban.AR', current: true },
         ]}
       />
       {children}

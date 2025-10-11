@@ -1,11 +1,9 @@
-import Heading from '@/components/Heading';
+import Content from '@/content/work/pop-xr.mdx';
 
 export default function PopXRPage() {
   return (
     <div>
-      <Heading level={1}>Pop XR</Heading>
-      <p>[Description of Pop XR...]</p>
-
+      <Content />
     </div>
   );
 }

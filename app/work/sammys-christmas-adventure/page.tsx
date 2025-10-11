@@ -1,11 +1,9 @@
-import Heading from '@/components/Heading';
+import Content from '@/content/work/sammys-christmas-adventure.mdx';
 
 export default function SammysXmasAdventurePage() {
   return (
     <div>
-      <Heading level={1}>Sammy&apos;s Christmas Adventure</Heading>
-      <p>[Description of Sammy&apos;s Christmas Adventure...]</p>
-
+      <Content />
     </div>
   );
 }

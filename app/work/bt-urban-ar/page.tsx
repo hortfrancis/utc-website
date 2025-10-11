@@ -1,11 +1,9 @@
-import Heading from '@/components/Heading';
+import Content from '@/content/work/bt-urban-ar.mdx';
 
 export default function BTUrbanARPage() {
   return (
     <div>
-      <Heading level={1}>BT Urban AR</Heading>
-      <p>[Description of BT Urban AR...]</p>
-
+      <Content />
     </div>
   );
 }

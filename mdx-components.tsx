@@ -11,7 +11,7 @@ const components: MDXComponents = {
   h6: (props) => <Heading level={6} {...props} />,
   p: (props) => <p className="my-4 leading-6.5" {...props} />,
   a: ({ href = '', ...props }) => {
-    const linkStyles = 'text-theme-purple font-semibold hover:underline decoration-2 underline-offset-2';
+    const linkStyle = 'text-theme-purple font-semibold hover:underline decoration-2 underline-offset-2';
 
     const isExternal = href.startsWith('http');
     return isExternal ? (
@@ -19,12 +19,13 @@ const components: MDXComponents = {
         href={href}
         target="_blank"
         rel="noopener noreferrer"
-        className={linkStyles} {...props} />
+        className={linkStyle} {...props} />
     ) : (
       // Use next/link for internal links for client-side navigation
-      <Link href={href} className={linkStyles} {...props} />
+      <Link href={href} className={linkStyle} {...props} />
     );
-  }
+  },
+  hr: (props) => <hr className="my-8 border-theme-black" {...props} />,
 };
 
 export function useMDXComponents(): MDXComponents {

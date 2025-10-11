@@ -6,7 +6,7 @@ export default function ConstructARLayout({ children }: { children: React.ReactN
       <Breadcrumbs
         items={[
           { label: 'Work', path: '/work' },
-          { label: 'Construct AR', current: true },
+          { label: 'Construct.AR', current: true },
         ]}
       />
       {children}

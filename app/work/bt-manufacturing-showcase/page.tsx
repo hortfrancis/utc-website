@@ -1,11 +1,9 @@
-import Heading from '@/components/Heading';
+import Content from '@/content/work/bt-manufacturing-showcase.mdx';
 
 export default function BTManufacturingShowcasePage() {
   return (
     <div>
-      <Heading level={1}>BT Manufacturing Showcase</Heading>
-      <p>[Description of BT Manufacturing Showcase...]</p>
-
+      <Content />
     </div>
   );
 }

@@ -6,7 +6,7 @@ export default function PopXRLayout({ children }: { children: React.ReactNode })
       <Breadcrumbs
         items={[
           { label: 'Work', path: '/work' },
-          { label: 'Pop XR', current: true },
+          { label: 'Pop.XR', current: true },
         ]}
       />
       {children}

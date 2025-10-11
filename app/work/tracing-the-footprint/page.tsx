@@ -1,11 +1,9 @@
-import Heading from '@/components/Heading';
+import Content from '@/content/work/tracing-the-footprint.mdx';
 
 export default function TracingFootprintPage() {
   return (
     <div>
-      <Heading level={1}>Tracing the Footprint</Heading>
-      <p>[Description of Tracing the Footprint...]</p>
-
+      <Content />
     </div>
   );
 }

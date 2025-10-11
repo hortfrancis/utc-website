@@ -31,7 +31,7 @@ export default function RootLayout({
         )}
       >
         <Header />
-        <main className='p-10'>
+        <main className='p-10 w-full max-w-4xl mx-auto'>
           {children}
         </main>
         <Footer />
