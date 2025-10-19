@@ -1,0 +1,67 @@
+:root {
+  --cube-size: 45vw;
+  --cube-half-size: calc(var(--cube-size) / 2);
+  --cube-face-font-size: calc(var(--cube-size) / 10);
+}
+
+@media (min-width: 500px) {
+  :root {
+    --cube-size: 33vw;
+  }
+}
+
+@media (min-width: 800px) {
+  :root {
+    /* Max size */
+    --cube-size: 300px;
+  }
+}
+
+.scene {
+  width: var(--cube-size);
+  height: var(--cube-size);
+  perspective: 1000px;
+  perspective-origin: center;
+}
+
+.cube {
+  width: var(--cube-size);
+  height: var(--cube-size);
+  transform-style: preserve-3d;
+  transform: rotateX(-25deg) rotateY(45deg);
+
+}
+
+.face {
+  backface-visibility: hidden;
+  transform-origin: center;
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  box-sizing: border-box;
+  font-size: var(--cube-face-font-size);
+}
+
+.face--front {
+  transform: translateZ(var(--cube-half-size));
+}
+
+.face--back {
+  transform: translateZ(calc(var(--cube-half-size) * -1)) rotateY(180deg);
+}
+
+.face--right {
+  transform: translateX(var(--cube-half-size)) rotateY(90deg);
+}
+
+.face--left {
+  transform: translateX(calc(var(--cube-half-size) * -1)) rotateY(-90deg);
+}
+
+.face--top {
+  transform: translateY(calc(var(--cube-half-size) * -1)) rotateX(90deg);
+}
+
+.face--bottom {
+  transform: translateY(var(--cube-half-size)) rotateX(-90deg);
+}

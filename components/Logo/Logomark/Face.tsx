@@ -1,8 +1,7 @@
-import clsx from 'clsx';
 import Grid from './Grid';
 import type { GridSquare } from './Grid';
 
-interface FrontFaceProps {
+interface FaceProps {
   cubeSize: number;
   gridGap: number;
   position: 'front' | 'left' | 'top';
@@ -14,7 +13,7 @@ export default function Face({
   cubeSize,
   position,
   gridSquares
-}: FrontFaceProps) {
+}: FaceProps) {
 
   const cubeHalfSize = cubeSize / 2;
 
@@ -24,16 +23,10 @@ export default function Face({
     left: `rotateY(-90deg) translateZ(${cubeHalfSize}px)`,
   };
 
-  const style = clsx(
-    'absolute w-full h-full backface-hidden box-border flex content-center items-center',
-  );
-
   return (
     <div
-      className={style}
-      style={{
-        transform: transformStyles[position]
-      }}
+      className='absolute w-full h-full backface-hidden box-border flex content-center items-center'
+      style={{ transform: transformStyles[position] }}
     >
       <Grid gap={gridGap} squares={gridSquares} />
     </div>

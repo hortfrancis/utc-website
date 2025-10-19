@@ -7,7 +7,8 @@ export default function Footer() {
       'mt-auto p-4',
       'flex flex-col sm:flex-row gap-4',
       'bg-black text-gray-300',
-      'text-left'
+      'text-left',
+      'z-10' // Needed due to full-screen Cube positioning in Home page
     )}>
       <div className='ml-4 sm:ml-6'>
         &copy; {new Date().getFullYear()} Urban Tech Creative

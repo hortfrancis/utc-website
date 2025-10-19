@@ -8,7 +8,8 @@ export default function Header() {
       className={clsx(
         'flex items-center justify-between',
         'h-30 px-10',
-        'bg-background border-b'
+        'bg-background border-b',
+        'z-10' // Needed due to full-screen Cube positioning in Home page
       )}
     >
       <Logo cubeSize={40} />

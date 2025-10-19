@@ -29,7 +29,7 @@ export default function Cube({
       { colour: 'opaque' },
       { colour: 'clear' },
       { colour: 'opaque' },
-      { colour: 'opaque' },
+      { colour: 'opaque', corner: 'bottom-left' },
       { colour: 'opaque' },
       { colour: 'opaque' },
     ],
