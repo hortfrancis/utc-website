@@ -39,6 +39,10 @@
   }
 } */
 
+html {
+  background: var(--theme-black);
+}
+
 body {
   background: linear-gradient(to right,
       var(--background-faded-orange),

@@ -6,7 +6,7 @@ export default function Footer() {
     <footer className={clsx(
       'mt-auto p-4',
       'flex flex-col sm:flex-row gap-4',
-      'bg-black text-gray-300',
+      'bg-theme-black text-theme-white/75',
       'text-left',
       'z-10' // Needed due to full-screen Cube positioning in Home page
     )}>
