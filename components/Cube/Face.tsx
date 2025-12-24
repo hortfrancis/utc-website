@@ -1,35 +1,39 @@
-import { XR, Work, Vision, News, Showcase, Hamster } from './Faces';
+import React from "react";
+import { XR, Work, Vision, News, Showcase, Hamster } from "./Faces";
 
 interface FaceProps {
-  position: 'front' | 'back' | 'left' | 'right' | 'top' | 'bottom';
+  position: "front" | "back" | "left" | "right" | "top" | "bottom";
+  onButtonClick?: (position: FaceProps["position"]) => void;
 }
 
-// function PlaceholderContent({ position }: { position: string }) {
-//   return (
-//     <div className='w-full h-full bg-theme-purple border-4 border-theme-black flex flex-col items-center justify-center text-white font-bold'>
-//       FACE {position.toUpperCase()}
-//       <div className='text-[0.5em] mt-2'>
-//         Smaller text
-//       </div>
-//     </div>
-//   );
-// }
-
-export default function Face({
-  position,
-}: FaceProps) {
+export default function Face({ position, onButtonClick }: FaceProps) {
   return (
-    <div
-      className={`face face--${position}`}>
+    <div className={`face face--${position}`}>
+      {position === "top" && <XR />}
+      {position === "front" && <Work />}
+      {position === "left" && <Vision />}
+      {position === "back" && <News />}
+      {position === "right" && <Showcase />}
+      {position === "bottom" && <Hamster />}
 
-      {position === 'top' && <XR />}
-      {position === 'front' && <Work />}
-      {position === 'left' && <Vision />}
-      {position === 'back' && <News />}
-      {position === 'right' && <Showcase />}
-      {position === 'bottom' && <Hamster />}
+      {/* Center button (PoC click target) */}
+      <button
+        type="button"
+        className="face__button"
+        aria-label={`Open ${position}`}
+        // Prevent the cube drag from starting when pressing the button
+        onPointerDownCapture={(e) => e.stopPropagation()}
+        onClick={(e) => {
+          // For the alert() prototype: avoid leaving focus on the button,
+          // which can make the next drag attempt feel "blocked".
+          (e.currentTarget as HTMLButtonElement).blur();
 
-      {/* <PlaceholderContent position={position} /> */}
-    </div >
+          if (onButtonClick) onButtonClick(position);
+          else alert(`Clicked ${position}`);
+        }}
+      >
+        {position}
+      </button>
+    </div>
   );
 }
