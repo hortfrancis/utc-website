@@ -31,7 +31,7 @@
 
   transform-style: preserve-3d;
 
-  /* JS drives transform now */
+  /* JS drives transform instead */
   transform: none;
 
   user-select: none;
@@ -59,40 +59,6 @@
   justify-content: center;
 
   font-size: var(--cube-face-font-size);
-}
-
-/* centered button on each face */
-.face__button {
-  width: calc(var(--cube-size) / 4);
-  height: calc(var(--cube-size) / 4);
-  max-width: 90px;
-  max-height: 90px;
-
-  border-radius: 12px;
-  border: 2px solid rgba(255, 255, 255, 0.75);
-  background: rgba(0, 0, 0, 0.18);
-  color: #ffffff;
-
-  font-size: calc(var(--cube-size) / 10);
-  font-weight: 800;
-
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-
-  cursor: pointer;
-
-  /* ensure it feels "on top" of the face */
-  transform: translateZ(1px);
-}
-
-.face__button:active {
-  transform: translateZ(1px) scale(0.98);
-}
-
-.face__button:focus {
-  outline: 3px solid rgba(255, 255, 255, 0.6);
-  outline-offset: 3px;
 }
 
 .face--front {

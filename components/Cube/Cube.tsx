@@ -452,15 +452,6 @@ export default function Cube() {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
-  /**
-   * Temporary face-button click handler.
-   * In the production menu, this should open a modal and/or navigate.
-   * @param face Face id ("front", "back", etc.)
-   */
-  const onFaceButtonClick = (face: string) => {
-    alert(`Clicked ${face}`);
-  };
-
   return (
     <Container>
       <div className="scene">
@@ -473,12 +464,12 @@ export default function Cube() {
           onPointerCancel={onPointerUp}
           onLostPointerCapture={onLostPointerCapture}
         >
-          <Face position="front" onButtonClick={onFaceButtonClick} />
-          <Face position="back" onButtonClick={onFaceButtonClick} />
-          <Face position="left" onButtonClick={onFaceButtonClick} />
-          <Face position="right" onButtonClick={onFaceButtonClick} />
-          <Face position="top" onButtonClick={onFaceButtonClick} />
-          <Face position="bottom" onButtonClick={onFaceButtonClick} />
+          <Face position="front" />
+          <Face position="back" />
+          <Face position="left" />
+          <Face position="right" />
+          <Face position="top" />
+          <Face position="bottom" />
         </div>
       </div>
     </Container>

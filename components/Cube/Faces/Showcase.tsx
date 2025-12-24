@@ -1,11 +1,15 @@
 import Layout from "./Layout";
+import Button from "../Button";
 
 export default function Showcase() {
   return (
     <Layout>
-      <div className='text-white'>
+      {/* <div className='text-white'>
         Showcase
-      </div>
+      </div> */}
+      <Button>
+        Showcase
+      </Button>
     </Layout>
   );
 }
