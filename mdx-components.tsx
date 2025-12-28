@@ -2,6 +2,9 @@ import Heading from '@/components/Heading';
 import Link from 'next/link';
 import type { MDXComponents } from 'mdx/types';
 
+// Default `img` fallback is not overriden; 
+// we expect to use custom `Image` from `@/components/Image` in MDX files directly, 
+// in order to specify `width` & `height` for `next/image`.
 const components: MDXComponents = {
   h1: (props) => <Heading level={1} {...props} />,
   h2: (props) => <Heading level={2} {...props} />,
