@@ -45,6 +45,11 @@ export default function WorkPage() {
             href="/work/afghan-project" className={linkStyle}>
             Afghan Project</Link>
         </li>
+        <li>
+          <Link
+            href="/work/dock-stories" className={linkStyle}>
+            Dock Stories</Link>
+        </li>
       </ul>
     </div>
   )
