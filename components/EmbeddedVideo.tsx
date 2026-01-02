@@ -17,7 +17,7 @@ interface EmbeddedVideoProps {
    * 
    * Sets the aspect ratio of the video container using CSS `aspect-ratio` property (via Tailwind).
    */
-  aspectRatio?: '16:9' | '4:3';
+  aspectRatio?: '16:9' | '4:3' | '1.43:1';
   /**
   * Determines whether the iframe receives a `loading="lazy"` HTML attribute.
   * 
@@ -42,6 +42,7 @@ export default function EmbeddedVideo({
     // Maintains 16:9 aspect ratio using `aspect-ratio` CSS property
     if (aspectRatio === '16:9') return 'aspect-video';
     if (aspectRatio === '4:3') return 'aspect-[4/3]';
+    if (aspectRatio === '1.43:1') return 'aspect-[1.43/1]';
     return '';
   })();
 
