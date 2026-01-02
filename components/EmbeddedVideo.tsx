@@ -30,7 +30,7 @@ export default function EmbeddedVideo({
 }: EmbeddedVideoProps) {
 
   const containerStyles = clsx(
-    'bg-theme-white',
+    'bg-theme-black',
     'my-6',
     'rounded-md',
     'border-theme-black border border-2',
