@@ -11,6 +11,14 @@ interface EmbeddedVideoProps {
   */
   title: string;
   /**
+   * Aspect ratio of the video container.
+   * 
+   * Default is '16:9'.
+   * 
+   * Sets the aspect ratio of the video container using CSS `aspect-ratio` property (via Tailwind).
+   */
+  aspectRatio?: '16:9' | '4:3';
+  /**
   * Determines whether the iframe receives a `loading="lazy"` HTML attribute.
   * 
   * If `true`, the video will only load when it is about to enter the viewport, which can improve page load performance.
@@ -26,8 +34,16 @@ interface EmbeddedVideoProps {
 export default function EmbeddedVideo({
   src,
   title,
+  aspectRatio = '16:9',
   lazyLoad = false,
 }: EmbeddedVideoProps) {
+
+  const aspectRatioClass = (() => {
+    // Maintains 16:9 aspect ratio using `aspect-ratio` CSS property
+    if (aspectRatio === '16:9') return 'aspect-video';
+    if (aspectRatio === '4:3') return 'aspect-[4/3]';
+    return '';
+  })();
 
   const containerStyles = clsx(
     'bg-theme-black',
@@ -36,7 +52,7 @@ export default function EmbeddedVideo({
     'border-theme-black border border-2',
     'overflow-hidden',
     'w-full',
-    'aspect-video' // Maintains 16:9 aspect ratio using `aspect-ratio` CSS property
+    aspectRatioClass,
   );
   const iframeStyles = 'w-full h-full border-0';
 
