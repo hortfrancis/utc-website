@@ -1,6 +1,6 @@
-import LinkedInIcon from './icons/LinkedInIcon';
-import InstagramIcon from './icons/InstagramIcon';
-import YouTubeIcon from './icons/YouTubeIcon';
+import LinkedInIcon from './icons/social/LinkedInIcon';
+import InstagramIcon from './icons/social/InstagramIcon';
+import YouTubeIcon from './icons/social/YouTubeIcon';
 
 interface SocialProps {
   platform: 'linkedin' | 'instagram' | 'youtube';

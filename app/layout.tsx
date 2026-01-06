@@ -1,4 +1,5 @@
-import Header from "@/components/Header";
+import SiteHeader from '@/components/SiteHeader';
+// import Header from "@/components/Header";
 import Footer from "@/components/Footer";
 import "./globals.css";
 import { Recursive } from "next/font/google";
@@ -30,7 +31,7 @@ export default function RootLayout({
           `${recursive.variable} antialiased`,
         )}
       >
-        <Header />
+        <SiteHeader />
         <main className='p-10 w-full max-w-4xl mx-auto'>
           {children}
         </main>
