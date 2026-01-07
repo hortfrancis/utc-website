@@ -43,6 +43,7 @@ export default function NavLink({
     size === 'mobile' && 'text-3xl',
     size === 'desktop' && 'text-sm',
     'border-4 border-theme-black border-l-0',
+    'select-none',
   );
 
   const iconSize = (() => {
