@@ -2,7 +2,7 @@ import Link from 'next/link';
 import { clsx } from 'clsx';
 import NewsIcon from '../icons/sections/newsIcon';
 
-interface NavLinkProps {
+export interface NavLinkProps {
   href: string;
   label: string;
 }
