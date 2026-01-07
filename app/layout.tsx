@@ -18,18 +18,20 @@ export const metadata: Metadata = {
   description: "We are a creative studio specialising in the use of tech to produce unique 3D digital narratives and insights for you and your audience.",
 };
 
-export default function RootLayout({
-  children,
-}: Readonly<{
-  children: React.ReactNode;
-}>) {
+export default function RootLayout(
+  { children }: Readonly<{ children: React.ReactNode; }>
+) {
+
+  const bodyStyles = clsx(
+    'min-h-[100dvh] flex flex-col',
+    'pt-30',
+    `${recursive.variable} antialiased`,
+  );
+
   return (
     <html lang="en">
       <body
-        className={clsx(
-          'min-h-[100dvh] flex flex-col',
-          `${recursive.variable} antialiased`,
-        )}
+        className={bodyStyles}
       >
         <SiteHeader />
         <main className='p-10 w-full max-w-4xl mx-auto'>

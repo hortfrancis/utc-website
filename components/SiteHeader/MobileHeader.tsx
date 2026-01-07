@@ -10,23 +10,17 @@ export default function MobileHeader() {
 
   const [open, setOpen] = useState(false);
 
-  const topBorderStyles = clsx(
-    'w-full',
-    'absolute',
-    'border-t border-8 border-theme-black',
-  );
-
   const logoVerticalGradientStyles = clsx(
     'w-4',
     'border-4 border-theme-black',
-    'border-r-0',
+    'border-r-0 border-t-0',
     'bg-gradient-to-b from-theme-magenta to-theme-green',
   );
 
   const menuButtonVerticalGradientStyles = clsx(
     'w-4',
     'border-4 border-theme-black',
-    'border-l-0',
+    'border-l-0 border-t-0',
     'bg-gradient-to-b from-theme-purple to-theme-orange',
     'z-[-1]', // Keep behind button, for focus ring 
   );
@@ -38,12 +32,13 @@ export default function MobileHeader() {
   );
 
   return (
-    <div className='sm:hidden'>
-      <div className={topBorderStyles} />
-      <div className='flex justify-between'>
+    <div className='md:hidden'>
+      <div className='flex justify-between mt-2'>
 
         <div className={logoVerticalGradientStyles} />
-        <Logo />
+        <div className='mr-auto'>
+          <Logo />
+        </div>
 
         <MobileNavMenuButton open={open} onClick={() => setOpen(prev => !prev)} />
         <div className={menuButtonVerticalGradientStyles} />

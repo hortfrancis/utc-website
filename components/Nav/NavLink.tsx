@@ -6,24 +6,29 @@ export interface NavLinkProps {
   href: string;
   label: string;
   onClick?: () => void;
+  /** Determines sizing off text and icon */
+  size: 'mobile' | 'desktop';
 }
 
 export default function NavLink({
   href,
   label,
-  onClick
+  onClick,
+  size,
 }: NavLinkProps) {
 
   const outerLinkStyles = clsx(
     'flex items-center',
-    'h-18',
+    size === 'mobile' && 'h-18',
+    size === 'desktop' && 'h-10',
     'mt-[-2px] mb-[-2px]', // To offset the border thickness
   );
 
   const iconContainerStyles = clsx(
     'flex items-center justify-center',
     'h-full',
-    'w-18',
+    size === 'mobile' && 'w-18',
+    size === 'desktop' && 'w-10',
     'bg-theme-white',
     'border-4 border-theme-black',
   );
@@ -31,19 +36,26 @@ export default function NavLink({
   const textContainerStyles = clsx(
     'flex items-center justify-center',
     'h-full',
-    'px-6',
+    size === 'mobile' && 'px-6',
+    size === 'desktop' && 'px-2',
     'bg-theme-white',
-    'font-semibold text-3xl',
+    'font-semibold',
+    size === 'mobile' && 'text-3xl',
+    size === 'desktop' && 'text-sm',
     'border-4 border-theme-black border-l-0',
-    //  'h-full',
   );
+
+  const iconSize = (() => {
+    if (size === 'mobile') return 40;
+    if (size === 'desktop') return 16;
+  })();
 
   const icon = (() => {
     // if (href === '/news') return <NewsIcon />;
     // return null;
 
     // _temp
-    return <NewsIcon />;
+    return <NewsIcon size={iconSize} />;
   })();
 
   return (
@@ -61,38 +73,3 @@ export default function NavLink({
     </Link>
   );
 }
-
-// 'use client';
-
-// import { usePathname } from 'next/navigation';
-// import Link from 'next/link';
-// import { clsx } from 'clsx';
-
-// export interface NavLinkProps {
-//   href: string;
-//   label: string;
-//   onClick?: () => void;
-// }
-
-// export default function NavLink({ href, label, onClick }: NavLinkProps) {
-//   const pathname = usePathname();
-//   const isActive = href !== '/' && pathname.startsWith(href);
-
-//   const styles = clsx({
-//     'text-theme-purple font-semibold border-b-2 border-theme-purple': isActive,
-//     'text-foreground hover:text-theme-purple': !isActive,
-//   });
-
-//   return (
-//     <li>
-//       <Link
-//         href={href}
-//         className={styles}
-//         aria-current={isActive ? 'page' : undefined}
-//         onClick={onClick}
-//       >
-//         {label}
-//       </Link>
-//     </li>
-//   );
-// }

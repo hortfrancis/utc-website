@@ -18,12 +18,10 @@ export default function MobileNavMenuButton({
     'w-24 h-24',
     'flex items-center justify-center',
     'bg-theme-white',
-    'border-4 border-theme-black',
+    'border-4 border-theme-black border-t-0',
     'cursor-pointer',
     'hover:bg-theme-cyan transition-colors duration-200',
     'focus:outline-none focus:ring-4 focus:ring-theme-orange',
-    // 'z-1'
-    // 'focus:outline-none focus:border-theme-orange',
   );
 
   return (
@@ -32,12 +30,10 @@ export default function MobileNavMenuButton({
       className={styles}
       type='button'
       aria-label={open ? 'Close navigation menu' : 'Open navigation menu'}
-    >
-      {
+    >{
         open
           ? <CloseNavMenuIcon />
           : <OpenNavMenuIcon />
-      }
-    </button>
+      }</button>
   );
 }
