@@ -1,5 +1,6 @@
 'use client';
 
+import { useEffect, useRef } from 'react';
 import clsx from 'clsx';
 import NavLink from './NavLink';
 
@@ -16,6 +17,25 @@ export interface MobileNavProps {
 }
 
 export default function MobileNav({ onClose }: MobileNavProps) {
+  // Used for click-away-close behaviour 
+  const ref = useRef<HTMLDivElement>(null);
+
+  useEffect(() => {
+    const handleClickOutside = (event: MouseEvent | TouchEvent) => {
+      if (ref.current && !ref.current.contains(event.target as Node)) {
+        onClose();
+      }
+    };
+
+    // Add event listeners for both mouse and touch events
+    document.addEventListener('mousedown', handleClickOutside);
+    document.addEventListener('touchstart', handleClickOutside);
+
+    return () => {
+      document.removeEventListener('mousedown', handleClickOutside);
+      document.removeEventListener('touchstart', handleClickOutside);
+    };
+  }, [onClose]);
 
   const outerContainerStyles = clsx(
     'flex flex-col',
@@ -50,7 +70,7 @@ export default function MobileNav({ onClose }: MobileNavProps) {
   );
 
   return (
-    <div className={outerContainerStyles}>
+    <div ref={ref} className={outerContainerStyles}>
       <div className={innerContainerStyles}>
         <div className={heavyEdgeStyles} />
         <div className={gradientBackgroundStyles}>
