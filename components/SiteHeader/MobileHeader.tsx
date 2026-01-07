@@ -16,17 +16,6 @@ export default function MobileHeader() {
     'border-t border-8 border-theme-black',
   );
 
-  // const logoContainerStyles = clsx(
-  //   'flex items-center justify-center',
-  //   'mr-auto',
-  //   'w-48 h-24',
-  //   'bg-theme-white',
-  //   'border-4 border-theme-black',
-  //   'rounded-br-3xl',
-  //   'cursor-pointer',
-  //   'hover:bg-theme-cyan transition-colors duration-200',
-  // );
-
   const logoVerticalGradientStyles = clsx(
     'w-4',
     'border-4 border-theme-black',
@@ -61,7 +50,7 @@ export default function MobileHeader() {
       </div>
       <div className={menuUndersideBlockStyles} />
 
-      {open && <MobileNav />}
+      {open && <MobileNav onClose={() => setOpen(false)} />}
     </div >
   );
 }

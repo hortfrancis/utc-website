@@ -5,11 +5,13 @@ import NewsIcon from '../icons/sections/newsIcon';
 export interface NavLinkProps {
   href: string;
   label: string;
+  onClick?: () => void;
 }
 
 export default function NavLink({
   href,
-  label
+  label,
+  onClick
 }: NavLinkProps) {
 
   const outerLinkStyles = clsx(
@@ -47,6 +49,7 @@ export default function NavLink({
   return (
     <Link
       href={href}
+      onClick={onClick}
       className={outerLinkStyles}
     >
       <div className={iconContainerStyles}>

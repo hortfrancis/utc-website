@@ -11,7 +11,11 @@ const links = [
   { href: '/contact', label: 'Contact' }
 ];
 
-export default function MobileNav() {
+export interface MobileNavProps {
+  onClose: () => void;
+}
+
+export default function MobileNav({ onClose }: MobileNavProps) {
 
   const outerContainerStyles = clsx(
     'flex flex-col',
@@ -57,7 +61,8 @@ export default function MobileNav() {
                 <li key={link.href}>
                   <NavLink
                     href={link.href}
-                    label={link.label} />
+                    label={link.label}
+                    onClick={onClose} />
                 </li>
               ))}
             </ul>
