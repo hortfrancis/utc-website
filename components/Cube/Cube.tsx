@@ -16,6 +16,15 @@ import "./Cube.css";
 type Mode = "AUTO" | "DRAG";
 
 /**
+ * Logical identifiers for each cube face.
+ *
+ * Used by tap / click detection to map DOM events (via `data-face`) to
+ * a specific face so higher-level behaviour (e.g. navigation) can be
+ * implemented per face.
+ */
+type FacePosition = "front" | "back" | "left" | "right" | "top" | "bottom";
+
+/**
  * Interactive CSS 3D cube used as an interactive homepage menu.
  *
  * Rendering:
@@ -104,6 +113,24 @@ export default function Cube() {
   const dragStartRotYRef = useRef<number>(0);
 
   // ---------------------------------------------------------------------------
+  // Tap / click detection (refs)
+  // For detecting quick taps on faces to trigger 'onClick' behaviour.
+  // ---------------------------------------------------------------------------
+
+  /** Starting pointer position for tap detection. */
+  const tapStartXRef = useRef<number>(0);
+  const tapStartYRef = useRef<number>(0);
+
+  /** Timestamp when tap began. */
+  const tapStartTimeRef = useRef<number>(0);
+
+  /** Face under the pointer at tap start, if any. */
+  const tapFaceRef = useRef<FacePosition | null>(null);
+
+  /** Whether the current interaction is still a tap candidate. */
+  const tapActiveRef = useRef<boolean>(false);
+
+  // ---------------------------------------------------------------------------
   // Tunable constants
   // ---------------------------------------------------------------------------
 
@@ -130,6 +157,12 @@ export default function Cube() {
 
   /** Duration of the smooth X return animation. */
   const RETURN_DURATION_MS = 600;
+
+  /** Maximum pointer movement (px) for an interaction to count as a tap. */
+  const TAP_MOVE_TOLERANCE_PX = 10;
+
+  /** Maximum duration (ms) for an interaction to count as a tap. */
+  const TAP_TIME_MAX_MS = 300;
 
   // ---------------------------------------------------------------------------
   // "Wait then return X" state (refs)
@@ -334,13 +367,34 @@ export default function Cube() {
   };
 
   /** Window-level pointerup handler (capture phase). */
-  const onWindowPointerUp = (ev: PointerEvent) => endDrag(ev.pointerId);
+  const onWindowPointerUp = (ev: PointerEvent) => {
+    const cubeEl = cubeRef.current;
+
+    // If the pointerup occurs on the cube (or a descendant), let the
+    // React onPointerUp handler manage drag end + tap detection.
+    if (cubeEl && ev.target instanceof Node && cubeEl.contains(ev.target)) {
+      return;
+    }
+
+    // Pointerup happened elsewhere -> cancel any pending tap and end drag.
+    tapActiveRef.current = false;
+    tapFaceRef.current = null;
+    endDrag(ev.pointerId);
+  };
 
   /** Window-level pointercancel handler (capture phase). */
-  const onWindowPointerCancel = (ev: PointerEvent) => endDrag(ev.pointerId);
+  const onWindowPointerCancel = (ev: PointerEvent) => {
+    tapActiveRef.current = false;
+    tapFaceRef.current = null;
+    endDrag(ev.pointerId);
+  };
 
   /** Window blur handler (e.g., user alt-tabs mid-drag). */
-  const onWindowBlur = () => endDrag();
+  const onWindowBlur = () => {
+    tapActiveRef.current = false;
+    tapFaceRef.current = null;
+    endDrag();
+  };
 
   // ---------------------------------------------------------------------------
   // Pointer handlers (attached to cube element)
@@ -356,6 +410,35 @@ export default function Cube() {
   const onPointerDown = (e: React.PointerEvent) => {
     const el = cubeRef.current;
     if (!el) return;
+
+    // Record tap baseline and which face (if any) was pressed.
+    tapActiveRef.current = true;
+    tapStartXRef.current = e.clientX;
+    tapStartYRef.current = e.clientY;
+    tapStartTimeRef.current = e.timeStamp;
+
+    // Find the face element (if the pointer started on a face).
+    const nativeTarget = e.target as HTMLElement | null;
+    let face: FacePosition | null = null;
+
+    if (nativeTarget) {
+      const faceEl = nativeTarget.closest<HTMLElement>("[data-face]");
+      if (faceEl && el.contains(faceEl)) {
+        const dataFace = faceEl.getAttribute("data-face");
+        if (
+          dataFace === "front" ||
+          dataFace === "back" ||
+          dataFace === "left" ||
+          dataFace === "right" ||
+          dataFace === "top" ||
+          dataFace === "bottom"
+        ) {
+          face = dataFace;
+        }
+      }
+    }
+
+    tapFaceRef.current = face;
 
     // User takes control -> cancel pending return and stop spin.
     clearReturn();
@@ -398,14 +481,80 @@ export default function Cube() {
     rotYRef.current = dragStartRotYRef.current + dx * DRAG_SPEED;
     rotXRef.current = dragStartRotXRef.current - dy * DRAG_SPEED;
 
+    // If movement exceeds tap tolerance, no longer consider this a tap.
+    if (tapActiveRef.current) {
+      const movementFromTapStartX = e.clientX - tapStartXRef.current;
+      const movementFromTapStartY = e.clientY - tapStartYRef.current;
+
+      // Math.hypot(dx, dy) computes the straight-line distance (Euclidean
+      // distance) from the tap start point, combining X and Y movement.
+      if (
+        Math.hypot(movementFromTapStartX, movementFromTapStartY) >
+        TAP_MOVE_TOLERANCE_PX
+      ) {
+        tapActiveRef.current = false;
+      }
+    }
+
     applyTransform();
   };
 
   /** Pointerup handler on cube (best-effort; global handler is primary). */
-  const onPointerUp = (e: React.PointerEvent) => endDrag(e.pointerId);
+  const onPointerUp = (e: React.PointerEvent) => {
+    endDrag(e.pointerId);
+
+    // Detect "tap" interactions that should count as face clicks.
+    if (!tapActiveRef.current || !tapFaceRef.current) {
+      return;
+    }
+
+    const dt = e.timeStamp - tapStartTimeRef.current;
+    const movementFromTapStartX = e.clientX - tapStartXRef.current;
+    const movementFromTapStartY = e.clientY - tapStartYRef.current;
+
+    // Same distance check as onPointerMove: use Euclidean distance from the
+    // original tap point to decide whether this interaction was a tap vs drag.
+    const movedTooFar =
+      Math.hypot(movementFromTapStartX, movementFromTapStartY) >
+      TAP_MOVE_TOLERANCE_PX;
+    const tookTooLong = dt > TAP_TIME_MAX_MS;
+
+    const face = tapFaceRef.current;
+
+    tapActiveRef.current = false;
+    tapFaceRef.current = null;
+
+    if (movedTooFar || tookTooLong || !face) {
+      return;
+    }
+
+    handleFaceTap(face);
+  };
 
   /** Called if the browser revokes pointer capture. */
   const onLostPointerCapture = () => endDrag();
+
+  /**
+   * Handle a confirmed face tap. Currently a prototype alert, ready to be
+   * wired to real navigation or routing.
+   */
+  const handleFaceTap = (face: FacePosition) => {
+    // TODO: replace this with real navigation / routing behaviour.
+    // For now, mirror the previous Button prototype alert.
+    // Map face to a human-friendly label.
+    const labelMap: Record<FacePosition, string> = {
+      front: "Work",
+      back: "News",
+      left: "Vision",
+      right: "Showcase",
+      top: "XR",
+      bottom: "Hamster",
+    };
+
+    const label = labelMap[face] ?? face;
+    // eslint-disable-next-line no-alert
+    alert(`Face clicked: ${label}`);
+  };
 
   // ---------------------------------------------------------------------------
   // Lifecycle: tab visibility + mount/unmount

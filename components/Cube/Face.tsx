@@ -2,12 +2,14 @@ import { XR, Work, Vision, News, Showcase, Hamster } from "./Faces";
 
 interface FaceProps {
   position: "front" | "back" | "left" | "right" | "top" | "bottom";
-  onButtonClick?: (position: FaceProps["position"]) => void;
 }
 
 export default function Face({ position }: FaceProps) {
   return (
-    <div className={`face face--${position}`}>
+    <div
+      className={`face face--${position}`}
+      data-face={position}
+    >
       {position === "top" && <XR />}
       {position === "front" && <Work />}
       {position === "left" && <Vision />}

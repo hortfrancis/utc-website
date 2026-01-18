@@ -1,15 +1,11 @@
 import Layout from "./Layout";
-import Button from "../Button";
 
 export default function Work() {
   return (
     <Layout>
-      {/* <div className='text-white'>
+      <div className="text-white select-none">
         Work
-      </div> */}
-      <Button >
-        Work
-      </Button>
+      </div>
     </Layout>
   );
 }

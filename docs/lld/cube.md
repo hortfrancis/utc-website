@@ -6,7 +6,7 @@ The homepage 'cube menu' is a 3D cube that:
 
 - Spins slowly by default (attract behaviour).
 - Can be rotated manually via mouse/touch drag.
-- Has a button on each face that can be clicked/tapped (for each section in the website).
+- Treats each whole face as a clickable/tappable region (for each section in the website).
 
 The cube is implemented using pure CSS 3D transforms + imperative DOM transforms -- no 3rd party 3D library is used.
 
@@ -42,12 +42,14 @@ The cube is implemented using pure CSS 3D transforms + imperative DOM transforms
 
   - Defines cube sizing variables.
   - Defines 3D geometry for each face using `translateZ`, `rotateX`, `rotateY`.
-  - Defines cursor state and `.face__button` styling.
+  - Defines cursor state and shared face styling.
 
 - [`Face.tsx`](../../components/Cube/Face.tsx)
   - Renders one face at a given position (`front/back/left/right/top/bottom`).
   - Renders the face’s content component (e.g. `XR`, `Work`, etc.).
-  - Renders a centered button; stops pointerdown propagation to avoid starting drag.
+  - Sets a `data-face` attribute on the face root (`data-face="front" | "back" | …`).
+  - This lets `Cube.tsx` walk up from `event.target` on pointerdown to identify which face was pressed.
+  - Combined with tap detection in `Cube.tsx` (low movement + short duration), a quick tap anywhere on the face is treated as a face click.
 
 ---
 

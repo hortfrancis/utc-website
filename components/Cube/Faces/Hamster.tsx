@@ -1,15 +1,11 @@
 import Layout from "./Layout";
-import Button from "../Button";
 
 export default function Hamster() {
   return (
     <Layout>
-      {/* <div className='text-white'>
+      <div className="text-white select-none">
         Hamster
-      </div> */}
-      <Button>
-        Hamster
-      </Button>
+      </div>
     </Layout>
   );
 }

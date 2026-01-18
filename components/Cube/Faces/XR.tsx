@@ -1,15 +1,11 @@
-import Layout from './Layout';
-import Button from '../Button';
+import Layout from "./Layout";
 
 export default function XR() {
   return (
     <Layout>
-      {/* <div className='text-white'>
+      <div className="text-white select-none">
         XR
-      </div> */}
-      <Button>
-        XR
-      </Button>
+      </div>
     </Layout>
   );
 }

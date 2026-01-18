@@ -9,7 +9,9 @@ export default function Layout({ children }: LayoutProps) {
     <div className={clsx(
       'w-full h-full',
       'flex flex-col items-center justify-center',
-      'bg-theme-black'
+      'bg-theme-black',
+      'transition-colors duration-150',
+      'hover:bg-theme-black/80'
     )}>
       {children}
     </div>
