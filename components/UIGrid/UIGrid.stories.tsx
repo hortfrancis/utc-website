@@ -1,6 +1,7 @@
 import type { Meta, StoryObj } from '@storybook/react';
 import { UIGrid, GridBlock } from './index';
 import Accent from '../Accent/Accent';
+import Logo from '../Logo';
 import clsx from 'clsx';
 
 /**
@@ -168,6 +169,48 @@ export const InContainer: Story = {
       description: {
         story:
           'Grid inside a fixed container (not full viewport). Cells stay square; grid is centered in the container.',
+      },
+    },
+  },
+};
+
+/**
+ * Logo (Default lockup) inside a grid block. The logo uses the Frame component
+ * (partial border + one rounded corner) for its stamp/badge shape.
+ */
+export const WithLogo: Story = {
+  args: {
+    cols: 6,
+    rows: 4,
+    gap: '6px',
+    fullViewport: false,
+  },
+  render: (args) => (
+    <div className="h-[400px] w-full max-w-2xl border border-neutral-300 bg-neutral-100">
+      <UIGrid {...args}>
+        <GridBlock col={1} row={1} colSpan={2} rowSpan={2} className="flex items-center justify-center">
+          <Logo />
+        </GridBlock>
+        <GridBlock col={3} row={1} colSpan={2} rowSpan={2}>
+          <CardPlaceholder />
+        </GridBlock>
+        <GridBlock col={5} row={1} colSpan={2} rowSpan={4}>
+          <AccentBlock />
+        </GridBlock>
+        <GridBlock col={1} row={3} colSpan={4} rowSpan={2}>
+          <div className="h-full w-full border-4 border-theme-black bg-theme-orange/20 rounded-lg flex items-center justify-center">
+            <span className="text-sm font-bold text-theme-black">Content area</span>
+          </div>
+        </GridBlock>
+      </UIGrid>
+    </div>
+  ),
+  parameters: {
+    layout: 'centered',
+    docs: {
+      description: {
+        story:
+          'Logo (Default lockup) in a grid block. The logo’s partial border and rounded corner come from the Frame component.',
       },
     },
   },

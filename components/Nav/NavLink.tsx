@@ -1,5 +1,6 @@
 import Link from 'next/link';
 import { clsx } from 'clsx';
+import { Frame } from '@/components/Frame';
 import NewsIcon from '../icons/sections/newsIcon';
 import WorkIcon from '../icons/sections/workIcon';
 import XRIcon from '../icons/sections/xrIcon';
@@ -11,6 +12,18 @@ export interface NavLinkProps {
   /** Determines sizing off text and icon */
   size: 'mobile' | 'desktop';
 }
+
+/** Icon cell: hard box (full border, no rounded corners). */
+const iconFrameProps = {
+  borderSides: ['top', 'right', 'bottom', 'left'] as const,
+  roundedCorners: [] as const,
+};
+
+/** Text cell: open on left so it butts against the icon. */
+const textFrameProps = {
+  borderSides: ['top', 'right', 'bottom'] as const,
+  roundedCorners: [] as const,
+};
 
 export default function NavLink({
   href,
@@ -26,16 +39,15 @@ export default function NavLink({
     'mt-[-2px] mb-[-2px]', // To offset the border thickness
   );
 
-  const iconContainerStyles = clsx(
+  const iconFrameStyles = clsx(
     'flex items-center justify-center box-border',
     'h-full',
     size === 'mobile' && 'w-18',
     size === 'desktop' && 'w-10',
     'bg-theme-white',
-    'border-4 border-theme-black',
   );
 
-  const textContainerStyles = clsx(
+  const textFrameStyles = clsx(
     'flex items-center justify-center box-border shrink-0',
     'h-full',
     size === 'mobile' && 'min-w-18 px-6',
@@ -44,7 +56,6 @@ export default function NavLink({
     'font-semibold',
     size === 'mobile' && 'text-3xl',
     size === 'desktop' && 'text-sm',
-    'border-4 border-theme-black border-l-0',
     'select-none',
   );
 
@@ -67,12 +78,12 @@ export default function NavLink({
       onClick={onClick}
       className={outerLinkStyles}
     >
-      <div className={iconContainerStyles}>
+      <Frame {...iconFrameProps} className={iconFrameStyles}>
         {icon}
-      </div>
-      <div className={textContainerStyles}>
+      </Frame>
+      <Frame {...textFrameProps} className={textFrameStyles}>
         {label}
-      </div>
+      </Frame>
     </Link>
   );
 }

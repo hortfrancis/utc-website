@@ -1,5 +1,6 @@
 import type { Meta, StoryObj } from '@storybook/react';
 import Logo from '@/components/Logo';
+import { Frame } from '@/components/Frame';
 
 /**
  * Urban Tech Creative logo component with interactive 3D logomark.
@@ -27,6 +28,9 @@ const meta = {
     },
   },
   tags: ['autodocs'],
+  args: {
+    showFrame: false,
+  },
   argTypes: {
     cubeSize: {
       control: { type: 'range', min: 20, max: 100, step: 1 },
@@ -46,6 +50,14 @@ const meta = {
       control: 'select',
       options: ['single-line', 'stacked'],
       description: 'Text layout for the logotype',
+    },
+    showFrame: {
+      control: 'boolean',
+      description: 'Show the Frame (curved border); turn off to inspect logo on its own',
+    },
+    spinOnHover: {
+      control: 'boolean',
+      description: 'When false, the logomark does not spin on hover',
     },
   },
 } satisfies Meta<typeof Logo>;
@@ -101,25 +113,49 @@ export const VerticalLockup: Story = {
 };
 
 /**
- * Single-line text layout.
+ * Logo alone with no spin on hover.
  */
-export const SingleLineText: Story = {
+export const LogoNoSpin: Story = {
   args: {
     cubeSize: 36,
     type: 'full',
     lockup: 'horizontal',
-    textLayout: 'single-line',
+    textLayout: 'stacked',
+    showFrame: false,
+    spinOnHover: false,
+  },
+  parameters: {
+    docs: {
+      description: {
+        story: 'Logo alone (no Frame). The logomark does not spin when hovered.',
+      },
+    },
   },
 };
 
 /**
- * Large cube size for emphasis.
+ * Logo in default configuration inside a Frame (default: hard box).
+ * Logo’s own Frame is off so only the block provides the border.
  */
-export const LargeCube: Story = {
+export const InABlock: Story = {
   args: {
-    cubeSize: 72,
+    cubeSize: 36,
     type: 'full',
     lockup: 'horizontal',
     textLayout: 'stacked',
+    showFrame: false,
+  },
+  render: (args) => (
+    <Frame className="p-4 bg-theme-white">
+      <Logo {...args} />
+    </Frame>
+  ),
+  parameters: {
+    docs: {
+      description: {
+        story:
+          'Logo in default configuration inside a Frame (default: hard box). Only the outer Frame is used; the logo’s own curved border is off so the block alone defines the border.',
+      },
+    },
   },
 };
