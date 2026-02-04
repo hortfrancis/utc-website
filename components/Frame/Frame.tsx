@@ -16,12 +16,12 @@ export interface FrameProps {
    * Which sides get the border; others are flush (no border).
    * Use a partial set for an "open" frame (e.g. three sides = stamp/badge).
    */
-  borderSides?: FrameBorderSide[];
+  borderSides?: readonly FrameBorderSide[];
   /**
    * Which corners are rounded. Use one or two for a stamp/badge cut;
    * use all four for a pill or soft box.
    */
-  roundedCorners?: FrameCorner[];
+  roundedCorners?: readonly FrameCorner[];
   /** Border width class (default: border-4). */
   borderWidth?: 'border-2' | 'border-4';
   /**
