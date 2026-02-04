@@ -1,5 +1,6 @@
 import type { Meta, StoryObj } from '@storybook/react';
 import Grid6x6 from './Grid6x6';
+import { extendedRealityIcon, newsIcon, workIcon } from './patterns';
 import type { GridSquare } from './types';
 
 /**
@@ -53,6 +54,22 @@ function checker(): GridSquare[] {
   return squares;
 }
 
+/**
+ * Virtual reality icon: nested squares — black outer border, white frame,
+ * black inner square. Matches the 6×6 bullet style.
+ */
+function virtualRealityIcon(): GridSquare[] {
+  const squares: GridSquare[] = [];
+  for (let i = 0; i < 36; i++) {
+    const row = Math.floor(i / 6);
+    const col = i % 6;
+    const isBorder = row === 0 || row === 5 || col === 0 || col === 5;
+    const isCenter = row >= 2 && row <= 3 && col >= 2 && col <= 3;
+    squares.push({ colour: isBorder || isCenter ? 'opaque' : 'clear' });
+  }
+  return squares;
+}
+
 export const Default: Story = {
   args: {
     gap: 4,
@@ -69,6 +86,86 @@ export const Checkerboard: Story = {
   args: {
     gap: 4,
     squares: checker(),
+  },
+  render: (args) => (
+    <div className={containerClass} style={{ width: 180, height: 180 }}>
+      <Grid6x6 {...args} />
+    </div>
+  ),
+};
+
+export const VirtualRealityIcon: Story = {
+  args: {
+    gap: 4,
+    squares: virtualRealityIcon(),
+  },
+  parameters: {
+    docs: {
+      description: {
+        story:
+          'Virtual reality icon: nested squares — black outer border, white frame, black inner square. Suited for use as a 6×6 bullet in section grids.',
+      },
+    },
+  },
+  render: (args) => (
+    <div className={containerClass} style={{ width: 180, height: 180 }}>
+      <Grid6x6 {...args} />
+    </div>
+  ),
+};
+
+export const ExtendedRealityIcon: Story = {
+  args: {
+    gap: 4,
+    squares: extendedRealityIcon(),
+  },
+  parameters: {
+    docs: {
+      description: {
+        story:
+          'Extended reality icon: L-shape on the left, T of three squares on the right (top, gap, two below). Blocky pixel-art style for use as a 6×6 bullet.',
+      },
+    },
+  },
+  render: (args) => (
+    <div className={containerClass} style={{ width: 180, height: 180 }}>
+      <Grid6x6 {...args} />
+    </div>
+  ),
+};
+
+export const WorkIcon: Story = {
+  args: {
+    gap: 4,
+    squares: workIcon(),
+  },
+  parameters: {
+    docs: {
+      description: {
+        story:
+          'Work icon: three horizontal bars each followed by a vertical step (stepped Z / three Ls). For use as a 6×6 bullet in nav and section grids.',
+      },
+    },
+  },
+  render: (args) => (
+    <div className={containerClass} style={{ width: 180, height: 180 }}>
+      <Grid6x6 {...args} />
+    </div>
+  ),
+};
+
+export const NewsIcon: Story = {
+  args: {
+    gap: 4,
+    squares: newsIcon(),
+  },
+  parameters: {
+    docs: {
+      description: {
+        story:
+          'News icon: top/bottom corners, two branches with middle spine (5×6 pattern). For use as a 6×6 bullet in nav and section grids.',
+      },
+    },
   },
   render: (args) => (
     <div className={containerClass} style={{ width: 180, height: 180 }}>

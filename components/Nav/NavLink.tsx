@@ -1,6 +1,8 @@
 import Link from 'next/link';
 import { clsx } from 'clsx';
 import NewsIcon from '../icons/sections/newsIcon';
+import WorkIcon from '../icons/sections/workIcon';
+import XRIcon from '../icons/sections/xrIcon';
 
 export interface NavLinkProps {
   href: string;
@@ -25,7 +27,7 @@ export default function NavLink({
   );
 
   const iconContainerStyles = clsx(
-    'flex items-center justify-center',
+    'flex items-center justify-center box-border',
     'h-full',
     size === 'mobile' && 'w-18',
     size === 'desktop' && 'w-10',
@@ -34,10 +36,10 @@ export default function NavLink({
   );
 
   const textContainerStyles = clsx(
-    'flex items-center justify-center',
+    'flex items-center justify-center box-border shrink-0',
     'h-full',
-    size === 'mobile' && 'px-6',
-    size === 'desktop' && 'px-2',
+    size === 'mobile' && 'min-w-18 px-6',
+    size === 'desktop' && 'min-w-10 px-2',
     'bg-theme-white',
     'font-semibold',
     size === 'mobile' && 'text-3xl',
@@ -47,15 +49,15 @@ export default function NavLink({
   );
 
   const iconSize = (() => {
-    if (size === 'mobile') return 40;
-    if (size === 'desktop') return 16;
+    if (size === 'mobile') return 56;
+    if (size === 'desktop') return 28;
   })();
 
   const icon = (() => {
-    // if (href === '/news') return <NewsIcon />;
-    // return null;
-
-    // _temp
+    if (href === '/work') return <WorkIcon size={iconSize} />;
+    if (href === '/xr') return <XRIcon size={iconSize} />;
+    if (href === '/news') return <NewsIcon size={iconSize} />;
+    // _temp: About and Contact use NewsIcon until section icons are added
     return <NewsIcon size={iconSize} />;
   })();
 
