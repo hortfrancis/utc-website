@@ -16,11 +16,10 @@ interface LogoProps {
 
 export default function Logo({
   cubeSize = 36, // 36px by default
-  // type = 'full', // logomark & logotype by default
+  type = 'full', // logomark, logotype, or full
   lockup = 'horizontal', // 'Lockup' = the spatial arrangement of logomark & logotype
-  textLayout = 'stacked', // One line per word 
+  textLayout = 'stacked', // One line per word
 }: LogoProps) {
-
   const [spin, setSpin] = useState(false);
 
   const linkContainerStyles = clsx(
@@ -36,6 +35,17 @@ export default function Logo({
     'focus:outline-none focus:ring-4 focus:ring-theme-orange',
   );
 
+  const content = (
+    <>
+      {(type === 'logomark' || type === 'full') && (
+        <Logomark cubeSize={cubeSize} spin={spin} />
+      )}
+      {(type === 'logotype' || type === 'full') && (
+        <Logotype textLayout={textLayout} />
+      )}
+    </>
+  );
+
   return (
     <Link
       href="/"
@@ -43,8 +53,7 @@ export default function Logo({
       onMouseEnter={() => setSpin(true)}
       onMouseLeave={() => setSpin(false)}
     >
-      <Logomark cubeSize={cubeSize} spin={spin} />
-      <Logotype textLayout={textLayout} />
+      {content}
     </Link>
   );
 }
