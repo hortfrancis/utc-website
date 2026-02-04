@@ -1,4 +1,5 @@
 import clsx from 'clsx';
+import type { CSSProperties } from 'react';
 
 export const ACCENT_DATA_TESTID = 'Accent';
 
@@ -18,6 +19,12 @@ export interface AccentProps {
   gradient: AccentGradient;
   /** Which sides get the black border; others are flush. */
   borderSides?: AccentBorderSide[];
+  /**
+   * When true, border and gradient use CSS variables (--button-border-color,
+   * --button-accent-from, --button-accent-to) so the accent responds to Button
+   * hover/focus (orange border and gradient). Use when Accent is inside a Button.
+   */
+  interactive?: boolean;
   /** Optional class overrides (e.g. z-index, rounded). */
   className?: string;
 }
@@ -26,6 +33,16 @@ const gradientFromTo: Record<AccentGradient, string> = {
   'magenta-green': 'from-theme-magenta to-theme-green',
   'purple-orange': 'from-theme-purple to-theme-orange',
   'orange-purple': 'from-theme-orange to-theme-purple',
+};
+
+/** CSS variable values for interactive gradient (used with --button-accent-from/to on hover). */
+const gradientVars: Record<
+  AccentGradient,
+  { from: string; to: string }
+> = {
+  'magenta-green': { from: 'var(--theme-magenta)', to: 'var(--theme-green)' },
+  'purple-orange': { from: 'var(--theme-purple)', to: 'var(--theme-orange)' },
+  'orange-purple': { from: 'var(--theme-orange)', to: 'var(--theme-purple)' },
 };
 
 const borderSideZero: Record<AccentBorderSide, string> = {
@@ -44,6 +61,7 @@ export default function Accent({
   direction,
   gradient,
   borderSides = ['top', 'right', 'bottom', 'left'],
+  interactive = false,
   className,
 }: AccentProps) {
   const gradientAxis =
@@ -56,15 +74,37 @@ export default function Accent({
 
   const sizeClass = direction === 'vertical' ? 'w-4' : 'h-4';
 
+  const vars = gradientVars[gradient];
+  const gradientLine =
+    direction === 'vertical'
+      ? 'linear-gradient(to bottom, var(--button-accent-from, var(--accent-from)), var(--button-accent-to, var(--accent-to)))'
+      : 'linear-gradient(to right, var(--button-accent-from, var(--accent-from)), var(--button-accent-to, var(--accent-to)))';
+
+  const interactiveStyle: CSSProperties | undefined = interactive
+    ? {
+        ['--accent-from' as string]: vars.from,
+        ['--accent-to' as string]: vars.to,
+        background: gradientLine,
+      }
+    : undefined;
+
   const styles = clsx(
     sizeClass,
-    'border-4 border-theme-black',
-    gradientClass,
+    'border-4',
+    interactive
+      ? 'border-[color:var(--button-border-color,var(--theme-black))] transition-[border-color,background] duration-200'
+      : 'border-theme-black',
+    !interactive && gradientClass,
     borderZeroClasses,
     className
   );
 
   return (
-    <div data-testid={ACCENT_DATA_TESTID} className={styles} aria-hidden />
+    <div
+      data-testid={ACCENT_DATA_TESTID}
+      className={styles}
+      style={interactiveStyle}
+      aria-hidden
+    />
   );
 }

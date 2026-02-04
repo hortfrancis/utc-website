@@ -230,3 +230,45 @@ export const InAButton: Story = {
     },
   },
 };
+
+/**
+ * Logo in a Button with Accent on the left and Frame with bottom-right curve.
+ * Hover for orange border, cyan background, and accent gradient/border turning orange.
+ */
+export const InAButtonWithAccentAndCurve: Story = {
+  args: {
+    cubeSize: 36,
+    type: 'full',
+    lockup: 'horizontal',
+    textLayout: 'stacked',
+    spinOnHover: true,
+  },
+  render: (args) => (
+    <Button href="#" aria-label="Urban Tech Creative – home">
+      <div className="flex items-stretch">
+        <Accent
+          direction="vertical"
+          gradient="magenta-green"
+          borderSides={['top', 'bottom', 'left']}
+          interactive
+        />
+        <Frame
+          borderSides={['top', 'right', 'bottom', 'left']}
+          roundedCorners={['bottom-right']}
+          interactive
+          className="flex items-center justify-center gap-6 w-48 h-24"
+        >
+          <Logo {...args} />
+        </Frame>
+      </div>
+    </Button>
+  ),
+  parameters: {
+    docs: {
+      description: {
+        story:
+          'Logo in a Button with left Accent and stamp-style Frame (bottom-right curve). Hover for orange border, cyan background, and accent turning orange.',
+      },
+    },
+  },
+};

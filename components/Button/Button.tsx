@@ -47,7 +47,7 @@ export default function Button({
     'button-block',
     'flex items-center justify-center',
     'cursor-pointer',
-    'focus:outline-none focus:ring-4 focus:ring-theme-orange',
+    // 'focus:outline-none focus:ring-4 focus:ring-theme-orange',
     'focus-visible:outline-none',
     className
   );

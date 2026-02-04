@@ -1,6 +1,7 @@
 import type { Meta, StoryObj } from '@storybook/react';
 import { Button } from './index';
 import { Frame } from '@/components/Frame';
+import Accent from '@/components/Accent';
 
 /**
  * Button wraps any UI block to make it a button. Sets CSS custom properties
@@ -32,37 +33,10 @@ export default meta;
 
 type Story = StoryObj<typeof meta>;
 
-/** Frame (interactive) inside Button: hover for orange border and cyan background. */
-export const WithFrame: Story = {
+export const DefaultWithFrame: Story = {
   args: {
-    'aria-label': 'Example block button',
-  },
-  render: (args) => (
-    <Button {...args}>
-      <Frame
-        borderSides={['right', 'bottom', 'left']}
-        roundedCorners={['bottom-right']}
-        interactive
-        className="w-48 h-24 flex items-center justify-center"
-      >
-        <span className="text-sm font-bold text-theme-black">Block button</span>
-      </Frame>
-    </Button>
-  ),
-  parameters: {
-    docs: {
-      description: {
-        story:
-          'Frame with interactive uses Button’s CSS variables. Hover or focus to see border → orange, background → cyan.',
-      },
-    },
-  },
-};
-
-/** Hard box (full border, no rounded corners) as button. */
-export const HardBox: Story = {
-  args: {
-    'aria-label': 'Hard box button',
+    'aria-label': 'Default button',
+    children: undefined,
   },
   render: (args) => (
     <Button {...args}>
@@ -72,8 +46,54 @@ export const HardBox: Story = {
         interactive
         className="w-40 h-24 flex items-center justify-center"
       >
-        <span className="text-sm font-bold text-theme-black">Hard box</span>
+        <span className="text-sm font-bold text-theme-black">Default</span>
       </Frame>
+    </Button>
+  ),
+};
+
+export const WithCurve: Story = {
+  args: {
+    'aria-label': 'Button with curve',
+    children: undefined,
+  },
+  render: (args) => (
+    <Button {...args}>
+      <Frame
+        borderSides={['top', 'right', 'bottom', 'left']}
+        roundedCorners={['bottom-right']}
+        interactive
+        className="w-40 h-24 flex items-center justify-center"
+      >
+        <span className="text-sm font-bold text-theme-black">With curve</span>
+      </Frame>
+    </Button>
+  ),
+};
+
+export const WithAccentLeft: Story = {
+  args: {
+    'aria-label': 'Button with accent left',
+    children: undefined,
+  },
+  render: (args) => (
+    <Button {...args}>
+      <div className="flex items-stretch">
+        <Accent
+          direction="vertical"
+          gradient="orange-purple"
+          borderSides={['top', 'bottom', 'left']}
+          interactive
+        />
+        <Frame
+          borderSides={['top', 'right', 'bottom', 'left']}
+          roundedCorners={[]}
+          interactive
+          className="w-40 h-24 flex items-center justify-center"
+        >
+          <span className="text-sm font-bold text-theme-black">With accent left</span>
+        </Frame>
+      </div>
     </Button>
   ),
 };

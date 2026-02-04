@@ -30,21 +30,24 @@ export default function MobileHeader({ defaultOpen = false }: MobileHeaderProps)
     <div data-testid={MOBILE_HEADER_DATA_TESTID} className='md:hidden'>
       <div className='flex justify-between mt-2'>
 
-        <Accent
-          direction="vertical"
-          gradient="magenta-green"
-          borderSides={['left', 'bottom']}
-        />
         <div className='mr-auto'>
           <Button href="/" aria-label="Urban Tech Creative – home">
-            <Frame
-              borderSides={['right', 'bottom', 'left']}
-              roundedCorners={['bottom-right']}
-              interactive
-              className="flex items-center justify-center gap-6 w-48 h-24"
-            >
-              <Logo />
-            </Frame>
+            <div className="flex items-stretch">
+              <Accent
+                direction="vertical"
+                gradient="magenta-green"
+                borderSides={['top', 'bottom', 'left']}
+                interactive
+              />
+              <Frame
+                borderSides={['top', 'right', 'bottom', 'left']}
+                roundedCorners={['bottom-right']}
+                interactive
+                className="flex items-center justify-center gap-6 w-48 h-24"
+              >
+                <Logo />
+              </Frame>
+            </div>
           </Button>
         </div>
 

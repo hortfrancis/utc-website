@@ -8,6 +8,8 @@ export interface MobileNavProps {
   onClose: () => void;
 }
 
+const MOBILE_NAV_DATA_TESTID = 'MobileNav';
+
 /**
  * Mobile nav menu with click-outside-to-close. Composes MobileNavPanel.
  */

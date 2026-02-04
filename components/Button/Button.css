@@ -1,6 +1,6 @@
 /**
  * Block button: CSS custom properties for hover/focus.
- * Child blocks (e.g. Frame with interactive) use these for border and background.
+ * Child blocks (e.g. Frame with interactive, Accent with interactive) use these.
  */
 .button-block {
   --button-border-color: var(--theme-black);
@@ -11,4 +11,6 @@
 .button-block:focus-visible {
   --button-border-color: var(--theme-orange);
   --button-bg: var(--theme-cyan);
+  --button-accent-from: var(--theme-orange);
+  --button-accent-to: var(--theme-orange);
 }

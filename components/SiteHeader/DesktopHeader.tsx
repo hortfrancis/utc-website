@@ -12,20 +12,23 @@ export default function DesktopHeader() {
     <div data-testid={DESKTOP_HEADER_DATA_TESTID} className='hidden md:block'>
       <div className='flex mt-2'>
 
-        <Accent
-          direction="vertical"
-          gradient="magenta-green"
-          borderSides={['left', 'bottom']}
-        />
         <Button href="/" aria-label="Urban Tech Creative – home">
-          <Frame
-            borderSides={['right', 'bottom', 'left']}
-            roundedCorners={['bottom-right']}
-            interactive
-            className="flex items-center justify-center gap-6 w-48 h-24"
-          >
-            <Logo />
-          </Frame>
+          <div className="flex items-stretch">
+            <Accent
+              direction="vertical"
+              gradient="magenta-green"
+              borderSides={['top', 'bottom', 'left']}
+              interactive
+            />
+            <Frame
+              borderSides={['top', 'right', 'bottom', 'left']}
+              roundedCorners={['bottom-right']}
+              interactive
+              className="flex items-center justify-center gap-6 w-48 h-24"
+            >
+              <Logo />
+            </Frame>
+          </div>
         </Button>
 
         <div className='mr-auto'>
