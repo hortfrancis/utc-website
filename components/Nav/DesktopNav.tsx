@@ -2,6 +2,8 @@ import { clsx } from 'clsx';
 import NavLink from './NavLink';
 import { navLinks } from './navLinks';
 
+export const DESKTOP_NAV_DATA_TESTID = 'DesktopNav';
+
 export default function DesktopNav() {
 
   const listStyles = clsx(

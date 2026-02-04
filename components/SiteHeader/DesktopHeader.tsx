@@ -1,6 +1,7 @@
 import Logo from "../Logo";
 import Accent from "../Accent";
 import { Button } from "../Button";
+import { Frame } from "../Frame";
 import DesktopNav from "../Nav/DesktopNav";
 
 export const DESKTOP_HEADER_DATA_TESTID = 'DesktopHeader';
@@ -17,7 +18,14 @@ export default function DesktopHeader() {
           borderSides={['left', 'bottom']}
         />
         <Button href="/" aria-label="Urban Tech Creative – home">
-          <Logo />
+          <Frame
+            borderSides={['right', 'bottom', 'left']}
+            roundedCorners={['bottom-right']}
+            interactive
+            className="flex items-center justify-center gap-6 w-48 h-24"
+          >
+            <Logo />
+          </Frame>
         </Button>
 
         <div className='mr-auto'>

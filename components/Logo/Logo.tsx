@@ -2,7 +2,6 @@
 
 import { clsx } from 'clsx';
 import { useState } from 'react';
-import { Frame } from '@/components/Frame';
 import Logomark from './Logomark';
 import Logotype from './Logotype';
 
@@ -14,20 +13,13 @@ interface LogoProps {
   type?: 'logomark' | 'logotype' | 'full';
   lockup?: 'horizontal' | 'vertical';
   textLayout?: 'single-line' | 'stacked';
-  /** When false, the Frame (curved border) is not rendered — e.g. for Storybook to inspect the logo on its own. */
-  showFrame?: boolean;
   /** When false, the logomark does not spin on hover. */
   spinOnHover?: boolean;
 }
 
-/** Default lockup frame: three sides, one rounded corner (stamp/badge). */
-const defaultFrameProps = {
-  borderSides: ['right', 'bottom', 'left'] as const,
-  roundedCorners: ['bottom-right'] as const,
-};
-
 /**
- * Presentational logo: logomark + logotype, optionally in a Frame.
+ * Presentational logo: logomark + logotype (pure atom).
+ * No Frame — wrap in Frame when you want the stamp-style border (e.g. in headers).
  * No link or button behaviour — wrap in Button (or Link) when you want it to be clickable.
  */
 export default function Logo({
@@ -35,7 +27,6 @@ export default function Logo({
   type = 'full',
   lockup = 'horizontal',
   textLayout = 'stacked',
-  showFrame = true,
   spinOnHover = true,
 }: LogoProps) {
   const [spin, setSpin] = useState(false);
@@ -46,37 +37,21 @@ export default function Logo({
     lockup === 'horizontal' ? 'flex-row' : 'flex-col',
     'gap-6',
     'w-48 h-24',
-    showFrame
-      ? null
-      : 'bg-[color:var(--button-bg,var(--theme-white))] transition-colors duration-200',
   );
 
-  const content = (
-    <>
+  return (
+    <div
+      data-testid={LOGO_DATA_TESTID}
+      className={innerStyles}
+      onMouseEnter={spinOnHover ? () => setSpin(true) : undefined}
+      onMouseLeave={spinOnHover ? () => setSpin(false) : undefined}
+    >
       {(type === 'logomark' || type === 'full') && (
         <Logomark cubeSize={cubeSize} spin={effectiveSpin} />
       )}
       {(type === 'logotype' || type === 'full') && (
         <Logotype textLayout={textLayout} />
       )}
-    </>
-  );
-
-  const inner = showFrame ? (
-    <Frame {...defaultFrameProps} interactive className={innerStyles}>
-      {content}
-    </Frame>
-  ) : (
-    <div className={innerStyles}>{content}</div>
-  );
-
-  return (
-    <div
-      data-testid={LOGO_DATA_TESTID}
-      onMouseEnter={spinOnHover ? () => setSpin(true) : undefined}
-      onMouseLeave={spinOnHover ? () => setSpin(false) : undefined}
-    >
-      {inner}
     </div>
   );
 }

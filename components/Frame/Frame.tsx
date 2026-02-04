@@ -32,7 +32,8 @@ export interface FrameProps {
   interactive?: boolean;
   /** Optional class for the frame wrapper. */
   className?: string;
-  children: ReactNode;
+  /** Frame content (typically passed as JSX children). */
+  children?: ReactNode;
 }
 
 const sideZeroClass: Record<FrameBorderSide, string> = {

@@ -3,6 +3,7 @@
 import clsx from 'clsx';
 import { useState } from 'react';
 import { Button } from '../Button';
+import { Frame } from '../Frame';
 import Logo from '../Logo';
 import Accent from '../Accent';
 import MobileNavMenuButton from './MobileNavMenuButton';
@@ -36,7 +37,14 @@ export default function MobileHeader({ defaultOpen = false }: MobileHeaderProps)
         />
         <div className='mr-auto'>
           <Button href="/" aria-label="Urban Tech Creative – home">
-            <Logo />
+            <Frame
+              borderSides={['right', 'bottom', 'left']}
+              roundedCorners={['bottom-right']}
+              interactive
+              className="flex items-center justify-center gap-6 w-48 h-24"
+            >
+              <Logo />
+            </Frame>
           </Button>
         </div>
 

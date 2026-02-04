@@ -5,7 +5,8 @@ import { Frame } from '@/components/Frame';
 import Accent from '@/components/Accent';
 
 /**
- * Presentational logo: logomark + logotype, optionally in a Frame.
+ * Presentational logo: logomark + logotype (pure atom).
+ * No Frame — wrap in Frame for stamp-style border (e.g. "In a Button" story).
  * No link or button behaviour — wrap in Button (or Link) when you want it clickable.
  */
 const meta = {
@@ -16,14 +17,11 @@ const meta = {
     docs: {
       description: {
         component:
-          'Brand logo (3D cube logomark + company name). Presentational only; use "In a Button" story or wrap in Button when you want hover/click behaviour.',
+          'Brand logo (3D cube logomark + company name). Presentational only; use "In a Button" story or wrap in Button + Frame when you want hover/click behaviour.',
       },
     },
   },
   tags: ['autodocs'],
-  args: {
-    showFrame: false,
-  },
   argTypes: {
     cubeSize: {
       control: { type: 'range', min: 20, max: 100, step: 1 },
@@ -43,10 +41,6 @@ const meta = {
       control: 'select',
       options: ['single-line', 'stacked'],
       description: 'Text layout for the logotype',
-    },
-    showFrame: {
-      control: 'boolean',
-      description: 'Show the Frame (curved border); turn off to inspect logo on its own',
     },
     spinOnHover: {
       control: 'boolean',
@@ -114,7 +108,6 @@ export const LogoNoSpin: Story = {
     type: 'full',
     lockup: 'horizontal',
     textLayout: 'stacked',
-    showFrame: false,
     spinOnHover: false,
   },
   parameters: {
@@ -127,19 +120,17 @@ export const LogoNoSpin: Story = {
 };
 
 /**
- * Logo in default configuration inside a Frame (default: hard box).
- * Logo’s own Frame is off so only the block provides the border.
+ * Logo inside a Frame (hard box — full border, no rounded corners).
  */
-export const InABlock: Story = {
+export const InAFrame: Story = {
   args: {
     cubeSize: 36,
     type: 'full',
     lockup: 'horizontal',
     textLayout: 'stacked',
-    showFrame: false,
   },
   render: (args) => (
-    <Frame className="bg-theme-white">
+    <Frame className="bg-theme-white flex items-center justify-center gap-6 w-48 h-24">
       <Logo {...args} />
     </Frame>
   ),
@@ -147,7 +138,7 @@ export const InABlock: Story = {
     docs: {
       description: {
         story:
-          'Logo in default configuration inside a Frame (default: hard box). Only the outer Frame is used; the logo’s own curved border is off so the block alone defines the border.',
+          'Logo composed inside a Frame (default hard box). Frame is provided by the parent.',
       },
     },
   },
@@ -162,7 +153,6 @@ export const InAFrameWithAccent: Story = {
     type: 'full',
     lockup: 'horizontal',
     textLayout: 'stacked',
-    showFrame: false,
   },
   render: (args) => (
     <div className="flex items-stretch">
@@ -171,7 +161,7 @@ export const InAFrameWithAccent: Story = {
         gradient="magenta-green"
         borderSides={['top', 'left', 'bottom']}
       />
-      <Frame className="bg-theme-white flex items-center justify-center">
+      <Frame className="bg-theme-white flex items-center justify-center gap-6 w-48 h-24">
         <Logo {...args} />
       </Frame>
     </div>
@@ -186,8 +176,30 @@ export const InAFrameWithAccent: Story = {
   },
 };
 
+export const InAFrameWithCurve: Story = {
+  args: {
+    cubeSize: 36,
+  },
+  render: (args) => (
+    <Frame
+      borderSides={['top', 'right', 'bottom', 'left']}
+      roundedCorners={['bottom-right']}
+      className="bg-theme-white flex items-center justify-center gap-6 w-48 h-24"
+    >
+      <Logo {...args} />
+    </Frame>
+  ),
+  parameters: {
+    docs: {
+      description: {
+        story: 'Logo in a Frame with only the bottom-right corner rounded — mimics the stamp/badge style cut.',
+      },
+    },
+  },
+};
+
 /**
- * Logo inside a Button: hover for orange border and cyan background.
+ * Logo inside a Button with stamp-style Frame: hover for orange border and cyan background.
  */
 export const InAButton: Story = {
   args: {
@@ -195,19 +207,25 @@ export const InAButton: Story = {
     type: 'full',
     lockup: 'horizontal',
     textLayout: 'stacked',
-    showFrame: true,
     spinOnHover: true,
   },
   render: (args) => (
     <Button href="#" aria-label="Urban Tech Creative – home">
-      <Logo {...args} />
+      <Frame
+        // borderSides={['right', 'bottom', 'left']}
+        // roundedCorners={['bottom-right']}
+        interactive
+        className="flex items-center justify-center gap-6 w-48 h-24"
+      >
+        <Logo {...args} />
+      </Frame>
     </Button>
   ),
   parameters: {
     docs: {
       description: {
         story:
-          'Logo wrapped in a Button. Hover for orange border and cyan background; logomark spins on hover.',
+          'Logo composed as Button → Frame (stamp) → Logo. Hover for orange border and cyan background; logomark spins on hover.',
       },
     },
   },
