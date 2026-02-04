@@ -1,12 +1,14 @@
 import Link from 'next/link';
 
+export const BREADCRUMBS_DATA_TESTID = 'Breadcrumbs';
+
 interface BreadcrumbsProps {
   items: { label: string; path?: string; current?: boolean }[];
 }
 
 export default function Breadcrumbs({ items }: BreadcrumbsProps) {
   return (
-    <nav className="mb-4 flex space-x-1 text-sm text-theme-black opacity-75" aria-label="Breadcrumb">
+    <nav data-testid={BREADCRUMBS_DATA_TESTID} className="mb-4 flex space-x-1 text-sm text-theme-black opacity-75" aria-label="Breadcrumb">
       {items.map((item, index) => (
         <span key={index}>
           {item.current ? (

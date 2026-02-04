@@ -2,6 +2,8 @@ import clsx from 'clsx';
 import MobileHeader from './MobileHeader';
 import DesktopHeader from './DesktopHeader';
 
+export const SITE_HEADER_DATA_TESTID = 'SiteHeader';
+
 export interface SiteHeaderProps {
   /** Initial open state for mobile nav (e.g. for Storybook). */
   defaultMobileNavOpen?: boolean;
@@ -21,7 +23,7 @@ export default function SiteHeader({ defaultMobileNavOpen = false }: SiteHeaderP
   );
 
   return (
-    <div className={styles}>
+    <div data-testid={SITE_HEADER_DATA_TESTID} className={styles}>
       <div className={topBorderStyles} />
       <MobileHeader defaultOpen={defaultMobileNavOpen} />
       <DesktopHeader />

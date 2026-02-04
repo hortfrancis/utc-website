@@ -1,9 +1,11 @@
 import Social from './Social';
 import clsx from 'clsx';
 
+export const FOOTER_DATA_TESTID = 'Footer';
+
 export default function Footer() {
   return (
-    <footer className={clsx(
+    <footer data-testid={FOOTER_DATA_TESTID} className={clsx(
       'mt-auto p-4',
       'flex flex-col sm:flex-row gap-4',
       'bg-theme-black text-theme-white/75',

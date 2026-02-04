@@ -2,6 +2,8 @@ import clsx from 'clsx';
 import NavLink from './NavLink';
 import type { NavLinkItem } from './navLinks';
 
+export const MOBILE_NAV_PANEL_DATA_TESTID = 'MobileNavPanel';
+
 export interface MobileNavPanelProps {
   /** Nav items to display in the menu */
   links: NavLinkItem[];
@@ -52,7 +54,7 @@ export default function MobileNavPanel({
   );
 
   return (
-    <div className={outerContainerStyles}>
+    <div data-testid={MOBILE_NAV_PANEL_DATA_TESTID} className={outerContainerStyles}>
       <div className={innerContainerStyles}>
         <div className={heavyEdgeStyles} />
         <div className={gradientBackgroundStyles}>

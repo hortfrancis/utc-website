@@ -5,6 +5,8 @@ import { clsx } from 'clsx';
 import type { MouseEvent, ReactNode } from 'react';
 import './Button.css';
 
+export const BUTTON_DATA_TESTID = 'Button';
+
 export interface ButtonProps {
   /** When provided, renders as Next Link (for navigation). */
   href?: string;
@@ -20,6 +22,8 @@ export interface ButtonProps {
   className?: string;
   /** Accessible label (recommended when content is not text). */
   'aria-label'?: string;
+  /** Override data-testid (e.g. when Button wraps NavLink so test id is NavLink). */
+  'data-testid'?: string;
 }
 
 /**
@@ -36,7 +40,9 @@ export default function Button({
   children,
   className,
   'aria-label': ariaLabel,
+  'data-testid': dataTestId,
 }: ButtonProps) {
+  const testId = dataTestId ?? BUTTON_DATA_TESTID;
   const baseStyles = clsx(
     'button-block',
     'flex items-center justify-center',
@@ -57,6 +63,7 @@ export default function Button({
         href={href}
         className={baseStyles}
         aria-label={ariaLabel}
+        data-testid={testId}
         onClick={onClick}
         {...mouseProps}
       >
@@ -69,6 +76,7 @@ export default function Button({
     <button
       type="button"
       className={baseStyles}
+      data-testid={testId}
       onClick={onClick}
       aria-label={ariaLabel}
       {...mouseProps}

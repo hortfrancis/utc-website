@@ -3,10 +3,12 @@ import Accent from "../Accent";
 import { Button } from "../Button";
 import DesktopNav from "../Nav/DesktopNav";
 
+export const DESKTOP_HEADER_DATA_TESTID = 'DesktopHeader';
+
 export default function DesktopHeader() {
 
   return (
-    <div className='hidden md:block'>
+    <div data-testid={DESKTOP_HEADER_DATA_TESTID} className='hidden md:block'>
       <div className='flex mt-2'>
 
         <Accent

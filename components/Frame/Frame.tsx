@@ -1,6 +1,8 @@
 import type { ReactNode } from 'react';
 import clsx from 'clsx';
 
+export const FRAME_DATA_TESTID = 'Frame';
+
 export type FrameBorderSide = 'top' | 'right' | 'bottom' | 'left';
 
 export type FrameCorner =
@@ -72,6 +74,7 @@ export default function Frame({
 
   return (
     <div
+      data-testid={FRAME_DATA_TESTID}
       className={clsx(
         'box-border',
         borderWidth,

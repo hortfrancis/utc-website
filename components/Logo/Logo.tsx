@@ -6,6 +6,8 @@ import { Frame } from '@/components/Frame';
 import Logomark from './Logomark';
 import Logotype from './Logotype';
 
+export const LOGO_DATA_TESTID = 'Logo';
+
 interface LogoProps {
   /** Size of the cube in pixels */
   cubeSize?: number;
@@ -70,6 +72,7 @@ export default function Logo({
 
   return (
     <div
+      data-testid={LOGO_DATA_TESTID}
       onMouseEnter={spinOnHover ? () => setSpin(true) : undefined}
       onMouseLeave={spinOnHover ? () => setSpin(false) : undefined}
     >

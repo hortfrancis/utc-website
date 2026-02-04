@@ -3,6 +3,8 @@
 import React, { useCallback, useEffect, useRef, useState } from 'react';
 import clsx from 'clsx';
 
+export const UI_GRID_DATA_TESTID = 'UIGrid';
+
 export interface UIGridProps {
   /** Number of columns. */
   cols: number;
@@ -59,6 +61,7 @@ export default function UIGrid({
   return (
     <div
       ref={containerRef}
+      data-testid={UI_GRID_DATA_TESTID}
       className={clsx(
         'flex items-center justify-center overflow-hidden',
         fullViewport && 'h-[100dvh] w-screen',

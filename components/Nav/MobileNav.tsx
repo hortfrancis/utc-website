@@ -31,7 +31,7 @@ export default function MobileNav({ onClose }: MobileNavProps) {
   }, [onClose]);
 
   return (
-    <div ref={ref} className="absolute top-30 right-0">
+    <div ref={ref} data-testid={MOBILE_NAV_DATA_TESTID} className="absolute top-30 right-0">
       <MobileNavPanel links={navLinks} onLinkClick={onClose} />
     </div>
   );

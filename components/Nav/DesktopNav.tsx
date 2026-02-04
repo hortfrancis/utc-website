@@ -18,7 +18,7 @@ export default function DesktopNav() {
   );
 
   return (
-    <nav className='hidden sm:block'>
+    <nav data-testid={DESKTOP_NAV_DATA_TESTID} className='hidden sm:block'>
       <ul className={listStyles}>
         {navLinks.map((link) => (
           <li key={link.href}>

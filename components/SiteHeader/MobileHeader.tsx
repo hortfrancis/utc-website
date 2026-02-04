@@ -8,6 +8,8 @@ import Accent from '../Accent';
 import MobileNavMenuButton from './MobileNavMenuButton';
 import MobileNav from '../Nav/MobileNav';
 
+export const MOBILE_HEADER_DATA_TESTID = 'MobileHeader';
+
 export interface MobileHeaderProps {
   /** Initial open state for the mobile nav (e.g. for Storybook). */
   defaultOpen?: boolean;
@@ -24,7 +26,7 @@ export default function MobileHeader({ defaultOpen = false }: MobileHeaderProps)
   );
 
   return (
-    <div className='md:hidden'>
+    <div data-testid={MOBILE_HEADER_DATA_TESTID} className='md:hidden'>
       <div className='flex justify-between mt-2'>
 
         <Accent

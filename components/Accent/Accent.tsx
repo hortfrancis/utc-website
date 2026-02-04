@@ -1,5 +1,7 @@
 import clsx from 'clsx';
 
+export const ACCENT_DATA_TESTID = 'Accent';
+
 export type AccentDirection = 'vertical' | 'horizontal';
 
 export type AccentGradient =
@@ -62,5 +64,7 @@ export default function Accent({
     className
   );
 
-  return <div className={styles} aria-hidden />;
+  return (
+    <div data-testid={ACCENT_DATA_TESTID} className={styles} aria-hidden />
+  );
 }

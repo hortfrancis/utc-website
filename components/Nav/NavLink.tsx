@@ -5,6 +5,8 @@ import NewsIcon from '../icons/sections/newsIcon';
 import WorkIcon from '../icons/sections/workIcon';
 import XRIcon from '../icons/sections/xrIcon';
 
+export const NAV_LINK_DATA_TESTID = 'NavLink';
+
 export interface NavLinkProps {
   href: string;
   label: string;
@@ -75,6 +77,7 @@ export default function NavLink({
       href={href}
       onClick={onClick}
       className={outerLinkStyles}
+      data-testid={NAV_LINK_DATA_TESTID}
     >
       <Frame {...iconFrameProps} interactive className={iconFrameStyles}>
         {icon}

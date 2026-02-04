@@ -1,5 +1,7 @@
 import { JSX } from "react";
 
+export const HEADING_DATA_TESTID = 'Heading';
+
 interface HeadingProps {
   children: React.ReactNode;
   level?: number;
@@ -21,6 +23,6 @@ export default function Heading({ children, level = 1 }: HeadingProps) {
   const headingStyle = headingStyles[level as keyof typeof headingStyles] || headingStyles[1];
 
   return (
-    <HeadingTag className={headingStyle}>{children}</HeadingTag>
+    <HeadingTag data-testid={HEADING_DATA_TESTID} className={headingStyle}>{children}</HeadingTag>
   );
 }

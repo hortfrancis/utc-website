@@ -1,6 +1,8 @@
 import React from 'react';
 import clsx from 'clsx';
 
+export const GRID_BLOCK_DATA_TESTID = 'GridBlock';
+
 export interface GridBlockProps {
   /** Column index (1-based). */
   col: number;
@@ -29,6 +31,7 @@ export default function GridBlock({
 }: GridBlockProps) {
   return (
     <div
+      data-testid={GRID_BLOCK_DATA_TESTID}
       className={clsx('min-w-0 min-h-0 overflow-hidden', className)}
       style={{
         gridColumn: `${col} / span ${colSpan}`,
