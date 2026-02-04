@@ -3,6 +3,7 @@
 import clsx from 'clsx';
 import { useState } from 'react';
 import Logo from '../Logo';
+import Accent from '../Accent';
 import MobileNavMenuButton from './MobileNavMenuButton';
 import MobileNav from '../Nav/MobileNav';
 
@@ -15,21 +16,6 @@ export default function MobileHeader({ defaultOpen = false }: MobileHeaderProps)
 
   const [open, setOpen] = useState(defaultOpen);
 
-  const logoVerticalGradientStyles = clsx(
-    'w-4',
-    'border-4 border-theme-black',
-    'border-r-0 border-t-0',
-    'bg-gradient-to-b from-theme-magenta to-theme-green',
-  );
-
-  const menuButtonVerticalGradientStyles = clsx(
-    'w-4',
-    'border-4 border-theme-black',
-    'border-l-0 border-t-0',
-    'bg-gradient-to-b from-theme-purple to-theme-orange',
-    'z-[-1]', // Keep behind button, for focus ring 
-  );
-
   const menuUndersideBlockStyles = clsx(
     'w-28 h-5',
     'ml-auto',
@@ -40,13 +26,22 @@ export default function MobileHeader({ defaultOpen = false }: MobileHeaderProps)
     <div className='md:hidden'>
       <div className='flex justify-between mt-2'>
 
-        <div className={logoVerticalGradientStyles} />
+        <Accent
+          direction="vertical"
+          gradient="magenta-green"
+          borderSides={['left', 'bottom']}
+        />
         <div className='mr-auto'>
           <Logo />
         </div>
 
         <MobileNavMenuButton open={open} onClick={() => setOpen(prev => !prev)} />
-        <div className={menuButtonVerticalGradientStyles} />
+        <Accent
+          direction="vertical"
+          gradient="purple-orange"
+          borderSides={['right', 'bottom']}
+          className="z-[-1]"
+        />
       </div>
       <div className={menuUndersideBlockStyles} />
 
