@@ -2,7 +2,12 @@ import clsx from 'clsx';
 import MobileHeader from './MobileHeader';
 import DesktopHeader from './DesktopHeader';
 
-export default function SiteHeader() {
+export interface SiteHeaderProps {
+  /** Initial open state for mobile nav (e.g. for Storybook). */
+  defaultMobileNavOpen?: boolean;
+}
+
+export default function SiteHeader({ defaultMobileNavOpen = false }: SiteHeaderProps) {
 
   const styles = clsx(
     'absolute top-0 w-full',
@@ -18,7 +23,7 @@ export default function SiteHeader() {
   return (
     <div className={styles}>
       <div className={topBorderStyles} />
-      <MobileHeader />
+      <MobileHeader defaultOpen={defaultMobileNavOpen} />
       <DesktopHeader />
     </div>
   );

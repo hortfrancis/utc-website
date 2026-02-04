@@ -6,9 +6,14 @@ import Logo from '../Logo';
 import MobileNavMenuButton from './MobileNavMenuButton';
 import MobileNav from '../Nav/MobileNav';
 
-export default function MobileHeader() {
+export interface MobileHeaderProps {
+  /** Initial open state for the mobile nav (e.g. for Storybook). */
+  defaultOpen?: boolean;
+}
 
-  const [open, setOpen] = useState(false);
+export default function MobileHeader({ defaultOpen = false }: MobileHeaderProps) {
+
+  const [open, setOpen] = useState(defaultOpen);
 
   const logoVerticalGradientStyles = clsx(
     'w-4',

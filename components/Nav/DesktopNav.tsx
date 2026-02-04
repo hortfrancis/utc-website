@@ -1,13 +1,6 @@
 import { clsx } from 'clsx';
 import NavLink from './NavLink';
-
-const links = [
-  { href: '/work', label: 'Work' },
-  { href: '/xr', label: 'XR' },
-  { href: '/news', label: 'News' },
-  { href: '/about', label: 'About' },
-  { href: '/contact', label: 'Contact' }
-];
+import { navLinks } from './navLinks';
 
 export default function DesktopNav() {
 
@@ -27,7 +20,7 @@ export default function DesktopNav() {
   return (
     <nav className='hidden sm:block'>
       <ul className={listStyles}>
-        {links.map((link) => (
+        {navLinks.map((link) => (
           <li key={link.href}>
             <NavLink
               href={link.href}
