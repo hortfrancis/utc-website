@@ -1,4 +1,5 @@
 import type { Meta, StoryObj } from '@storybook/react';
+import Accent from '../Accent';
 import { Frame } from './index';
 
 /**
@@ -51,7 +52,7 @@ export default meta;
 type Story = StoryObj<typeof meta>;
 
 /** Full frame, no rounded corners (hard box). */
-export const HardBox: Story = {
+export const Default: Story = {
   args: {
     borderSides: ['top', 'right', 'bottom', 'left'],
     roundedCorners: [],
@@ -65,7 +66,7 @@ export const HardBox: Story = {
 };
 
 /** Full frame, one corner rounded (soft box). */
-export const SoftBox: Story = {
+export const WithCurve: Story = {
   args: {
     borderSides: ['top', 'right', 'bottom', 'left'],
     roundedCorners: ['bottom-right'],
@@ -78,30 +79,77 @@ export const SoftBox: Story = {
   ),
 };
 
-/** Open on top and left (corner block). */
-export const CornerBlock: Story = {
-  args: {
-    borderSides: ['right', 'bottom'],
-    roundedCorners: ['bottom-right'],
-    borderWidth: 'border-4',
-  },
-  render: (args) => (
-    <Frame {...args} className="w-32 h-20 bg-theme-cyan/30 flex items-center justify-center">
-      <span className="text-xs font-semibold text-theme-black">Corner</span>
-    </Frame>
-  ),
-};
-
-/** All four sides, all corners rounded (pill-like). */
-export const FullRounded: Story = {
+export const WithAllCornersCurve: Story = {
   args: {
     borderSides: ['top', 'right', 'bottom', 'left'],
     roundedCorners: ['top-left', 'top-right', 'bottom-left', 'bottom-right'],
     borderWidth: 'border-4',
   },
   render: (args) => (
-    <Frame {...args} className="w-40 h-16 bg-theme-white flex items-center justify-center rounded-3xl">
-      <span className="text-sm font-bold text-theme-black">Pill</span>
+    <Frame {...args} className="w-40 h-24 bg-theme-white p-3">
+      <span className="text-sm text-theme-black">Content</span>
     </Frame>
+  ),
+};
+
+/** Frame with gradient Accent strip (e.g. logo lockup or badge). */
+export const WithAccentLeft: Story = {
+  render: (args) => (
+    <div className="flex items-stretch">
+      <Accent
+        direction="vertical"
+        gradient="orange-purple"
+        borderSides={['top', 'bottom', 'left']}
+      />
+      <Frame {...args} className="w-32 h-20 bg-theme-white flex items-center justify-center ">
+        <span className="text-xs font-semibold text-theme-black">Label</span>
+      </Frame>
+    </div>
+  ),
+};
+
+export const WithAccentRight: Story = {
+  render: (args) => (
+    <div className="flex items-stretch">
+      <Frame {...args} className="w-32 h-20 bg-theme-white flex items-center justify-center ">
+        <span className="text-xs font-semibold text-theme-black">Label</span>
+      </Frame>
+      <Accent
+        direction="vertical"
+        gradient="orange-purple"
+        borderSides={['top', 'bottom', 'right']}
+      />
+    </div>
+  ),
+};
+
+export const WithAccentTop: Story = {
+  render: (args) => (
+    <div className="flex flex-col items-stretch">
+      <Accent
+        direction="horizontal"
+        gradient="orange-purple"
+        borderSides={['left', 'right', 'top']}
+      />
+      <Frame {...args} className="w-32 h-20 bg-theme-white flex items-center justify-center ">
+        <span className="text-xs font-semibold text-theme-black">Label</span>
+      </Frame>
+
+    </div>
+  ),
+};
+
+export const WithAccentBottom: Story = {
+  render: (args) => (
+    <div className="flex flex-col items-stretch">
+      <Frame {...args} className="w-32 h-20 bg-theme-white flex items-center justify-center ">
+        <span className="text-xs font-semibold text-theme-black">Label</span>
+      </Frame>
+      <Accent
+        direction="horizontal"
+        gradient="orange-purple"
+        borderSides={['left', 'right', 'bottom']}
+      />
+    </div>
   ),
 };
