@@ -2,6 +2,7 @@ import type { Meta, StoryObj } from '@storybook/react';
 import Logo from '@/components/Logo';
 import { Button } from '@/components/Button';
 import { Frame } from '@/components/Frame';
+import Accent from '@/components/Accent';
 
 /**
  * Presentational logo: logomark + logotype, optionally in a Frame.
@@ -138,7 +139,7 @@ export const InABlock: Story = {
     showFrame: false,
   },
   render: (args) => (
-    <Frame className="p-4 bg-theme-white">
+    <Frame className="bg-theme-white">
       <Logo {...args} />
     </Frame>
   ),
@@ -147,6 +148,39 @@ export const InABlock: Story = {
       description: {
         story:
           'Logo in default configuration inside a Frame (default: hard box). Only the outer Frame is used; the logo’s own curved border is off so the block alone defines the border.',
+      },
+    },
+  },
+};
+
+/**
+ * Logo in a Frame with Accent on the left (header-style lockup).
+ */
+export const InAFrameWithAccent: Story = {
+  args: {
+    cubeSize: 36,
+    type: 'full',
+    lockup: 'horizontal',
+    textLayout: 'stacked',
+    showFrame: false,
+  },
+  render: (args) => (
+    <div className="flex items-stretch">
+      <Accent
+        direction="vertical"
+        gradient="magenta-green"
+        borderSides={['top', 'left', 'bottom']}
+      />
+      <Frame className="bg-theme-white flex items-center justify-center">
+        <Logo {...args} />
+      </Frame>
+    </div>
+  ),
+  parameters: {
+    docs: {
+      description: {
+        story:
+          'Logo in a Frame (hard box) with Accent on the left — same composition as the header.',
       },
     },
   },
