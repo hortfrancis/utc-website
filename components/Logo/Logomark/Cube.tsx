@@ -1,5 +1,5 @@
 import Face from './Face';
-import type { GridSquare } from './Grid';
+import type { GridSquare } from '@/components/Grids';
 import './spin-cube.css';
 
 type GridSquares = {

@@ -1,5 +1,4 @@
-import Grid from './Grid';
-import type { GridSquare } from './Grid';
+import { Grid3x3, type GridSquare } from '@/components/Grids';
 
 interface FaceProps {
   cubeSize: number;
@@ -28,7 +27,7 @@ export default function Face({
       className='absolute w-full h-full backface-hidden box-border flex content-center items-center'
       style={{ transform: transformStyles[position] }}
     >
-      <Grid gap={gridGap} squares={gridSquares} />
+      <Grid3x3 gap={gridGap} squares={gridSquares} />
     </div>
   );
 }
