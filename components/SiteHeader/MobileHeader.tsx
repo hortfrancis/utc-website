@@ -2,6 +2,7 @@
 
 import clsx from 'clsx';
 import { useState } from 'react';
+import { Button } from '../Button';
 import Logo from '../Logo';
 import Accent from '../Accent';
 import MobileNavMenuButton from './MobileNavMenuButton';
@@ -32,7 +33,9 @@ export default function MobileHeader({ defaultOpen = false }: MobileHeaderProps)
           borderSides={['left', 'bottom']}
         />
         <div className='mr-auto'>
-          <Logo />
+          <Button href="/" aria-label="Urban Tech Creative – home">
+            <Logo />
+          </Button>
         </div>
 
         <MobileNavMenuButton open={open} onClick={() => setOpen(prev => !prev)} />

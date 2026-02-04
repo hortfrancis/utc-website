@@ -2,7 +2,6 @@
 
 import { clsx } from 'clsx';
 import { useState } from 'react';
-import Link from 'next/link';
 import { Frame } from '@/components/Frame';
 import Logomark from './Logomark';
 import Logotype from './Logotype';
@@ -25,30 +24,29 @@ const defaultFrameProps = {
   roundedCorners: ['bottom-right'] as const,
 };
 
+/**
+ * Presentational logo: logomark + logotype, optionally in a Frame.
+ * No link or button behaviour — wrap in Button (or Link) when you want it to be clickable.
+ */
 export default function Logo({
-  cubeSize = 36, // 36px by default
-  type = 'full', // logomark, logotype, or full
-  lockup = 'horizontal', // 'Lockup' = the spatial arrangement of logomark & logotype
-  textLayout = 'stacked', // One line per word
+  cubeSize = 36,
+  type = 'full',
+  lockup = 'horizontal',
+  textLayout = 'stacked',
   showFrame = true,
   spinOnHover = true,
 }: LogoProps) {
   const [spin, setSpin] = useState(false);
   const effectiveSpin = spinOnHover && spin;
 
-  const linkStyles = clsx(
-    'group flex items-center justify-center',
-    'cursor-pointer',
-    'focus:outline-none focus:ring-4 focus:ring-theme-orange',
-  );
-
   const innerStyles = clsx(
     'flex items-center justify-center',
     lockup === 'horizontal' ? 'flex-row' : 'flex-col',
     'gap-6',
     'w-48 h-24',
-    'bg-theme-white',
-    'transition-colors duration-200 group-hover:bg-theme-cyan',
+    showFrame
+      ? null
+      : 'bg-[color:var(--button-bg,var(--theme-white))] transition-colors duration-200',
   );
 
   const content = (
@@ -63,7 +61,7 @@ export default function Logo({
   );
 
   const inner = showFrame ? (
-    <Frame {...defaultFrameProps} className={innerStyles}>
+    <Frame {...defaultFrameProps} interactive className={innerStyles}>
       {content}
     </Frame>
   ) : (
@@ -71,13 +69,11 @@ export default function Logo({
   );
 
   return (
-    <Link
-      href="/"
-      className={linkStyles}
-      onMouseEnter={() => spinOnHover && setSpin(true)}
-      onMouseLeave={() => spinOnHover && setSpin(false)}
+    <div
+      onMouseEnter={spinOnHover ? () => setSpin(true) : undefined}
+      onMouseLeave={spinOnHover ? () => setSpin(false) : undefined}
     >
       {inner}
-    </Link>
+    </div>
   );
 }

@@ -1,5 +1,5 @@
-import Link from 'next/link';
 import { clsx } from 'clsx';
+import { Button } from '@/components/Button';
 import { Frame } from '@/components/Frame';
 import NewsIcon from '../icons/sections/newsIcon';
 import WorkIcon from '../icons/sections/workIcon';
@@ -44,7 +44,6 @@ export default function NavLink({
     'h-full',
     size === 'mobile' && 'w-18',
     size === 'desktop' && 'w-10',
-    'bg-theme-white',
   );
 
   const textFrameStyles = clsx(
@@ -52,7 +51,6 @@ export default function NavLink({
     'h-full',
     size === 'mobile' && 'min-w-18 px-6',
     size === 'desktop' && 'min-w-10 px-2',
-    'bg-theme-white',
     'font-semibold',
     size === 'mobile' && 'text-3xl',
     size === 'desktop' && 'text-sm',
@@ -73,17 +71,17 @@ export default function NavLink({
   })();
 
   return (
-    <Link
+    <Button
       href={href}
       onClick={onClick}
       className={outerLinkStyles}
     >
-      <Frame {...iconFrameProps} className={iconFrameStyles}>
+      <Frame {...iconFrameProps} interactive className={iconFrameStyles}>
         {icon}
       </Frame>
-      <Frame {...textFrameProps} className={textFrameStyles}>
+      <Frame {...textFrameProps} interactive className={textFrameStyles}>
         {label}
       </Frame>
-    </Link>
+    </Button>
   );
 }

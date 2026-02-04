@@ -22,6 +22,12 @@ export interface FrameProps {
   roundedCorners?: FrameCorner[];
   /** Border width class (default: border-4). */
   borderWidth?: 'border-2' | 'border-4';
+  /**
+   * When true, border and background use CSS variables (--button-border-color,
+   * --button-bg) so the block responds to Button hover/focus (orange border,
+   * cyan background). Use when Frame is the direct child of Button.
+   */
+  interactive?: boolean;
   /** Optional class for the frame wrapper. */
   className?: string;
   children: ReactNode;
@@ -54,6 +60,7 @@ export default function Frame({
   borderSides = ['top', 'right', 'bottom', 'left'],
   roundedCorners = [],
   borderWidth = 'border-4',
+  interactive = false,
   className,
   children,
 }: FrameProps) {
@@ -66,10 +73,13 @@ export default function Frame({
   return (
     <div
       className={clsx(
-        'border-theme-black box-border',
+        'box-border',
         borderWidth,
         borderZeroClasses,
         roundedClasses,
+        interactive
+          ? 'border-[color:var(--button-border-color,var(--theme-black))] bg-[color:var(--button-bg,var(--theme-white))] transition-colors duration-200'
+          : 'border-theme-black',
         className
       )}
     >

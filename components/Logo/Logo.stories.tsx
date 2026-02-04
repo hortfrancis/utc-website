@@ -1,19 +1,11 @@
 import type { Meta, StoryObj } from '@storybook/react';
 import Logo from '@/components/Logo';
+import { Button } from '@/components/Button';
 import { Frame } from '@/components/Frame';
 
 /**
- * Urban Tech Creative logo component with interactive 3D logomark.
- *
- * The logo consists of:
- * - Logomark: A 3D cube displaying 'U', 'T', 'C' on its visible faces
- * - Logotype: The full company name "Urban Tech Creative"
- *
- * Features:
- * - Hover to trigger cube spin animation
- * - Configurable cube size
- * - Multiple display types (logomark only, logotype only, or full logo)
- * - Flexible layouts (horizontal/vertical lockup, single-line/stacked text)
+ * Presentational logo: logomark + logotype, optionally in a Frame.
+ * No link or button behaviour — wrap in Button (or Link) when you want it clickable.
  */
 const meta = {
   title: 'Components/Logo',
@@ -23,7 +15,7 @@ const meta = {
     docs: {
       description: {
         component:
-          'Brand logo component featuring a 3D CSS cube logomark and company name. Hover over the logo to see the cube spin.',
+          'Brand logo (3D cube logomark + company name). Presentational only; use "In a Button" story or wrap in Button when you want hover/click behaviour.',
       },
     },
   },
@@ -155,6 +147,33 @@ export const InABlock: Story = {
       description: {
         story:
           'Logo in default configuration inside a Frame (default: hard box). Only the outer Frame is used; the logo’s own curved border is off so the block alone defines the border.',
+      },
+    },
+  },
+};
+
+/**
+ * Logo inside a Button: hover for orange border and cyan background.
+ */
+export const InAButton: Story = {
+  args: {
+    cubeSize: 36,
+    type: 'full',
+    lockup: 'horizontal',
+    textLayout: 'stacked',
+    showFrame: true,
+    spinOnHover: true,
+  },
+  render: (args) => (
+    <Button href="#" aria-label="Urban Tech Creative – home">
+      <Logo {...args} />
+    </Button>
+  ),
+  parameters: {
+    docs: {
+      description: {
+        story:
+          'Logo wrapped in a Button. Hover for orange border and cyan background; logomark spins on hover.',
       },
     },
   },

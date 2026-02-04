@@ -1,5 +1,6 @@
 import Logo from "../Logo";
 import Accent from "../Accent";
+import { Button } from "../Button";
 import DesktopNav from "../Nav/DesktopNav";
 
 export default function DesktopHeader() {
@@ -13,7 +14,9 @@ export default function DesktopHeader() {
           gradient="magenta-green"
           borderSides={['left', 'bottom']}
         />
-        <Logo />
+        <Button href="/" aria-label="Urban Tech Creative – home">
+          <Logo />
+        </Button>
 
         <div className='mr-auto'>
           <DesktopNav />
