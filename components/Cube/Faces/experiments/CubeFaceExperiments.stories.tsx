@@ -1,3 +1,4 @@
+import { useRef, useCallback } from 'react';
 import type { Meta, StoryObj } from '@storybook/nextjs';
 import FaceGrid from '../FaceGrid';
 import Icon from '../../../Icon/Icon';
@@ -372,4 +373,184 @@ export const IconGrid: Story = {
       </div>
     </FaceGrid>
   ),
+};
+
+/* ================================================================== */
+/*  7 · ICON GRID HOVER                                                */
+/*  Same cube icon in every cell. Muted at rest, lights up to a       */
+/*  cycling theme colour on hover with a smooth transition.            */
+/* ================================================================== */
+
+/** Tailwind classes: muted base → vivid on hover, per theme colour. */
+const hoverColourClasses = [
+  'text-theme-cyan/20 hover:text-theme-cyan',
+  'text-theme-orange/20 hover:text-theme-orange',
+  'text-theme-purple/20 hover:text-theme-purple',
+  'text-theme-magenta/20 hover:text-theme-magenta',
+  'text-theme-green/20 hover:text-theme-green',
+  'text-theme-white/20 hover:text-theme-white',
+];
+
+export const IconGridHover: Story = {
+  name: 'XR – Icon Grid Hover',
+  render: () => (
+    <FaceGrid>
+      <div className="absolute inset-0 grid grid-cols-6 grid-rows-6 gap-[2px] p-[2px]">
+        {Array.from({ length: 36 }).map((_, i) => (
+          <div
+            key={i}
+            className={`flex items-center justify-center cursor-pointer transition-colors duration-200 hover:bg-theme-white/5 ${hoverColourClasses[i % hoverColourClasses.length]}`}
+          >
+            <Icon name="cube" size={28} weight="fill" />
+          </div>
+        ))}
+      </div>
+    </FaceGrid>
+  ),
+};
+
+/* ================================================================== */
+/*  8 · ICON GRID TRAIL                                                */
+/*  Same cube icon grid but with a long fade-out (10s) creating a     */
+/*  trail effect as you move the cursor across the grid.               */
+/* ================================================================== */
+
+/** Background matches the hover colour per cell for a unified glow. */
+const trailColourClasses = [
+  'text-theme-cyan/20 hover:text-theme-cyan bg-theme-cyan/5 hover:bg-theme-cyan/15',
+  'text-theme-orange/20 hover:text-theme-orange bg-theme-orange/5 hover:bg-theme-orange/15',
+  'text-theme-purple/20 hover:text-theme-purple bg-theme-purple/5 hover:bg-theme-purple/15',
+  'text-theme-magenta/20 hover:text-theme-magenta bg-theme-magenta/5 hover:bg-theme-magenta/15',
+  'text-theme-green/20 hover:text-theme-green bg-theme-green/5 hover:bg-theme-green/15',
+  'text-theme-white/20 hover:text-theme-white bg-theme-white/5 hover:bg-theme-white/15',
+];
+
+export const IconGridTrail: Story = {
+  name: 'XR – Icon Grid Trail',
+  render: () => (
+    <FaceGrid>
+      <div className="absolute inset-0 grid grid-cols-6 grid-rows-6 gap-[2px] p-[2px]">
+        {Array.from({ length: 36 }).map((_, i) => (
+          <div
+            key={i}
+            className={`flex items-center justify-center cursor-pointer transition-colors [transition-duration:10s] hover:[transition-duration:0s] ${trailColourClasses[i % trailColourClasses.length]}`}
+          >
+            <Icon name="cube" size={28} weight="fill" />
+          </div>
+        ))}
+      </div>
+    </FaceGrid>
+  ),
+};
+
+/* ================================================================== */
+/*  9 · ICON GRID TOUCH TRAIL                                          */
+/*  Touch + mouse version. JS tracks pointer via pointerover/out for   */
+/*  mouse, touchmove + elementFromPoint for touch drag. CSS custom     */
+/*  properties carry per-cell vivid colours; a data-active attribute   */
+/*  triggers instant-on / 10s-fade-off via a scoped <style> block.     */
+/* ================================================================== */
+
+/** Per-cell vivid colour values (set as CSS custom properties). */
+const touchTrailVividColours = [
+  { color: 'var(--theme-cyan)', bg: 'rgba(104, 227, 232, 0.15)' },
+  { color: 'var(--theme-orange)', bg: 'rgba(251, 176, 6, 0.15)' },
+  { color: 'var(--theme-purple)', bg: 'rgba(68, 59, 255, 0.15)' },
+  { color: 'var(--theme-magenta)', bg: 'rgba(248, 73, 193, 0.15)' },
+  { color: 'var(--theme-green)', bg: 'rgba(50, 205, 50, 0.15)' },
+  { color: 'var(--theme-white)', bg: 'rgba(255, 255, 255, 0.15)' },
+];
+
+/** Base (muted) Tailwind classes per colour. */
+const touchTrailBaseClasses = [
+  'text-theme-cyan/20 bg-theme-cyan/5',
+  'text-theme-orange/20 bg-theme-orange/5',
+  'text-theme-purple/20 bg-theme-purple/5',
+  'text-theme-magenta/20 bg-theme-magenta/5',
+  'text-theme-green/20 bg-theme-green/5',
+  'text-theme-white/20 bg-theme-white/5',
+];
+
+function IconGridTouchTrailComponent() {
+  const gridRef = useRef<HTMLDivElement>(null);
+  const lastTouchCell = useRef<Element | null>(null);
+
+  // Mouse: pointerover/pointerout bubble, so we delegate from the grid
+  const handlePointerOver = useCallback((e: React.PointerEvent) => {
+    if (e.pointerType === 'touch') return;
+    const cell = (e.target as Element).closest('[data-trail-cell]');
+    cell?.setAttribute('data-active', '');
+  }, []);
+
+  const handlePointerOut = useCallback((e: React.PointerEvent) => {
+    if (e.pointerType === 'touch') return;
+    const cell = (e.target as Element).closest('[data-trail-cell]');
+    cell?.removeAttribute('data-active');
+  }, []);
+
+  // Touch: track finger position, find cell via elementFromPoint
+  const handleTouchMove = useCallback((e: React.TouchEvent) => {
+    const touch = e.touches[0];
+    if (!touch) return;
+    const el = document.elementFromPoint(touch.clientX, touch.clientY);
+    const cell = el?.closest('[data-trail-cell]');
+    if (!cell || !gridRef.current?.contains(cell)) return;
+
+    if (cell !== lastTouchCell.current) {
+      lastTouchCell.current?.removeAttribute('data-active');
+      cell.setAttribute('data-active', '');
+      lastTouchCell.current = cell;
+    }
+  }, []);
+
+  const handleTouchEnd = useCallback(() => {
+    lastTouchCell.current?.removeAttribute('data-active');
+    lastTouchCell.current = null;
+  }, []);
+
+  return (
+    <FaceGrid>
+      {/* Scoped styles: base 10s fade, instant-on when active */}
+      <style>{`
+        .trail-grid [data-trail-cell] {
+          transition: color 10s, background-color 10s;
+        }
+        .trail-grid [data-trail-cell][data-active] {
+          color: var(--trail-color) !important;
+          background-color: var(--trail-bg) !important;
+          transition-duration: 0s !important;
+        }
+      `}</style>
+      <div
+        ref={gridRef}
+        className="trail-grid absolute inset-0 grid grid-cols-6 grid-rows-6 gap-[2px] p-[2px] touch-none"
+        onPointerOver={handlePointerOver}
+        onPointerOut={handlePointerOut}
+        onTouchMove={handleTouchMove}
+        onTouchEnd={handleTouchEnd}
+      >
+        {Array.from({ length: 36 }).map((_, i) => {
+          const idx = i % touchTrailVividColours.length;
+          return (
+            <div
+              key={i}
+              data-trail-cell=""
+              style={{
+                '--trail-color': touchTrailVividColours[idx].color,
+                '--trail-bg': touchTrailVividColours[idx].bg,
+              } as React.CSSProperties}
+              className={`flex items-center justify-center cursor-pointer ${touchTrailBaseClasses[idx]}`}
+            >
+              <Icon name="cube" size={28} weight="fill" />
+            </div>
+          );
+        })}
+      </div>
+    </FaceGrid>
+  );
+}
+
+export const IconGridTouchTrail: Story = {
+  name: 'XR – Icon Grid Touch Trail',
+  render: () => <IconGridTouchTrailComponent />,
 };
