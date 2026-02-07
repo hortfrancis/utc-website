@@ -1,0 +1,59 @@
+---
+description: Session handover — current project state, immediate next steps, and open decisions. Updated at the end of each working session.
+globs:
+  - "**"
+---
+
+# Session Handover
+
+Last updated: 2026-02-07
+
+## What happened this session
+
+Major infrastructure and design system work to prepare for cube face design prototyping:
+
+1. **Design system documentation** (`.cursor/rules/design-system.mdc`) — comprehensive reference covering atomic design hierarchy, tokens, composition patterns, grid system, and design philosophy (LCARS, acid design, post-neobrutalism). Auto-loads for all component/app work.
+
+2. **UIGrid rebuild** — fixed the gap math (was ignoring gap space in cell size calculation), rewrote stories with real design system atoms (LCARS full-viewport layout, 6x6, 3x3), added `docs/lld/ui-grid.md` with performance and responsive design documentation.
+
+3. **Icon component** (`components/Icon/`) — wraps Phosphor Icons (`@phosphor-icons/react`, MIT). Curated registry of ~50 icons, string `name` prop, defaults to `fill` weight for the acid design aesthetic. Stories show all weights, theme colors, sizes, and the full grouped registry.
+
+4. **FaceGrid** (`components/Cube/Faces/FaceGrid.tsx`) — light container for cube face content. Dark background, relative positioning for layer stacking, overflow clip. Children use raw Tailwind grid classes for the 6x6 layout.
+
+5. **Storybook reorganised** into Atomic Design hierarchy — Atoms (Frame, Accent, Button, Icon, Heading), Molecules (NavLink, Logo), Organisms (SiteHeader, MobileNavPanel, Cube, Cube Faces), Layout (UIGrid), Utilities (Grids), Experiments (Cube Faces).
+
+6. **Heading stories** added — levels 1-4 plus a stacked hierarchy view.
+
+7. **Experiments section** created — `components/Cube/Faces/experiments/` with `CubeFaceExperiments.stories.tsx`. Has a "Hello Experiment" placeholder. Ready for design work.
+
+8. **Cross-referenced docs** — cursor rules and LLD docs point to each other. Documentation Structure table in design-system.mdc explains the two-layer approach.
+
+## Immediate next steps
+
+1. **XR face experiments** — the main creative work queued up. Create 3-4 design variants in `components/Cube/Faces/experiments/`:
+   - Grid Typography: asymmetric type on the 6x6 grid
+   - Pixel Overlay: XR icon pattern as background texture with text overlay
+   - Color Block: solid theme-color cells, acid-poster style
+   - Minimal Corner: negative space, clustered text
+   - Text content: "XR: Extended Reality", "AR: Augmented Reality", "VR: Virtual Reality"
+   - Reference images from the Figma board will help guide the aesthetic
+
+2. **Review and combine** — pick elements that work from the experiments, combine into a final XR face design, wire it into `components/Cube/Faces/XR.tsx`.
+
+3. **Repeat for other faces** — Work, Vision, News (Showcase last, Hamster is an easter egg).
+
+## Open decisions
+
+- **Grid gap standardisation**: 4px tight / 8px separated is proposed but not yet confirmed as a design token.
+- **Section icons in NavLinks**: The current CSS grid icons may be replaced with Phosphor icons or another icon set. The grid icons work at large sizes but break at small pixel dimensions.
+- **UIGrid for page layouts**: The LCARS-style grid is ready but not yet used in any actual page layout. When a page beyond the homepage needs layout, UIGrid + GridBlock is the intended approach, with mobile-first breakpoints swapping grid configs.
+
+## Working style notes
+
+The developer (Alex) prefers:
+- Separate commits per concern (not monolithic refactors)
+- Discussing design decisions before executing — use Plan/Ask mode for "what do you think?" conversations
+- Practical over precious — prototype fast, extract patterns later
+- Storybook as the primary design tool ("vibe-designing")
+- Clear documentation that serves both humans and LLM agents
+- Having a genuinely good time while building things
