@@ -1,5 +1,7 @@
 # Cube
 
+> Quick reference: see `.cursor/rules/design-system.mdc` (Cube Face Mapping, Organisms section).
+
 ## Overview
 
 The homepage 'cube menu' is a 3D cube that:

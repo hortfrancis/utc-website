@@ -1,5 +1,7 @@
 # Frame
 
+> Quick reference: see `.cursor/rules/design-system.mdc` (Atoms section, Composition Patterns).
+
 ## Overview
 
 **Frame** is a composable UI primitive: a partial border with configurable sides and rounded corners. It is used for the logo lockup (Default) and can wrap any block that should read as a distinct chunk without a full closed box.

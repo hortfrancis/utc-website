@@ -7,6 +7,20 @@ globs:
 
 # UTC Design System
 
+## Documentation Structure
+
+- **`.cursor/rules/design-system.mdc`** (this file): Operational reference. Conventions, tokens, component APIs, composition patterns. Automatically available when editing `components/**` or `app/**`. This is the source of truth for "how to use things".
+- **`docs/lld/*.md`**: Deep-dive implementation docs. Why things work the way they do, motion models, performance rationale, edge cases. The source of truth for "how things work internally". Read these when modifying a specific subsystem.
+
+| Topic | Quick reference | Deep dive |
+|-------|----------------|-----------|
+| Design system | This file | -- |
+| Cube (3D interaction) | Cube Face Mapping (below) | `docs/lld/cube.md` |
+| Frame (semantic use) | Atoms section (below) | `docs/lld/frame.md` |
+| UIGrid (layout grid) | Grid System section (below) | `docs/lld/ui-grid.md` |
+
+---
+
 ## Atomic Design Hierarchy
 
 ### Atoms (primitives)
@@ -86,7 +100,27 @@ Each master cell subdivides into 2x2, giving 36 total cells. Two uses:
 
 `components/UIGrid/UIGrid.tsx` — Site-wide layout grid where every cell is a perfect square. Uses ResizeObserver to compute cell size from available space: `min((w - gaps) / cols, (h - gaps) / rows)`. Grid is centered in the container. Use `GridBlock` to place children at specific grid positions.
 
-Intended for site-wide UI positioning — LCARS-style panel layouts with Frames, Accents, NavLinks. Supports any `cols × rows` configuration. See `docs/lld/ui-grid.md` for full documentation.
+Intended for site-wide UI positioning — LCARS-style panel layouts with Frames, Accents, NavLinks. Supports any `cols × rows` configuration. For performance and responsive design details, see `docs/lld/ui-grid.md`.
+
+#### UIGrid API
+
+| Prop | Type | Default | Description |
+|------|------|---------|-------------|
+| `cols` | `number` | required | Number of columns |
+| `rows` | `number` | required | Number of rows |
+| `gap` | `number` | `4` | Gap between cells in pixels |
+| `fullViewport` | `boolean` | `true` | Fill viewport or fill parent |
+| `className` | `string` | -- | Optional class for outer wrapper |
+
+#### GridBlock API
+
+| Prop | Type | Default | Description |
+|------|------|---------|-------------|
+| `col` | `number` | required | Column index (1-based) |
+| `row` | `number` | required | Row index (1-based) |
+| `colSpan` | `number` | `1` | Columns to span |
+| `rowSpan` | `number` | `1` | Rows to span |
+| `className` | `string` | -- | Optional class for block wrapper |
 
 ### FaceGrid Usage
 

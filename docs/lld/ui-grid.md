@@ -1,5 +1,7 @@
 # UIGrid
 
+> Quick reference: see `.cursor/rules/design-system.mdc` (Atoms section, Grid System section — includes API tables).
+
 ## Overview
 
 **UIGrid** is the site-wide layout grid. Every cell is a perfect square, regardless of the container's aspect ratio. Use it to position UI atoms and molecules (Frames, Accents, NavLinks) on a grid with consistent proportions.
