@@ -51,7 +51,8 @@ const variantStyles: Record<ButtonVariant, string> = {
 const sharedStyles = clsx(
   'inline-flex items-center gap-2',
   'px-5 py-2.5 font-bold',
-  'transition-colors duration-200',
+  'transition-[color,background-color,border-color,translate] duration-100',
+  'active:translate-y-1',
   'outline-0 focus-visible:outline-4 focus-visible:outline-[var(--theme-magenta)] focus-visible:outline-offset-2',
 );
 
