@@ -19,6 +19,7 @@ const preview: Preview = {
       </div>
     ),
   ],
+
   parameters: {
     controls: {
       matchers: {
@@ -30,15 +31,20 @@ const preview: Preview = {
       test: 'todo',
     },
     backgrounds: {
-      default: 'white',
-      values: [
-        {
+      options: {
+        white: {
           name: 'white',
           value: '#ffffff',
-        },
-      ],
+        }
+      }
     },
   },
+
+  initialGlobals: {
+    backgrounds: {
+      value: 'white'
+    }
+  }
 };
 
 export default preview;
