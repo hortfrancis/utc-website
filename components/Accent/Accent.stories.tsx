@@ -7,7 +7,7 @@ import Accent from './Accent';
  * UI blocks; placement and size are controlled by the parent.
  */
 const meta = {
-  title: 'Components/Accent',
+  title: 'Atoms/Accent',
   component: Accent,
   parameters: {
     layout: 'centered',

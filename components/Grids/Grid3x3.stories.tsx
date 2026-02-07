@@ -6,7 +6,7 @@ import type { GridSquare } from './types';
  * 3×3 grid (9 squares). Used by the logomark cube faces and elsewhere.
  */
 const meta = {
-  title: 'Components/Grids/Grid3x3',
+  title: 'Utilities/Grids/Grid3x3',
   component: Grid3x3,
   parameters: {
     layout: 'centered',

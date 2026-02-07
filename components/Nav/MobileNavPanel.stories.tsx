@@ -10,7 +10,7 @@ import { navLinks } from './navLinks';
  * Same component is composed by `MobileNav` in the app.
  */
 const meta = {
-  title: 'Components/Nav/MobileNavPanel',
+  title: 'Organisms/MobileNavPanel',
   component: MobileNavPanel,
   parameters: {
     layout: 'centered',

@@ -10,7 +10,7 @@ import Accent from '@/components/Accent';
  * No link or button behaviour — wrap in Button (or Link) when you want it clickable.
  */
 const meta = {
-  title: 'Components/Logo',
+  title: 'Molecules/Logo',
   component: Logo,
   parameters: {
     layout: 'centered',

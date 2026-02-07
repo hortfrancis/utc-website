@@ -12,7 +12,7 @@ import { Frame } from './index';
  * should feel like a distinct chunk without a full closed box.
  */
 const meta = {
-  title: 'Components/Frame',
+  title: 'Atoms/Frame',
   component: Frame,
   parameters: {
     layout: 'centered',

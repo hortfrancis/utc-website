@@ -3,7 +3,7 @@ import NavLink from './NavLink';
 import { navLinks } from './navLinks';
 
 const meta = {
-  title: 'Components/Nav/NavLink',
+  title: 'Molecules/NavLink',
   component: NavLink,
   parameters: {
     layout: 'centered',

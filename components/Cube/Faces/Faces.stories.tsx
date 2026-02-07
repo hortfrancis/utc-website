@@ -7,7 +7,7 @@ import { XR, Work, Vision, News, Showcase, Hamster } from './index';
  * Shown here in a square frame to match the cube face aspect.
  */
 const meta = {
-  title: 'Components/Cube/Faces',
+  title: 'Organisms/Cube Faces',
   parameters: {
     layout: 'centered',
     docs: {

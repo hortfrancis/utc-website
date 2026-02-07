@@ -12,7 +12,7 @@ import Cube from '@/components/Cube';
  * - Tab visibility awareness (pauses when tab is hidden)
  */
 const meta = {
-  title: 'Components/Cube',
+  title: 'Organisms/Cube',
   component: Cube,
   parameters: {
     layout: 'fullscreen',

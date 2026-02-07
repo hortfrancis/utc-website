@@ -10,7 +10,7 @@ import Accent from '@/components/Accent';
  * that reads those variables.
  */
 const meta = {
-  title: 'Components/Button',
+  title: 'Atoms/Button',
   component: Button,
   parameters: {
     layout: 'centered',

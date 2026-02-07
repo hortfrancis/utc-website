@@ -8,7 +8,7 @@ import type { GridSquare } from './types';
  * one cell in the 3×3 grid — four small squares equal one large square.
  */
 const meta = {
-  title: 'Components/Grids/Grid6x6',
+  title: 'Utilities/Grids/Grid6x6',
   component: Grid6x6,
   parameters: {
     layout: 'centered',

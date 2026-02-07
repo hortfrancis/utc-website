@@ -11,7 +11,7 @@ import SiteHeader from './SiteHeader';
  * These are the same components used in the Next.js app—design here, they update in the app.
  */
 const meta = {
-  title: 'Components/SiteHeader',
+  title: 'Organisms/SiteHeader',
   component: SiteHeader,
   parameters: {
     layout: 'fullscreen',
