@@ -1,5 +1,8 @@
 import type { Meta, StoryObj } from '@storybook/nextjs';
+import { useState } from 'react';
 import Cube from '@/components/Cube';
+import SectionDetail from '@/components/SectionDetail';
+import type { FacePosition } from './Cube';
 
 /**
  * Interactive 3D cube component with drag-to-rotate and tap-to-navigate functionality.
@@ -30,9 +33,31 @@ export default meta;
 type Story = StoryObj<typeof meta>;
 
 /**
- * Interactive cube with drag-to-rotate and tap-to-navigate functionality.
+ * Default cube with the built-in alert on face tap.
  *
  * Try dragging the cube to rotate it, or tap on any face to see an alert.
  * The cube automatically spins when idle, and smoothly returns to its attract pose after being released.
  */
 export const Default: Story = {};
+
+/**
+ * Cube with SectionDetail overlay — mirrors the homepage behaviour.
+ *
+ * Tap a face to open the section detail overlay. Click the backdrop,
+ * press Escape, or use the Close button to dismiss it.
+ */
+export const WithSectionDetail: Story = {
+  render: function CubeWithSectionDetail() {
+    const [activeFace, setActiveFace] = useState<FacePosition | null>(null);
+
+    return (
+      <>
+        <Cube onFaceTap={(face) => setActiveFace(face)} />
+        <SectionDetail
+          face={activeFace}
+          onClose={() => setActiveFace(null)}
+        />
+      </>
+    );
+  },
+};

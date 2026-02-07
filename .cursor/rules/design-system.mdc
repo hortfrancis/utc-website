@@ -31,6 +31,7 @@ globs:
 - **Heading** (`components/Heading.tsx`): Semantic heading component (h1-h6). Predefined size/weight classes per level. Uses Recursive font.
 - **Icon**: Icons from `@phosphor-icons/react`. Prefer the **fill** variant for the acid design aesthetic -- bold, solid shapes with strong silhouettes. Fall back to regular weight for secondary/supporting icons.
 - **UIGrid** (`components/UIGrid/UIGrid.tsx`): Site-wide layout grid with square cells. Uses ResizeObserver to compute cell size so cells never stretch or squash. Use for LCARS-style panel positioning. Pair with **GridBlock** (`components/UIGrid/GridBlock.tsx`) for placement (col, row, colSpan, rowSpan). NOT for cube faces -- use FaceGrid for those.
+- **Overlay** (`components/Overlay/Overlay.tsx`): Full-viewport overlay with backdrop. Renders via portal (`document.body`). Props: `open` (boolean), `onClose` (backdrop click or Escape), `children`, `className`. CSS keyframe animations for fade + scale entrance. Handles focus management (auto-focus on mount, restore on close) and locks body scroll while open. Use as the base layer for any modal, detail panel, or dialog.
 
 ### Molecules (combinations of atoms)
 
@@ -41,7 +42,8 @@ globs:
 
 - **SiteHeader** (`components/SiteHeader/`): Responsive header with desktop and mobile variants. Mobile has a menu button + expandable MobileNavPanel.
 - **MobileNavPanel** (`components/Nav/MobileNavPanel.tsx`): List of NavLinks with Accent bars.
-- **Cube** (`components/Cube/Cube.tsx`): Interactive 3D CSS cube on the homepage. Auto-spins, drag-to-rotate, tap-to-navigate. Each face maps to a site section.
+- **Cube** (`components/Cube/Cube.tsx`): Interactive 3D CSS cube on the homepage. Auto-spins, drag-to-rotate, tap-to-navigate. Each face maps to a site section. Accepts `onFaceTap?: (face: FacePosition) => void` prop; defaults to an alert. Exports `FacePosition` type and `FACE_LABELS` map.
+- **SectionDetail** (`components/SectionDetail/SectionDetail.tsx`): Detail overlay shown when a cube face is tapped. Renders section-specific content (title, description, CTA link) inside an Overlay with Accent + Frame. Props: `face: FacePosition | null` (null = closed), `onClose`.
 
 ---
 

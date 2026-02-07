@@ -25,7 +25,7 @@ type Mode = "AUTO" | "DRAG";
 export type FacePosition = "front" | "back" | "left" | "right" | "top" | "bottom";
 
 /** Human-readable label for each cube face / site section. */
-const FACE_LABELS: Record<FacePosition, string> = {
+export const FACE_LABELS: Record<FacePosition, string> = {
   front: "Work",
   back: "News",
   left: "Vision",
