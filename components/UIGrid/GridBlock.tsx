@@ -18,7 +18,7 @@ export interface GridBlockProps {
 }
 
 /**
- * Places a block (any UI component) into the UI grid at the given cell.
+ * Places a block (any UI component) into a UIGrid at the given cell.
  * Uses CSS Grid placement; col/row are 1-based.
  */
 export default function GridBlock({

@@ -10,8 +10,8 @@ export interface UIGridProps {
   cols: number;
   /** Number of rows. */
   rows: number;
-  /** Gap between cells (CSS length, e.g. "4px" or "0.25rem"). */
-  gap?: string;
+  /** Gap between cells in pixels. */
+  gap?: number;
   /** Whether the grid fills the viewport (100dvh × 100vw). If false, fills parent. */
   fullViewport?: boolean;
   /** Optional class for the outer wrapper. */
@@ -20,14 +20,20 @@ export interface UIGridProps {
 }
 
 /**
- * Full-area layout grid with square cells. Covers the whole screen (or parent);
- * cell size is computed so every cell is a square: min(width/cols, height/rows).
+ * Site-wide layout grid with square cells. Covers the whole screen (or parent
+ * container); cell size is computed so every cell is a perfect square:
+ *   min((width - gaps) / cols, (height - gaps) / rows)
+ *
  * Responsive: uses ResizeObserver to recompute on resize.
+ *
+ * Use for site-wide UI positioning (LCARS-style panel layouts). For cube face
+ * layouts, use FaceGrid instead (pure CSS, no ResizeObserver needed since
+ * cube faces are already square).
  */
 export default function UIGrid({
   cols,
   rows,
-  gap = '4px',
+  gap = 4,
   fullViewport = true,
   className,
   children,
@@ -41,9 +47,14 @@ export default function UIGrid({
 
     const width = el.clientWidth;
     const height = el.clientHeight;
-    const size = Math.min(width / cols, height / rows);
+
+    // Subtract total gap space before dividing by cell count
+    const cellFromWidth = (width - gap * (cols - 1)) / cols;
+    const cellFromHeight = (height - gap * (rows - 1)) / rows;
+    const size = Math.min(cellFromWidth, cellFromHeight);
+
     setCellSizePx(Math.max(0, Math.floor(size)));
-  }, [cols, rows]);
+  }, [cols, rows, gap]);
 
   useEffect(() => {
     measure();
@@ -55,8 +66,8 @@ export default function UIGrid({
     return () => observer.disconnect();
   }, [measure]);
 
-  const gridWidth = cellSizePx * cols;
-  const gridHeight = cellSizePx * rows;
+  const gridWidth = cellSizePx * cols + gap * (cols - 1);
+  const gridHeight = cellSizePx * rows + gap * (rows - 1);
 
   return (
     <div
@@ -64,7 +75,7 @@ export default function UIGrid({
       data-testid={UI_GRID_DATA_TESTID}
       className={clsx(
         'flex items-center justify-center overflow-hidden',
-        fullViewport && 'h-[100dvh] w-screen',
+        fullViewport && 'h-dvh w-screen',
         !fullViewport && 'h-full w-full',
         className
       )}
@@ -74,7 +85,7 @@ export default function UIGrid({
         style={{
           gridTemplateColumns: `repeat(${cols}, ${cellSizePx}px)`,
           gridTemplateRows: `repeat(${rows}, ${cellSizePx}px)`,
-          gap,
+          gap: `${gap}px`,
           width: gridWidth,
           height: gridHeight,
         }}

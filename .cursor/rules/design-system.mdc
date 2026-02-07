@@ -16,6 +16,7 @@ globs:
 - **Button** (`components/Button/Button.tsx`): Wraps a Frame (or Frame + Accent) to make it interactive. Sets CSS custom properties (`--button-border-color`, `--button-bg`, `--button-accent-from/to`) on hover/focus so child Frame/Accent respond (orange border, cyan background, shifted gradient).
 - **Heading** (`components/Heading.tsx`): Semantic heading component (h1-h6). Predefined size/weight classes per level. Uses Recursive font.
 - **Icon**: Icons from `@phosphor-icons/react`. Prefer the **fill** variant for the acid design aesthetic -- bold, solid shapes with strong silhouettes. Fall back to regular weight for secondary/supporting icons.
+- **UIGrid** (`components/UIGrid/UIGrid.tsx`): Site-wide layout grid with square cells. Uses ResizeObserver to compute cell size so cells never stretch or squash. Use for LCARS-style panel positioning. Pair with **GridBlock** (`components/UIGrid/GridBlock.tsx`) for placement (col, row, colSpan, rowSpan). NOT for cube faces -- use FaceGrid for those.
 
 ### Molecules (combinations of atoms)
 
@@ -80,6 +81,12 @@ Each master cell subdivides into 2x2, giving 36 total cells. Two uses:
 
 1. **Icon grids** (`components/Grids/Grid6x6.tsx`): Renders pixel-art icons using opaque/clear squares. Grid patterns defined in `components/Grids/patterns.ts`. Used for section icons in navigation.
 2. **Face layout grids** (`components/Cube/Faces/FaceGrid.tsx`): Layout grid for placing arbitrary content on cube faces. Same 6x6 geometry, but children are positioned with Tailwind grid classes (`col-start-*`, `row-start-*`, `col-span-*`, `row-span-*`). Supports absolute overlay layers for blend-mode experiments.
+
+### UIGrid (site-wide layout)
+
+`components/UIGrid/UIGrid.tsx` — Site-wide layout grid where every cell is a perfect square. Uses ResizeObserver to compute cell size from available space: `min((w - gaps) / cols, (h - gaps) / rows)`. Grid is centered in the container. Use `GridBlock` to place children at specific grid positions.
+
+Intended for site-wide UI positioning — LCARS-style panel layouts with Frames, Accents, NavLinks. Supports any `cols × rows` configuration. See `docs/lld/ui-grid.md` for full documentation.
 
 ### FaceGrid Usage
 
