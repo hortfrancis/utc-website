@@ -1,5 +1,5 @@
 ---
-description: Design system reference for Urban Tech Creative website. Covers atoms, molecules, tokens, grid system, composition patterns, and design philosophy.
+description: Design system reference for Urban Tech Creative website. Covers utilities, atoms, molecules, tokens, grid system, composition patterns, and design philosophy.
 globs:
   - components/**
   - app/**
@@ -23,27 +23,31 @@ globs:
 
 ## Atomic Design Hierarchy
 
+### Utilities
+
+- **Pressable** (`components/Pressable/Pressable.tsx`): Makes any subtree interactive and accessible. Zero visual opinion — no borders, backgrounds, padding, or hover effects. Renders `<Link>` for internal navigation (`href` starts with `/`), `<a target="_blank" rel="noopener noreferrer">` for external URLs (`href` starts with `http`), or `<button type="button">` for actions (no `href`). Props: `href?`, `onClick?`, `onMouseEnter?`, `onMouseLeave?`, `children`, `className?`, `aria-label?`, `data-testid?`. Use when wrapping custom compositions (Logo lockups, NavLinks) where the visual treatment is owned by the children.
+- **Icon**: Icons from `@phosphor-icons/react`. Prefer the **fill** variant for the acid design aesthetic — bold, solid shapes with strong silhouettes. Fall back to regular weight for secondary/supporting icons.
+
 ### Atoms (primitives)
 
-- **Frame** (`components/Frame/Frame.tsx`): Post-neobrutalist bordered container. A self-contained piece of UI or content. Thick black borders (4px default). Selective rounded corners add friendliness -- use sparingly (one curve is the sweet spot). Props: `borderSides` (omit sides to prevent double-borders when stacking adjacent Frames), `roundedCorners`, `borderWidth` (`border-2` | `border-4`), `interactive` (responds to Button hover via CSS custom properties).
-- **Accent** (`components/Accent/Accent.tsx`): Gradient bar placed alongside a Frame to signal interactivity. Draws the user's eye to interactive elements using immediate, unconscious visual processing. Gradients: `magenta-green`, `purple-orange`, `orange-purple`. Props: `direction` (`vertical` | `horizontal`), `gradient`, `borderSides` (match adjacent Frame to avoid double-borders), `interactive`.
-- **Button** (`components/Button/Button.tsx`): Wraps a Frame (or Frame + Accent) to make it interactive. Sets CSS custom properties (`--button-border-color`, `--button-bg`, `--button-accent-from/to`) on hover/focus so child Frame/Accent respond (orange border, cyan background, shifted gradient).
+- **Frame** (`components/Frame/Frame.tsx`): Post-neobrutalist bordered container. A self-contained piece of UI or content. Thick black borders (4px default). Selective rounded corners add friendliness — use sparingly (one curve is the sweet spot). Props: `borderSides` (omit sides to prevent double-borders when stacking adjacent Frames), `roundedCorners`, `borderWidth` (`border-2` | `border-4`). Purely presentational — no hover or interactive behaviour.
+- **Accent** (`components/Accent/Accent.tsx`): Gradient bar placed alongside a Frame for visual emphasis. Draws the user's eye using colour. Gradients: `magenta-green`, `purple-orange`, `orange-purple`. Props: `direction` (`vertical` | `horizontal`), `gradient`, `borderSides` (match adjacent Frame to avoid double-borders). Purely presentational — no hover or interactive behaviour.
 - **Heading** (`components/Heading.tsx`): Semantic heading component (h1-h6). Predefined size/weight classes per level. Uses Recursive font.
-- **Icon**: Icons from `@phosphor-icons/react`. Prefer the **fill** variant for the acid design aesthetic -- bold, solid shapes with strong silhouettes. Fall back to regular weight for secondary/supporting icons.
-- **UIGrid** (`components/UIGrid/UIGrid.tsx`): Site-wide layout grid with square cells. Uses ResizeObserver to compute cell size so cells never stretch or squash. Use for LCARS-style panel positioning. Pair with **GridBlock** (`components/UIGrid/GridBlock.tsx`) for placement (col, row, colSpan, rowSpan). NOT for cube faces -- use FaceGrid for those.
+- **UIGrid** (`components/UIGrid/UIGrid.tsx`): Site-wide layout grid with square cells. Uses ResizeObserver to compute cell size so cells never stretch or squash. Use for LCARS-style panel positioning. Pair with **GridBlock** (`components/UIGrid/GridBlock.tsx`) for placement (col, row, colSpan, rowSpan). NOT for cube faces — use FaceGrid for those.
 - **Overlay** (`components/Overlay/Overlay.tsx`): Full-viewport overlay with backdrop. Renders via portal (`document.body`). Props: `open` (boolean), `onClose` (backdrop click or Escape), `children`, `className`. CSS keyframe animations for fade + scale entrance. Handles focus management (auto-focus on mount, restore on close) and locks body scroll while open. Use as the base layer for any modal, detail panel, or dialog.
 
 ### Molecules (combinations of atoms)
 
-- **NavLink** (`components/Nav/NavLink.tsx`): Button wrapping two adjacent Frames -- one for the icon, one for the text label. Icon Frame has all 4 borders; text Frame omits the left border to butt against the icon (double-border prevention pattern).
-- **Logo lockup** (`components/Logo/Logo.tsx`): Frame + Accent + Logomark. The logomark itself is a real 3D CSS cube showing the U/T/C grid patterns.
+- **Button** (`components/Button/Button.tsx`): Opinionated, self-contained interactive button with three semantic variants. Renders its own border, background, hover, and focus styling — no Frame needed. Uses `Pressable` internally for element selection. Props: `variant` (`"primary"` | `"secondary"` | `"tertiary"`), `label?` (button text), `icon?` (IconName), `iconOnly?` (boolean), `href?`, `onClick?`, `aria-label?`, `className?`. Visual treatment: **Primary** = black bg, white text, `rounded-br-2xl`, hover cyan (main action). **Secondary** = transparent bg, black text/border, `rounded-bl-2xl`, hover cyan (supporting action). **Tertiary** = no border/bg, black text, hover cyan bg (low-emphasis action, still clearly pressable). **Focus (all)** = 4px magenta outline, 2px offset.
+- **NavLink** (`components/Nav/NavLink.tsx`): Pressable wrapping two adjacent Frames — one for the icon, one for the text label. Icon Frame has all 4 borders; text Frame omits the left border to butt against the icon (double-border prevention pattern). Hover styling via `group-hover:` on the Pressable wrapper.
+- **Logo lockup** (`components/Logo/Logo.tsx`): Frame + Accent + Logomark. The logomark itself is a real 3D CSS cube showing the U/T/C grid patterns. When clickable, wrapped in Pressable with `group-hover:` for cyan background transition.
 
 ### Organisms (groups of molecules)
 
-- **SiteHeader** (`components/SiteHeader/`): Responsive header with desktop and mobile variants. Mobile has a menu button + expandable MobileNavPanel.
+- **SiteHeader** (`components/SiteHeader/`): Responsive header with desktop and mobile variants. Logo lockup uses Pressable for the home link. Mobile has a menu button + expandable MobileNavPanel.
 - **MobileNavPanel** (`components/Nav/MobileNavPanel.tsx`): List of NavLinks with Accent bars.
 - **Cube** (`components/Cube/Cube.tsx`): Interactive 3D CSS cube on the homepage. Auto-spins, drag-to-rotate, tap-to-navigate. Each face maps to a site section. Accepts `onFaceTap?: (face: FacePosition) => void` prop; defaults to an alert. Exports `FacePosition` type and `FACE_LABELS` map.
-- **SectionDetail** (`components/SectionDetail/SectionDetail.tsx`): Detail overlay shown when a cube face is tapped. Renders section-specific content (title, description, CTA link) inside an Overlay with Accent + Frame. Props: `face: FacePosition | null` (null = closed), `onClose`.
+- **SectionDetail** (`components/SectionDetail/SectionDetail.tsx`): Detail overlay shown when a cube face is tapped. Renders section-specific content (title, description, CTA link) inside an Overlay with Accent + Frame. Uses the Button molecule for actions (`variant="primary"` for Explore, `variant="secondary"` for Close). Props: `face: FacePosition | null` (null = closed), `onClose`.
 
 ---
 
@@ -53,11 +57,11 @@ globs:
 
 | Token | Hex | Tailwind class | Usage |
 |-------|-----|----------------|-------|
-| `--theme-cyan` | #68E3E8 | `text-theme-cyan`, `bg-theme-cyan` | Primary accent, interactive highlights |
-| `--theme-orange` | #FBB006 | `text-theme-orange`, `bg-theme-orange` | Hover states, warmth, CTAs |
+| `--theme-cyan` | #68E3E8 | `text-theme-cyan`, `bg-theme-cyan` | Primary accent, interactive highlights, hover states |
+| `--theme-orange` | #FBB006 | `text-theme-orange`, `bg-theme-orange` | Warmth, CTAs |
 | `--theme-purple` | #443BFF | `text-theme-purple`, `bg-theme-purple` | Depth, tech feel |
 | `--theme-black` | #012031 | `text-theme-black`, `bg-theme-black` | Backgrounds, borders, text |
-| `--theme-magenta` | #F849C1 | `text-theme-magenta`, `bg-theme-magenta` | Energy, accent gradients |
+| `--theme-magenta` | #F849C1 | `text-theme-magenta`, `bg-theme-magenta` | Energy, accent gradients, focus rings |
 | `--theme-green` | #32CD32 | `text-theme-green`, `bg-theme-green` | Growth, accent gradients |
 | `--theme-white` | #FFF | `text-theme-white`, `bg-theme-white` | Light backgrounds, text on dark |
 
@@ -149,9 +153,13 @@ Intended for site-wide UI positioning — LCARS-style panel layouts with Frames,
 
 When two Frames are adjacent, omit the shared border on one side. Example: NavLink icon Frame has all 4 borders, text Frame omits `left` so they share a single border line.
 
-### Interactive Signalling
+### Hover with group-hover
 
-Accent bar next to a Frame = "you can interact with this". Place both inside a Button wrapper. The Button sets CSS custom properties on hover that both Frame and Accent respond to.
+For custom compositions (Logo lockups, NavLinks) that need hover effects, wrap in `Pressable` with `className="group"` and apply `group-hover:` utilities to child elements. Example: `group-hover:bg-theme-cyan transition-colors duration-200` on the Frame inside a Pressable logo lockup.
+
+### Focus Ring
+
+All interactive elements use a magenta focus ring: `focus-visible:outline-4 focus-visible:outline-[var(--theme-magenta)] focus-visible:outline-offset-2`. This is built into Button. For Pressable compositions, add it to the Pressable's `className`.
 
 ### Layering on Cube Faces
 

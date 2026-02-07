@@ -2,7 +2,7 @@
 
 import clsx from 'clsx';
 import { useState } from 'react';
-import { Button } from '../Button';
+import { Pressable } from '../Pressable';
 import { Frame } from '../Frame';
 import Logo from '../Logo';
 import Accent from '../Accent';
@@ -31,24 +31,20 @@ export default function MobileHeader({ defaultOpen = false }: MobileHeaderProps)
       <div className='flex justify-between mt-2'>
 
         <div className='mr-auto'>
-          <Button href="/" aria-label="Urban Tech Creative – home">
-            <div className="flex items-stretch">
-              <Accent
-                direction="vertical"
-                gradient="magenta-green"
-                borderSides={['top', 'bottom', 'left']}
-                interactive
-              />
-              <Frame
-                borderSides={['top', 'right', 'bottom', 'left']}
-                roundedCorners={['bottom-right']}
-                interactive
-                className="flex items-center justify-center gap-6 w-48 h-24"
-              >
-                <Logo />
-              </Frame>
-            </div>
-          </Button>
+          <Pressable href="/" aria-label="Urban Tech Creative – home" className="group flex items-stretch">
+            <Accent
+              direction="vertical"
+              gradient="magenta-green"
+              borderSides={['top', 'bottom', 'left']}
+            />
+            <Frame
+              borderSides={['top', 'right', 'bottom', 'left']}
+              roundedCorners={['bottom-right']}
+              className="flex items-center justify-center gap-6 w-48 h-24 group-hover:bg-theme-cyan transition-colors duration-200"
+            >
+              <Logo />
+            </Frame>
+          </Pressable>
         </div>
 
         <MobileNavMenuButton open={open} onClick={() => setOpen(prev => !prev)} />

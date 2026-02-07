@@ -1,99 +1,140 @@
 import type { Meta, StoryObj } from '@storybook/nextjs';
 import { Button } from './index';
-import { Frame } from '@/components/Frame';
-import Accent from '@/components/Accent';
 
 /**
- * Button wraps any UI block to make it a button. Sets CSS custom properties
- * (--button-border-color, --button-bg) that change on hover/focus to
- * theme-orange and theme-cyan. Use with Frame (interactive) or any block
- * that reads those variables.
+ * Self-contained interactive button with semantic variants:
+ * `primary`, `secondary`, and `tertiary`.
+ * Supports text, icon, or text+icon content. Uses Pressable internally
+ * for element selection (Link / a / button).
  */
 const meta = {
-  title: 'Atoms/Button',
+  title: 'Molecules/Button',
   component: Button,
   parameters: {
     layout: 'centered',
     docs: {
       description: {
         component:
-          'Wraps a block (e.g. Frame with interactive) to add pointer, focus ring, and hover/focus colours (border → orange, background → cyan). Pass href to render as Link.',
+          'Opinionated button molecule with primary/secondary/tertiary variants, optional icon, and magenta focus ring. Uses Pressable for Link/a/button polymorphism.',
       },
     },
   },
   tags: ['autodocs'],
   argTypes: {
-    href: { description: 'When provided, renders as Next Link' },
-    onClick: { action: 'clicked', description: 'Click handler (button only)' },
-    'aria-label': { description: 'Accessible label' },
+    variant: {
+      control: 'radio',
+      options: ['primary', 'secondary', 'tertiary'],
+    },
+    icon: {
+      control: 'text',
+    },
   },
 } satisfies Meta<typeof Button>;
 
 export default meta;
-
 type Story = StoryObj<typeof meta>;
 
-export const DefaultWithFrame: Story = {
+/** Primary variant — the main action. */
+export const Primary: Story = {
   args: {
-    'aria-label': 'Default button',
-    children: undefined,
+    variant: 'primary',
+    label: 'Explore',
   },
-  render: (args) => (
-    <Button {...args}>
-      <Frame
-        borderSides={['top', 'right', 'bottom', 'left']}
-        roundedCorners={[]}
-        interactive
-        className="w-40 h-24 flex items-center justify-center"
-      >
-        <span className="text-sm font-bold text-theme-black">Default</span>
-      </Frame>
-    </Button>
-  ),
 };
 
-export const WithCurve: Story = {
+/** Secondary variant — supporting action. */
+export const Secondary: Story = {
   args: {
-    'aria-label': 'Button with curve',
-    children: undefined,
+    variant: 'secondary',
+    label: 'Close',
   },
-  render: (args) => (
-    <Button {...args}>
-      <Frame
-        borderSides={['top', 'right', 'bottom', 'left']}
-        roundedCorners={['bottom-right']}
-        interactive
-        className="w-40 h-24 flex items-center justify-center"
-      >
-        <span className="text-sm font-bold text-theme-black">With curve</span>
-      </Frame>
-    </Button>
-  ),
 };
 
-export const WithAccentLeft: Story = {
+/** Tertiary variant — low-emphasis, borderless. */
+export const Tertiary: Story = {
   args: {
-    'aria-label': 'Button with accent left',
-    children: undefined,
+    variant: 'tertiary',
+    label: 'Cancel',
   },
-  render: (args) => (
-    <Button {...args}>
-      <div className="flex items-stretch">
-        <Accent
-          direction="vertical"
-          gradient="orange-purple"
-          borderSides={['top', 'bottom', 'left']}
-          interactive
-        />
-        <Frame
-          borderSides={['top', 'right', 'bottom', 'left']}
-          roundedCorners={[]}
-          interactive
-          className="w-40 h-24 flex items-center justify-center"
-        >
-          <span className="text-sm font-bold text-theme-black">With accent left</span>
-        </Frame>
+};
+
+/** Primary with icon after label. */
+export const PrimaryWithIcon: Story = {
+  args: {
+    variant: 'primary',
+    label: 'Explore',
+    icon: 'arrow-right',
+  },
+};
+
+/** Secondary with icon after label. */
+export const SecondaryWithIcon: Story = {
+  args: {
+    variant: 'secondary',
+    label: 'Back',
+    icon: 'arrow-left',
+  },
+};
+
+/** Tertiary with icon. */
+export const TertiaryWithIcon: Story = {
+  args: {
+    variant: 'tertiary',
+    label: 'Learn more',
+    icon: 'arrow-right',
+  },
+};
+
+/** Icon-only primary button. */
+export const IconOnly: Story = {
+  args: {
+    variant: 'primary',
+    icon: 'arrow-right',
+    iconOnly: true,
+    'aria-label': 'Next',
+  },
+};
+
+/** Renders as a Next.js Link (internal navigation). */
+export const AsLink: Story = {
+  args: {
+    variant: 'primary',
+    label: 'Go to XR',
+    icon: 'arrow-right',
+    href: '/xr',
+  },
+};
+
+/** Renders as an external anchor. */
+export const AsExternalLink: Story = {
+  args: {
+    variant: 'secondary',
+    label: 'Visit Site',
+    icon: 'share',
+    href: 'https://example.com',
+  },
+};
+
+/** All variants side by side for comparison. */
+export const Comparison: Story = {
+  render: () => (
+    <div className="flex flex-col gap-6">
+      <div className="flex items-center gap-4">
+        <Button variant="primary" label="Primary" />
+        <Button variant="primary" label="With Icon" icon="arrow-right" />
+        <Button variant="primary" icon="arrow-right" iconOnly aria-label="Next" />
       </div>
-    </Button>
+      <div className="flex items-center gap-4">
+        <Button variant="secondary" label="Secondary" />
+        <Button variant="secondary" label="With Icon" icon="arrow-left" />
+        <Button variant="secondary" icon="x" iconOnly aria-label="Close" />
+      </div>
+      <div className="flex items-center gap-4">
+        <Button variant="tertiary" label="Tertiary" />
+        <Button variant="tertiary" label="With Icon" icon="arrow-right" />
+        <Button variant="tertiary" icon="x" iconOnly aria-label="Dismiss" />
+      </div>
+    </div>
   ),
+  args: { variant: 'primary' },
 };

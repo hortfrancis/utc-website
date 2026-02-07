@@ -98,25 +98,20 @@ export default function SectionDetail({ face, onClose }: SectionDetailProps) {
 
             <div className="flex gap-3">
               {content.href && (
-                <Button href={content.href} aria-label={`Explore ${content.title}`}>
-                  <Frame
-                    interactive
-                    roundedCorners={['bottom-right']}
-                    className="px-5 py-2"
-                  >
-                    <span className="font-bold text-theme-black">Explore</span>
-                  </Frame>
-                </Button>
+                <Button
+                  variant="primary"
+                  label="Explore"
+                  icon="arrow-right"
+                  href={content.href}
+                  aria-label={`Explore ${content.title}`}
+                />
               )}
-              <Button onClick={onClose} aria-label="Close overlay">
-                <Frame
-                  interactive
-                  roundedCorners={['bottom-left']}
-                  className="px-5 py-2"
-                >
-                  <span className="font-bold text-theme-black">Close</span>
-                </Frame>
-              </Button>
+              <Button
+                variant="secondary"
+                label="Close"
+                onClick={onClose}
+                aria-label="Close overlay"
+              />
             </div>
           </Frame>
         </div>

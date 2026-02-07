@@ -24,12 +24,6 @@ export interface FrameProps {
   roundedCorners?: readonly FrameCorner[];
   /** Border width class (default: border-4). */
   borderWidth?: 'border-2' | 'border-4';
-  /**
-   * When true, border and background use CSS variables (--button-border-color,
-   * --button-bg) so the block responds to Button hover/focus (orange border,
-   * cyan background). Use when Frame is the direct child of Button.
-   */
-  interactive?: boolean;
   /** Optional class for the frame wrapper. */
   className?: string;
   /** Frame content (typically passed as JSX children). */
@@ -54,7 +48,7 @@ const cornerRoundClass: Record<FrameCorner, string> = {
  * Composable frame: partial border and optional rounded corners.
  *
  * **Semantic use:** An open frame (missing one or more sides) suggests
- * "entry point", "panel edge", or "badge" — the content isn’t fully
+ * "entry point", "panel edge", or "badge" — the content isn't fully
  * boxed in. One rounded corner reads as stamp/badge cut (craft,
  * tangibility). Use for logo lockups, nav panels, or any block that
  * should feel like a distinct chunk without a full closed box.
@@ -63,7 +57,6 @@ export default function Frame({
   borderSides = ['top', 'right', 'bottom', 'left'],
   roundedCorners = [],
   borderWidth = 'border-4',
-  interactive = false,
   className,
   children,
 }: FrameProps) {
@@ -79,11 +72,9 @@ export default function Frame({
       className={clsx(
         'box-border',
         borderWidth,
+        'border-theme-black',
         borderZeroClasses,
         roundedClasses,
-        interactive
-          ? 'border-[color:var(--button-border-color,var(--theme-black))] bg-[color:var(--button-bg,var(--theme-white))] transition-colors duration-200'
-          : 'border-theme-black',
         className
       )}
     >

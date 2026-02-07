@@ -40,10 +40,6 @@ const meta = {
       options: ['border-2', 'border-4'],
       description: 'Border thickness',
     },
-    interactive: {
-      control: 'boolean',
-      description: 'Use Button CSS variables for border/bg (use inside Button)',
-    },
   },
 } satisfies Meta<typeof Frame>;
 

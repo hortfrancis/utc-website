@@ -1,5 +1,5 @@
 import { clsx } from 'clsx';
-import { Button } from '@/components/Button';
+import { Pressable } from '@/components/Pressable';
 import { Frame } from '@/components/Frame';
 import NewsIcon from '../icons/sections/newsIcon';
 import WorkIcon from '../icons/sections/workIcon';
@@ -35,7 +35,7 @@ export default function NavLink({
 }: NavLinkProps) {
 
   const outerLinkStyles = clsx(
-    'flex items-center',
+    'group flex items-center',
     size === 'mobile' && 'h-18',
     size === 'desktop' && 'h-10',
     'mt-[-2px] mb-[-2px]', // To offset the border thickness
@@ -46,6 +46,7 @@ export default function NavLink({
     'h-full',
     size === 'mobile' && 'w-18',
     size === 'desktop' && 'w-10',
+    'group-hover:bg-theme-cyan transition-colors duration-200',
   );
 
   const textFrameStyles = clsx(
@@ -57,6 +58,7 @@ export default function NavLink({
     size === 'mobile' && 'text-3xl',
     size === 'desktop' && 'text-sm',
     'select-none',
+    'group-hover:bg-theme-cyan transition-colors duration-200',
   );
 
   const iconSize = (() => {
@@ -73,18 +75,18 @@ export default function NavLink({
   })();
 
   return (
-    <Button
+    <Pressable
       href={href}
       onClick={onClick}
       className={outerLinkStyles}
       data-testid={NAV_LINK_DATA_TESTID}
     >
-      <Frame {...iconFrameProps} interactive className={iconFrameStyles}>
+      <Frame {...iconFrameProps} className={iconFrameStyles}>
         {icon}
       </Frame>
-      <Frame {...textFrameProps} interactive className={textFrameStyles}>
+      <Frame {...textFrameProps} className={textFrameStyles}>
         {label}
       </Frame>
-    </Button>
+    </Pressable>
   );
 }

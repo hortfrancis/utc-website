@@ -1,87 +1,92 @@
 'use client';
 
-import Link from 'next/link';
 import { clsx } from 'clsx';
-import type { MouseEvent, ReactNode } from 'react';
-import './Button.css';
+import { Pressable } from '../Pressable';
+import Icon from '../Icon/Icon';
+import type { IconName } from '../Icon/Icon';
 
 export const BUTTON_DATA_TESTID = 'Button';
 
+export type ButtonVariant = 'primary' | 'secondary' | 'tertiary';
+
 export interface ButtonProps {
-  /** When provided, renders as Next Link (for navigation). */
+  /** Semantic variant: `primary` (main action), `secondary` (supporting), `tertiary` (low-emphasis, borderless). */
+  variant: ButtonVariant;
+  /** Button text. Omit when using `iconOnly`. */
+  label?: string;
+  /** Optional icon (rendered after label, or alone when `iconOnly`). */
+  icon?: IconName;
+  /** When true, only renders the icon. Requires `icon` and `aria-label`. */
+  iconOnly?: boolean;
+  /** When provided, renders as a link (internal or external). */
   href?: string;
-  /** Click handler (for button element). */
+  /** Click handler. */
   onClick?: () => void;
-  /** Mouse enter (e.g. for hover-driven behaviour in children). */
-  onMouseEnter?: (e: MouseEvent<HTMLElement>) => void;
-  /** Mouse leave (e.g. for hover-driven behaviour in children). */
-  onMouseLeave?: (e: MouseEvent<HTMLElement>) => void;
-  /** Button content; typically a Frame (with interactive) or any block. */
-  children: ReactNode;
+  /** Accessible label (required when `iconOnly`). */
+  'aria-label'?: string;
   /** Optional class for the outer element. */
   className?: string;
-  /** Accessible label (recommended when content is not text). */
-  'aria-label'?: string;
-  /** Override data-testid (e.g. when Button wraps NavLink so test id is NavLink). */
-  'data-testid'?: string;
 }
 
+/** Variant-specific styling. */
+const variantStyles: Record<ButtonVariant, string> = {
+  primary: clsx(
+    'bg-theme-black text-theme-white',
+    'border-4 border-theme-black rounded-br-2xl',
+    'hover:bg-theme-cyan hover:text-theme-black',
+  ),
+  secondary: clsx(
+    'bg-transparent text-theme-black',
+    'border-4 border-theme-black rounded-bl-2xl',
+    'hover:bg-theme-cyan',
+  ),
+  tertiary: clsx(
+    'bg-transparent text-theme-black',
+    'border-0',
+    'hover:bg-theme-cyan',
+  ),
+};
+
+/** Shared styling for all variants. */
+const sharedStyles = clsx(
+  'inline-flex items-center gap-2',
+  'px-5 py-2.5 font-bold',
+  'transition-colors duration-200',
+  'outline-0 focus-visible:outline-4 focus-visible:outline-[var(--theme-magenta)] focus-visible:outline-offset-2',
+);
+
 /**
- * Wraps any UI block to make it a button. Sets CSS custom properties
- * (--button-border-color, --button-bg) that change on hover/focus to
- * theme-orange and theme-cyan. Use with Frame (interactive) or any
- * block that reads those variables.
+ * Opinionated, self-contained interactive button.
+ *
+ * Renders its own visual treatment (border, background, hover, focus)
+ * with three semantic variants:
+ * - `primary` — the main action in a given context
+ * - `secondary` — supporting / alternative action
+ * - `tertiary` — low-emphasis, borderless, inline-feeling action
+ *
+ * Supports text, icon, or text+icon content. Uses `Pressable` internally
+ * for element selection (Link / a / button).
  */
 export default function Button({
+  variant,
+  label,
+  icon,
+  iconOnly = false,
   href,
   onClick,
-  onMouseEnter,
-  onMouseLeave,
-  children,
-  className,
   'aria-label': ariaLabel,
-  'data-testid': dataTestId,
+  className,
 }: ButtonProps) {
-  const testId = dataTestId ?? BUTTON_DATA_TESTID;
-  const baseStyles = clsx(
-    'button-block',
-    'flex items-center justify-center',
-    'cursor-pointer',
-    // 'focus:outline-none focus:ring-4 focus:ring-theme-orange',
-    'focus-visible:outline-none',
-    className
-  );
-
-  const mouseProps = {
-    onMouseEnter,
-    onMouseLeave,
-  };
-
-  if (href !== undefined) {
-    return (
-      <Link
-        href={href}
-        className={baseStyles}
-        aria-label={ariaLabel}
-        data-testid={testId}
-        onClick={onClick}
-        {...mouseProps}
-      >
-        {children}
-      </Link>
-    );
-  }
-
   return (
-    <button
-      type="button"
-      className={baseStyles}
-      data-testid={testId}
+    <Pressable
+      href={href}
       onClick={onClick}
       aria-label={ariaLabel}
-      {...mouseProps}
+      data-testid={BUTTON_DATA_TESTID}
+      className={clsx(sharedStyles, variantStyles[variant], className)}
     >
-      {children}
-    </button>
+      {!iconOnly && label && <span>{label}</span>}
+      {icon && <Icon name={icon} size={iconOnly ? 20 : 18} className="text-current" />}
+    </Pressable>
   );
 }

@@ -1,6 +1,6 @@
 import Logo from "../Logo";
 import Accent from "../Accent";
-import { Button } from "../Button";
+import { Pressable } from "../Pressable";
 import { Frame } from "../Frame";
 import DesktopNav from "../Nav/DesktopNav";
 
@@ -12,24 +12,20 @@ export default function DesktopHeader() {
     <div data-testid={DESKTOP_HEADER_DATA_TESTID} className='hidden md:block'>
       <div className='flex mt-2'>
 
-        <Button href="/" aria-label="Urban Tech Creative – home">
-          <div className="flex items-stretch">
-            <Accent
-              direction="vertical"
-              gradient="magenta-green"
-              borderSides={['top', 'bottom', 'left']}
-              interactive
-            />
-            <Frame
-              borderSides={['top', 'right', 'bottom', 'left']}
-              roundedCorners={['bottom-right']}
-              interactive
-              className="flex items-center justify-center gap-6 w-48 h-24"
-            >
-              <Logo />
-            </Frame>
-          </div>
-        </Button>
+        <Pressable href="/" aria-label="Urban Tech Creative – home" className="group flex items-stretch">
+          <Accent
+            direction="vertical"
+            gradient="magenta-green"
+            borderSides={['top', 'bottom', 'left']}
+          />
+          <Frame
+            borderSides={['top', 'right', 'bottom', 'left']}
+            roundedCorners={['bottom-right']}
+            className="flex items-center justify-center gap-6 w-48 h-24 group-hover:bg-theme-cyan transition-colors duration-200"
+          >
+            <Logo />
+          </Frame>
+        </Pressable>
 
         <div className='mr-auto'>
           <DesktopNav />

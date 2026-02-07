@@ -1,13 +1,13 @@
 import type { Meta, StoryObj } from '@storybook/nextjs';
 import Logo from '@/components/Logo';
-import { Button } from '@/components/Button';
+import { Pressable } from '@/components/Pressable';
 import { Frame } from '@/components/Frame';
 import Accent from '@/components/Accent';
 
 /**
  * Presentational logo: logomark + logotype (pure atom).
- * No Frame — wrap in Frame for stamp-style border (e.g. "In a Button" story).
- * No link or button behaviour — wrap in Button (or Link) when you want it clickable.
+ * No Frame — wrap in Frame for stamp-style border (e.g. "In a Pressable" story).
+ * No link or button behaviour — wrap in Pressable when you want it clickable.
  */
 const meta = {
   title: 'Molecules/Logo',
@@ -17,7 +17,7 @@ const meta = {
     docs: {
       description: {
         component:
-          'Brand logo (3D cube logomark + company name). Presentational only; use "In a Button" story or wrap in Button + Frame when you want hover/click behaviour.',
+          'Brand logo (3D cube logomark + company name). Presentational only; use "In a Pressable" story or wrap in Pressable + Frame when you want hover/click behaviour.',
       },
     },
   },
@@ -199,9 +199,9 @@ export const InAFrameWithCurve: Story = {
 };
 
 /**
- * Logo inside a Button with stamp-style Frame: hover for orange border and cyan background.
+ * Logo inside a Pressable with Frame: hover for cyan background.
  */
-export const InAButton: Story = {
+export const InAPressable: Story = {
   args: {
     cubeSize: 36,
     type: 'full',
@@ -210,32 +210,29 @@ export const InAButton: Story = {
     spinOnHover: true,
   },
   render: (args) => (
-    <Button href="#" aria-label="Urban Tech Creative – home">
+    <Pressable href="#" aria-label="Urban Tech Creative – home" className="group">
       <Frame
-        // borderSides={['right', 'bottom', 'left']}
-        // roundedCorners={['bottom-right']}
-        interactive
-        className="flex items-center justify-center gap-6 w-48 h-24"
+        className="flex items-center justify-center gap-6 w-48 h-24 group-hover:bg-theme-cyan transition-colors duration-200"
       >
         <Logo {...args} />
       </Frame>
-    </Button>
+    </Pressable>
   ),
   parameters: {
     docs: {
       description: {
         story:
-          'Logo composed as Button → Frame (stamp) → Logo. Hover for orange border and cyan background; logomark spins on hover.',
+          'Logo composed as Pressable → Frame → Logo. Hover for cyan background; logomark spins on hover.',
       },
     },
   },
 };
 
 /**
- * Logo in a Button with Accent on the left and Frame with bottom-right curve.
- * Hover for orange border, cyan background, and accent gradient/border turning orange.
+ * Logo in a Pressable with Accent on the left and Frame with bottom-right curve.
+ * Hover for cyan background.
  */
-export const InAButtonWithAccentAndCurve: Story = {
+export const InAPressableWithAccentAndCurve: Story = {
   args: {
     cubeSize: 36,
     type: 'full',
@@ -244,30 +241,26 @@ export const InAButtonWithAccentAndCurve: Story = {
     spinOnHover: true,
   },
   render: (args) => (
-    <Button href="#" aria-label="Urban Tech Creative – home">
-      <div className="flex items-stretch">
-        <Accent
-          direction="vertical"
-          gradient="magenta-green"
-          borderSides={['top', 'bottom', 'left']}
-          interactive
-        />
-        <Frame
-          borderSides={['top', 'right', 'bottom', 'left']}
-          roundedCorners={['bottom-right']}
-          interactive
-          className="flex items-center justify-center gap-6 w-48 h-24"
-        >
-          <Logo {...args} />
-        </Frame>
-      </div>
-    </Button>
+    <Pressable href="#" aria-label="Urban Tech Creative – home" className="group flex items-stretch">
+      <Accent
+        direction="vertical"
+        gradient="magenta-green"
+        borderSides={['top', 'bottom', 'left']}
+      />
+      <Frame
+        borderSides={['top', 'right', 'bottom', 'left']}
+        roundedCorners={['bottom-right']}
+        className="flex items-center justify-center gap-6 w-48 h-24 group-hover:bg-theme-cyan transition-colors duration-200"
+      >
+        <Logo {...args} />
+      </Frame>
+    </Pressable>
   ),
   parameters: {
     docs: {
       description: {
         story:
-          'Logo in a Button with left Accent and stamp-style Frame (bottom-right curve). Hover for orange border, cyan background, and accent turning orange.',
+          'Logo in a Pressable with left Accent and stamp-style Frame (bottom-right curve). Hover for cyan background.',
       },
     },
   },
