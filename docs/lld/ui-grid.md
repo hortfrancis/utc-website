@@ -45,6 +45,30 @@ For site-wide layouts, larger grids (e.g. 12×8) work well for LCARS-style panel
 
 ---
 
+## Performance
+
+ResizeObserver fires once per layout change — not per frame. The callback performs three divisions, a `Math.min`, and a single `setState`. This is microseconds of JS work, followed by one CSS Grid re-layout (which the browser would do for any responsive reflow anyway).
+
+`Math.floor` on the cell size means small sub-pixel viewport changes don't trigger a re-render at all, because the floored value stays the same. In practice, resize events only fire when the user drags a browser edge or rotates a device — a handful of times, not continuously.
+
+The only scenario that could cause excessive recalculation is a CSS animation on the container's own dimensions (continuously changing width/height). This is not a realistic use case for a layout grid. Normal viewport resizing, orientation changes, and page navigation are all fine.
+
+---
+
+## Responsive design
+
+UIGrid handles **spatial** responsiveness automatically — cells scale to fit the available space while staying square.
+
+**Structural** responsiveness (what goes where at different viewport sizes) lives *above* UIGrid, via breakpoints:
+
+- **Mobile-first breakpoints** determine which grid configuration to render (e.g. 3×6 on mobile, 12×8 on desktop).
+- At each breakpoint, render a different UIGrid with different `cols`/`rows` and a different set of GridBlocks — or use Tailwind's `hidden md:block` / `md:hidden` to swap entire layouts without JS breakpoint detection.
+- Organisms and layout sections rearrange at breakpoints; UIGrid takes care of the rest.
+
+This separates concerns cleanly: UIGrid scales proportionally, breakpoints restructure.
+
+---
+
 ## Files
 
 - [`UIGrid.tsx`](../../components/UIGrid/UIGrid.tsx) — Grid container with ResizeObserver-based square cell computation.
