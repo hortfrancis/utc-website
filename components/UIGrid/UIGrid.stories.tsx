@@ -217,9 +217,8 @@ export const SixBySix: Story = {
     fullViewport: false,
   },
   render: (args) => (
-    <div className="h-120 w-120 border border-neutral-300 bg-neutral-100">
-      <UIGrid {...args}>
-        {/* Top-left 2×2 (= 1 master cell): colored block */}
+    <UIGrid {...args}>
+      {/* Top-left 2×2 (= 1 master cell): colored block */}
         <GridBlock col={1} row={1} colSpan={2} rowSpan={2}>
           <Frame
             borderSides={['top', 'right', 'bottom', 'left']}
@@ -273,7 +272,6 @@ export const SixBySix: Story = {
           </Frame>
         </GridBlock>
       </UIGrid>
-    </div>
   ),
   parameters: {
     layout: 'centered',
@@ -302,9 +300,8 @@ export const ThreeByThree: Story = {
     fullViewport: false,
   },
   render: (args) => (
-    <div className="h-90 w-90 border border-neutral-300 bg-neutral-100">
-      <UIGrid {...args}>
-        <GridBlock col={1} row={1} colSpan={2} rowSpan={1}>
+    <UIGrid {...args}>
+      <GridBlock col={1} row={1} colSpan={2} rowSpan={1}>
           <div className="h-full w-full flex">
             <Accent
               direction="vertical"
@@ -343,7 +340,6 @@ export const ThreeByThree: Story = {
           </Frame>
         </GridBlock>
       </UIGrid>
-    </div>
   ),
   parameters: {
     layout: 'centered',
