@@ -1,0 +1,148 @@
+---
+description: Design system reference for Urban Tech Creative website. Covers atoms, molecules, tokens, grid system, composition patterns, and design philosophy.
+globs:
+  - components/**
+  - app/**
+---
+
+# UTC Design System
+
+## Atomic Design Hierarchy
+
+### Atoms (primitives)
+
+- **Frame** (`components/Frame/Frame.tsx`): Post-neobrutalist bordered container. A self-contained piece of UI or content. Thick black borders (4px default). Selective rounded corners add friendliness -- use sparingly (one curve is the sweet spot). Props: `borderSides` (omit sides to prevent double-borders when stacking adjacent Frames), `roundedCorners`, `borderWidth` (`border-2` | `border-4`), `interactive` (responds to Button hover via CSS custom properties).
+- **Accent** (`components/Accent/Accent.tsx`): Gradient bar placed alongside a Frame to signal interactivity. Draws the user's eye to interactive elements using immediate, unconscious visual processing. Gradients: `magenta-green`, `purple-orange`, `orange-purple`. Props: `direction` (`vertical` | `horizontal`), `gradient`, `borderSides` (match adjacent Frame to avoid double-borders), `interactive`.
+- **Button** (`components/Button/Button.tsx`): Wraps a Frame (or Frame + Accent) to make it interactive. Sets CSS custom properties (`--button-border-color`, `--button-bg`, `--button-accent-from/to`) on hover/focus so child Frame/Accent respond (orange border, cyan background, shifted gradient).
+- **Heading** (`components/Heading.tsx`): Semantic heading component (h1-h6). Predefined size/weight classes per level. Uses Recursive font.
+- **Icon**: Icons from `@phosphor-icons/react`. Prefer the **fill** variant for the acid design aesthetic -- bold, solid shapes with strong silhouettes. Fall back to regular weight for secondary/supporting icons.
+
+### Molecules (combinations of atoms)
+
+- **NavLink** (`components/Nav/NavLink.tsx`): Button wrapping two adjacent Frames -- one for the icon, one for the text label. Icon Frame has all 4 borders; text Frame omits the left border to butt against the icon (double-border prevention pattern).
+- **Logo lockup** (`components/Logo/Logo.tsx`): Frame + Accent + Logomark. The logomark itself is a real 3D CSS cube showing the U/T/C grid patterns.
+
+### Organisms (groups of molecules)
+
+- **SiteHeader** (`components/SiteHeader/`): Responsive header with desktop and mobile variants. Mobile has a menu button + expandable MobileNavPanel.
+- **MobileNavPanel** (`components/Nav/MobileNavPanel.tsx`): List of NavLinks with Accent bars.
+- **Cube** (`components/Cube/Cube.tsx`): Interactive 3D CSS cube on the homepage. Auto-spins, drag-to-rotate, tap-to-navigate. Each face maps to a site section.
+
+---
+
+## Design Tokens
+
+### Colors
+
+| Token | Hex | Tailwind class | Usage |
+|-------|-----|----------------|-------|
+| `--theme-cyan` | #68E3E8 | `text-theme-cyan`, `bg-theme-cyan` | Primary accent, interactive highlights |
+| `--theme-orange` | #FBB006 | `text-theme-orange`, `bg-theme-orange` | Hover states, warmth, CTAs |
+| `--theme-purple` | #443BFF | `text-theme-purple`, `bg-theme-purple` | Depth, tech feel |
+| `--theme-black` | #012031 | `text-theme-black`, `bg-theme-black` | Backgrounds, borders, text |
+| `--theme-magenta` | #F849C1 | `text-theme-magenta`, `bg-theme-magenta` | Energy, accent gradients |
+| `--theme-green` | #32CD32 | `text-theme-green`, `bg-theme-green` | Growth, accent gradients |
+| `--theme-white` | #FFF | `text-theme-white`, `bg-theme-white` | Light backgrounds, text on dark |
+
+### Backgrounds
+
+| Token | Hex | Usage |
+|-------|-----|-------|
+| `--background-faded-cyan` | #E4F1F1 | Subtle page background (right side of gradient) |
+| `--background-faded-orange` | #F3EBDA | Subtle page background (left side of gradient) |
+
+Body background: `linear-gradient(to right, faded-orange, faded-cyan)`.
+HTML background: `--theme-black` (visible behind body, e.g. on overscroll).
+
+### Typography
+
+- **Font**: Recursive (variable, axes: CASL, CRSV, MONO, slnt, wght 300-1000)
+- **CSS variable**: `--font-recursive`
+- **Heading sizes**: h1 = `text-4xl font-black`, h2 = `text-3xl font-extrabold`, h3 = `text-2xl font-bold`, h4-h6 = progressively smaller
+
+### Spacing & Borders
+
+- **Border width**: `border-4` (default), `border-2` (lighter contexts)
+- **Border radius**: `rounded-3xl` for Frame curved corners
+- **Grid gap**: `4px` for tight/stacked elements (e.g. adjacent Frames in a series), `8px` for separated elements
+
+---
+
+## Grid System
+
+### 3x3 Master Grid
+
+Aligns with the logomark cube faces. Each cell represents one conceptual "block". Used in the Logo Cube, where each face shows a 3x3 letter pattern (U, T, C).
+
+### 6x6 Sub-Grid
+
+Each master cell subdivides into 2x2, giving 36 total cells. Two uses:
+
+1. **Icon grids** (`components/Grids/Grid6x6.tsx`): Renders pixel-art icons using opaque/clear squares. Grid patterns defined in `components/Grids/patterns.ts`. Used for section icons in navigation.
+2. **Face layout grids** (`components/Cube/Faces/FaceGrid.tsx`): Layout grid for placing arbitrary content on cube faces. Same 6x6 geometry, but children are positioned with Tailwind grid classes (`col-start-*`, `row-start-*`, `col-span-*`, `row-span-*`). Supports absolute overlay layers for blend-mode experiments.
+
+### FaceGrid Usage
+
+```tsx
+<FaceGrid>
+  {/* Grid layer: content placed on the 6x6 grid */}
+  <div className="absolute inset-0 grid grid-cols-6 grid-rows-6 gap-1 p-1">
+    <div className="col-start-1 row-start-1 col-span-4 row-span-2 flex items-end">
+      <h2 className="text-theme-cyan font-black">XR</h2>
+    </div>
+  </div>
+  {/* Overlay layer: stacked on top for effects */}
+  <div className="absolute inset-0 mix-blend-screen pointer-events-none">
+    ...
+  </div>
+</FaceGrid>
+```
+
+---
+
+## Composition Patterns
+
+### Double-Border Prevention
+
+When two Frames are adjacent, omit the shared border on one side. Example: NavLink icon Frame has all 4 borders, text Frame omits `left` so they share a single border line.
+
+### Interactive Signalling
+
+Accent bar next to a Frame = "you can interact with this". Place both inside a Button wrapper. The Button sets CSS custom properties on hover that both Frame and Accent respond to.
+
+### Layering on Cube Faces
+
+FaceGrid uses `position: relative` with `overflow: hidden`. Stack content by using multiple `absolute inset-0` children. Use `mix-blend-mode` and `opacity` for visual effects. Later layers sit on top of earlier ones.
+
+---
+
+## Cube Face Mapping
+
+| Position | Section | Route | Description |
+|----------|---------|-------|-------------|
+| top | XR: Extended Reality | /xr | AR, VR, MR |
+| front | Work | /work | Portfolio, projects |
+| left | Vision | /about | Company vision, team |
+| back | News | /news | Newsletter, weekly videos |
+| right | Showcase | (TBD) | Specific showcase, spare slot |
+| bottom | Hamster | -- | Easter egg |
+
+---
+
+## Design Philosophy & Influences
+
+### User-Centric Design
+
+Visual design serves the user's cognitive processing. Accents and color guide the eye to interactive affordances. Hierarchy is established through weight, size, and color -- not decoration. The design should be immediately parseable: what can I click, what is content, where am I.
+
+### LCARS (Star Trek: The Next Generation)
+
+The ship computer interface from TNG. Rounded-corner blocks, bold solid color fields, clear typographic hierarchy, panel-edge aesthetic. Directly informs the Frame/Accent system: open frames suggest "panel edge" or "entry point", curved corners read as badge/stamp cuts. Information is presented in clear, functional blocks.
+
+### Acid Design
+
+Bold asymmetric layouts, high-contrast color blocking, strong grid presence, experimental typography. Large type, intentional whitespace (or blackspace). Informs the cube face experiments: elements are placed on the grid with deliberate asymmetry, not centered defaults. Favours **fill** icon variants for their bold silhouettes.
+
+### Post-Neobrutalism
+
+Thick borders (4px), sharp geometry softened by selective curves. Honest, structural design that doesn't hide its construction. Informs Frame border weight, corner treatment, and the overall "blocks on a grid" composition approach.
