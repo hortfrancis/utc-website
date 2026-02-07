@@ -2,6 +2,7 @@
 
 import Overlay from '../Overlay';
 import { Frame } from '../Frame';
+import { Button } from '../Button';
 import Accent from '../Accent';
 import Heading from '../Heading';
 import { type FacePosition } from '../Cube/Cube';
@@ -97,20 +98,25 @@ export default function SectionDetail({ face, onClose }: SectionDetailProps) {
 
             <div className="flex gap-3">
               {content.href && (
-                <a
-                  href={content.href}
-                  className="inline-block px-5 py-2 bg-theme-black text-theme-white font-bold border-4 border-theme-black rounded-br-xl hover:bg-theme-cyan hover:text-theme-black transition-colors duration-200"
-                >
-                  Explore
-                </a>
+                <Button href={content.href} aria-label={`Explore ${content.title}`}>
+                  <Frame
+                    interactive
+                    roundedCorners={['bottom-right']}
+                    className="px-5 py-2"
+                  >
+                    <span className="font-bold text-theme-black">Explore</span>
+                  </Frame>
+                </Button>
               )}
-              <button
-                type="button"
-                onClick={onClose}
-                className="inline-block px-5 py-2 font-bold border-4 border-theme-black text-theme-black rounded-bl-xl hover:bg-theme-black hover:text-theme-white transition-colors duration-200"
-              >
-                Close
-              </button>
+              <Button onClick={onClose} aria-label="Close overlay">
+                <Frame
+                  interactive
+                  roundedCorners={['bottom-left']}
+                  className="px-5 py-2"
+                >
+                  <span className="font-bold text-theme-black">Close</span>
+                </Frame>
+              </Button>
             </div>
           </Frame>
         </div>
