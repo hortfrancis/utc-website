@@ -22,7 +22,28 @@ type Mode = "AUTO" | "DRAG";
  * a specific face so higher-level behaviour (e.g. navigation) can be
  * implemented per face.
  */
-type FacePosition = "front" | "back" | "left" | "right" | "top" | "bottom";
+export type FacePosition = "front" | "back" | "left" | "right" | "top" | "bottom";
+
+/** Human-readable label for each cube face / site section. */
+const FACE_LABELS: Record<FacePosition, string> = {
+  front: "Work",
+  back: "News",
+  left: "Vision",
+  right: "Showcase",
+  top: "XR",
+  bottom: "Hamster",
+};
+
+/** Default face-tap handler: shows an alert with the section name. */
+const defaultOnFaceTap = (face: FacePosition) => {
+  const label = FACE_LABELS[face] ?? face;
+  alert(`Face clicked: ${label}`);
+};
+
+interface CubeProps {
+  /** Called when a face is tapped. Defaults to an alert with the face label. */
+  onFaceTap?: (face: FacePosition) => void;
+}
 
 /**
  * Interactive CSS 3D cube used as an interactive homepage menu.
@@ -52,7 +73,7 @@ type FacePosition = "front" | "back" | "left" | "right" | "top" | "bottom";
  * - RAF = requestAnimationFrame 
  * - DT = delta time
  */
-export default function Cube() {
+export default function Cube({ onFaceTap = defaultOnFaceTap }: CubeProps = {}) {
   /**
    * UI state used only for coarse mode decisions (cursor class, etc).
    * (High-frequency motion state lives in refs to avoid React re-render on every frame.)
@@ -534,26 +555,8 @@ export default function Cube() {
   /** Called if the browser revokes pointer capture. */
   const onLostPointerCapture = () => endDrag();
 
-  /**
-   * Handle a confirmed face tap. Currently a prototype alert, ready to be
-   * wired to real navigation or routing.
-   */
-  const handleFaceTap = (face: FacePosition) => {
-    // TODO: replace this with real navigation / routing behaviour.
-    // For now, mirror the previous Button prototype alert.
-    // Map face to a human-friendly label.
-    const labelMap: Record<FacePosition, string> = {
-      front: "Work",
-      back: "News",
-      left: "Vision",
-      right: "Showcase",
-      top: "XR",
-      bottom: "Hamster",
-    };
-
-    const label = labelMap[face] ?? face;
-    alert(`Face clicked: ${label}`);
-  };
+  /** Delegates to the onFaceTap prop (defaulted at the parameter level). */
+  const handleFaceTap = (face: FacePosition) => onFaceTap(face);
 
   // ---------------------------------------------------------------------------
   // Lifecycle: tab visibility + mount/unmount
