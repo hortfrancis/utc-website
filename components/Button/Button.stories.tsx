@@ -86,12 +86,32 @@ export const TertiaryWithIcon: Story = {
 };
 
 /** Icon-only primary button. */
-export const IconOnly: Story = {
+export const IconOnlyPrimary: Story = {
   args: {
     variant: 'primary',
     icon: 'arrow-right',
     iconOnly: true,
     'aria-label': 'Next',
+  },
+};
+
+/** Icon-only secondary button. */
+export const IconOnlySecondary: Story = {
+  args: {
+    variant: 'secondary',
+    icon: 'x',
+    iconOnly: true,
+    'aria-label': 'Close',
+  },
+};
+
+/** Icon-only tertiary button. */
+export const IconOnlyTertiary: Story = {
+  args: {
+    variant: 'tertiary',
+    icon: 'arrow-right',
+    iconOnly: true,
+    'aria-label': 'More',
   },
 };
 
