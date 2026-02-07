@@ -552,7 +552,6 @@ export default function Cube() {
     };
 
     const label = labelMap[face] ?? face;
-    // eslint-disable-next-line no-alert
     alert(`Face clicked: ${label}`);
   };
 
@@ -574,6 +573,7 @@ export default function Cube() {
 
     document.addEventListener("visibilitychange", onVisibilityChange);
     return () => document.removeEventListener("visibilitychange", onVisibilityChange);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   /**

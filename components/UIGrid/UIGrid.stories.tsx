@@ -1,4 +1,4 @@
-import type { Meta, StoryObj } from '@storybook/react';
+import type { Meta, StoryObj } from '@storybook/nextjs';
 import { UIGrid, GridBlock } from './index';
 import { Frame } from '../Frame';
 import Accent from '../Accent/Accent';

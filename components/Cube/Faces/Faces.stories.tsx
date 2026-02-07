@@ -1,4 +1,4 @@
-import type { Meta, StoryObj } from '@storybook/react';
+import type { Meta, StoryObj } from '@storybook/nextjs';
 import { XR, Work, Vision, News, Showcase, Hamster } from './index';
 
 /**

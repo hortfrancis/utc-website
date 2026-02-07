@@ -1,4 +1,4 @@
-import type { Meta, StoryObj } from '@storybook/react';
+import type { Meta, StoryObj } from '@storybook/nextjs';
 import Grid3x3 from './Grid3x3';
 import type { GridSquare } from './types';
 

@@ -21,11 +21,11 @@ import {
   Lightning,
   Broadcast,
   Atom,
-  CircuitBoard,
+  Circuitry,
 
   // Creative / work
   PencilSimple,
-  Paintbrush,
+  PaintBrush,
   Camera,
   Image,
   VideoCamera,
@@ -85,11 +85,11 @@ const iconRegistry = {
   'lightning': Lightning,
   'broadcast': Broadcast,
   'atom': Atom,
-  'circuit-board': CircuitBoard,
+  'circuit-board': Circuitry,
 
   // Creative / work
   'pencil': PencilSimple,
-  'paintbrush': Paintbrush,
+  'paintbrush': PaintBrush,
   'camera': Camera,
   'image': Image,
   'video-camera': VideoCamera,

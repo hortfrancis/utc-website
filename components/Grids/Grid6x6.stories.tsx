@@ -1,4 +1,4 @@
-import type { Meta, StoryObj } from '@storybook/react';
+import type { Meta, StoryObj } from '@storybook/nextjs';
 import Grid6x6 from './Grid6x6';
 import { extendedRealityIcon, newsIcon, workIcon } from './patterns';
 import type { GridSquare } from './types';
