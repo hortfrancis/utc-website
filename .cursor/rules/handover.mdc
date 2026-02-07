@@ -28,6 +28,8 @@ Major infrastructure and design system work to prepare for cube face design prot
 
 8. **Cross-referenced docs** — cursor rules and LLD docs point to each other. Documentation Structure table in design-system.mdc explains the two-layer approach.
 
+9. **Vercel build fix** (`6c14b65`) — the Storybook v10 upgrade (`7c5df32`) added `eslint-plugin-storybook` with the `no-renderer-packages` rule, but story file imports weren't updated to match. All 15 `.stories.tsx` files changed `from '@storybook/react'` → `from '@storybook/nextjs'`. Also fixed two Phosphor icon name mismatches (`CircuitBoard` → `Circuitry`, `Paintbrush` → `PaintBrush`) and cleaned up lint warnings in `Cube.tsx`.
+
 ## Immediate next steps
 
 1. **XR face experiments** — the main creative work queued up. Create 3-4 design variants in `components/Cube/Faces/experiments/`:
@@ -47,6 +49,12 @@ Major infrastructure and design system work to prepare for cube face design prot
 - **Grid gap standardisation**: 4px tight / 8px separated is proposed but not yet confirmed as a design token.
 - **Section icons in NavLinks**: The current CSS grid icons may be replaced with Phosphor icons or another icon set. The grid icons work at large sizes but break at small pixel dimensions.
 - **UIGrid for page layouts**: The LCARS-style grid is ready but not yet used in any actual page layout. When a page beyond the homepage needs layout, UIGrid + GridBlock is the intended approach, with mobile-first breakpoints swapping grid configs.
+
+## Gotchas
+
+- **Storybook story imports**: Always use `import type { Meta, StoryObj } from '@storybook/nextjs'` (the framework package), NOT `@storybook/react` (the renderer). The `eslint-plugin-storybook` rule `no-renderer-packages` enforces this.
+- **Phosphor icon names**: Not all PascalCase guesses are correct (e.g. `CircuitBoard` doesn't exist, it's `Circuitry`; `Paintbrush` is actually `PaintBrush`). Verify against `node_modules/@phosphor-icons/react/dist/index.d.ts` when adding new icons to the registry. You can grep that file to search the full catalogue of 1,512 icons.
+- **Vercel build vs local dev**: `next build` runs ESLint and TypeScript checking that `next dev` does not. Always run `npm run build` locally before pushing if lint/type issues are suspected.
 
 ## Working style notes
 
