@@ -1,4 +1,5 @@
 import type { Meta, StoryObj } from '@storybook/nextjs';
+import { workProjectLinks } from '@/app/work/projectLinks';
 import NavList from './NavList';
 import { primaryNavLinks } from './primaryNavLinks';
 
@@ -76,5 +77,13 @@ export const InPanel: Story = {
     links: primaryNavLinks,
     size: 'desktop',
     inPanel: true,
+  },
+};
+
+/** Work page: all project links (as on /work). */
+export const WorkProjects: Story = {
+  args: {
+    links: workProjectLinks,
+    size: 'desktop',
   },
 };

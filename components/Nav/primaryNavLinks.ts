@@ -1,10 +1,4 @@
-import type { IconName } from '@/components/Icon/Icon';
-
-export interface NavLinkItem {
-  href: string;
-  label: string;
-  icon: IconName;
-}
+import type { NavLinkItem } from './types';
 
 export const primaryNavLinks: NavLinkItem[] = [
   { href: '/work', label: 'Work', icon: 'paintbrush' },

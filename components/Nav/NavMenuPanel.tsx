@@ -1,7 +1,7 @@
 import clsx from 'clsx';
 import { Frame } from '@/components/Frame';
 import NavList from './NavList';
-import type { NavLinkItem } from './primaryNavLinks';
+import type { NavLinkItem } from './types';
 
 export const NAV_MENU_PANEL_DATA_TESTID = 'NavMenuPanel';
 

@@ -1,7 +1,7 @@
 import { clsx } from 'clsx';
 import type { FrameBorderSide } from '@/components/Frame';
 import NavLink from './NavLink';
-import type { NavLinkItem } from './primaryNavLinks';
+import type { NavLinkItem } from './types';
 
 export const NAV_LIST_DATA_TESTID = 'NavList';
 
