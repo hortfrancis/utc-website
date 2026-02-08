@@ -48,48 +48,14 @@ const meta = {
 export default meta;
 type Story = StoryObj<typeof meta>;
 
-/** Logo accent: vertical strip, magenta→green, border left + bottom (flush top/right). */
-export const LogoAccent: Story = {
+/** Default: no gradient, solid theme-black fill. */
+export const Default: Story = {
   args: {
     direction: 'vertical',
-    gradient: 'magenta-green',
-    borderSides: ['left', 'bottom'],
   },
   decorators: [
     (Story) => (
       <div style={{ height: 80, display: 'flex', alignItems: 'stretch' }}>
-        <Story />
-      </div>
-    ),
-  ],
-};
-
-/** Menu button accent: vertical strip, purple→orange, border right + bottom. */
-export const MenuButtonAccent: Story = {
-  args: {
-    direction: 'vertical',
-    gradient: 'purple-orange',
-    borderSides: ['right', 'bottom'],
-  },
-  decorators: [
-    (Story) => (
-      <div style={{ height: 80, display: 'flex', alignItems: 'stretch' }}>
-        <Story />
-      </div>
-    ),
-  ],
-};
-
-/** Horizontal bar (e.g. nav underside): orange→purple. */
-export const HorizontalBar: Story = {
-  args: {
-    direction: 'horizontal',
-    gradient: 'orange-purple',
-    borderSides: ['bottom', 'right'],
-  },
-  decorators: [
-    (Story) => (
-      <div style={{ width: 200 }}>
         <Story />
       </div>
     ),

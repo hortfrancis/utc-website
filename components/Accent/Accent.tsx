@@ -14,8 +14,8 @@ export type AccentBorderSide = 'top' | 'right' | 'bottom' | 'left';
 export interface AccentProps {
   /** Gradient direction (vertical = top-to-bottom, horizontal = left-to-right). */
   direction: AccentDirection;
-  /** Theme gradient pair. */
-  gradient: AccentGradient;
+  /** Theme gradient pair. Omit for solid theme-black fill. */
+  gradient?: AccentGradient;
   /** Which sides get the black border; others are flush. */
   borderSides?: AccentBorderSide[];
   /** Optional class overrides (e.g. z-index, rounded). */
@@ -46,9 +46,12 @@ export default function Accent({
   borderSides = ['top', 'right', 'bottom', 'left'],
   className,
 }: AccentProps) {
-  const gradientAxis =
-    direction === 'vertical' ? 'bg-gradient-to-b' : 'bg-gradient-to-r';
-  const gradientClass = clsx(gradientAxis, gradientFromTo[gradient]);
+  const fillClass = gradient
+    ? clsx(
+        direction === 'vertical' ? 'bg-gradient-to-b' : 'bg-gradient-to-r',
+        gradientFromTo[gradient]
+      )
+    : 'bg-theme-black';
 
   const borderZeroClasses = (['top', 'right', 'bottom', 'left'] as const)
     .filter((side) => !borderSides.includes(side))
@@ -60,7 +63,7 @@ export default function Accent({
     sizeClass,
     'border-4',
     'border-theme-black',
-    gradientClass,
+    fillClass,
     borderZeroClasses,
     className
   );
