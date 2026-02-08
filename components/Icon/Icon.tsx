@@ -60,6 +60,7 @@ import {
   UsersIcon,
   EyeIcon,
   ShareIcon,
+  CopyrightIcon,
 
   // Fun / misc
   PawPrintIcon,
@@ -70,6 +71,11 @@ import {
   SparkleIcon,
   PlanetIcon,
   AlienIcon,
+
+  // Social
+  LinkedinLogoIcon,
+  InstagramLogoIcon,
+  YoutubeLogoIcon,
 } from '@phosphor-icons/react';
 
 const iconRegistry = {
@@ -124,6 +130,7 @@ const iconRegistry = {
   'users': UsersIcon,
   'eye': EyeIcon,
   'share': ShareIcon,
+  'copyright': CopyrightIcon,
 
   // Fun / misc
   'paw-print': PawPrintIcon,
@@ -134,6 +141,11 @@ const iconRegistry = {
   'sparkle': SparkleIcon,
   'planet': PlanetIcon,
   'alien': AlienIcon,
+
+  // Social
+  'linkedin': LinkedinLogoIcon,
+  'instagram': InstagramLogoIcon,
+  'youtube': YoutubeLogoIcon,
 } as const satisfies Record<string, ComponentType<PhosphorIconProps>>;
 
 export type IconName = keyof typeof iconRegistry;
