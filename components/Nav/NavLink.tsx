@@ -34,6 +34,11 @@ const arrowFrameProps = {
   roundedCorners: [] as const,
 };
 
+/**
+ * Single nav item: icon cell + label cell + arrow cell. Purely presentational —
+ * does not render a `<nav>` landmark. Wrap in NavList (which owns `<nav>`)
+ * or provide your own landmark at a higher level.
+ */
 export default function NavLink({
   href,
   label,
