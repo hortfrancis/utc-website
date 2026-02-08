@@ -27,6 +27,7 @@ export default function DesktopNav() {
             <NavLink
               href={link.href}
               label={link.label}
+              icon={link.icon}
               size='desktop'
             />
           </li>

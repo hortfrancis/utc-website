@@ -1,17 +1,18 @@
 import { clsx } from 'clsx';
 import { Pressable } from '@/components/Pressable';
 import { Frame } from '@/components/Frame';
-import NewsIcon from '../icons/sections/newsIcon';
-import WorkIcon from '../icons/sections/workIcon';
-import XRIcon from '../icons/sections/xrIcon';
+import Icon from '@/components/Icon/Icon';
+import type { IconName } from '@/components/Icon/Icon';
 
 export const NAV_LINK_DATA_TESTID = 'NavLink';
 
 export interface NavLinkProps {
   href: string;
   label: string;
+  /** Section icon displayed in the leading cell. */
+  icon: IconName;
   onClick?: () => void;
-  /** Determines sizing off text and icon */
+  /** Determines sizing of text and icon. */
   size: 'mobile' | 'desktop';
 }
 
@@ -21,8 +22,14 @@ const iconFrameProps = {
   roundedCorners: [] as const,
 };
 
-/** Text cell: open on left so it butts against the icon. */
+/** Text cell: open on left and right so it butts against icon and arrow. */
 const textFrameProps = {
+  borderSides: ['top', 'bottom'] as const,
+  roundedCorners: [] as const,
+};
+
+/** Arrow cell: open on left so it butts against the text. */
+const arrowFrameProps = {
   borderSides: ['top', 'right', 'bottom'] as const,
   roundedCorners: [] as const,
 };
@@ -30,6 +37,7 @@ const textFrameProps = {
 export default function NavLink({
   href,
   label,
+  icon,
   onClick,
   size,
 }: NavLinkProps) {
@@ -46,7 +54,8 @@ export default function NavLink({
     'h-full',
     size === 'mobile' && 'w-18',
     size === 'desktop' && 'w-10',
-    'group-hover:bg-theme-cyan transition-colors duration-200',
+    'bg-theme-black text-theme-white',
+    'group-hover:bg-theme-cyan group-hover:text-theme-black transition-colors duration-200',
   );
 
   const textFrameStyles = clsx(
@@ -61,18 +70,16 @@ export default function NavLink({
     'group-hover:bg-theme-cyan transition-colors duration-200',
   );
 
-  const iconSize = (() => {
-    if (size === 'mobile') return 56;
-    if (size === 'desktop') return 28;
-  })();
+  const arrowFrameStyles = clsx(
+    'flex items-center justify-center box-border',
+    'h-full',
+    size === 'mobile' && 'w-18',
+    size === 'desktop' && 'w-10',
+    'group-hover:bg-theme-cyan transition-colors duration-200',
+  );
 
-  const icon = (() => {
-    if (href === '/work') return <WorkIcon size={iconSize} />;
-    if (href === '/xr') return <XRIcon size={iconSize} />;
-    if (href === '/news') return <NewsIcon size={iconSize} />;
-    // _temp: About and Contact use NewsIcon until section icons are added
-    return <NewsIcon size={iconSize} />;
-  })();
+  const arrowSize = size === 'mobile' ? 24 : 16;
+  const sectionIconSize = size === 'mobile' ? 32 : 20;
 
   return (
     <Pressable
@@ -82,10 +89,13 @@ export default function NavLink({
       data-testid={NAV_LINK_DATA_TESTID}
     >
       <Frame {...iconFrameProps} className={iconFrameStyles}>
-        {icon}
+        <Icon name={icon} size={sectionIconSize} className="text-current" />
       </Frame>
       <Frame {...textFrameProps} className={textFrameStyles}>
         {label}
+      </Frame>
+      <Frame {...arrowFrameProps} className={arrowFrameStyles}>
+        <Icon name="arrow-right" size={arrowSize} className="text-current" />
       </Frame>
     </Pressable>
   );

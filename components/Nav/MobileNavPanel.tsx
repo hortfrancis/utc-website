@@ -65,6 +65,7 @@ export default function MobileNavPanel({
                   <NavLink
                     href={link.href}
                     label={link.label}
+                    icon={link.icon}
                     onClick={onLinkClick}
                     size="mobile"
                   />
