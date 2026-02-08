@@ -42,7 +42,7 @@ const variantStyles: Record<ButtonVariant, string> = {
     'hover:bg-theme-cyan hover:text-theme-black',
   ),
   secondary: clsx(
-    'bg-transparent text-theme-black',
+    'bg-theme-white text-theme-black',
     'border-4 border-theme-black rounded-tl-2xl',
     'hover:bg-theme-cyan',
   ),

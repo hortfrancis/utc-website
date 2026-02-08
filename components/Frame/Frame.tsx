@@ -70,7 +70,7 @@ export default function Frame({
     <div
       data-testid={FRAME_DATA_TESTID}
       className={clsx(
-        'box-border',
+        'box-border bg-theme-white',
         borderWidth,
         'border-theme-black',
         borderZeroClasses,
