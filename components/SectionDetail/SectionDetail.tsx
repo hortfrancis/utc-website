@@ -96,7 +96,13 @@ export default function SectionDetail({ face, onClose }: SectionDetailProps) {
               {content.description}
             </p>
 
-            <div className="flex gap-3">
+            <div className="flex gap-3 justify-end">
+              <Button
+                variant="secondary"
+                label="Close"
+                onClick={onClose}
+                aria-label="Close overlay"
+              />
               {content.href && (
                 <Button
                   variant="primary"
@@ -106,12 +112,6 @@ export default function SectionDetail({ face, onClose }: SectionDetailProps) {
                   aria-label={`Explore ${content.title}`}
                 />
               )}
-              <Button
-                variant="secondary"
-                label="Close"
-                onClick={onClose}
-                aria-label="Close overlay"
-              />
             </div>
           </Frame>
         </div>

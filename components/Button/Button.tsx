@@ -37,7 +37,7 @@ const variantStyles: Record<ButtonVariant, string> = {
   ),
   secondary: clsx(
     'bg-transparent text-theme-black',
-    'border-4 border-theme-black rounded-bl-2xl',
+    'border-4 border-theme-black rounded-tl-2xl',
     'hover:bg-theme-cyan',
   ),
   tertiary: clsx(
