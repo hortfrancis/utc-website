@@ -41,6 +41,7 @@ export default function PrimaryNav({
       aria-expanded={open}
       aria-haspopup="menu"
       aria-label={open ? 'Close navigation menu' : 'Open navigation menu'}
+      className="rounded-tl-none rounded-bl-2xl"
     />
   );
 

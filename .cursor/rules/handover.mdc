@@ -26,7 +26,7 @@ Major refactor of the interactive component layer, splitting concerns between a 
 4. **Updated all consumers:**
    - `SectionDetail` — uses `<Button variant="primary">` / `<Button variant="secondary">` instead of `Button > Frame(interactive)`
    - `NavLink` — uses Pressable + `group`/`group-hover:bg-theme-cyan` for hover
-   - `DesktopHeader` / `MobileHeader` — logo lockup uses Pressable + `group-hover:`
+   - `SiteHeader` — logo lockup uses Pressable + `group-hover:`
    - `Logo.stories` — replaced `InAButton` stories with `InAPressable` equivalents
    - `Frame.stories` — removed `interactive` argType
 
@@ -43,7 +43,7 @@ Major refactor of the interactive component layer, splitting concerns between a 
 | Utilities | Pressable, Icon |
 | Atoms | Frame, Accent, Heading, UIGrid, Overlay |
 | Molecules | Button (primary/secondary/tertiary), NavLink, Logo lockup |
-| Organisms | SiteHeader, MobileNavPanel, Cube, SectionDetail |
+| Organisms | SiteHeader, PrimaryNav, NavMenuPanel, Cube, SectionDetail |
 
 ### Key interaction patterns
 
