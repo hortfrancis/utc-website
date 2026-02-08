@@ -36,7 +36,13 @@ export default function NavMenuPanel({
         roundedCorners={['bottom-left']}
         className={clsx('bg-theme-white border-theme-black overflow-hidden', className)}
       >
-        <NavList links={links} size={size} align={align} onLinkClick={onLinkClick} />
+        <NavList
+          links={links}
+          size={size}
+          align={align}
+          inPanel
+          onLinkClick={onLinkClick}
+        />
       </Frame>
     </div>
   );

@@ -10,7 +10,7 @@ const meta = {
     docs: {
       description: {
         component:
-          'Single nav item: icon cell + label cell. Used in desktop and mobile nav. One story per nav link.',
+          'Single nav item: one Frame wrapping icon + label + arrow. Used in desktop and mobile nav. One story per nav link.',
       },
     },
   },

@@ -27,6 +27,10 @@ const meta = {
       options: ['left', 'right'],
       description: 'Cross-axis alignment of the list',
     },
+    inPanel: {
+      control: 'boolean',
+      description: 'When true, NavList computes frameBorderSides per row so stacked links share single strokes (no double borders)',
+    },
     onLinkClick: {
       action: 'link clicked',
       description: 'Fired when any link is clicked',
@@ -63,5 +67,14 @@ export const RightAligned: Story = {
     links: primaryNavLinks,
     size: 'desktop',
     align: 'right',
+  },
+};
+
+/** Stacked in panel: single-stroke borders between rows (as in NavMenuPanel). */
+export const InPanel: Story = {
+  args: {
+    links: primaryNavLinks,
+    size: 'desktop',
+    inPanel: true,
   },
 };
