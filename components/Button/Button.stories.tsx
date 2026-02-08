@@ -28,6 +28,12 @@ const meta = {
     icon: {
       control: 'text',
     },
+    iconLeft: {
+      control: 'text',
+    },
+    iconRight: {
+      control: 'text',
+    },
   },
 } satisfies Meta<typeof Button>;
 
@@ -73,6 +79,25 @@ export const SecondaryWithIcon: Story = {
     variant: 'secondary',
     label: 'Back',
     icon: 'arrow-left',
+  },
+};
+
+/** Primary with icon before label (iconLeft). */
+export const PrimaryWithIconLeft: Story = {
+  args: {
+    variant: 'primary',
+    label: 'Start here',
+    iconLeft: 'path',
+  },
+};
+
+/** Secondary with icon on both sides (e.g. Navigation trigger). */
+export const WithIconLeftAndRight: Story = {
+  args: {
+    variant: 'secondary',
+    label: 'Navigation',
+    iconLeft: 'path',
+    iconRight: 'arrow-down',
   },
 };
 
@@ -143,16 +168,21 @@ export const Comparison: Story = {
       <div className="flex items-center gap-4">
         <Button variant="primary" label="Primary" />
         <Button variant="primary" label="With Icon" icon="arrow-right" />
+        <Button variant="primary" label="Icon left" iconLeft="path" />
+        <Button variant="primary" label="Both" iconLeft="path" iconRight="arrow-down" />
         <Button variant="primary" icon="arrow-right" iconOnly aria-label="Next" />
       </div>
       <div className="flex items-center gap-4">
         <Button variant="secondary" label="Secondary" />
         <Button variant="secondary" label="With Icon" icon="arrow-left" />
+        <Button variant="secondary" label="Icon left" iconLeft="path" />
+        <Button variant="secondary" label="Navigation" iconLeft="path" iconRight="arrow-down" />
         <Button variant="secondary" icon="x" iconWeight="bold" iconOnly aria-label="Close" />
       </div>
       <div className="flex items-center gap-4">
         <Button variant="tertiary" label="Tertiary" />
         <Button variant="tertiary" label="With Icon" icon="arrow-right" />
+        <Button variant="tertiary" label="Icon left" iconLeft="path" />
         <Button variant="tertiary" icon="x" iconWeight="bold" iconOnly aria-label="Dismiss" />
       </div>
     </div>

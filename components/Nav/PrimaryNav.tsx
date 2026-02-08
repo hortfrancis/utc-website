@@ -36,7 +36,8 @@ export default function PrimaryNav({
     <Button
       variant="secondary"
       label="Navigation"
-      icon="arrow-down"
+      iconLeft="path"
+      iconRight="arrow-down"
       onClick={toggle}
       aria-expanded={open}
       aria-haspopup="menu"

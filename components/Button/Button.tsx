@@ -14,11 +14,15 @@ export interface ButtonProps {
   variant: ButtonVariant;
   /** Button text. Omit when using `iconOnly`. */
   label?: string;
-  /** Optional icon (rendered after label, or alone when `iconOnly`). */
+  /** Optional icon on the left of the label. */
+  iconLeft?: IconName;
+  /** Optional icon on the right of the label (or alone when `iconOnly`). */
+  iconRight?: IconName;
+  /** @deprecated Use `iconRight`. Optional icon (rendered after label, or alone when `iconOnly`). */
   icon?: IconName;
   /** Phosphor weight for the icon. Defaults to Icon's default ('fill'). */
   iconWeight?: IconWeight;
-  /** When true, only renders the icon. Requires `icon` and `aria-label`. */
+  /** When true, only renders the icon. Requires `iconRight` or `icon` and `aria-label`. */
   iconOnly?: boolean;
   /** When provided, renders as a link (internal or external). */
   href?: string;
@@ -74,9 +78,13 @@ const sharedStyles = clsx(
  * Supports text, icon, or text+icon content. Uses `Pressable` internally
  * for element selection (Link / a / button).
  */
+const iconSize = (iconOnly: boolean) => (iconOnly ? 20 : 18);
+
 export default function Button({
   variant,
   label,
+  iconLeft,
+  iconRight,
   icon,
   iconWeight,
   iconOnly = false,
@@ -87,6 +95,9 @@ export default function Button({
   'aria-haspopup': ariaHaspopup,
   className,
 }: ButtonProps) {
+  const rightIcon = iconRight ?? icon;
+  const size = iconSize(iconOnly);
+
   return (
     <Pressable
       href={href}
@@ -97,8 +108,9 @@ export default function Button({
       data-testid={BUTTON_DATA_TESTID}
       className={clsx(sharedStyles, variantStyles[variant], className)}
     >
+      {!iconOnly && iconLeft && <Icon name={iconLeft} size={size} weight={iconWeight} className="text-current" />}
       {!iconOnly && label && <span>{label}</span>}
-      {icon && <Icon name={icon} size={iconOnly ? 20 : 18} weight={iconWeight} className="text-current" />}
+      {rightIcon && <Icon name={rightIcon} size={size} weight={iconWeight} className="text-current" />}
     </Pressable>
   );
 }
