@@ -25,6 +25,10 @@ export interface PressableProps {
   className?: string;
   /** Accessible label (recommended when content is not text). */
   'aria-label'?: string;
+  /** For menu triggers: whether the menu is open. */
+  'aria-expanded'?: boolean;
+  /** For menu triggers: type of popup (e.g. 'menu'). */
+  'aria-haspopup'?: 'menu' | 'listbox' | 'tree' | 'grid' | 'dialog';
   /** Override data-testid. */
   'data-testid'?: string;
 }
@@ -54,6 +58,8 @@ export default function Pressable({
   children,
   className,
   'aria-label': ariaLabel,
+  'aria-expanded': ariaExpanded,
+  'aria-haspopup': ariaHaspopup,
   'data-testid': dataTestId,
 }: PressableProps) {
   const testId = dataTestId ?? PRESSABLE_DATA_TESTID;
@@ -64,6 +70,14 @@ export default function Pressable({
     onMouseLeave,
   };
 
+  const linkAriaProps = { 'aria-label': ariaLabel };
+
+  const buttonAriaProps = {
+    'aria-label': ariaLabel,
+    ...(ariaExpanded !== undefined && { 'aria-expanded': ariaExpanded }),
+    ...(ariaHaspopup !== undefined && { 'aria-haspopup': ariaHaspopup }),
+  };
+
   if (href !== undefined) {
     if (isExternal(href)) {
       return (
@@ -72,7 +86,7 @@ export default function Pressable({
           target="_blank"
           rel="noopener noreferrer"
           className={baseStyles}
-          aria-label={ariaLabel}
+          {...linkAriaProps}
           data-testid={testId}
           onClick={onClick}
           {...mouseProps}
@@ -86,7 +100,7 @@ export default function Pressable({
       <Link
         href={href}
         className={baseStyles}
-        aria-label={ariaLabel}
+        {...linkAriaProps}
         data-testid={testId}
         onClick={onClick}
         {...mouseProps}
@@ -102,7 +116,7 @@ export default function Pressable({
       className={baseStyles}
       data-testid={testId}
       onClick={onClick}
-      aria-label={ariaLabel}
+      {...buttonAriaProps}
       {...mouseProps}
     >
       {children}

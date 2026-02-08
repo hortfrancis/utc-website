@@ -26,6 +26,10 @@ export interface ButtonProps {
   onClick?: () => void;
   /** Accessible label (required when `iconOnly`). */
   'aria-label'?: string;
+  /** For menu triggers: whether the menu is open. */
+  'aria-expanded'?: boolean;
+  /** For menu triggers: type of popup (e.g. 'menu'). */
+  'aria-haspopup'?: 'menu' | 'listbox' | 'tree' | 'grid' | 'dialog';
   /** Optional class for the outer element. */
   className?: string;
 }
@@ -79,6 +83,8 @@ export default function Button({
   href,
   onClick,
   'aria-label': ariaLabel,
+  'aria-expanded': ariaExpanded,
+  'aria-haspopup': ariaHaspopup,
   className,
 }: ButtonProps) {
   return (
@@ -86,6 +92,8 @@ export default function Button({
       href={href}
       onClick={onClick}
       aria-label={ariaLabel}
+      aria-expanded={ariaExpanded}
+      aria-haspopup={ariaHaspopup}
       data-testid={BUTTON_DATA_TESTID}
       className={clsx(sharedStyles, variantStyles[variant], className)}
     >
