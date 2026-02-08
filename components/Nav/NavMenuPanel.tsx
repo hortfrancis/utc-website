@@ -14,7 +14,9 @@ export interface NavMenuPanelProps {
   align?: 'left' | 'right';
   /** Called when any link is clicked (e.g. close a menu). */
   onLinkClick?: () => void;
-  /** Optional class for the Frame. */
+  /** Background colour class for the panel Frame (default: theme black). */
+  backgroundClassName?: string;
+  /** Optional class for the Frame (merged with background and other styles). */
   className?: string;
 }
 
@@ -22,11 +24,14 @@ export interface NavMenuPanelProps {
  * Presentational panel: Frame + NavList. No open/close or trigger — use inside
  * NavMenu (or standalone in stories) for the dropdown content.
  */
+const DEFAULT_BACKGROUND_CLASS = 'bg-theme-black';
+
 export default function NavMenuPanel({
   links,
   size,
   align = 'left',
   onLinkClick,
+  backgroundClassName = DEFAULT_BACKGROUND_CLASS,
   className,
 }: NavMenuPanelProps) {
   return (
@@ -34,7 +39,7 @@ export default function NavMenuPanel({
       <Frame
         borderSides={['top', 'right', 'bottom', 'left']}
         roundedCorners={['bottom-left']}
-        className={clsx('bg-theme-white border-theme-black overflow-hidden', className)}
+        className={clsx(backgroundClassName, 'border-theme-black overflow-hidden', className)}
       >
         <NavList
           links={links}

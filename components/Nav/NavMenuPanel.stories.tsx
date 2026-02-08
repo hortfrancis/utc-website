@@ -27,6 +27,10 @@ const meta = {
       options: ['left', 'right'],
       description: 'Cross-axis alignment of the list (default: left)',
     },
+    backgroundClassName: {
+      control: 'text',
+      description: 'Background class for the panel Frame (default: theme black)',
+    },
     onLinkClick: {
       action: 'link clicked',
       description: 'Fired when any link is clicked',
@@ -51,5 +55,14 @@ export const RightAligned: Story = {
     links: primaryNavLinks,
     size: 'desktop',
     align: 'right',
+  },
+};
+
+/** Vertical gradient background (purple to orange). */
+export const GradientBackground: Story = {
+  args: {
+    links: primaryNavLinks,
+    size: 'desktop',
+    backgroundClassName: 'bg-gradient-to-b from-theme-purple to-theme-orange',
   },
 };

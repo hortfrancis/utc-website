@@ -53,7 +53,8 @@ export default function PrimaryNav({
         <NavMenuPanel
           links={primaryNavLinks}
           size="desktop"
-          align="right"
+          align="left"
+          backgroundClassName="bg-gradient-to-b from-theme-purple to-theme-orange"
           onLinkClick={close}
         />
       </NavMenu>
