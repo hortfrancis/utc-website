@@ -1,16 +1,16 @@
 import type { Meta, StoryObj } from '@storybook/nextjs';
-import NavList from './NavList';
+import NavMenuPanel from './NavMenuPanel';
 import { primaryNavLinks } from './primaryNavLinks';
 
 const meta = {
-  title: 'Organisms/NavList',
-  component: NavList,
+  title: 'Organisms/NavMenuPanel',
+  component: NavMenuPanel,
   parameters: {
     layout: 'centered',
     docs: {
       description: {
         component:
-          'Vertical column of NavLinks. Owns the `<nav>` landmark (NavLink is purely presentational). No chrome — decoration is the parent\'s job.',
+          'Presentational panel: Frame + NavList. No trigger or open/close — use inside NavMenu for dropdown content or standalone for layout review.',
       },
     },
   },
@@ -25,39 +25,27 @@ const meta = {
     align: {
       control: { type: 'radio' },
       options: ['left', 'right'],
-      description: 'Cross-axis alignment of the list',
+      description: 'Cross-axis alignment of the list (default: left)',
     },
     onLinkClick: {
       action: 'link clicked',
       description: 'Fired when any link is clicked',
     },
   },
-} satisfies Meta<typeof NavList>;
+} satisfies Meta<typeof NavMenuPanel>;
 
 export default meta;
 type Story = StoryObj<typeof meta>;
 
-export const Desktop: Story = {
+/** Default: left-aligned list in Frame. */
+export const Default: Story = {
   args: {
     links: primaryNavLinks,
     size: 'desktop',
   },
 };
 
-export const Mobile: Story = {
-  args: {
-    links: primaryNavLinks,
-    size: 'mobile',
-  },
-};
-
-export const FewerLinks: Story = {
-  args: {
-    links: primaryNavLinks.slice(0, 3),
-    size: 'desktop',
-  },
-};
-
+/** Right-aligned list (e.g. as used in PrimaryNav dropdown). */
 export const RightAligned: Story = {
   args: {
     links: primaryNavLinks,

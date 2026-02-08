@@ -1,6 +1,6 @@
 import { clsx } from 'clsx';
 import NavLink from './NavLink';
-import { navLinks } from './navLinks';
+import { primaryNavLinks } from './primaryNavLinks';
 
 export const DESKTOP_NAV_DATA_TESTID = 'DesktopNav';
 
@@ -22,7 +22,7 @@ export default function DesktopNav() {
   return (
     <nav data-testid={DESKTOP_NAV_DATA_TESTID} className='hidden sm:block'>
       <ul className={listStyles}>
-        {navLinks.map((link) => (
+        {primaryNavLinks.map((link) => (
           <li key={link.href}>
             <NavLink
               href={link.href}

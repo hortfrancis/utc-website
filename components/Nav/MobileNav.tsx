@@ -2,7 +2,7 @@
 
 import { useEffect, useRef } from 'react';
 import MobileNavPanel from './MobileNavPanel';
-import { navLinks } from './navLinks';
+import { primaryNavLinks } from './primaryNavLinks';
 
 export interface MobileNavProps {
   onClose: () => void;
@@ -34,7 +34,7 @@ export default function MobileNav({ onClose }: MobileNavProps) {
 
   return (
     <div ref={ref} data-testid={MOBILE_NAV_DATA_TESTID} className="absolute top-30 right-0">
-      <MobileNavPanel links={navLinks} onLinkClick={onClose} />
+      <MobileNavPanel links={primaryNavLinks} onLinkClick={onClose} />
     </div>
   );
 }

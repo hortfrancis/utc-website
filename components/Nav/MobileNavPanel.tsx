@@ -1,6 +1,6 @@
 import clsx from 'clsx';
 import NavLink from './NavLink';
-import type { NavLinkItem } from './navLinks';
+import type { NavLinkItem } from './primaryNavLinks';
 
 export const MOBILE_NAV_PANEL_DATA_TESTID = 'MobileNavPanel';
 

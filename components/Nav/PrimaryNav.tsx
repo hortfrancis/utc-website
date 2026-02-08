@@ -3,10 +3,9 @@
 import { useState } from 'react';
 import clsx from 'clsx';
 import { Button } from '@/components/Button';
-import { Frame } from '@/components/Frame';
-import NavList from './NavList';
 import NavMenu from './NavMenu';
-import { navLinks } from './navLinks';
+import NavMenuPanel from './NavMenuPanel';
+import { primaryNavLinks } from './primaryNavLinks';
 
 export const PRIMARY_NAV_DATA_TESTID = 'PrimaryNav';
 
@@ -21,7 +20,7 @@ export interface PrimaryNavProps {
  * Primary navigation: floating menu in the top-right.
  *
  * Composes NavMenu (show/hide, positioning) + Button trigger ("Navigation",
- * arrow-down) + NavList inside a Frame. Lives in the site header.
+ * arrow-down) + NavMenuPanel. Lives in the site header.
  * Toggle opens/closes the dropdown; click outside or Escape closes it.
  */
 export default function PrimaryNav({
@@ -51,17 +50,12 @@ export default function PrimaryNav({
       className={clsx('inline-block', className)}
     >
       <NavMenu open={open} onClose={close} trigger={trigger}>
-        <Frame
-          borderSides={['top', 'right', 'bottom', 'left']}
-          roundedCorners={['bottom-left']}
-          className="bg-theme-white border-theme-black overflow-hidden p-1"
-        >
-          <NavList
-            links={navLinks}
-            size="desktop"
-            onLinkClick={close}
-          />
-        </Frame>
+        <NavMenuPanel
+          links={primaryNavLinks}
+          size="desktop"
+          align="right"
+          onLinkClick={close}
+        />
       </NavMenu>
     </div>
   );

@@ -1,6 +1,6 @@
 import type { Meta, StoryObj } from '@storybook/nextjs';
 import MobileNavPanel from './MobileNavPanel';
-import { navLinks } from './navLinks';
+import { primaryNavLinks } from './primaryNavLinks';
 
 /**
  * Mobile navigation menu panel in isolation—the pop-up menu that appears
@@ -56,13 +56,13 @@ type Story = StoryObj<typeof meta>;
 /** Default mobile nav menu panel—how it looks when the burger is pressed. */
 export const Default: Story = {
   args: {
-    links: navLinks,
+    links: primaryNavLinks,
   },
 };
 
 /** With a custom subset of links (e.g. for testing layout). */
 export const FewerLinks: Story = {
   args: {
-    links: navLinks.slice(0, 3),
+    links: primaryNavLinks.slice(0, 3),
   },
 };

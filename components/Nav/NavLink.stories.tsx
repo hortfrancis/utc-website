@@ -1,6 +1,6 @@
 import type { Meta, StoryObj } from '@storybook/nextjs';
 import NavLink from './NavLink';
-import { navLinks } from './navLinks';
+import { primaryNavLinks } from './primaryNavLinks';
 
 const meta = {
   title: 'Molecules/NavLink',
@@ -31,11 +31,11 @@ export default meta;
 
 type Story = StoryObj<typeof meta>;
 
-const workLink = navLinks[0];
-const xrLink = navLinks[1];
-const newsLink = navLinks[2];
-const aboutLink = navLinks[3];
-const contactLink = navLinks[4];
+const workLink = primaryNavLinks[0];
+const xrLink = primaryNavLinks[1];
+const newsLink = primaryNavLinks[2];
+const aboutLink = primaryNavLinks[3];
+const contactLink = primaryNavLinks[4];
 
 export const Work: Story = {
   args: {
