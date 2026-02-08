@@ -100,6 +100,7 @@ export const IconOnlySecondary: Story = {
   args: {
     variant: 'secondary',
     icon: 'x',
+    iconWeight: 'bold',
     iconOnly: true,
     'aria-label': 'Close',
   },
@@ -147,12 +148,12 @@ export const Comparison: Story = {
       <div className="flex items-center gap-4">
         <Button variant="secondary" label="Secondary" />
         <Button variant="secondary" label="With Icon" icon="arrow-left" />
-        <Button variant="secondary" icon="x" iconOnly aria-label="Close" />
+        <Button variant="secondary" icon="x" iconWeight="bold" iconOnly aria-label="Close" />
       </div>
       <div className="flex items-center gap-4">
         <Button variant="tertiary" label="Tertiary" />
         <Button variant="tertiary" label="With Icon" icon="arrow-right" />
-        <Button variant="tertiary" icon="x" iconOnly aria-label="Dismiss" />
+        <Button variant="tertiary" icon="x" iconWeight="bold" iconOnly aria-label="Dismiss" />
       </div>
     </div>
   ),

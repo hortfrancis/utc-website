@@ -3,7 +3,7 @@
 import { clsx } from 'clsx';
 import { Pressable } from '../Pressable';
 import Icon from '../Icon/Icon';
-import type { IconName } from '../Icon/Icon';
+import type { IconName, IconWeight } from '../Icon/Icon';
 
 export const BUTTON_DATA_TESTID = 'Button';
 
@@ -16,6 +16,8 @@ export interface ButtonProps {
   label?: string;
   /** Optional icon (rendered after label, or alone when `iconOnly`). */
   icon?: IconName;
+  /** Phosphor weight for the icon. Defaults to Icon's default ('fill'). */
+  iconWeight?: IconWeight;
   /** When true, only renders the icon. Requires `icon` and `aria-label`. */
   iconOnly?: boolean;
   /** When provided, renders as a link (internal or external). */
@@ -72,6 +74,7 @@ export default function Button({
   variant,
   label,
   icon,
+  iconWeight,
   iconOnly = false,
   href,
   onClick,
@@ -87,7 +90,7 @@ export default function Button({
       className={clsx(sharedStyles, variantStyles[variant], className)}
     >
       {!iconOnly && label && <span>{label}</span>}
-      {icon && <Icon name={icon} size={iconOnly ? 20 : 18} className="text-current" />}
+      {icon && <Icon name={icon} size={iconOnly ? 20 : 18} weight={iconWeight} className="text-current" />}
     </Pressable>
   );
 }
