@@ -1,0 +1,24 @@
+/**
+ * Responsive LinkedIn embed.
+ *
+ * LinkedIn iframes paint at a fixed 504px width internally and don't
+ * reflow when resized. We use CSS `zoom` driven by a container query
+ * to scale the iframe proportionally when the container is narrower
+ * than the native width.
+ *
+ * `zoom` (unlike `transform: scale`) affects layout, so the element's
+ * box shrinks naturally — no wrapper height hacks needed.
+ */
+
+.linkedin-embed {
+  container-type: inline-size;
+  width: 100%;
+  max-width: var(--linkedin-embed-width);
+}
+
+.linkedin-embed iframe {
+  width: var(--linkedin-embed-width);
+  height: var(--linkedin-embed-height);
+  border: 0;
+  zoom: calc(min(100cqw, var(--linkedin-embed-width)) / var(--linkedin-embed-width));
+}

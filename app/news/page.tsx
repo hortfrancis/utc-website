@@ -1,7 +1,7 @@
 import clsx from 'clsx';
 import Heading from '@/components/Heading';
 import linkedinPosts from '@/content/news/linkedinPosts';
-import EmbeddedLinkedinPost from '@/components/EmbeddedLinkedinPost';
+import LinkedinEmbed from '@/components/LinkedinEmbed/LinkedinEmbed';
 
 export default function NewsPage() {
 
@@ -18,9 +18,9 @@ export default function NewsPage() {
       <ul className={listStyles}>
         {linkedinPosts.map((post) => (
           <li key={post.id}>
-            <EmbeddedLinkedinPost
-              id={post.id}
-              embedCode={post.embedCode}
+            <LinkedinEmbed
+              src={post.src}
+              height={post.height}
             />
           </li>
         ))}
