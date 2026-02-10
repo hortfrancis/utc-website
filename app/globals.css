@@ -51,6 +51,16 @@ body {
   font-family: var(--font-recursive), ui-sans-serif, system-ui, sans-serif;
 }
 
+@media (min-width: 640px) {
+  body {
+    background-image:
+      linear-gradient(90deg, rgba(0,0,0,0.2) 0.1ch, transparent 0.1ch),
+      linear-gradient(rgba(0,0,0,0.2) 0.1ch, transparent 0.1ch),
+      linear-gradient(to right, var(--background-faded-orange), var(--background-faded-cyan));
+    background-size: 1rem 1rem, 1rem 1rem, 100% 100%;
+  }
+}
+
 a strong {
   /* Tailwind default is 900 -- a bit much */
   font-weight: 700;

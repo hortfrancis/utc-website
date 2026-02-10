@@ -103,18 +103,19 @@ export const SideBordersWithSmallGridResponsive: Story = {
   decorators: [
     (Story) => (
       <MDXProvider components={useMDXComponents()}>
-        <div className="absolute inset-0 bg-linear-to-r from-(--background-faded-orange) to-(--background-faded-cyan) overflow-auto">
-          <div
-            className="absolute inset-0 hidden sm:block"
-            style={{
-              backgroundImage: `
-                linear-gradient(90deg, rgba(0,0,0,0.2) 0.1ch, transparent 0.1ch),
-                linear-gradient(rgba(0,0,0,0.2) 0.1ch, transparent 0.1ch)
-              `,
-              backgroundSize: '1rem 1rem',
-            }}
-          />
-          <main className="relative p-5 sm:p-10 w-full max-w-4xl mx-auto">
+        <div
+          className="absolute inset-0 overflow-auto"
+          style={{
+            backgroundImage: `
+              linear-gradient(90deg, rgba(0,0,0,0.2) 0.1ch, transparent 0.1ch),
+              linear-gradient(rgba(0,0,0,0.2) 0.1ch, transparent 0.1ch),
+              linear-gradient(to right, var(--background-faded-orange), var(--background-faded-cyan))
+            `,
+            backgroundSize: '1rem 1rem, 1rem 1rem, 100% 100%',
+            backgroundAttachment: 'local, local, fixed',
+          }}
+        >
+          <main className="p-5 sm:p-10 w-full max-w-4xl mx-auto">
             <Story />
           </main>
         </div>
@@ -123,6 +124,37 @@ export const SideBordersWithSmallGridResponsive: Story = {
   ],
   render: () => (
     <Page className="sm:border-x-4 border-theme-black/50 sm:px-10 bg-linear-to-r from-(--background-faded-orange) to-(--background-faded-cyan)">
+      <AboutContent />
+    </Page>
+  ),
+};
+
+/** White page background with grid and side borders. */
+export const WhiteBackground: Story = {
+  decorators: [
+    (Story) => (
+      <MDXProvider components={useMDXComponents()}>
+        <div
+          className="absolute inset-0 overflow-auto"
+          style={{
+            backgroundImage: `
+              linear-gradient(90deg, rgba(0,0,0,0.2) 0.1ch, transparent 0.1ch),
+              linear-gradient(rgba(0,0,0,0.2) 0.1ch, transparent 0.1ch),
+              linear-gradient(to right, var(--background-faded-orange), var(--background-faded-cyan))
+            `,
+            backgroundSize: '1rem 1rem, 1rem 1rem, 100% 100%',
+            backgroundAttachment: 'local, local, fixed',
+          }}
+        >
+          <main className="p-5 sm:p-10 w-full max-w-4xl mx-auto">
+            <Story />
+          </main>
+        </div>
+      </MDXProvider>
+    ),
+  ],
+  render: () => (
+    <Page style={{ background: 'var(--theme-white)' }}>
       <AboutContent />
     </Page>
   ),

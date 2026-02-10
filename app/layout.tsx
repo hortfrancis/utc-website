@@ -24,7 +24,7 @@ export default function RootLayout(
 
   const bodyStyles = clsx(
     'min-h-[100dvh] flex flex-col',
-    'pt-30',
+    'pt-22',
     `${recursive.variable} antialiased`,
   );
 
@@ -34,7 +34,7 @@ export default function RootLayout(
         className={bodyStyles}
       >
         <SiteHeader />
-        <main className='p-10 w-full max-w-4xl mx-auto'>
+        <main className='p-5 sm:p-10 w-full max-w-4xl mx-auto'>
           {children}
         </main>
         <Footer />
