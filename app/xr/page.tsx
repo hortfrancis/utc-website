@@ -1,9 +1,10 @@
 import Heading from '@/components/Heading';
+import Page from '@/components/Page/Page';
 import Section from '@/components/Section';
 
 export default function XRPage() {
   return (
-    <div className=''>
+    <Page>
       <Heading level={1}>XR: Extended Reality</Heading>
 
       <Section id='what-is-xr'>
@@ -20,6 +21,6 @@ export default function XRPage() {
         <Heading level={2}>What is AR?</Heading>
         <p>[Explanation of what AR is...]</p>
       </Section>
-    </div>
+    </Page>
   );
 }

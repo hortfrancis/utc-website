@@ -1,5 +1,6 @@
 import clsx from 'clsx';
 import Heading from '@/components/Heading';
+import Page from '@/components/Page/Page';
 import linkedinPosts from '@/content/news/linkedinPosts';
 import LinkedinEmbed from '@/components/LinkedinEmbed/LinkedinEmbed';
 
@@ -12,7 +13,7 @@ export default function NewsPage() {
   );
 
   return (
-    <div>
+    <Page>
       <Heading level={1}>News</Heading>
 
       <ul className={listStyles}>
@@ -25,6 +26,6 @@ export default function NewsPage() {
           </li>
         ))}
       </ul>
-    </div>
+    </Page>
   )
 }
