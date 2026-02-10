@@ -35,7 +35,7 @@ export default function PrimaryNav({
   const trigger = (
     <Button
       variant="secondary"
-      label="Navigation"
+      label={<><span className="sm:hidden">Nav</span><span className="hidden sm:inline">Navigation</span></>}
       iconLeft="path"
       iconRight="arrow-down"
       onClick={toggle}

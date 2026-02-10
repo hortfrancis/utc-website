@@ -12,8 +12,8 @@ export type ButtonVariant = 'primary' | 'secondary' | 'tertiary';
 export interface ButtonProps {
   /** Semantic variant: `primary` (main action), `secondary` (supporting), `tertiary` (low-emphasis, borderless). */
   variant: ButtonVariant;
-  /** Button text. Omit when using `iconOnly`. */
-  label?: string;
+  /** Button text (or ReactNode for responsive labels). Omit when using `iconOnly`. */
+  label?: React.ReactNode;
   /** Optional icon on the left of the label. */
   iconLeft?: IconName;
   /** Optional icon on the right of the label (or alone when `iconOnly`). */
