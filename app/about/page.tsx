@@ -1,9 +1,10 @@
 import Content from '@/content/about.mdx'
+import Page from '@/components/Page/Page'
 
 export default function AboutPage() {
   return (
-    <div>
+    <Page>
       <Content />
-    </div>
+    </Page>
   )
 }
