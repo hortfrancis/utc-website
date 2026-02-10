@@ -59,7 +59,7 @@ const variantStyles: Record<ButtonVariant, string> = {
 
 /** Shared styling for all variants. */
 const sharedStyles = clsx(
-  'inline-flex items-center gap-2',
+  'inline-flex items-center gap-2 select-none',
   'px-5 py-2.5 font-bold',
   'transition-[color,background-color,border-color,translate] duration-100',
   'active:translate-y-1',
