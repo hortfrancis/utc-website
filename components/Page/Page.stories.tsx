@@ -34,6 +34,7 @@ export const Default: Story = {
 };
 
 export const About: Story = {
+  args: { children: null },
   render: () => (
     <Page>
       <AboutContent />

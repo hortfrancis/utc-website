@@ -33,6 +33,7 @@ type Story = StoryObj<typeof meta>;
 
 /** Content area with borders on the left and right sides. */
 export const SideBorders: Story = {
+  args: { children: null },
   render: () => (
     <Page className="border-x-4 border-theme-black px-10">
       <AboutContent />
@@ -42,6 +43,7 @@ export const SideBorders: Story = {
 
 /** Half-opacity side borders with grid background flanking the content area. */
 export const SideBordersWithGrid: Story = {
+  args: { children: null },
   decorators: [
     (Story) => (
       <MDXProvider components={useMDXComponents()}>
@@ -71,6 +73,7 @@ export const SideBordersWithGrid: Story = {
 
 /** Same as SideBordersWithGrid but with 1rem grid squares. */
 export const SideBordersWithSmallGrid: Story = {
+  args: { children: null },
   decorators: [
     (Story) => (
       <MDXProvider components={useMDXComponents()}>
@@ -100,6 +103,7 @@ export const SideBordersWithSmallGrid: Story = {
 
 /** Small grid that disappears below sm breakpoint. */
 export const SideBordersWithSmallGridResponsive: Story = {
+  args: { children: null },
   decorators: [
     (Story) => (
       <MDXProvider components={useMDXComponents()}>
@@ -131,6 +135,7 @@ export const SideBordersWithSmallGridResponsive: Story = {
 
 /** White page background with grid and side borders. */
 export const WhiteBackground: Story = {
+  args: { children: null },
   decorators: [
     (Story) => (
       <MDXProvider components={useMDXComponents()}>
