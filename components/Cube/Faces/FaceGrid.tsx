@@ -11,16 +11,21 @@ export interface FaceGridProps {
 /**
  * Layout container for cube face content. Provides:
  *
- * - Full-size dark background (bg-theme-black)
- * - Relative positioning for stacking layers
+ * - Full-size white background (bg-theme-white)
  * - Overflow hidden (clips to face bounds)
  * - CSS container (inline-size) so children can use `cqi` units
  *   for responsive sizing that scales with the cube face
+ * - A 6×6 CSS grid — all children are grid items
  *
- * Children are typically:
- * 1. A grid layer: `<div className="absolute inset-0 grid grid-cols-6 grid-rows-6 ...">` with
- *    items placed using Tailwind grid classes (col-start-*, row-start-*, col-span-*, row-span-*).
- * 2. Overlay layers: `<div className="absolute inset-0 ...">` for blend-mode effects, gradients, etc.
+ * ## Layout model
+ *
+ * Children are placed on a 6×6 grid using `gridColumn` / `gridRow`
+ * (or the `<Cell>` helper component).
+ *
+ * Full-face layers (images, gradients, overlays) use
+ * `gridColumn: '1 / -1'` and `gridRow: '1 / -1'` to span
+ * all columns and rows. Overlapping children stack by DOM order
+ * (later = on top). No absolute positioning needed.
  *
  * ## Container query units
  *
@@ -32,10 +37,6 @@ export interface FaceGridProps {
  * - Full face:    100cqi
  * - One grid cell: ~16.67cqi (100/6)
  * - Half a cell:   ~8.33cqi  (sub-square)
- *
- * This is the cube-face counterpart to UIGrid. Since cube faces are always
- * square, a simple CSS grid with 1fr units gives square cells automatically
- * — no ResizeObserver needed.
  */
 export default function FaceGrid({ className, children }: FaceGridProps) {
   return (
@@ -43,10 +44,10 @@ export default function FaceGrid({ className, children }: FaceGridProps) {
       data-testid={FACE_GRID_DATA_TESTID}
       className={clsx(
         'w-full h-full',
-        'relative',
-        'bg-theme-black',
+        'grid grid-cols-6 grid-rows-6',
+        'bg-theme-white',
         'overflow-hidden',
-        className
+        className,
       )}
       style={{ containerType: 'inline-size' }}
     >

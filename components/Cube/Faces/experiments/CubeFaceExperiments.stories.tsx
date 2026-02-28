@@ -1,10 +1,38 @@
 import { useRef, useCallback } from 'react';
 import type { Meta, StoryObj } from '@storybook/nextjs';
-import FaceGrid from '../FaceGrid';
+import clsx from 'clsx';
 import Icon from '../../../Icon/Icon';
 import type { IconName } from '../../../Icon/Icon';
 import { iconNames } from '../../../Icon/Icon';
 import { extendedRealityIcon } from '../../../Grids/patterns';
+
+/* ------------------------------------------------------------------ */
+/*  Frozen copy of the original FaceGrid (pre-refactor).               */
+/*  Inlined here so these experiment stories remain self-contained     */
+/*  and visually identical regardless of future FaceGrid changes.      */
+/* ------------------------------------------------------------------ */
+function FaceGrid({
+  className,
+  children,
+}: {
+  className?: string;
+  children?: React.ReactNode;
+}) {
+  return (
+    <div
+      className={clsx(
+        'w-full h-full',
+        'relative',
+        'bg-theme-black',
+        'overflow-hidden',
+        className,
+      )}
+      style={{ containerType: 'inline-size' }}
+    >
+      {children}
+    </div>
+  );
+}
 
 /**
  * XR cube face experiments. Each story explores a different visual approach

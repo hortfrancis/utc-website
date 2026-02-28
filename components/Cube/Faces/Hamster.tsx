@@ -1,11 +1,14 @@
-import Layout from "./Layout";
+import FaceGrid from './FaceGrid';
 
 export default function Hamster() {
   return (
-    <Layout>
-      <div className="text-white select-none">
+    <FaceGrid>
+      <div
+        className="flex items-center justify-center text-white select-none"
+        style={{ gridColumn: '1 / -1', gridRow: '1 / -1' }}
+      >
         Hamster
       </div>
-    </Layout>
+    </FaceGrid>
   );
 }
