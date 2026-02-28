@@ -554,3 +554,232 @@ export const IconGridTouchTrail: Story = {
   name: 'XR – Icon Grid Touch Trail',
   render: () => <IconGridTouchTrailComponent />,
 };
+
+/* ================================================================== */
+/* 10 · TRON FLAT GRID                                                 */
+/*  Retrofuturist TRON (1982) inspired. Uniform 6×6 grid of bright     */
+/*  yellow-outlined squares on black with subtle neon glow.            */
+/* ================================================================== */
+
+export const TronFlatGrid: Story = {
+  name: 'XR – TRON Flat Grid',
+  render: () => (
+    <FaceGrid className="bg-black!">
+      <div
+        className="absolute inset-0 grid grid-cols-6 grid-rows-6"
+      >
+        {Array.from({ length: 36 }).map((_, i) => (
+          <div
+            key={i}
+            style={{
+              border: '1px solid #FFE500',
+              boxShadow: '0 0 4px #FFE50055',
+              background: 'transparent',
+            }}
+          />
+        ))}
+      </div>
+    </FaceGrid>
+  ),
+};
+
+/* ================================================================== */
+/* 11 · TRON GRID + VR IMAGE                                           */
+/*  Same yellow grid on black with a VR headset image composited over  */
+/*  the top.                                                           */
+/* ================================================================== */
+
+export const TronGridVRImage: Story = {
+  name: 'XR – TRON Grid + VR Image',
+  render: () => (
+    <FaceGrid className="bg-black!">
+      {/* Yellow grid layer */}
+      <div
+        className="absolute inset-0 grid grid-cols-6 grid-rows-6"
+      >
+        {Array.from({ length: 36 }).map((_, i) => (
+          <div
+            key={i}
+            style={{
+              border: '1px solid #FFE500',
+              boxShadow: '0 0 4px #FFE50055',
+              background: 'transparent',
+            }}
+          />
+        ))}
+      </div>
+
+      {/* VR image layer — fades from visible at top to transparent at bottom */}
+      <div
+        className="absolute inset-0"
+        style={{
+          maskImage: 'linear-gradient(to bottom, black 0%, transparent 100%)',
+          WebkitMaskImage: 'linear-gradient(to bottom, black 0%, transparent 100%)',
+        }}
+      >
+        <img
+          src="/images/experiments/vr01.png"
+          alt="VR headset"
+          className="w-full h-full object-cover"
+        />
+      </div>
+    </FaceGrid>
+  ),
+};
+
+/* ================================================================== */
+/* 12 · WHITE GRID + VR02 IMAGE + TYPE                                 */
+/*  White grid lines on black, vr02 image faded top-to-bottom,         */
+/*  XR / Extended Reality / VR / AR labels placed at grid positions.   */
+/* ================================================================== */
+
+export const WhiteGridVR02: Story = {
+  name: 'XR – White Grid + VR02 + Type',
+  render: () => (
+    <FaceGrid className="bg-black!">
+      {/* White grid layer */}
+      <div className="absolute inset-0 grid grid-cols-6 grid-rows-6">
+        {Array.from({ length: 36 }).map((_, i) => (
+          <div
+            key={i}
+            className="border border-theme-white/20"
+          />
+        ))}
+      </div>
+
+      {/* VR image — fades top to bottom */}
+      <div
+        className="absolute inset-0"
+        style={{
+          maskImage: 'linear-gradient(to bottom, black 0%, transparent 100%)',
+          WebkitMaskImage: 'linear-gradient(to bottom, black 0%, transparent 100%)',
+        }}
+      >
+        <img
+          src="/images/experiments/vr02.png"
+          alt="VR headset"
+          className="w-full h-full object-cover"
+        />
+      </div>
+
+      {/* Typography layer — positioned on the 6×6 grid */}
+      <div className="absolute inset-0 grid grid-cols-6 grid-rows-6">
+        {/* XR — large, bottom-left area */}
+        <div className="col-start-1 col-span-3 row-start-4 row-span-2 flex items-end p-2">
+          <span
+            className="font-black text-theme-white leading-none select-none"
+            style={{ fontSize: '3.5rem', letterSpacing: '-0.03em' }}
+          >
+            XR
+          </span>
+        </div>
+
+        {/* Extended Reality — right of XR */}
+        <div className="col-start-3 col-span-4 row-start-4 flex items-end pb-2">
+          <span
+            className="font-bold text-theme-white/70 uppercase tracking-widest select-none"
+            style={{ fontSize: '0.5rem' }}
+          >
+            Extended Reality
+          </span>
+        </div>
+
+        {/* VR: Virtual Reality — bottom row left */}
+        <div className="col-start-1 col-span-3 row-start-6 flex items-center px-2">
+          <span className="select-none">
+            <span className="font-bold text-theme-white/60" style={{ fontSize: '0.45rem' }}>
+              VR:{' '}
+            </span>
+            <span className="text-theme-white/40" style={{ fontSize: '0.4rem' }}>
+              Virtual Reality
+            </span>
+          </span>
+        </div>
+
+        {/* AR: Augmented Reality — bottom row right */}
+        <div className="col-start-4 col-span-3 row-start-6 flex items-center px-2">
+          <span className="select-none">
+            <span className="font-bold text-theme-white/60" style={{ fontSize: '0.45rem' }}>
+              AR:{' '}
+            </span>
+            <span className="text-theme-white/40" style={{ fontSize: '0.4rem' }}>
+              Augmented Reality
+            </span>
+          </span>
+        </div>
+      </div>
+    </FaceGrid>
+  ),
+};
+
+/* ================================================================== */
+/* 13 · WHITE GRID + VR02 + TYPE v2                                    */
+/*  Iteration on 12. Bigger XR spanning C1-C2/R5-R6, Extended Reality  */
+/*  doubled up at C3-C6/R5, VR at C3-C4/R6, AR at C5/R6.             */
+/* ================================================================== */
+
+export const WhiteGridVR02v2: Story = {
+  name: 'XR – White Grid + VR02 + Type v2',
+  render: () => (
+    <FaceGrid className="bg-black!">
+      {/* White grid layer */}
+      <div className="absolute inset-0 grid grid-cols-6 grid-rows-6">
+        {Array.from({ length: 36 }).map((_, i) => (
+          <div
+            key={i}
+            className="border border-theme-white/20"
+          />
+        ))}
+      </div>
+
+      {/* VR image — fades top to bottom */}
+      <div
+        className="absolute inset-0"
+        style={{
+          maskImage: 'linear-gradient(to bottom, black 0%, transparent 100%)',
+          WebkitMaskImage: 'linear-gradient(to bottom, black 0%, transparent 100%)',
+        }}
+      >
+        <img
+          src="/images/experiments/vr02.png"
+          alt="VR headset"
+          className="w-full h-full object-cover"
+        />
+      </div>
+
+      {/* Typography layer — positioned on the 6×6 grid */}
+      <div className="absolute inset-0 grid grid-cols-6 grid-rows-6">
+        {/* XR — fills C1-C2 / R5-R6 with padding */}
+        <div className="col-start-1 col-span-2 row-start-5 row-span-2 flex items-center justify-center p-2">
+          <span
+            className="font-black text-theme-white leading-none select-none"
+            style={{ fontSize: '4.4rem', letterSpacing: '-0.04em' }}
+          >
+            XR
+          </span>
+        </div>
+
+        {/* Extended Reality — C3-C6 / R5, technical monospace via MONO axis */}
+        <div className="col-start-3 col-span-4 row-start-5 flex items-center px-2">
+          <span
+            className="font-black text-theme-white/70 uppercase tracking-widest select-none"
+            style={{ fontSize: '1rem', fontWeight: 750, fontVariationSettings: "'MONO' 1, 'CASL' 0" }}
+          >
+            Extended Reality
+          </span>
+        </div>
+
+        {/* VR + AR — single container, C3-C5 / R6 */}
+        <div className="col-start-3 col-span-3 row-start-6 flex items-center px-2">
+          <span className="select-none" style={{ fontSize: '0.6rem' }}>
+            <span className="font-bold text-theme-white/80">VR: </span>
+            <span className="text-theme-white/60">Virtual Reality</span>
+            <br />
+            <span className="font-bold text-theme-white/80">AR: </span>
+            <span className="text-theme-white/60">Augmented Reality</span>
+          </span>
+        </div>
+      </div>
+    </FaceGrid>
+  ),
+};
