@@ -783,3 +783,259 @@ export const WhiteGridVR02v2: Story = {
     </FaceGrid>
   ),
 };
+/* ================================================================== */
+/* 14 · WHITE GRID + VR02 + TYPE + ICONS                               */
+/*  Iteration on 13. Adds acid-style Phosphor icons: a row of 3 at    */
+/*  top-left (C1-C3/R1), and a 2×2 quad in the bottom-right corner.   */
+/* ================================================================== */
+
+const topRowIcons: IconName[] = ['google-cardboard', 'cube-focus', 'virtual-reality'];
+const quadIcons: IconName[] = ['hard-hat', 'blueprint', 'crane', 'cube'];
+
+export const WhiteGridVR02v3Icons: Story = {
+  name: 'XR – White Grid + VR02 + Icons',
+  render: () => (
+    <FaceGrid className="bg-black!">
+      {/* White grid layer */}
+      <div className="absolute inset-0 grid grid-cols-6 grid-rows-6">
+        {Array.from({ length: 36 }).map((_, i) => (
+          <div
+            key={i}
+            className="border border-theme-white/20"
+          />
+        ))}
+      </div>
+
+      {/* VR image — fades top to bottom */}
+      <div
+        className="absolute inset-0"
+        style={{
+          maskImage: 'linear-gradient(to bottom, black 0%, transparent 100%)',
+          WebkitMaskImage: 'linear-gradient(to bottom, black 0%, transparent 100%)',
+        }}
+      >
+        <img
+          src="/images/experiments/vr02.png"
+          alt="VR headset"
+          className="w-full h-full object-cover"
+        />
+      </div>
+
+      {/* Icons + Typography layer */}
+      <div className="absolute inset-0 grid grid-cols-6 grid-rows-6">
+        {/* Top-left row of icons — C1-C3 / R1 */}
+        {topRowIcons.map((name, i) => (
+          <div
+            key={name}
+            className="flex items-center justify-center"
+            style={{
+              gridColumn: `${i + 1} / ${i + 2}`,
+              gridRow: '1 / 2',
+            }}
+          >
+            <Icon name={name} size={18} color="var(--theme-white)" weight="fill" />
+          </div>
+        ))}
+
+        {/* Bottom-right quad of icons — C6 / R4-R5, 2×2 sub-grid */}
+        {/* Bottom-right quad of icons — C6 / R4-R5, 2×2 sub-grid */}
+        <div
+          className="grid grid-cols-2 grid-rows-2 gap-1"
+          style={{ gridColumn: '6 / 7', gridRow: '4 / 6' }}
+        >
+          {quadIcons.map((name) => (
+            <div key={name} className="flex items-center justify-center">
+              <Icon name={name} size={18} color="var(--theme-white)" weight="fill" className="opacity-60" />
+            </div>
+          ))}
+        </div>
+
+        {/* XR — fills C1-C2 / R5-R6 with padding */}
+        <div className="col-start-1 col-span-2 row-start-5 row-span-2 flex items-center justify-center p-2">
+          <span
+            className="font-black text-theme-white leading-none select-none"
+            style={{ fontSize: '4.4rem', letterSpacing: '-0.04em' }}
+          >
+            XR
+          </span>
+        </div>
+
+        {/* Extended Reality — C3-C6 / R5, technical monospace via MONO axis */}
+        <div className="col-start-3 col-span-4 row-start-5 flex items-center px-2">
+          <span
+            className="font-black text-theme-white/70 uppercase tracking-widest select-none"
+            style={{ fontSize: '1rem', fontWeight: 750, fontVariationSettings: "'MONO' 1, 'CASL' 0" }}
+          >
+            Extended Reality
+          </span>
+        </div>
+
+        {/* VR + AR — single container, C3-C5 / R6 */}
+        <div className="col-start-3 col-span-3 row-start-6 flex items-center px-2">
+          <span className="select-none" style={{ fontSize: '0.6rem' }}>
+            <span className="font-bold text-theme-white/80">VR: </span>
+            <span className="text-theme-white/60">Virtual Reality</span>
+            <br />
+            <span className="font-bold text-theme-white/80">AR: </span>
+            <span className="text-theme-white/60">Augmented Reality</span>
+          </span>
+        </div>
+      </div>
+    </FaceGrid>
+  ),
+};
+
+/* ================================================================== */
+/* 15 · SUB-SQUARE ICONS + CQI UNITS                                   */
+/*  Iteration on 14. All sizing uses cqi (container query inline)      */
+/*  so the face scales responsively. Icons sit in "sub-squares" —      */
+/*  a quadrant of a grid cell — for structural consistency.            */
+/* ================================================================== */
+
+/**
+ * Sub-square icon wrapper. Places an icon in one quadrant of its
+ * parent grid cell. The icon is sized relative to the face via cqi.
+ *
+ * @param anchor - Which corner quadrant: 'tl' | 'tr' | 'bl' | 'br'
+ */
+function SubSquareIcon({
+  name,
+  anchor = 'tl',
+  opacity = 1,
+}: {
+  name: IconName;
+  anchor?: 'tl' | 'tr' | 'bl' | 'br';
+  opacity?: number;
+}) {
+  const anchorClasses: Record<string, string> = {
+    tl: 'items-start justify-start',
+    tr: 'items-start justify-end',
+    bl: 'items-end justify-start',
+    br: 'items-end justify-end',
+  };
+
+  return (
+    <div
+      className={`flex ${anchorClasses[anchor]} p-[1cqi]`}
+      style={{ opacity }}
+    >
+      <div
+        className="flex items-center justify-center"
+        style={{ width: '6cqi', height: '6cqi' }}
+      >
+        <Icon
+          name={name}
+          size={999}
+          color="var(--theme-white)"
+          weight="fill"
+          className="[&>svg]:w-full [&>svg]:h-full"
+        />
+      </div>
+    </div>
+  );
+}
+
+export const SubSquareIconsCQI: Story = {
+  name: 'XR – Sub-Square Icons + CQI',
+  render: () => (
+    <FaceGrid className="bg-black!">
+      {/* White grid layer */}
+      <div className="absolute inset-0 grid grid-cols-6 grid-rows-6">
+        {Array.from({ length: 36 }).map((_, i) => (
+          <div
+            key={i}
+            className="border border-theme-white/20"
+          />
+        ))}
+      </div>
+
+      {/* VR image — fades top to bottom */}
+      <div
+        className="absolute inset-0"
+        style={{
+          maskImage: 'linear-gradient(to bottom, black 0%, transparent 100%)',
+          WebkitMaskImage: 'linear-gradient(to bottom, black 0%, transparent 100%)',
+        }}
+      >
+        <img
+          src="/images/experiments/vr02.png"
+          alt="VR headset"
+          className="w-full h-full object-cover"
+        />
+      </div>
+
+      {/* Icons + Typography layer */}
+      <div className="absolute inset-0 grid grid-cols-6 grid-rows-6">
+        {/* Top-left row of icons — C1/R1, C2/R1, C3/R1 — each in sub-square */}
+        <div style={{ gridColumn: '1', gridRow: '1' }}>
+          <SubSquareIcon name="google-cardboard" anchor="tl" />
+        </div>
+        <div style={{ gridColumn: '2', gridRow: '1' }}>
+          <SubSquareIcon name="cube-focus" anchor="tl" />
+        </div>
+        <div style={{ gridColumn: '3', gridRow: '1' }}>
+          <SubSquareIcon name="virtual-reality" anchor="tl" />
+        </div>
+
+        {/* Bottom-right quad — C5-C6 / R3-R4, one icon per cell sub-square */}
+        <div style={{ gridColumn: '6', gridRow: '3' }}>
+          <SubSquareIcon name="hard-hat" anchor="br" opacity={0.6} />
+        </div>
+        <div style={{ gridColumn: '6', gridRow: '4' }}>
+          <SubSquareIcon name="blueprint" anchor="br" opacity={0.6} />
+        </div>
+        <div style={{ gridColumn: '5', gridRow: '3' }}>
+          <SubSquareIcon name="crane" anchor="br" opacity={0.6} />
+        </div>
+        <div style={{ gridColumn: '5', gridRow: '4' }}>
+          <SubSquareIcon name="cube" anchor="br" opacity={0.6} />
+        </div>
+
+        {/* XR — fills C1-C2 / R5-R6 */}
+        <div
+          className="col-start-1 col-span-2 row-start-5 row-span-2 flex items-center justify-center"
+          style={{ padding: '2cqi' }}
+        >
+          <span
+            className="font-black text-theme-white leading-none select-none"
+            style={{ fontSize: '22.5cqi', letterSpacing: '-0.04em' }}
+          >
+            XR
+          </span>
+        </div>
+
+        {/* Extended Reality — C3-C6 / R5 */}
+        <div
+          className="col-start-3 col-span-4 row-start-5 flex items-center"
+          style={{ paddingInline: '1.5cqi' }}
+        >
+          <span
+            className="font-black text-theme-white/70 uppercase tracking-widest select-none"
+            style={{
+              fontSize: '7cqi',
+              fontWeight: 750,
+              fontVariationSettings: "'MONO' 1, 'CASL' 0",
+              lineHeight: 1,
+            }}
+          >
+            Extended Reality
+          </span>
+        </div>
+
+        {/* VR + AR — C3-C5 / R6 */}
+        <div
+          className="col-start-3 col-span-3 row-start-6 flex items-center"
+          style={{ paddingInline: '1.5cqi' }}
+        >
+          <span className="select-none" style={{ fontSize: '3cqi' }}>
+            <span className="font-bold text-theme-white/80">VR: </span>
+            <span className="text-theme-white/60">Virtual Reality</span>
+            <br />
+            <span className="font-bold text-theme-white/80">AR: </span>
+            <span className="text-theme-white/60">Augmented Reality</span>
+          </span>
+        </div>
+      </div>
+    </FaceGrid>
+  ),
+};

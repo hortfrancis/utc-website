@@ -14,7 +14,9 @@ import {
   // XR / tech
   CubeIcon,
   CubeTransparentIcon,
+  CubeFocusIcon,
   VirtualRealityIcon,
+  GoogleCardboardLogoIcon,
   GlobeIcon,
   GlobeHemisphereEastIcon,
   MonitorIcon,
@@ -24,6 +26,9 @@ import {
   BroadcastIcon,
   AtomIcon,
   CircuitryIcon,
+  HardHatIcon,
+  BlueprintIcon,
+  CraneIcon,
 
   // Creative / work
   PencilSimpleIcon,
@@ -85,7 +90,9 @@ const iconRegistry = {
   // XR / tech
   'cube': CubeIcon,
   'cube-transparent': CubeTransparentIcon,
+  'cube-focus': CubeFocusIcon,
   'virtual-reality': VirtualRealityIcon,
+  'google-cardboard': GoogleCardboardLogoIcon,
   'globe': GlobeIcon,
   'globe-hemisphere': GlobeHemisphereEastIcon,
   'monitor': MonitorIcon,
@@ -95,6 +102,9 @@ const iconRegistry = {
   'broadcast': BroadcastIcon,
   'atom': AtomIcon,
   'circuit-board': CircuitryIcon,
+  'hard-hat': HardHatIcon,
+  'blueprint': BlueprintIcon,
+  'crane': CraneIcon,
 
   // Creative / work
   'pencil': PencilSimpleIcon,
