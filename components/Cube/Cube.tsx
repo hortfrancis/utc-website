@@ -429,12 +429,6 @@ export default function Cube({ onFaceTap = defaultOnFaceTap }: CubeProps = {}) {
    * - Installs global safety listeners.
    */
   const onPointerDown = (e: React.PointerEvent) => {
-    // Prevent iOS Safari from interpreting this touch as a scroll, back-swipe,
-    // or pull-to-refresh gesture. touch-action:none in CSS helps but is not
-    // always sufficient on Safari; calling preventDefault() here is the
-    // reliable additional guard.
-    e.preventDefault();
-
     const el = cubeRef.current;
     if (!el) return;
 
@@ -501,10 +495,6 @@ export default function Cube({ onFaceTap = defaultOnFaceTap }: CubeProps = {}) {
   const onPointerMove = (e: React.PointerEvent) => {
     if (modeRef.current !== "DRAG") return;
     if (pointerIdRef.current !== e.pointerId) return;
-
-    // Prevent the browser from scrolling or triggering native gestures
-    // (e.g. Safari pull-to-refresh / swipe-back) while the cube is being dragged.
-    e.preventDefault();
 
     const dx = e.clientX - dragStartXRef.current;
     const dy = e.clientY - dragStartYRef.current;
