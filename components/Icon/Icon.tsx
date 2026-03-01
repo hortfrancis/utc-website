@@ -31,6 +31,9 @@ import {
   BrainIcon,
   HandWavingIcon,
   CraneIcon,
+  DesktopIcon,
+  CloudIcon,
+  FlaskIcon,
 
   // Creative / work
   PencilSimpleIcon,
@@ -109,6 +112,9 @@ const iconRegistry = {
   'brain': BrainIcon,
   'hand-waving': HandWavingIcon,
   'crane': CraneIcon,
+  'desktop': DesktopIcon,
+  'cloud': CloudIcon,
+  'flask': FlaskIcon,
 
   // Creative / work
   'pencil': PencilSimpleIcon,

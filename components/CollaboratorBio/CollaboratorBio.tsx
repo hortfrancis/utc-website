@@ -16,10 +16,25 @@ export type CollaboratorBioImageBackground =
 
 export type CollaboratorBioHeaderGradient =
   | 'theme-orange-theme-purple'
-  | 'theme-green-theme-cyan'
+  | 'theme-orange-theme-cyan'
+  | 'theme-orange-theme-green'
+  | 'theme-orange-theme-magenta'
+  | 'theme-purple-theme-orange'
   | 'theme-purple-theme-cyan'
+  | 'theme-purple-theme-green'
+  | 'theme-purple-theme-magenta'
+  | 'theme-cyan-theme-orange'
   | 'theme-cyan-theme-purple'
-  | 'theme-orange-theme-magenta';
+  | 'theme-cyan-theme-green'
+  | 'theme-cyan-theme-magenta'
+  | 'theme-green-theme-orange'
+  | 'theme-green-theme-purple'
+  | 'theme-green-theme-cyan'
+  | 'theme-green-theme-magenta'
+  | 'theme-magenta-theme-orange'
+  | 'theme-magenta-theme-purple'
+  | 'theme-magenta-theme-cyan'
+  | 'theme-magenta-theme-green';
 
 export type CollaboratorBioIconColor =
   | 'theme-orange'
@@ -39,10 +54,25 @@ const IMAGE_BACKGROUND_CLASS: Record<CollaboratorBioImageBackground, string> = {
 
 const HEADER_GRADIENT_CLASS: Record<CollaboratorBioHeaderGradient, string> = {
   'theme-orange-theme-purple': 'bg-linear-to-r from-theme-orange to-theme-purple',
-  'theme-green-theme-cyan': 'bg-linear-to-r from-theme-green to-theme-cyan',
-  'theme-purple-theme-cyan': 'bg-linear-to-r from-theme-purple to-theme-cyan',
-  'theme-cyan-theme-purple': 'bg-linear-to-r from-theme-cyan to-theme-purple',
+  'theme-orange-theme-cyan': 'bg-linear-to-r from-theme-orange to-theme-cyan',
+  'theme-orange-theme-green': 'bg-linear-to-r from-theme-orange to-theme-green',
   'theme-orange-theme-magenta': 'bg-linear-to-r from-theme-orange to-theme-magenta',
+  'theme-purple-theme-orange': 'bg-linear-to-r from-theme-purple to-theme-orange',
+  'theme-purple-theme-cyan': 'bg-linear-to-r from-theme-purple to-theme-cyan',
+  'theme-purple-theme-green': 'bg-linear-to-r from-theme-purple to-theme-green',
+  'theme-purple-theme-magenta': 'bg-linear-to-r from-theme-purple to-theme-magenta',
+  'theme-cyan-theme-orange': 'bg-linear-to-r from-theme-cyan to-theme-orange',
+  'theme-cyan-theme-purple': 'bg-linear-to-r from-theme-cyan to-theme-purple',
+  'theme-cyan-theme-green': 'bg-linear-to-r from-theme-cyan to-theme-green',
+  'theme-cyan-theme-magenta': 'bg-linear-to-r from-theme-cyan to-theme-magenta',
+  'theme-green-theme-orange': 'bg-linear-to-r from-theme-green to-theme-orange',
+  'theme-green-theme-purple': 'bg-linear-to-r from-theme-green to-theme-purple',
+  'theme-green-theme-cyan': 'bg-linear-to-r from-theme-green to-theme-cyan',
+  'theme-green-theme-magenta': 'bg-linear-to-r from-theme-green to-theme-magenta',
+  'theme-magenta-theme-orange': 'bg-linear-to-r from-theme-magenta to-theme-orange',
+  'theme-magenta-theme-purple': 'bg-linear-to-r from-theme-magenta to-theme-purple',
+  'theme-magenta-theme-cyan': 'bg-linear-to-r from-theme-magenta to-theme-cyan',
+  'theme-magenta-theme-green': 'bg-linear-to-r from-theme-magenta to-theme-green',
 };
 
 const ICON_COLOR_CLASS: Record<CollaboratorBioIconColor, string> = {
