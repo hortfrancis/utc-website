@@ -1,3 +1,5 @@
+import NextImage from 'next/image';
+
 const MASK_GRADIENTS: Record<string, string> = {
   'fade-down': 'linear-gradient(to bottom, black 0%, transparent 100%)',
   'fade-up': 'linear-gradient(to top, black 0%, transparent 100%)',
@@ -34,7 +36,7 @@ export default function ImageBlock({
   return (
     <div
       data-component="ImageBlock"
-      className="w-full h-full"
+      className="relative w-full h-full"
       style={{
         opacity,
         ...(maskValue && {
@@ -43,10 +45,10 @@ export default function ImageBlock({
         }),
       }}
     >
-      <img
+      <NextImage
         src={src}
         alt={alt}
-        className="w-full h-full"
+        fill
         style={{ objectFit }}
       />
     </div>
