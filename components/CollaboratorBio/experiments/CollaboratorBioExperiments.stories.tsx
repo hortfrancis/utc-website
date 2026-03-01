@@ -836,3 +836,83 @@ export const ImageLeftCurvedSharedGradientResponsiveStack: Story = {
     </div>
   ),
 };
+
+/* ------------------------------------------------------------------ */
+/*  13. Image left curved — shared gradient (responsive stack, green)  */
+/* ------------------------------------------------------------------ */
+
+/**
+ * **Image left curved (shared gradient, responsive stack, green)** —
+ * Based on ImageLeftCurvedSharedGradientResponsiveStack with a green
+ * colour treatment: theme-green image background and a
+ * theme-green→theme-cyan shared gradient block.
+ */
+export const ImageLeftCurvedSharedGradientResponsiveStackGreen: Story = {
+  render: () => (
+    <div className="flex flex-col sm:flex-row max-w-2xl">
+      {/* ---- Left column: image + icon strip (stacks above on mobile) ---- */}
+      <div className="w-full sm:w-48 shrink-0 flex flex-col self-start">
+        <Image
+          src={BOB_LONG.photoSrc}
+          alt={BOB_LONG.name}
+          width={192}
+          height={192}
+          borderSides={['top', 'left', 'right']}
+          background="bg-theme-green"
+          containerClassName="aspect-square rounded-tr-3xl sm:rounded-tr-none sm:rounded-tl-3xl sm:border-r-0"
+          className="object-cover h-full mix-blend-luminosity"
+        />
+        <Frame
+          borderSides={[]}
+          background="bg-theme-black"
+          className="flex items-center justify-end gap-2 py-2 pr-2 sm:rounded-bl-3xl"
+        >
+          <Icon name="atom" size={20} className="text-theme-green" />
+          <Icon name="lightning" size={20} className="text-theme-green" />
+          <Icon name="sparkle" size={20} className="text-theme-green" />
+        </Frame>
+      </div>
+
+      {/* ---- Right column ---- */}
+      <div className="flex-1 min-w-0 flex flex-col">
+        {/* Name + Role/Relationship with shared gradient behind both */}
+        <Frame
+          borderSides={['top', 'left', 'right', 'bottom']}
+          background="bg-linear-to-r from-theme-green to-theme-cyan"
+          className="flex flex-col items-start border-t-0 sm:border-t-4 sm:rounded-tr-3xl sm:overflow-hidden"
+        >
+          <Frame borderSides={['right', 'bottom']} className="px-4 py-3 -mt-0.5 -mb-0.5">
+            <h3 className="text-lg sm:text-xl font-bold text-theme-black leading-tight whitespace-nowrap">
+              {BOB_LONG.name}
+            </h3>
+          </Frame>
+
+          <Frame borderSides={['top', 'right']} className="flex items-stretch -mt-0.5">
+            <div className="px-4 py-2">
+              <p className="text-sm text-theme-black">
+                <span className="font-bold">{BOB_LONG.role}</span> · {BOB_LONG.relationship}
+              </p>
+            </div>
+          </Frame>
+        </Frame>
+
+        {/* Bio */}
+        <Frame borderSides={['left', 'right', 'bottom']} className="px-4 py-3 flex-1">
+          <p className="text-sm text-theme-black leading-relaxed">{BOB_LONG.bio}</p>
+        </Frame>
+
+        {/* Contact (linked) */}
+        <Frame borderSides={['left', 'right', 'bottom']} className="px-4 py-2 text-sm leading-6 sm:leading-5">
+          <Anchor href={`mailto:${BOB_LONG.email}`}>
+            {BOB_LONG.email}
+          </Anchor>
+          <span className="hidden sm:inline text-theme-black"> · </span>
+          <br className="sm:hidden" />
+          <Anchor href={`https://${BOB_LONG.web}`}>
+            {BOB_LONG.web}
+          </Anchor>
+        </Frame>
+      </div>
+    </div>
+  ),
+};
