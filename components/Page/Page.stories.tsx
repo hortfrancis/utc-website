@@ -15,7 +15,7 @@ const meta = {
     (Story) => (
       <MDXProvider components={useMDXComponents()}>
         <div className="absolute inset-0 bg-linear-to-r from-(--background-faded-orange) to-(--background-faded-cyan) overflow-auto">
-          <main className="p-10 w-full max-w-4xl mx-auto">
+          <main className="px-0 py-5 sm:p-10 w-full max-w-4xl mx-auto">
             <Story />
           </main>
         </div>

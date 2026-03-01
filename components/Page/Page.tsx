@@ -9,8 +9,9 @@ export interface PageProps {
 export default function Page({ children, className, style }: PageProps) {
   return (
     <div className={clsx(
-      'sm:border-4 border-theme-black sm:rounded-tr-3xl',
-      'sm:px-10 sm:py-10',
+      'border-t-4 sm:border-4 border-theme-black sm:rounded-tr-3xl',
+      'px-6 py-6 sm:px-16 sm:py-10',
+      'mt-4 sm:mt-0',
       'bg-theme-white',
       className,
     )}

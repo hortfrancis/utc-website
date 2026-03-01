@@ -34,7 +34,7 @@ export default function RootLayout(
         className={bodyStyles}
       >
         <SiteHeader />
-        <main className='p-5 sm:p-10 w-full max-w-4xl mx-auto'>
+        <main className='px-0 py-5 sm:p-10 w-full max-w-4xl mx-auto'>
           {children}
         </main>
         <Footer />
