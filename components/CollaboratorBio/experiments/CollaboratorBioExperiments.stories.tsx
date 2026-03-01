@@ -2,6 +2,7 @@ import type { Meta, StoryObj } from '@storybook/nextjs';
 import Accent from '../../Accent';
 import Anchor from '../../Anchor';
 import { Frame } from '../../Frame';
+import { Icon } from '../../Icon';
 import Image from '../../Image';
 
 /**
@@ -47,6 +48,11 @@ const BOB = {
   relationship: 'Freelancer',
   email: 'bob@blobshappening.org.uk',
   web: 'blobshappening.org.uk',
+};
+
+const BOB_LONG = {
+  ...BOB,
+  bio: 'Bob Blobson is the premier viscosity consultant working in this field. He brings his whole self to work. With over fifteen years of experience spanning fluid dynamics, polymer rheology, and non-Newtonian flow modelling, Bob has helped organisations across aerospace, food manufacturing, and biotech optimise their processes. He is a regular speaker at international conferences and holds two patents in shear-thinning measurement techniques.',
 };
 
 /* ------------------------------------------------------------------ */
@@ -391,16 +397,16 @@ export const ImageLeftCurved: Story = {
           />
         </Frame>
 
-        {/* Role / Relationship + Gradient */}
+        {/* Role / Relationship + Block */}
         <Frame borderSides={['right', 'bottom']} className="flex items-stretch">
           <div className="px-4 py-2 flex items-center shrink-0">
             <p className="text-sm text-theme-black">
-              {BOB.role} · {BOB.relationship}
+              <span className="font-bold">{BOB.role}</span> · {BOB.relationship}
             </p>
           </div>
           <Frame
             borderSides={['left']}
-            background="bg-linear-to-r from-theme-orange to-theme-purple"
+            background="bg-theme-black"
             className="flex-1"
           />
         </Frame>
@@ -418,6 +424,412 @@ export const ImageLeftCurved: Story = {
           <span className="text-theme-black">·</span>
           <Anchor href={`https://${BOB.web}`}>
             {BOB.web}
+          </Anchor>
+        </Frame>
+      </div>
+    </div>
+  ),
+};
+
+/* ------------------------------------------------------------------ */
+/*  8. Image left curved — long bio                                    */
+/* ------------------------------------------------------------------ */
+
+/**
+ * **Image left curved (long bio)** — Same layout as ImageLeftCurved but
+ * with a longer bio to test how the card stretches vertically.
+ */
+export const ImageLeftCurvedLongBio: Story = {
+  render: () => (
+    <div className="flex max-w-2xl">
+      {/* ---- Photo (framed by Image) ---- */}
+      <Image
+        src={BOB_LONG.photoSrc}
+        alt={BOB_LONG.name}
+        width={192}
+        height={192}
+        borderSides={['top', 'left', 'bottom', 'right']}
+        background="bg-theme-orange"
+        containerClassName="w-40 sm:w-48 shrink-0 aspect-square self-start"
+        className="object-cover h-full mix-blend-luminosity"
+      />
+
+      {/* ---- Right column ---- */}
+      <div className="flex-1 min-w-0 flex flex-col">
+        {/* Name + Gradient */}
+        <Frame borderSides={['top', 'right', 'bottom']} roundedCorners={['top-right']} className="flex items-stretch">
+          <div className="px-4 py-3 flex items-center shrink-0">
+            <h3 className="text-lg sm:text-xl font-bold text-theme-black leading-tight whitespace-nowrap">
+              {BOB_LONG.name}
+            </h3>
+          </div>
+          <Frame
+            borderSides={['left']}
+            background="bg-linear-to-r from-theme-orange to-theme-purple"
+            className="flex-1"
+          />
+        </Frame>
+
+        {/* Role / Relationship + Block */}
+        <Frame borderSides={['right', 'bottom']} className="flex items-stretch">
+          <div className="px-4 py-2 flex items-center shrink-0">
+            <p className="text-sm text-theme-black">
+              <span className="font-bold">{BOB_LONG.role}</span> · {BOB_LONG.relationship}
+            </p>
+          </div>
+          <Frame
+            borderSides={['left']}
+            background="bg-theme-black"
+            className="flex-1"
+          />
+        </Frame>
+
+        {/* Bio */}
+        <Frame borderSides={['right', 'bottom']} className="px-4 py-3 flex-1">
+          <p className="text-sm text-theme-black leading-relaxed">{BOB_LONG.bio}</p>
+        </Frame>
+
+        {/* Contact (linked) */}
+        <Frame borderSides={['right', 'bottom']} className="px-4 py-2 flex items-center gap-2 text-sm">
+          <Anchor href={`mailto:${BOB_LONG.email}`}>
+            {BOB_LONG.email}
+          </Anchor>
+          <span className="text-theme-black">·</span>
+          <Anchor href={`https://${BOB_LONG.web}`}>
+            {BOB_LONG.web}
+          </Anchor>
+        </Frame>
+      </div>
+    </div>
+  ),
+};
+
+/* ------------------------------------------------------------------ */
+/*  9. Image left curved — long bio, block below image                 */
+/* ------------------------------------------------------------------ */
+
+/**
+ * **Image left curved (block below)** — Square image at top-left with a
+ * theme-black Frame filling the remaining height below it, keeping the
+ * left column visually balanced against a longer bio.
+ */
+export const ImageLeftCurvedBlockBelow: Story = {
+  render: () => (
+    <div className="flex max-w-2xl">
+      {/* ---- Left column: image + block ---- */}
+      <div className="w-40 sm:w-48 shrink-0 flex flex-col">
+        <Image
+          src={BOB_LONG.photoSrc}
+          alt={BOB_LONG.name}
+          width={192}
+          height={192}
+          borderSides={['top', 'left', 'bottom', 'right']}
+          background="bg-theme-orange"
+          containerClassName="aspect-square"
+          className="object-cover h-full mix-blend-luminosity"
+        />
+        <Frame
+          borderSides={['left', 'bottom', 'right']}
+          background="bg-theme-black"
+          roundedCorners={['bottom-left']}
+          className="flex-1 flex items-start justify-evenly pt-4"
+        >
+          <Icon name="atom" size={24} className="text-theme-orange" />
+          <Icon name="lightning" size={24} className="text-theme-orange" />
+          <Icon name="sparkle" size={24} className="text-theme-orange" />
+        </Frame>
+      </div>
+
+      {/* ---- Right column ---- */}
+      <div className="flex-1 min-w-0 flex flex-col">
+        {/* Name + Gradient */}
+        <Frame borderSides={['top', 'right', 'bottom']} roundedCorners={['top-right']} className="flex items-stretch">
+          <div className="px-4 py-3 flex items-center shrink-0">
+            <h3 className="text-lg sm:text-xl font-bold text-theme-black leading-tight whitespace-nowrap">
+              {BOB_LONG.name}
+            </h3>
+          </div>
+          <Frame
+            borderSides={['left']}
+            background="bg-linear-to-r from-theme-orange to-theme-purple"
+            className="flex-1"
+          />
+        </Frame>
+
+        {/* Role / Relationship + Block */}
+        <Frame borderSides={['right', 'bottom']} className="flex items-stretch">
+          <div className="px-4 py-2 flex items-center shrink-0">
+            <p className="text-sm text-theme-black">
+              <span className="font-bold">{BOB_LONG.role}</span> · {BOB_LONG.relationship}
+            </p>
+          </div>
+          <Frame
+            borderSides={['left']}
+            background="bg-theme-black"
+            className="flex-1"
+          />
+        </Frame>
+
+        {/* Bio */}
+        <Frame borderSides={['right', 'bottom']} className="px-4 py-3 flex-1">
+          <p className="text-sm text-theme-black leading-relaxed">{BOB_LONG.bio}</p>
+        </Frame>
+
+        {/* Contact (linked) */}
+        <Frame borderSides={['right', 'bottom']} className="px-4 py-2 flex items-center gap-2 text-sm">
+          <Anchor href={`mailto:${BOB_LONG.email}`}>
+            {BOB_LONG.email}
+          </Anchor>
+          <span className="text-theme-black">·</span>
+          <Anchor href={`https://${BOB_LONG.web}`}>
+            {BOB_LONG.web}
+          </Anchor>
+        </Frame>
+      </div>
+    </div>
+  ),
+};
+
+/* ------------------------------------------------------------------ */
+/*  10. Image left curved — compact icon strip                         */
+/* ------------------------------------------------------------------ */
+
+/**
+ * **Image left curved (compact icons)** — Same as story 9 but the icon
+ * strip is only as tall as the icons themselves, not flex-filling.
+ */
+export const ImageLeftCurvedCompactIcons: Story = {
+  render: () => (
+    <div className="flex max-w-2xl">
+      {/* ---- Left column: image + icon strip ---- */}
+      <div className="w-40 sm:w-48 shrink-0 flex flex-col self-start">
+        <Image
+          src={BOB_LONG.photoSrc}
+          alt={BOB_LONG.name}
+          width={192}
+          height={192}
+          borderSides={['top', 'left', 'bottom']}
+          roundedCorners={['top-left']}
+          background="bg-theme-orange"
+          containerClassName="aspect-square"
+          className="object-cover h-full mix-blend-luminosity"
+        />
+        <Frame
+          borderSides={['left', 'bottom']}
+          background="bg-theme-black"
+          roundedCorners={['bottom-left']}
+          className="flex items-center justify-evenly py-3"
+        >
+          <Icon name="atom" size={24} className="text-theme-orange" />
+          <Icon name="lightning" size={24} className="text-theme-orange" />
+          <Icon name="sparkle" size={24} className="text-theme-orange" />
+        </Frame>
+      </div>
+
+      {/* ---- Right column ---- */}
+      <div className="flex-1 min-w-0 flex flex-col">
+        {/* Name + Gradient */}
+        <Frame borderSides={['top', 'left', 'right', 'bottom']} roundedCorners={['top-right']} className="flex items-stretch">
+          <div className="px-4 py-3 flex items-center shrink-0">
+            <h3 className="text-lg sm:text-xl font-bold text-theme-black leading-tight whitespace-nowrap">
+              {BOB_LONG.name}
+            </h3>
+          </div>
+          <Frame
+            borderSides={['left']}
+            background="bg-linear-to-r from-theme-orange to-theme-purple"
+            className="flex-1"
+          />
+        </Frame>
+
+        {/* Role / Relationship + Block */}
+        <Frame borderSides={['left', 'right', 'bottom']} className="flex items-stretch">
+          <div className="px-4 py-2 flex items-center shrink-0">
+            <p className="text-sm text-theme-black">
+              <span className="font-bold">{BOB_LONG.role}</span> · {BOB_LONG.relationship}
+            </p>
+          </div>
+          <Frame
+            borderSides={['left']}
+            background="bg-theme-black"
+            className="flex-1"
+          />
+        </Frame>
+
+        {/* Bio */}
+        <Frame borderSides={['left', 'right', 'bottom']} className="px-4 py-3 flex-1">
+          <p className="text-sm text-theme-black leading-relaxed">{BOB_LONG.bio}</p>
+        </Frame>
+
+        {/* Contact (linked) */}
+        <Frame borderSides={['left', 'right', 'bottom']} className="px-4 py-2 flex items-center gap-2 text-sm">
+          <Anchor href={`mailto:${BOB_LONG.email}`}>
+            {BOB_LONG.email}
+          </Anchor>
+          <span className="text-theme-black">·</span>
+          <Anchor href={`https://${BOB_LONG.web}`}>
+            {BOB_LONG.web}
+          </Anchor>
+        </Frame>
+      </div>
+    </div>
+  ),
+};
+
+/* ------------------------------------------------------------------ */
+/*  11. Image left curved — shared gradient strip                      */
+/* ------------------------------------------------------------------ */
+
+/**
+ * **Image left curved (shared gradient)** — Name and Role/Relationship
+ * rows share a single gradient block on the right instead of separate
+ * gradient + black blocks.
+ */
+export const ImageLeftCurvedSharedGradient: Story = {
+  render: () => (
+    <div className="flex max-w-2xl">
+      {/* ---- Left column: image + icon strip ---- */}
+      <div className="w-40 sm:w-48 shrink-0 flex flex-col self-start">
+        <Image
+          src={BOB_LONG.photoSrc}
+          alt={BOB_LONG.name}
+          width={192}
+          height={192}
+          borderSides={['top', 'left', 'bottom']}
+          roundedCorners={['top-left']}
+          background="bg-theme-orange"
+          containerClassName="aspect-square"
+          className="object-cover h-full mix-blend-luminosity"
+        />
+        <Frame
+          borderSides={['left', 'bottom']}
+          background="bg-theme-black"
+          roundedCorners={['bottom-left']}
+          className="flex items-center justify-evenly py-3"
+        >
+          <Icon name="atom" size={24} className="text-theme-orange" />
+          <Icon name="lightning" size={24} className="text-theme-orange" />
+          <Icon name="sparkle" size={24} className="text-theme-orange" />
+        </Frame>
+      </div>
+
+      {/* ---- Right column ---- */}
+      <div className="flex-1 min-w-0 flex flex-col">
+        {/* Name + Role/Relationship with shared gradient behind both */}
+        <Frame
+          borderSides={['top', 'left', 'right', 'bottom']}
+          roundedCorners={['top-right']}
+          background="bg-linear-to-r from-theme-orange to-theme-purple"
+          className="flex flex-col items-start"
+        >
+          <Frame borderSides={['right', 'bottom']} className="px-4 py-3 -mt-0.5 -mb-0.5">
+            <h3 className="text-lg sm:text-xl font-bold text-theme-black leading-tight whitespace-nowrap">
+              {BOB_LONG.name}
+            </h3>
+          </Frame>
+
+          <Frame borderSides={['top', 'right']} className="flex items-stretch -mt-0.5 -mb-0.5">
+            <div className="px-4 py-2">
+              <p className="text-sm text-theme-black">
+                <span className="font-bold">{BOB_LONG.role}</span> · {BOB_LONG.relationship}
+              </p>
+            </div>
+          </Frame>
+        </Frame>
+
+        {/* Bio */}
+        <Frame borderSides={['left', 'right', 'bottom']} className="px-4 py-3 flex-1">
+          <p className="text-sm text-theme-black leading-relaxed">{BOB_LONG.bio}</p>
+        </Frame>
+
+        {/* Contact (linked) */}
+        <Frame borderSides={['left', 'right', 'bottom']} className="px-4 py-2 flex items-center gap-2 text-sm">
+          <Anchor href={`mailto:${BOB_LONG.email}`}>
+            {BOB_LONG.email}
+          </Anchor>
+          <span className="text-theme-black">·</span>
+          <Anchor href={`https://${BOB_LONG.web}`}>
+            {BOB_LONG.web}
+          </Anchor>
+        </Frame>
+      </div>
+    </div>
+  ),
+};
+
+/* ------------------------------------------------------------------ */
+/*  12. Image left curved — shared gradient (responsive stack)         */
+/* ------------------------------------------------------------------ */
+
+/**
+ * **Image left curved (shared gradient, responsive stack)** — Based on
+ * ImageLeftCurvedSharedGradient, but on narrow viewports the image column
+ * moves above the rest of the card. In that stacked mobile layout the
+ * image has a curved top-right corner.
+ */
+export const ImageLeftCurvedSharedGradientResponsiveStack: Story = {
+  render: () => (
+    <div className="flex flex-col sm:flex-row max-w-2xl">
+      {/* ---- Left column: image + icon strip (stacks above on mobile) ---- */}
+      <div className="w-full sm:w-48 shrink-0 flex flex-col self-start">
+        <Image
+          src={BOB_LONG.photoSrc}
+          alt={BOB_LONG.name}
+          width={192}
+          height={192}
+          borderSides={['top', 'left', 'right']}
+          background="bg-theme-orange"
+          containerClassName="aspect-square rounded-tr-3xl sm:rounded-tr-none sm:rounded-tl-3xl sm:border-r-0"
+          className="object-cover h-full mix-blend-luminosity"
+        />
+        <Frame
+          borderSides={[]}
+          background="bg-theme-black"
+          className="flex items-center justify-end gap-2 py-2 pr-2 sm:rounded-bl-3xl"
+        >
+          <Icon name="atom" size={20} className="text-theme-orange" />
+          <Icon name="lightning" size={20} className="text-theme-orange" />
+          <Icon name="sparkle" size={20} className="text-theme-orange" />
+        </Frame>
+      </div>
+
+      {/* ---- Right column ---- */}
+      <div className="flex-1 min-w-0 flex flex-col">
+        {/* Name + Role/Relationship with shared gradient behind both */}
+        <Frame
+          borderSides={['top', 'left', 'right', 'bottom']}
+          background="bg-linear-to-r from-theme-orange to-theme-purple"
+          className="flex flex-col items-start border-t-0 sm:border-t-4 sm:rounded-tr-3xl sm:overflow-hidden"
+        >
+          <Frame borderSides={['right', 'bottom']} className="px-4 py-3 -mt-0.5 -mb-0.5">
+            <h3 className="text-lg sm:text-xl font-bold text-theme-black leading-tight whitespace-nowrap">
+              {BOB_LONG.name}
+            </h3>
+          </Frame>
+
+          <Frame borderSides={['top', 'right']} className="flex items-stretch -mt-0.5">
+            <div className="px-4 py-2">
+              <p className="text-sm text-theme-black">
+                <span className="font-bold">{BOB_LONG.role}</span> · {BOB_LONG.relationship}
+              </p>
+            </div>
+          </Frame>
+        </Frame>
+
+        {/* Bio */}
+        <Frame borderSides={['left', 'right', 'bottom']} className="px-4 py-3 flex-1">
+          <p className="text-sm text-theme-black leading-relaxed">{BOB_LONG.bio}</p>
+        </Frame>
+
+        {/* Contact (linked) */}
+        <Frame borderSides={['left', 'right', 'bottom']} className="px-4 py-2 text-sm leading-6 sm:leading-5">
+          <Anchor href={`mailto:${BOB_LONG.email}`}>
+            {BOB_LONG.email}
+          </Anchor>
+          <span className="hidden sm:inline text-theme-black"> · </span>
+          <br className="sm:hidden" />
+          <Anchor href={`https://${BOB_LONG.web}`}>
+            {BOB_LONG.web}
           </Anchor>
         </Frame>
       </div>
