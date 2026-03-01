@@ -1,5 +1,6 @@
 import type { Meta, StoryObj } from '@storybook/nextjs';
 import Accent from '../../Accent';
+import Anchor from '../../Anchor';
 import { Frame } from '../../Frame';
 import Image from '../../Image';
 
@@ -411,13 +412,13 @@ export const ImageLeftCurved: Story = {
 
         {/* Contact (linked) */}
         <Frame borderSides={['right', 'bottom']} className="px-4 py-2 flex items-center gap-2 text-sm">
-          <a href={`mailto:${BOB.email}`} className="text-theme-purple underline hover:text-theme-black">
+          <Anchor href={`mailto:${BOB.email}`}>
             {BOB.email}
-          </a>
+          </Anchor>
           <span className="text-theme-black">·</span>
-          <a href={`https://${BOB.web}`} target="_blank" rel="noopener noreferrer" className="text-theme-purple underline hover:text-theme-black">
+          <Anchor href={`https://${BOB.web}`}>
             {BOB.web}
-          </a>
+          </Anchor>
         </Frame>
       </div>
     </div>

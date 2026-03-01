@@ -1,5 +1,5 @@
 import Heading from '@/components/Heading';
-import Link from 'next/link';
+import Anchor from '@/components/Anchor';
 import type { MDXComponents } from 'mdx/types';
 
 // Default `img` fallback is not overriden; 
@@ -13,21 +13,7 @@ const components: MDXComponents = {
   h5: (props) => <Heading level={5} {...props} />,
   h6: (props) => <Heading level={6} {...props} />,
   p: (props) => <p className="my-4 leading-6.5" {...props} />,
-  a: ({ href = '', ...props }) => {
-    const linkStyle = 'text-theme-purple font-semibold hover:underline decoration-2 underline-offset-2';
-
-    const isExternal = href.startsWith('http');
-    return isExternal ? (
-      <a
-        href={href}
-        target="_blank"
-        rel="noopener noreferrer"
-        className={linkStyle} {...props} />
-    ) : (
-      // Use next/link for internal links for client-side navigation
-      <Link href={href} className={linkStyle} {...props} />
-    );
-  },
+  a: ({ href = '', ...props }) => <Anchor href={href} {...props} />,
   hr: (props) => <hr className="my-8 border-theme-black" {...props} />,
 };
 
