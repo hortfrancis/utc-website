@@ -22,6 +22,7 @@
   height: var(--cube-size);
   perspective: 1000px;
   perspective-origin: center;
+  touch-action: none;
 }
 
 .cube {
