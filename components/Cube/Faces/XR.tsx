@@ -10,31 +10,49 @@ import {
 
 export default function XR() {
   return (
-    <FaceGrid className="bg-black!">
-      {/* Layer 1: Grid lines */}
-      <GridLines />
+    <div className="group w-full h-full">
+      <FaceGrid className="bg-black!">
+        {/* Layer 1: Grid lines */}
+        <GridLines />
 
-      {/* Layer 2: VR image — full face, fades top to bottom */}
-      <Cell col={1} row={1} colSpan={6} rowSpan={6} zIndex={0}>
-        <ImageBlock
-          src="/images/experiments/vr02.png"
-          alt="VR headset"
-          mask="fade-down"
-        />
-      </Cell>
+        {/* Layer 2: VR image — zooms on hover */}
+        <Cell col={1} row={1} colSpan={6} rowSpan={6} zIndex={0}>
+          <div className="w-full h-full transition-transform duration-700 ease-out group-hover:scale-110">
+            <ImageBlock
+              src="/images/experiments/vr02.png"
+              alt="VR headset"
+              mask="fade-down"
+            />
+          </div>
+        </Cell>
 
-      {/* Layer 3: Colour gradient overlay */}
-      <Cell col={1} row={1} colSpan={6} rowSpan={6} zIndex={0}>
-        <GradientBlock
-          direction="135deg"
-          stops={[
-            { color: 'var(--theme-purple)', position: 0 },
-            { color: 'var(--theme-cyan)', position: 40 },
-            { color: 'transparent', position: 80 },
-          ]}
-          opacity={0.4}
-        />
-      </Cell>
+        {/* Layer 3: Colour gradient — cross-fades on hover */}
+        <Cell col={1} row={1} colSpan={6} rowSpan={6} zIndex={0}>
+          <div className="w-full h-full transition-opacity duration-700 ease-out group-hover:opacity-0">
+            <GradientBlock
+              direction="135deg"
+              stops={[
+                { color: 'var(--theme-purple)', position: 0 },
+                { color: 'var(--theme-cyan)', position: 40 },
+                { color: 'transparent', position: 80 },
+              ]}
+              opacity={0.4}
+            />
+          </div>
+        </Cell>
+        <Cell col={1} row={1} colSpan={6} rowSpan={6} zIndex={0}>
+          <div className="w-full h-full opacity-0 transition-opacity duration-700 ease-out group-hover:opacity-100">
+            <GradientBlock
+              direction="180deg"
+              stops={[
+                { color: 'var(--theme-cyan)', position: 0 },
+                { color: 'var(--theme-purple)', position: 50 },
+                { color: 'transparent', position: 90 },
+              ]}
+              opacity={0.55}
+            />
+          </div>
+        </Cell>
 
       {/* Layer 4: Icons + Typography */}
 
@@ -92,5 +110,6 @@ export default function XR() {
         </div>
       </Cell>
     </FaceGrid>
+    </div>
   );
 }

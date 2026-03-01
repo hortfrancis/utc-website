@@ -4,7 +4,7 @@ export default function Vision() {
   return (
     <FaceGrid>
       <div
-        className="flex items-center justify-center text-white select-none"
+        className="flex items-center justify-center text-black select-none"
         style={{ gridColumn: '1 / -1', gridRow: '1 / -1' }}
       >
         Vision
