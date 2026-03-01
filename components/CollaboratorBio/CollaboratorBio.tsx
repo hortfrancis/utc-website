@@ -94,7 +94,8 @@ export interface CollaboratorBioProps {
   name: string;
   role: string;
   relationship: string;
-  bio: string;
+  /** Bio content — supports Markdown via MDX children (paragraphs, **bold**, *italic*). */
+  children: React.ReactNode;
   photoSrc: string;
   photoAlt?: string;
   email?: string;
@@ -118,7 +119,7 @@ export default function CollaboratorBio({
   name,
   role,
   relationship,
-  bio,
+  children,
   photoSrc,
   photoAlt,
   email,
@@ -183,7 +184,9 @@ export default function CollaboratorBio({
         </Frame>
 
         <Frame borderSides={['left', 'right', 'bottom']} className="px-4 py-3 flex-1">
-          <p className="text-sm text-theme-black leading-relaxed">{bio}</p>
+          <div className="text-sm text-theme-black leading-relaxed [&_p]:mb-2 [&_p:last-child]:mb-0 [&_strong]:font-bold [&_em]:italic">
+            {children}
+          </div>
         </Frame>
 
         {hasContactRow && (

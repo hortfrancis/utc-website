@@ -37,7 +37,7 @@ const BASE_ARGS = {
   name: 'Bob Blobson',
   role: 'Technical Consultant',
   relationship: 'Freelancer',
-  bio: 'Bob Blobson is the premier viscosity consultant working in this field. He brings his whole self to work.',
+  children: 'Bob Blobson is the premier viscosity consultant working in this field. He brings his whole self to work.',
   photoSrc: '/images/experiments/collaborator-bio-example01.png',
   email: 'bob@blobshappening.org.uk',
   web: 'blobshappening.org.uk',
