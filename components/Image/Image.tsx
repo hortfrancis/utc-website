@@ -10,6 +10,8 @@ export interface ImageProps extends NextImageProps {
   borderSides?: readonly FrameBorderSide[];
   /** Which corners are rounded (forwarded to Frame). */
   roundedCorners?: readonly FrameCorner[];
+  /** Background colour class for the Frame (forwarded to Frame). */
+  background?: string;
   /** Extra classes on the Frame wrapper. */
   containerClassName?: string;
 }
@@ -26,6 +28,7 @@ export default function Image({
   framed = true,
   borderSides,
   roundedCorners,
+  background,
   containerClassName,
   className,
   ...props
@@ -44,6 +47,7 @@ export default function Image({
     <Frame
       borderSides={borderSides}
       roundedCorners={roundedCorners}
+      background={background}
       className={clsx('overflow-hidden', containerClassName)}
     >
       {imageNode}

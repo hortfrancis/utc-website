@@ -24,6 +24,8 @@ export interface FrameProps {
   roundedCorners?: readonly FrameCorner[];
   /** Border width class (default: border-4). */
   borderWidth?: 'border-2' | 'border-4';
+  /** Background colour class (default: bg-theme-white). */
+  background?: string;
   /** Optional class for the frame wrapper. */
   className?: string;
   /** Frame content (typically passed as JSX children). */
@@ -57,6 +59,7 @@ export default function Frame({
   borderSides = ['top', 'right', 'bottom', 'left'],
   roundedCorners = [],
   borderWidth = 'border-4',
+  background = 'bg-theme-white',
   className,
   children,
 }: FrameProps) {
@@ -70,11 +73,13 @@ export default function Frame({
     <div
       data-testid={FRAME_DATA_TESTID}
       className={clsx(
-        'box-border bg-theme-white',
+        'box-border',
+        background,
         borderWidth,
         'border-theme-black',
         borderZeroClasses,
         roundedClasses,
+        roundedCorners.length > 0 && 'overflow-hidden',
         className
       )}
     >

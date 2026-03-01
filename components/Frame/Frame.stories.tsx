@@ -149,3 +149,43 @@ export const WithAccentBottom: Story = {
     </div>
   ),
 };
+
+/** Frame with a coloured background — useful for image backdrops or status panels. */
+export const WithColouredBackground: Story = {
+  render: () => (
+    <div className="flex flex-col gap-8">
+      <Frame background="bg-theme-orange" className="p-6">
+        <span className="text-sm font-bold text-theme-black">Orange background</span>
+      </Frame>
+      <Frame background="bg-theme-cyan" className="p-6">
+        <span className="text-sm font-bold text-theme-black">Cyan background</span>
+      </Frame>
+      <Frame background="bg-theme-magenta" className="p-6">
+        <span className="text-sm font-bold text-theme-white">Magenta background</span>
+      </Frame>
+      <Frame background="bg-theme-green" className="p-6">
+        <span className="text-sm font-bold text-theme-black">Green background</span>
+      </Frame>
+      <Frame background="bg-theme-black" className="p-6">
+        <span className="text-sm font-bold text-theme-white">Black background</span>
+      </Frame>
+    </div>
+  ),
+};
+
+/** Frame with a gradient background. */
+export const WithGradientBackground: Story = {
+  render: () => (
+    <div className="flex flex-col gap-8">
+      <Frame background="bg-linear-to-r from-theme-orange to-theme-purple" className="p-6">
+        <span className="text-sm font-bold text-theme-black">Orange → Purple</span>
+      </Frame>
+      <Frame background="bg-linear-to-r from-theme-magenta to-theme-green" className="p-6">
+        <span className="text-sm font-bold text-theme-black">Magenta → Green</span>
+      </Frame>
+      <Frame background="bg-linear-to-r from-theme-purple to-theme-orange" className="p-6">
+        <span className="text-sm font-bold text-theme-black">Purple → Orange</span>
+      </Frame>
+    </div>
+  ),
+};
