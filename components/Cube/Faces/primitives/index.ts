@@ -21,3 +21,6 @@ export type { IconQuadProps } from './IconQuad';
 
 export { default as IconSingle } from './IconSingle';
 export type { IconSingleProps } from './IconSingle';
+
+export { default as StripeBars } from './StripeBars';
+export type { StripeBarsProps, StripeBarDef } from './StripeBars';
