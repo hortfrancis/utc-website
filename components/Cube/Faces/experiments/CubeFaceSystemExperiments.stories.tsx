@@ -493,29 +493,20 @@ export const FullCompositionV2: Story = {
 
       {/* Layer 4: Icons + Typography */}
 
-      {/* Top-left row of icons — C1/R1, C2/R1, C3/R1 */}
+      {/* Top-left row of icons — 2 per cell, C1-C2/R1 */}
       <Cell col={1} row={1} zIndex={1}>
-        <IconQuad icons={{ tl: 'google-cardboard' }} showDivider={false} />
+        <IconQuad icons={{ tl: 'google-cardboard', tr: 'cube-focus' }} showDivider={false} />
       </Cell>
       <Cell col={2} row={1} zIndex={1}>
-        <IconQuad icons={{ tl: 'cube-focus' }} showDivider={false} />
-      </Cell>
-      <Cell col={3} row={1} zIndex={1}>
-        <IconQuad icons={{ tl: 'virtual-reality' }} showDivider={false} />
+        <IconQuad icons={{ tl: 'virtual-reality', tr: 'globe' }} showDivider={false} />
       </Cell>
 
-      {/* Bottom-right quad of icons — C5-C6/R3-R4 */}
-      <Cell col={5} row={3} zIndex={1}>
-        <IconQuad icons={{ br: 'crane' }} showDivider={false} opacity={0.6} />
+      {/* Bottom-right column of icons — 2 per cell, C6/R5-R6 */}
+      <Cell col={6} row={5} zIndex={1}>
+        <IconQuad icons={{ tr: 'crane', br: 'hard-hat' }} showDivider={false} opacity={0.6} />
       </Cell>
-      <Cell col={6} row={3} zIndex={1}>
-        <IconQuad icons={{ br: 'hard-hat' }} showDivider={false} opacity={0.6} />
-      </Cell>
-      <Cell col={5} row={4} zIndex={1}>
-        <IconQuad icons={{ br: 'cube' }} showDivider={false} opacity={0.6} />
-      </Cell>
-      <Cell col={6} row={4} zIndex={1}>
-        <IconQuad icons={{ br: 'blueprint' }} showDivider={false} opacity={0.6} />
+      <Cell col={6} row={6} zIndex={1}>
+        <IconQuad icons={{ tr: 'cube', br: 'blueprint' }} showDivider={false} opacity={0.6} />
       </Cell>
 
       {/* XR — fills C1-C2 / R5-R6 */}
@@ -525,8 +516,8 @@ export const FullCompositionV2: Story = {
         </TextBlock>
       </Cell>
 
-      {/* Extended Reality — C3-C6 / R5 */}
-      <Cell col={3} row={5} colSpan={4} zIndex={1}>
+      {/* Extended Reality — C3-C5 / R5 */}
+      <Cell col={3} row={5} colSpan={3} zIndex={1}>
         <TextBlock
           fontSize={7}
           fontWeight={750}
