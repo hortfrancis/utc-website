@@ -1,6 +1,7 @@
 import type { Meta, StoryObj } from '@storybook/nextjs';
 import Accent from '../../Accent';
 import { Frame } from '../../Frame';
+import Image from '../../Image';
 
 /**
  * CollaboratorBio design experiments. Each story explores a layout and
@@ -40,7 +41,7 @@ type Story = StoryObj<typeof meta>;
 const BOB = {
   name: 'Bob Blobson',
   role: 'Technical Consultant',
-  bio: 'Bob Blobson is the premier viscosity consultant working in this field. You brings his whole self to work.',
+  bio: 'Bob Blobson is the premier viscosity consultant working in this field. He brings his whole self to work.',
   photoSrc: '/images/experiments/collaborator-bio-example01.png',
   relationship: 'Freelancer',
   email: 'bob@blobshappening.org.uk',
@@ -59,9 +60,8 @@ export const Default: Story = {
   render: () => (
     <div className="border-4 border-theme-black bg-theme-white grid grid-cols-[auto_1fr] grid-rows-[auto_1fr_auto] max-w-2xl">
       {/* ---- Photo ---- */}
-      <div className="row-span-2 w-40 sm:w-48 aspect-3/4 bg-theme-orange overflow-hidden border-r-4 border-theme-black">
-        {/* eslint-disable-next-line @next/next/no-img-element */}
-        <img src={BOB.photoSrc} alt={BOB.name} className="w-full h-full object-cover" />
+      <div className="relative row-span-2 w-40 sm:w-48 aspect-3/4 bg-theme-orange overflow-hidden border-r-4 border-theme-black">
+        <Image src={BOB.photoSrc} alt={BOB.name} fill className="object-cover" framed={false} />
       </div>
 
       {/* ---- Name / Role + Accent ---- */}
@@ -107,9 +107,8 @@ export const WithImageBlend: Story = {
   render: () => (
     <div className="border-4 border-theme-black bg-theme-white grid grid-cols-[auto_1fr] grid-rows-[auto_1fr_auto] max-w-2xl">
       {/* ---- Photo with blend ---- */}
-      <div className="row-span-2 w-40 sm:w-48 aspect-3/4 bg-theme-orange overflow-hidden border-r-4 border-theme-black">
-        {/* eslint-disable-next-line @next/next/no-img-element */}
-        <img src={BOB.photoSrc} alt={BOB.name} className="w-full h-full object-cover mix-blend-luminosity" />
+      <div className="relative row-span-2 w-40 sm:w-48 aspect-3/4 bg-theme-orange overflow-hidden border-r-4 border-theme-black">
+        <Image src={BOB.photoSrc} alt={BOB.name} fill className="object-cover mix-blend-luminosity" framed={false} />
       </div>
 
       {/* ---- Name / Role + Accent ---- */}
@@ -155,9 +154,8 @@ export const SquareImage: Story = {
   render: () => (
     <div className="border-4 border-theme-black bg-theme-white grid grid-cols-[auto_1fr] grid-rows-[auto_1fr_auto] max-w-2xl">
       {/* ---- Photo (square) ---- */}
-      <div className="row-span-2 w-40 sm:w-48 aspect-square bg-theme-orange overflow-hidden border-r-4 border-theme-black">
-        {/* eslint-disable-next-line @next/next/no-img-element */}
-        <img src={BOB.photoSrc} alt={BOB.name} className="w-full h-full object-cover mix-blend-luminosity" />
+      <div className="relative row-span-2 w-40 sm:w-48 aspect-square bg-theme-orange overflow-hidden border-r-4 border-theme-black">
+        <Image src={BOB.photoSrc} alt={BOB.name} fill className="object-cover mix-blend-luminosity" framed={false} />
       </div>
 
       {/* ---- Name / Role + Accent ---- */}
@@ -229,9 +227,8 @@ export const ImageRight: Story = {
       </div>
 
       {/* ---- Photo (right on sm+, top on mobile) ---- */}
-      <div className="w-full sm:w-56 shrink-0 aspect-square bg-theme-orange overflow-hidden border-4 border-theme-black sm:border-l-0">
-        {/* eslint-disable-next-line @next/next/no-img-element */}
-        <img src={BOB.photoSrc} alt={BOB.name} className="w-full h-full object-cover mix-blend-luminosity" />
+      <div className="relative w-full sm:w-56 shrink-0 aspect-square bg-theme-orange overflow-hidden border-4 border-theme-black sm:border-l-0">
+        <Image src={BOB.photoSrc} alt={BOB.name} fill className="object-cover mix-blend-luminosity" framed={false} />
       </div>
     </div>
   ),
@@ -283,9 +280,145 @@ export const ImageRightResponsive: Story = {
       </div>
 
       {/* ---- Photo (right on sm+, top on mobile) ---- */}
-      <div className="w-full sm:w-2/5 sm:shrink-0 aspect-square bg-theme-orange overflow-hidden sm:border-l-4 sm:border-theme-black border-b-4 sm:border-b-0 border-theme-black">
-        {/* eslint-disable-next-line @next/next/no-img-element */}
-        <img src={BOB.photoSrc} alt={BOB.name} className="w-full h-full object-cover mix-blend-luminosity" />
+      <div className="relative w-full sm:w-2/5 sm:shrink-0 aspect-square bg-theme-orange overflow-hidden sm:border-l-4 sm:border-theme-black border-b-4 sm:border-b-0 border-theme-black">
+        <Image src={BOB.photoSrc} alt={BOB.name} fill className="object-cover mix-blend-luminosity" framed={false} />
+      </div>
+    </div>
+  ),
+};
+
+/* ------------------------------------------------------------------ */
+/*  6. Image left (framed)                                             */
+/* ------------------------------------------------------------------ */
+
+/**
+ * **Image left (framed)** — Image on the left using the standard `Image`
+ * component with its own Frame border. Gradient Frame strip sits to the right
+ * of the name to absorb leftover horizontal space.
+ */
+export const ImageLeftFramed: Story = {
+  render: () => (
+    <div className="flex max-w-2xl">
+      {/* ---- Photo (framed by Image) ---- */}
+      <Image
+        src={BOB.photoSrc}
+        alt={BOB.name}
+        width={192}
+        height={192}
+        borderSides={['top', 'left', 'bottom', 'right']}
+        background="bg-theme-orange"
+        containerClassName="w-40 sm:w-48 shrink-0 aspect-square"
+        className="object-cover h-full mix-blend-luminosity"
+      />
+
+      {/* ---- Right column ---- */}
+      <div className="flex-1 min-w-0 flex flex-col">
+        {/* Name + Gradient */}
+        <Frame borderSides={['top', 'right', 'bottom']} className="flex items-stretch">
+          <div className="px-4 py-3 flex items-center shrink-0">
+            <h3 className="text-lg sm:text-xl font-bold text-theme-black leading-tight whitespace-nowrap">
+              {BOB.name}
+            </h3>
+          </div>
+          <Frame
+            borderSides={['left']}
+            background="bg-linear-to-r from-theme-orange to-theme-purple"
+            className="flex-1"
+          />
+        </Frame>
+
+        {/* Role / Relationship */}
+        <Frame borderSides={['right', 'bottom']} className="px-4 py-2">
+          <p className="text-sm text-theme-black">
+            {BOB.role} · {BOB.relationship}
+          </p>
+        </Frame>
+
+        {/* Bio */}
+        <Frame borderSides={['right', 'bottom']} className="px-4 py-3 flex-1">
+          <p className="text-sm text-theme-black leading-relaxed">{BOB.bio}</p>
+        </Frame>
+
+        {/* Contact */}
+        <Frame borderSides={['right', 'bottom']} className="px-4 py-2">
+          <p className="text-sm text-theme-black">
+            {BOB.email} · {BOB.web}
+          </p>
+        </Frame>
+      </div>
+    </div>
+  ),
+};
+
+/* ------------------------------------------------------------------ */
+/*  7. Image left (curved, gradient role, linked contact)              */
+/* ------------------------------------------------------------------ */
+
+/**
+ * **Image left curved** — Builds on ImageLeftFramed with a rounded
+ * top-right corner, a gradient strip next to the role/relationship row,
+ * and clickable email/web links.
+ */
+export const ImageLeftCurved: Story = {
+  render: () => (
+    <div className="flex max-w-2xl">
+      {/* ---- Photo (framed by Image) ---- */}
+      <Image
+        src={BOB.photoSrc}
+        alt={BOB.name}
+        width={192}
+        height={192}
+        borderSides={['top', 'left', 'bottom', 'right']}
+        background="bg-theme-orange"
+        containerClassName="w-40 sm:w-48 shrink-0 aspect-square"
+        className="object-cover h-full mix-blend-luminosity"
+      />
+
+      {/* ---- Right column ---- */}
+      <div className="flex-1 min-w-0 flex flex-col">
+        {/* Name + Gradient */}
+        <Frame borderSides={['top', 'right', 'bottom']} roundedCorners={['top-right']} className="flex items-stretch">
+          <div className="px-4 py-3 flex items-center shrink-0">
+            <h3 className="text-lg sm:text-xl font-bold text-theme-black leading-tight whitespace-nowrap">
+              {BOB.name}
+            </h3>
+          </div>
+          <Frame
+            borderSides={['left']}
+            background="bg-linear-to-r from-theme-orange to-theme-purple"
+            className="flex-1"
+          />
+        </Frame>
+
+        {/* Role / Relationship + Gradient */}
+        <Frame borderSides={['right', 'bottom']} className="flex items-stretch">
+          <div className="px-4 py-2 flex items-center shrink-0">
+            <p className="text-sm text-theme-black">
+              {BOB.role} · {BOB.relationship}
+            </p>
+          </div>
+          <Frame
+            borderSides={['left']}
+            background="bg-linear-to-r from-theme-orange to-theme-purple"
+            className="flex-1"
+          />
+        </Frame>
+
+        {/* Bio */}
+        <Frame borderSides={['right', 'bottom']} className="px-4 py-3 flex-1">
+          <p className="text-sm text-theme-black leading-relaxed">{BOB.bio}</p>
+        </Frame>
+
+        {/* Contact (linked) */}
+        <Frame borderSides={['right', 'bottom']} className="px-4 py-2 flex items-center gap-2 text-sm">
+          <a href={`mailto:${BOB.email}`} className="text-theme-purple underline hover:text-theme-black">
+            {BOB.email}
+          </a>
+          <span className="text-theme-black">·</span>
+          <a href={`https://${BOB.web}`} target="_blank" rel="noopener noreferrer" className="text-theme-purple underline hover:text-theme-black">
+            {BOB.web}
+          </a>
+        </Frame>
       </div>
     </div>
   ),
