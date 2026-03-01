@@ -1,7 +1,6 @@
 'use client';
 
 import React, { useEffect, useRef, useState } from "react";
-import Container from "./Container";
 import Face from "./Face";
 import "./Cube.css";
 
@@ -94,6 +93,9 @@ export default function Cube({ onFaceTap = defaultOnFaceTap }: CubeProps = {}) {
     modeRef.current = next;
     setMode(next);
   };
+
+  /** DOM reference to the full-viewport wrapper that owns pointer event handlers. */
+  const containerRef = useRef<HTMLDivElement | null>(null);
 
   /** DOM reference to the cube element whose transform we update imperatively. */
   const cubeRef = useRef<HTMLDivElement | null>(null);
@@ -369,7 +371,7 @@ export default function Cube({ onFaceTap = defaultOnFaceTap }: CubeProps = {}) {
     }
 
     // Best-effort release pointer capture.
-    const el = cubeRef.current;
+    const el = containerRef.current;
     if (el && pointerIdRef.current !== null) {
       try {
         el.releasePointerCapture(pointerIdRef.current);
@@ -389,11 +391,12 @@ export default function Cube({ onFaceTap = defaultOnFaceTap }: CubeProps = {}) {
 
   /** Window-level pointerup handler (capture phase). */
   const onWindowPointerUp = (ev: PointerEvent) => {
-    const cubeEl = cubeRef.current;
+    const containerEl = containerRef.current;
 
-    // If the pointerup occurs on the cube (or a descendant), let the
-    // React onPointerUp handler manage drag end + tap detection.
-    if (cubeEl && ev.target instanceof Node && cubeEl.contains(ev.target)) {
+    // If the pointerup occurs anywhere inside the drag zone (the full-viewport
+    // wrapper or any of its descendants), let the React onPointerUp handler
+    // manage drag end + tap detection.
+    if (containerEl && ev.target instanceof Node && containerEl.contains(ev.target)) {
       return;
     }
 
@@ -434,7 +437,7 @@ export default function Cube({ onFaceTap = defaultOnFaceTap }: CubeProps = {}) {
     // this covers iOS Safari, which does not fully honour that property.
     e.preventDefault();
 
-    const el = cubeRef.current;
+    const el = containerRef.current;
     if (!el) return;
 
     // Record tap baseline and which face (if any) was pressed.
@@ -614,17 +617,17 @@ export default function Cube({ onFaceTap = defaultOnFaceTap }: CubeProps = {}) {
   }, []);
 
   return (
-    <Container>
+    <div
+      ref={containerRef}
+      className={`cube-zone h-[100dvh] absolute top-0 left-0 right-0 bottom-0 flex justify-center items-center z-0${mode === "DRAG" ? " cube--dragging" : ""}`}
+      onPointerDown={onPointerDown}
+      onPointerMove={onPointerMove}
+      onPointerUp={onPointerUp}
+      onPointerCancel={onPointerUp}
+      onLostPointerCapture={onLostPointerCapture}
+    >
       <div className="scene">
-        <div
-          ref={cubeRef}
-          className={`cube ${mode === "DRAG" ? "cube--dragging" : ""}`}
-          onPointerDown={onPointerDown}
-          onPointerMove={onPointerMove}
-          onPointerUp={onPointerUp}
-          onPointerCancel={onPointerUp}
-          onLostPointerCapture={onLostPointerCapture}
-        >
+        <div ref={cubeRef} className="cube">
           <Face position="front" />
           <Face position="back" />
           <Face position="left" />
@@ -633,6 +636,6 @@ export default function Cube({ onFaceTap = defaultOnFaceTap }: CubeProps = {}) {
           <Face position="bottom" />
         </div>
       </div>
-    </Container>
+    </div>
   );
 }

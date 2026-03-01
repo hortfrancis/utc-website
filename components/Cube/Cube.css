@@ -25,6 +25,17 @@
   touch-action: none;
 }
 
+/* Full-viewport drag zone that captures all pointer interactions */
+.cube-zone {
+  touch-action: none;
+  user-select: none;
+  cursor: grab;
+}
+
+.cube-zone.cube--dragging {
+  cursor: grabbing;
+}
+
 .cube {
   width: var(--cube-size);
   height: var(--cube-size);
@@ -35,15 +46,8 @@
   /* JS drives transform instead */
   transform: none;
 
-  user-select: none;
   touch-action: none;
   will-change: transform;
-
-  cursor: grab;
-}
-
-.cube--dragging {
-  cursor: grabbing;
 }
 
 .face {
