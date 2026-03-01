@@ -17,6 +17,7 @@ export type CollaboratorBioImageBackground =
 export type CollaboratorBioHeaderGradient =
   | 'theme-orange-theme-purple'
   | 'theme-green-theme-cyan'
+  | 'theme-purple-theme-cyan'
   | 'theme-cyan-theme-purple'
   | 'theme-orange-theme-magenta';
 
@@ -39,6 +40,7 @@ const IMAGE_BACKGROUND_CLASS: Record<CollaboratorBioImageBackground, string> = {
 const HEADER_GRADIENT_CLASS: Record<CollaboratorBioHeaderGradient, string> = {
   'theme-orange-theme-purple': 'bg-linear-to-r from-theme-orange to-theme-purple',
   'theme-green-theme-cyan': 'bg-linear-to-r from-theme-green to-theme-cyan',
+  'theme-purple-theme-cyan': 'bg-linear-to-r from-theme-purple to-theme-cyan',
   'theme-cyan-theme-purple': 'bg-linear-to-r from-theme-cyan to-theme-purple',
   'theme-orange-theme-magenta': 'bg-linear-to-r from-theme-orange to-theme-magenta',
 };
@@ -104,7 +106,7 @@ export default function CollaboratorBio({
   return (
     <div
       data-testid={COLLABORATOR_BIO_DATA_TESTID}
-      className={clsx('flex flex-col sm:flex-row max-w-2xl', className)}
+      className={clsx('flex flex-col sm:flex-row w-full max-w-3xl', className)}
     >
       <div className="w-full sm:w-48 shrink-0 flex flex-col self-start">
         <Image

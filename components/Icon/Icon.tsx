@@ -28,6 +28,8 @@ import {
   CircuitryIcon,
   HardHatIcon,
   BlueprintIcon,
+  BrainIcon,
+  HandWavingIcon,
   CraneIcon,
 
   // Creative / work
@@ -104,6 +106,8 @@ const iconRegistry = {
   'circuit-board': CircuitryIcon,
   'hard-hat': HardHatIcon,
   'blueprint': BlueprintIcon,
+  'brain': BrainIcon,
+  'hand-waving': HandWavingIcon,
   'crane': CraneIcon,
 
   // Creative / work
