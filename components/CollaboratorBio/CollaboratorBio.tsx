@@ -177,7 +177,10 @@ export default function CollaboratorBio({
           <Frame borderSides={['top', 'right']} className="flex items-stretch -mt-0.5">
             <div className="px-4 py-2">
               <p className="text-sm text-theme-black">
-                <span className="font-bold">{role}</span> · {relationship}
+                <span className="font-bold">{role}</span>
+                <span className="hidden sm:inline"> · </span>
+                <br className="sm:hidden" />
+                {relationship}
               </p>
             </div>
           </Frame>
