@@ -1,3 +1,4 @@
+import type { ReactNode } from 'react';
 import type { Meta, StoryObj } from '@storybook/nextjs';
 import type { IconName } from '../../../Icon/Icon';
 import FaceGrid from '../FaceGrid';
@@ -77,7 +78,7 @@ function ProjectCell({
   col: number;
   row: number;
   color: string;
-  title: string;
+  title: ReactNode;
   image: string;
   alt: string;
   icons: readonly [IconName, IconName, IconName, IconName];
@@ -105,10 +106,12 @@ function ProjectCell({
           uppercase
           letterSpacing="0.12em"
           fontWeight={700}
+          lineHeight={1.2}
           color="var(--theme-white)"
-          padding={0.5}
-          alignHorizontal="start"
-          alignVertical="center"
+          padding={2}
+          alignHorizontal="end"
+          alignVertical="end"
+          textAlign="right"
         >
           {title}
         </TextBlock>
@@ -176,7 +179,7 @@ export const Edited01: Story = {
             col={1}
             row={1}
             color="var(--theme-purple)"
-            title="Construct.AR"
+            title={<>Construct<br />.AR</>}
             image={IMG.construct}
             alt="Construct.AR"
             icons={PROJECT_ICONS.construct}
@@ -186,7 +189,7 @@ export const Edited01: Story = {
             col={3}
             row={1}
             color="var(--theme-cyan)"
-            title="Pop.XR"
+            title={<>Pop<br />.XR</>}
             image={IMG.popXr}
             alt="Pop.XR"
             icons={PROJECT_ICONS.popXr}
@@ -196,23 +199,12 @@ export const Edited01: Story = {
             col={5}
             row={1}
             color="var(--theme-orange)"
-            title="BT Urban.AR"
+            title={<>BT <br />Urban<br />.AR</>}
             image={IMG.btUrban}
             alt="BT Urban.AR"
             icons={PROJECT_ICONS.btUrban}
             iconColor="var(--theme-white)"
           />
-
-          <Cell col={1} row={5} colSpan={6} >
-            <StripeBars colors={['var(--theme-green)', 'var(--theme-magenta)', 'var(--theme-orange)', 'var(--theme-purple)', 'var(--theme-cyan)', 'var(--theme-orange)']} />
-          </Cell>
-
-          {/* ── Centre zone: "Work" ──────────────────────────────── */}
-          <Cell col={1} row={3} colSpan={6} rowSpan={2}>
-            <TextBlock fontSize={30} fontWeight={900} color="var(--theme-white)" padding={0}>
-              Work
-            </TextBlock>
-          </Cell>
 
 
           {/* Metadata — left gutter */}
@@ -241,7 +233,7 @@ export const Edited01: Story = {
                 opacity: 0.35,
                 }}>
                 Dock Stories
-              </span>
+                </span>
               </div>
               </Cell> */}
 
@@ -249,7 +241,7 @@ export const Edited01: Story = {
             col={1}
             row={5}
             color="var(--theme-green)"
-            title="Tracing"
+            title={<>Tracing <br />the <br />Footprint</>}
             image={IMG.tracing}
             alt="Tracing the Footprint"
             icons={PROJECT_ICONS.tracing}
@@ -259,7 +251,7 @@ export const Edited01: Story = {
             col={3}
             row={5}
             color="var(--theme-magenta)"
-            title="Sammy's Xmas"
+            title={<>Sammy&apos;s <br />Xmas <br />Adventure</>}
             image={IMG.sammys}
             alt="Sammy's Christmas Adventure"
             icons={PROJECT_ICONS.sammys}
@@ -269,17 +261,28 @@ export const Edited01: Story = {
             col={5}
             row={5}
             color="var(--theme-orange)"
-            title="BT Mfg"
+            title={<>BT <br />Manufacturing <br />Showcase</>}
             image={IMG.btMfg}
             alt="BT Manufacturing Showcase"
             icons={PROJECT_ICONS.btMfg}
             iconColor="var(--theme-white)"
           />
 
+          <Cell col={1} row={3} colSpan={6} >
+            <StripeBars colors={['var(--theme-green)', 'var(--theme-magenta)', 'var(--theme-orange)', 'var(--theme-purple)', 'var(--theme-cyan)', 'var(--theme-orange)']} />
+          </Cell>
           <Cell col={1} row={4} colSpan={6} >
             <StripeBars colors={['var(--theme-green)', 'var(--theme-magenta)', 'var(--theme-orange)', 'var(--theme-purple)', 'var(--theme-cyan)', 'var(--theme-orange)']} />
           </Cell>
           <GridLines color="var(--theme-black)" opacity={1} />
+
+          {/* ── Centre zone: "Work" ──────────────────────────────── */}
+          <Cell col={1} row={3} colSpan={6} rowSpan={2}>
+            <TextBlock fontSize={30} fontWeight={900} color="var(--theme-white)" padding={0}>
+              Work
+            </TextBlock>
+          </Cell>
+
         </FaceGrid>
       </div>
     );

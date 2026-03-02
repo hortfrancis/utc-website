@@ -19,6 +19,10 @@ export interface TextBlockProps {
   alignVertical?: 'start' | 'center' | 'end';
   /** Padding in cqi units. Default: 0. */
   padding?: number;
+  /** Text alignment within the block (for multi-line text). Default: 'left'. */
+  textAlign?: 'left' | 'center' | 'right' | 'justify';
+  /** Line height (unitless multiplier of font size). Default: 1. */
+  lineHeight?: number;
   children?: React.ReactNode;
 }
 
@@ -37,6 +41,8 @@ export default function TextBlock({
   alignHorizontal = 'center',
   alignVertical = 'center',
   padding = 0,
+  textAlign = 'left',
+  lineHeight = 1,
   children,
 }: TextBlockProps) {
   const alignMap = { start: 'flex-start', center: 'center', end: 'flex-end' };
@@ -52,13 +58,15 @@ export default function TextBlock({
       }}
     >
       <span
-        className="leading-none"
+        className="leading-none min-w-0 overflow-hidden text-ellipsis whitespace-nowrap"
         style={{
           fontSize: `${fontSize}cqi`,
           color,
           opacity,
           fontWeight,
           letterSpacing,
+          textAlign,
+          lineHeight,
           textTransform: uppercase ? 'uppercase' : undefined,
           ...(mono && {
             fontVariationSettings: "'MONO' 1, 'CASL' 0",
