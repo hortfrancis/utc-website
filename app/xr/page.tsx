@@ -1,10 +1,18 @@
+import Breadcrumbs from '@/components/Breadcrumbs';
 import Heading from '@/components/Heading';
 import Page from '@/components/Page/Page';
 import Section from '@/components/Section';
 
 export default function XRPage() {
   return (
-    <Page>
+    <>
+      <Breadcrumbs
+        items={[
+          { label: 'Cube', path: '/' },
+          { label: 'XR', current: true },
+        ]}
+      />
+      <Page>
       <Heading level={1}>XR: Extended Reality</Heading>
 
       <Section id='what-is-xr'>
@@ -22,5 +30,6 @@ export default function XRPage() {
         <p>[Explanation of what AR is...]</p>
       </Section>
     </Page>
+    </>
   );
 }

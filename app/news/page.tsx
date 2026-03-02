@@ -1,3 +1,4 @@
+import Breadcrumbs from '@/components/Breadcrumbs';
 import clsx from 'clsx';
 import Heading from '@/components/Heading';
 import Page from '@/components/Page/Page';
@@ -13,7 +14,14 @@ export default function NewsPage() {
   );
 
   return (
-    <Page>
+    <>
+      <Breadcrumbs
+        items={[
+          { label: 'Cube', path: '/' },
+          { label: 'News', current: true },
+        ]}
+      />
+      <Page>
       <Heading level={1}>News</Heading>
 
       <ul className={listStyles}>
@@ -27,5 +35,6 @@ export default function NewsPage() {
         ))}
       </ul>
     </Page>
+    </>
   )
 }
