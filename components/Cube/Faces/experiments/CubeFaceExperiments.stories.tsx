@@ -5,6 +5,16 @@ import Icon from '../../../Icon/Icon';
 import type { IconName } from '../../../Icon/Icon';
 import { iconNames } from '../../../Icon/Icon';
 import { extendedRealityIcon } from '../../../Grids/patterns';
+import FaceGridNew from '../FaceGrid';
+import {
+  Cell,
+  GridLines,
+  ColorBlock,
+  GradientBlock,
+  ImageBlock,
+  TextBlock,
+  IconQuad,
+} from '../primitives';
 
 /* ------------------------------------------------------------------ */
 /*  Frozen copy of the original FaceGrid (pre-refactor).               */
@@ -42,7 +52,7 @@ function FaceGrid({
  * Content: "XR: Extended Reality" · "AR: Augmented Reality" · "VR: Virtual Reality"
  */
 const meta = {
-  title: 'Experiments/Cube Faces',
+  title: 'Experiments/Cube Face XR',
   parameters: {
     layout: 'centered',
     docs: {
@@ -71,6 +81,7 @@ type Story = StoryObj;
 /*  Inspired by: reference's mixed-scale type and grid structure.      */
 /* ================================================================== */
 
+// ─── XR–1 · Grid Typography ─────────────────────────────────────────────────
 export const GridTypography: Story = {
   name: 'XR – Grid Typography',
   render: () => (
@@ -127,6 +138,7 @@ export const GridTypography: Story = {
 /*  Inspired by: reference's bold blue/orange/red colour fields.       */
 /* ================================================================== */
 
+// ─── XR–2 · Colour Block ────────────────────────────────────────────────────
 export const ColourBlock: Story = {
   name: 'XR – Colour Block',
   render: () => (
@@ -180,6 +192,7 @@ export const ColourBlock: Story = {
 /*  Inspired by: reference's geometric textures and icon patterns.     */
 /* ================================================================== */
 
+// ─── XR–3 · Pixel Overlay ───────────────────────────────────────────────────
 export const PixelOverlay: Story = {
   name: 'XR – Pixel Overlay',
   render: () => {
@@ -240,6 +253,7 @@ export const PixelOverlay: Story = {
 /*  Directly references the design image's window panel.               */
 /* ================================================================== */
 
+// ─── XR–4 · Info Card ───────────────────────────────────────────────────────
 export const InfoCard: Story = {
   name: 'XR – Info Card',
   render: () => (
@@ -330,6 +344,7 @@ export const InfoCard: Story = {
 /*  the density of the other experiments.                              */
 /* ================================================================== */
 
+// ─── XR–5 · Minimal Corner ──────────────────────────────────────────────────
 export const MinimalCorner: Story = {
   name: 'XR – Minimal Corner',
   render: () => (
@@ -379,6 +394,7 @@ const themeColours = [
 /** Pick 36 icons from the registry for the 6×6 grid. */
 const gridIcons: IconName[] = iconNames.slice(0, 36);
 
+// ─── XR–6 · Icon Grid ───────────────────────────────────────────────────────
 export const IconGrid: Story = {
   name: 'XR – Icon Grid',
   render: () => (
@@ -419,6 +435,7 @@ const hoverColourClasses = [
   'text-theme-white/20 hover:text-theme-white',
 ];
 
+// ─── XR–7 · Icon Grid Hover ─────────────────────────────────────────────────
 export const IconGridHover: Story = {
   name: 'XR – Icon Grid Hover',
   render: () => (
@@ -453,6 +470,7 @@ const trailColourClasses = [
   'text-theme-white/20 hover:text-theme-white bg-theme-white/5 hover:bg-theme-white/15',
 ];
 
+// ─── XR–8 · Icon Grid Trail ─────────────────────────────────────────────────
 export const IconGridTrail: Story = {
   name: 'XR – Icon Grid Trail',
   render: () => (
@@ -578,6 +596,7 @@ function IconGridTouchTrailComponent() {
   );
 }
 
+// ─── XR–9 · Icon Grid Touch Trail ───────────────────────────────────────────
 export const IconGridTouchTrail: Story = {
   name: 'XR – Icon Grid Touch Trail',
   render: () => <IconGridTouchTrailComponent />,
@@ -589,6 +608,7 @@ export const IconGridTouchTrail: Story = {
 /*  yellow-outlined squares on black with subtle neon glow.            */
 /* ================================================================== */
 
+// ─── XR–10 · TRON Flat Grid ─────────────────────────────────────────────────
 export const TronFlatGrid: Story = {
   name: 'XR – TRON Flat Grid',
   render: () => (
@@ -617,6 +637,7 @@ export const TronFlatGrid: Story = {
 /*  the top.                                                           */
 /* ================================================================== */
 
+// ─── XR–11 · TRON Grid + VR Image ───────────────────────────────────────────
 export const TronGridVRImage: Story = {
   name: 'XR – TRON Grid + VR Image',
   render: () => (
@@ -661,6 +682,7 @@ export const TronGridVRImage: Story = {
 /*  XR / Extended Reality / VR / AR labels placed at grid positions.   */
 /* ================================================================== */
 
+// ─── XR–12 · White Grid + VR02 + Type ───────────────────────────────────────
 export const WhiteGridVR02: Story = {
   name: 'XR – White Grid + VR02 + Type',
   render: () => (
@@ -746,6 +768,7 @@ export const WhiteGridVR02: Story = {
 /*  doubled up at C3-C6/R5, VR at C3-C4/R6, AR at C5/R6.             */
 /* ================================================================== */
 
+// ─── XR–13 · White Grid + VR02 + Type v2 ────────────────────────────────────
 export const WhiteGridVR02v2: Story = {
   name: 'XR – White Grid + VR02 + Type v2',
   render: () => (
@@ -820,6 +843,7 @@ export const WhiteGridVR02v2: Story = {
 const topRowIcons: IconName[] = ['google-cardboard', 'cube-focus', 'virtual-reality'];
 const quadIcons: IconName[] = ['hard-hat', 'blueprint', 'crane', 'cube'];
 
+// ─── XR–14 · White Grid + VR02 + Icons ──────────────────────────────────────
 export const WhiteGridVR02v3Icons: Story = {
   name: 'XR – White Grid + VR02 + Icons',
   render: () => (
@@ -963,6 +987,7 @@ function SubSquareIcon({
   );
 }
 
+// ─── XR–15 · Sub-Square Icons + CQI ─────────────────────────────────────────
 export const SubSquareIconsCQI: Story = {
   name: 'XR – Sub-Square Icons + CQI',
   render: () => (
@@ -1065,5 +1090,583 @@ export const SubSquareIconsCQI: Story = {
         </div>
       </div>
     </FaceGrid>
+  ),
+};
+/* ================================================================== */
+/*  PRIMITIVES-BASED STORIES                                           */
+/*  Moved from Cube Face Primitives — use the refactored FaceGrid      */
+/*  and Cell/primitive components.                                     */
+/* ================================================================== */
+
+/* ------------------------------------------------------------------ */
+/*  16 · FULL COMPOSITION (PRIMITIVES)                                 */
+/*  XR layout built with Cell + primitive components.                  */
+/* ------------------------------------------------------------------ */
+
+// ─── 16 · Full Composition (XR) ─────────────────────────────────────────────
+export const FullComposition: Story = {
+  name: '16 – Full Composition (XR)',
+  render: () => (
+    <FaceGridNew className="bg-black!">
+      <GridLines />
+
+      <Cell col={1} row={1} colSpan={6} rowSpan={6} zIndex={0}>
+        <ImageBlock src="/images/experiments/vr02.png" alt="VR headset" mask="fade-down" />
+      </Cell>
+
+      <Cell col={1} row={1} zIndex={1}>
+        <IconQuad icons={{ tl: 'google-cardboard' }} showDivider={false} />
+      </Cell>
+      <Cell col={2} row={1} zIndex={1}>
+        <IconQuad icons={{ tl: 'cube-focus' }} showDivider={false} />
+      </Cell>
+      <Cell col={3} row={1} zIndex={1}>
+        <IconQuad icons={{ tl: 'virtual-reality' }} showDivider={false} />
+      </Cell>
+      <Cell col={5} row={3} zIndex={1}>
+        <IconQuad icons={{ br: 'crane' }} showDivider={false} opacity={0.6} />
+      </Cell>
+      <Cell col={6} row={3} zIndex={1}>
+        <IconQuad icons={{ br: 'hard-hat' }} showDivider={false} opacity={0.6} />
+      </Cell>
+      <Cell col={5} row={4} zIndex={1}>
+        <IconQuad icons={{ br: 'cube' }} showDivider={false} opacity={0.6} />
+      </Cell>
+      <Cell col={6} row={4} zIndex={1}>
+        <IconQuad icons={{ br: 'blueprint' }} showDivider={false} opacity={0.6} />
+      </Cell>
+
+      <Cell col={1} row={5} colSpan={2} rowSpan={2} zIndex={1}>
+        <TextBlock fontSize={22.5} padding={2}>XR</TextBlock>
+      </Cell>
+      <Cell col={3} row={5} colSpan={4} zIndex={1}>
+        <TextBlock fontSize={7} fontWeight={750} mono uppercase letterSpacing="0.1em" opacity={0.7} padding={1.5} align="start">
+          Extended Reality
+        </TextBlock>
+      </Cell>
+      <Cell col={3} row={6} colSpan={3} zIndex={1}>
+        <div className="flex items-center w-full h-full select-none" style={{ paddingInline: '1.5cqi', fontSize: '3cqi' }}>
+          <span>
+            <span className="font-bold text-theme-white/80">VR: </span>
+            <span className="text-theme-white/60">Virtual Reality</span>
+            <br />
+            <span className="font-bold text-theme-white/80">AR: </span>
+            <span className="text-theme-white/60">Augmented Reality</span>
+          </span>
+        </div>
+      </Cell>
+    </FaceGridNew>
+  ),
+};
+
+/* ------------------------------------------------------------------ */
+/*  17 · FULL COMPOSITION V2 (XR + GRADIENT)                           */
+/*  Adds a colour gradient overlay on the image.                       */
+/* ------------------------------------------------------------------ */
+
+// ─── 17 · Full Composition V2 (XR + Gradient) ───────────────────────────────
+export const FullCompositionV2: Story = {
+  name: '17 – Full Composition V2 (XR + Gradient)',
+  render: () => (
+    <FaceGridNew className="bg-black!">
+      <GridLines />
+
+      <Cell col={1} row={1} colSpan={6} rowSpan={6} zIndex={0}>
+        <ImageBlock src="/images/experiments/vr02.png" alt="VR headset" mask="fade-down" />
+      </Cell>
+      <Cell col={1} row={1} colSpan={6} rowSpan={6} zIndex={0}>
+        <GradientBlock
+          direction="135deg"
+          stops={[
+            { color: 'var(--theme-purple)', position: 0 },
+            { color: 'var(--theme-cyan)', position: 40 },
+            { color: 'transparent', position: 80 },
+          ]}
+          opacity={0.4}
+        />
+      </Cell>
+
+      <Cell col={1} row={1} zIndex={1}>
+        <IconQuad icons={{ tl: 'google-cardboard', tr: 'cube-focus' }} showDivider={false} />
+      </Cell>
+      <Cell col={2} row={1} zIndex={1}>
+        <IconQuad icons={{ tl: 'virtual-reality', tr: 'globe' }} showDivider={false} />
+      </Cell>
+      <Cell col={6} row={5} zIndex={1}>
+        <IconQuad icons={{ tr: 'crane', br: 'hard-hat' }} showDivider={false} opacity={0.6} />
+      </Cell>
+      <Cell col={6} row={6} zIndex={1}>
+        <IconQuad icons={{ tr: 'cube', br: 'blueprint' }} showDivider={false} opacity={0.6} />
+      </Cell>
+
+      <Cell col={1} row={5} colSpan={2} rowSpan={2} zIndex={1}>
+        <TextBlock fontSize={22.5} padding={2}>XR</TextBlock>
+      </Cell>
+      <Cell col={3} row={5} colSpan={3} zIndex={1}>
+        <TextBlock fontSize={7} fontWeight={750} mono uppercase letterSpacing="0.1em" padding={1.5} align="start">
+          Extended Reality
+        </TextBlock>
+      </Cell>
+      <Cell col={3} row={6} colSpan={3} zIndex={1}>
+        <div className="flex items-center w-full h-full select-none" style={{ paddingInline: '1.5cqi', fontSize: '3cqi' }}>
+          <span>
+            <span className="font-bold text-theme-white">VR: </span>
+            <span className="text-theme-white">Virtual Reality</span>
+            <br />
+            <span className="font-bold text-theme-white">AR: </span>
+            <span className="text-theme-white">Augmented Reality</span>
+          </span>
+        </div>
+      </Cell>
+    </FaceGridNew>
+  ),
+};
+
+/* ------------------------------------------------------------------ */
+/*  18 · HOVER: IMAGE PARALLAX                                         */
+/*  Image zooms slightly on hover — subtle depth.                      */
+/* ------------------------------------------------------------------ */
+
+// ─── 18 · Hover — Image Parallax ────────────────────────────────────────────
+export const HoverImageParallax: Story = {
+  name: '18 – Hover: Image Parallax',
+  render: () => (
+    <div className="group">
+      <FaceGridNew className="bg-black!">
+        <GridLines />
+
+        <Cell col={1} row={1} colSpan={6} rowSpan={6} zIndex={0}>
+          <div className="w-full h-full transition-transform duration-700 ease-out group-hover:scale-110">
+            <ImageBlock src="/images/experiments/vr02.png" alt="VR headset" mask="fade-down" />
+          </div>
+        </Cell>
+        <Cell col={1} row={1} colSpan={6} rowSpan={6} zIndex={0}>
+          <GradientBlock
+            direction="135deg"
+            stops={[
+              { color: 'var(--theme-purple)', position: 0 },
+              { color: 'var(--theme-cyan)', position: 40 },
+              { color: 'transparent', position: 80 },
+            ]}
+            opacity={0.4}
+          />
+        </Cell>
+
+        <Cell col={1} row={1} zIndex={1}>
+          <IconQuad icons={{ tl: 'google-cardboard', tr: 'cube-focus' }} showDivider={false} />
+        </Cell>
+        <Cell col={2} row={1} zIndex={1}>
+          <IconQuad icons={{ tl: 'virtual-reality', tr: 'globe' }} showDivider={false} />
+        </Cell>
+        <Cell col={6} row={5} zIndex={1}>
+          <IconQuad icons={{ tr: 'crane', br: 'hard-hat' }} showDivider={false} opacity={0.6} />
+        </Cell>
+        <Cell col={6} row={6} zIndex={1}>
+          <IconQuad icons={{ tr: 'cube', br: 'blueprint' }} showDivider={false} opacity={0.6} />
+        </Cell>
+
+        <Cell col={1} row={5} colSpan={2} rowSpan={2} zIndex={1}>
+          <TextBlock fontSize={22.5} padding={2}>XR</TextBlock>
+        </Cell>
+        <Cell col={3} row={5} colSpan={3} zIndex={1}>
+          <TextBlock fontSize={7} fontWeight={750} mono uppercase letterSpacing="0.1em" padding={1.5} align="start">
+            Extended Reality
+          </TextBlock>
+        </Cell>
+        <Cell col={3} row={6} colSpan={3} zIndex={1}>
+          <div className="flex items-center w-full h-full select-none" style={{ paddingInline: '1.5cqi', fontSize: '3cqi' }}>
+            <span>
+              <span className="font-bold text-theme-white">VR: </span>
+              <span className="text-theme-white">Virtual Reality</span><br />
+              <span className="font-bold text-theme-white">AR: </span>
+              <span className="text-theme-white">Augmented Reality</span>
+            </span>
+          </div>
+        </Cell>
+      </FaceGridNew>
+    </div>
+  ),
+};
+
+/* ------------------------------------------------------------------ */
+/*  19 · HOVER: GRADIENT SHIFT                                         */
+/*  Gradient rotates and intensifies on hover.                         */
+/* ------------------------------------------------------------------ */
+
+// ─── 19 · Hover — Gradient Shift ────────────────────────────────────────────
+export const HoverGradientShift: Story = {
+  name: '19 – Hover: Gradient Shift',
+  render: () => (
+    <div className="group">
+      <FaceGridNew className="bg-black!">
+        <GridLines />
+
+        <Cell col={1} row={1} colSpan={6} rowSpan={6} zIndex={0}>
+          <ImageBlock src="/images/experiments/vr02.png" alt="VR headset" mask="fade-down" />
+        </Cell>
+        <Cell col={1} row={1} colSpan={6} rowSpan={6} zIndex={0}>
+          <div className="w-full h-full transition-opacity duration-700 ease-out group-hover:opacity-0">
+            <GradientBlock
+              direction="135deg"
+              stops={[
+                { color: 'var(--theme-purple)', position: 0 },
+                { color: 'var(--theme-cyan)', position: 40 },
+                { color: 'transparent', position: 80 },
+              ]}
+              opacity={0.4}
+            />
+          </div>
+        </Cell>
+        <Cell col={1} row={1} colSpan={6} rowSpan={6} zIndex={0}>
+          <div className="w-full h-full opacity-0 transition-opacity duration-700 ease-out group-hover:opacity-100">
+            <GradientBlock
+              direction="180deg"
+              stops={[
+                { color: 'var(--theme-cyan)', position: 0 },
+                { color: 'var(--theme-purple)', position: 50 },
+                { color: 'transparent', position: 90 },
+              ]}
+              opacity={0.55}
+            />
+          </div>
+        </Cell>
+
+        <Cell col={1} row={1} zIndex={1}>
+          <IconQuad icons={{ tl: 'google-cardboard', tr: 'cube-focus' }} showDivider={false} />
+        </Cell>
+        <Cell col={2} row={1} zIndex={1}>
+          <IconQuad icons={{ tl: 'virtual-reality', tr: 'globe' }} showDivider={false} />
+        </Cell>
+        <Cell col={6} row={5} zIndex={1}>
+          <IconQuad icons={{ tr: 'crane', br: 'hard-hat' }} showDivider={false} opacity={0.6} />
+        </Cell>
+        <Cell col={6} row={6} zIndex={1}>
+          <IconQuad icons={{ tr: 'cube', br: 'blueprint' }} showDivider={false} opacity={0.6} />
+        </Cell>
+
+        <Cell col={1} row={5} colSpan={2} rowSpan={2} zIndex={1}>
+          <TextBlock fontSize={22.5} padding={2}>XR</TextBlock>
+        </Cell>
+        <Cell col={3} row={5} colSpan={3} zIndex={1}>
+          <TextBlock fontSize={7} fontWeight={750} mono uppercase letterSpacing="0.1em" padding={1.5} align="start">
+            Extended Reality
+          </TextBlock>
+        </Cell>
+        <Cell col={3} row={6} colSpan={3} zIndex={1}>
+          <div className="flex items-center w-full h-full select-none" style={{ paddingInline: '1.5cqi', fontSize: '3cqi' }}>
+            <span>
+              <span className="font-bold text-theme-white">VR: </span>
+              <span className="text-theme-white">Virtual Reality</span><br />
+              <span className="font-bold text-theme-white">AR: </span>
+              <span className="text-theme-white">Augmented Reality</span>
+            </span>
+          </div>
+        </Cell>
+      </FaceGridNew>
+    </div>
+  ),
+};
+
+/* ------------------------------------------------------------------ */
+/*  20 · HOVER: GRID PULSE                                             */
+/*  Grid lines brighten on hover.                                      */
+/* ------------------------------------------------------------------ */
+
+// ─── 20 · Hover — Grid Pulse ────────────────────────────────────────────────
+export const HoverGridPulse: Story = {
+  name: '20 – Hover: Grid Pulse',
+  render: () => (
+    <div className="group">
+      <FaceGridNew className="bg-black!">
+        <div className="transition-opacity duration-500 ease-out group-hover:opacity-0" style={{ gridColumn: '1 / -1', gridRow: '1 / -1' }}>
+          <GridLines opacity={0.15} />
+        </div>
+        <div className="opacity-0 transition-opacity duration-500 ease-out group-hover:opacity-100" style={{ gridColumn: '1 / -1', gridRow: '1 / -1' }}>
+          <GridLines opacity={0.5} />
+        </div>
+
+        <Cell col={1} row={1} colSpan={6} rowSpan={6} zIndex={0}>
+          <ImageBlock src="/images/experiments/vr02.png" alt="VR headset" mask="fade-down" />
+        </Cell>
+        <Cell col={1} row={1} colSpan={6} rowSpan={6} zIndex={0}>
+          <GradientBlock
+            direction="135deg"
+            stops={[
+              { color: 'var(--theme-purple)', position: 0 },
+              { color: 'var(--theme-cyan)', position: 40 },
+              { color: 'transparent', position: 80 },
+            ]}
+            opacity={0.4}
+          />
+        </Cell>
+
+        <Cell col={1} row={1} zIndex={1}>
+          <IconQuad icons={{ tl: 'google-cardboard', tr: 'cube-focus' }} showDivider={false} />
+        </Cell>
+        <Cell col={2} row={1} zIndex={1}>
+          <IconQuad icons={{ tl: 'virtual-reality', tr: 'globe' }} showDivider={false} />
+        </Cell>
+        <Cell col={6} row={5} zIndex={1}>
+          <IconQuad icons={{ tr: 'crane', br: 'hard-hat' }} showDivider={false} opacity={0.6} />
+        </Cell>
+        <Cell col={6} row={6} zIndex={1}>
+          <IconQuad icons={{ tr: 'cube', br: 'blueprint' }} showDivider={false} opacity={0.6} />
+        </Cell>
+
+        <Cell col={1} row={5} colSpan={2} rowSpan={2} zIndex={1}>
+          <TextBlock fontSize={22.5} padding={2}>XR</TextBlock>
+        </Cell>
+        <Cell col={3} row={5} colSpan={3} zIndex={1}>
+          <TextBlock fontSize={7} fontWeight={750} mono uppercase letterSpacing="0.1em" padding={1.5} align="start">
+            Extended Reality
+          </TextBlock>
+        </Cell>
+        <Cell col={3} row={6} colSpan={3} zIndex={1}>
+          <div className="flex items-center w-full h-full select-none" style={{ paddingInline: '1.5cqi', fontSize: '3cqi' }}>
+            <span>
+              <span className="font-bold text-theme-white">VR: </span>
+              <span className="text-theme-white">Virtual Reality</span><br />
+              <span className="font-bold text-theme-white">AR: </span>
+              <span className="text-theme-white">Augmented Reality</span>
+            </span>
+          </div>
+        </Cell>
+      </FaceGridNew>
+    </div>
+  ),
+};
+
+/* ------------------------------------------------------------------ */
+/*  21 · HOVER: ICON SCATTER                                           */
+/*  Icons push away from centre on hover with staggered delays.        */
+/* ------------------------------------------------------------------ */
+
+// ─── 21 · Hover — Icon Scatter ──────────────────────────────────────────────
+export const HoverIconScatter: Story = {
+  name: '21 – Hover: Icon Scatter',
+  render: () => (
+    <div className="group">
+      <FaceGridNew className="bg-black!">
+        <GridLines />
+
+        <Cell col={1} row={1} colSpan={6} rowSpan={6} zIndex={0}>
+          <ImageBlock src="/images/experiments/vr02.png" alt="VR headset" mask="fade-down" />
+        </Cell>
+        <Cell col={1} row={1} colSpan={6} rowSpan={6} zIndex={0}>
+          <GradientBlock
+            direction="135deg"
+            stops={[
+              { color: 'var(--theme-purple)', position: 0 },
+              { color: 'var(--theme-cyan)', position: 40 },
+              { color: 'transparent', position: 80 },
+            ]}
+            opacity={0.4}
+          />
+        </Cell>
+
+        <Cell col={1} row={1} zIndex={1}>
+          <div className="w-full h-full transition-transform duration-500 ease-out group-hover:-translate-x-[1cqi] group-hover:-translate-y-[1cqi]">
+            <IconQuad icons={{ tl: 'google-cardboard', tr: 'cube-focus' }} showDivider={false} />
+          </div>
+        </Cell>
+        <Cell col={2} row={1} zIndex={1}>
+          <div className="w-full h-full transition-transform duration-500 ease-out delay-75 group-hover:-translate-y-[1.5cqi]">
+            <IconQuad icons={{ tl: 'virtual-reality', tr: 'globe' }} showDivider={false} />
+          </div>
+        </Cell>
+        <Cell col={6} row={5} zIndex={1}>
+          <div className="w-full h-full transition-transform duration-500 ease-out delay-75 group-hover:translate-x-[1cqi] group-hover:translate-y-[0.5cqi]">
+            <IconQuad icons={{ tr: 'crane', br: 'hard-hat' }} showDivider={false} opacity={0.6} />
+          </div>
+        </Cell>
+        <Cell col={6} row={6} zIndex={1}>
+          <div className="w-full h-full transition-transform duration-500 ease-out delay-150 group-hover:translate-x-[1.5cqi] group-hover:translate-y-[1cqi]">
+            <IconQuad icons={{ tr: 'cube', br: 'blueprint' }} showDivider={false} opacity={0.6} />
+          </div>
+        </Cell>
+
+        <Cell col={1} row={5} colSpan={2} rowSpan={2} zIndex={1}>
+          <TextBlock fontSize={22.5} padding={2}>XR</TextBlock>
+        </Cell>
+        <Cell col={3} row={5} colSpan={3} zIndex={1}>
+          <TextBlock fontSize={7} fontWeight={750} mono uppercase letterSpacing="0.1em" padding={1.5} align="start">
+            Extended Reality
+          </TextBlock>
+        </Cell>
+        <Cell col={3} row={6} colSpan={3} zIndex={1}>
+          <div className="flex items-center w-full h-full select-none" style={{ paddingInline: '1.5cqi', fontSize: '3cqi' }}>
+            <span>
+              <span className="font-bold text-theme-white">VR: </span>
+              <span className="text-theme-white">Virtual Reality</span><br />
+              <span className="font-bold text-theme-white">AR: </span>
+              <span className="text-theme-white">Augmented Reality</span>
+            </span>
+          </div>
+        </Cell>
+      </FaceGridNew>
+    </div>
+  ),
+};
+
+/* ------------------------------------------------------------------ */
+/*  22 · HOVER: XR GLOW                                                */
+/*  "XR" heading gets a cyan drop-shadow glow on hover.                */
+/* ------------------------------------------------------------------ */
+
+// ─── 22 · Hover — XR Glow ───────────────────────────────────────────────────
+export const HoverXRGlow: Story = {
+  name: '22 – Hover: XR Glow',
+  render: () => (
+    <div className="group">
+      <FaceGridNew className="bg-black!">
+        <GridLines />
+
+        <Cell col={1} row={1} colSpan={6} rowSpan={6} zIndex={0}>
+          <ImageBlock src="/images/experiments/vr02.png" alt="VR headset" mask="fade-down" />
+        </Cell>
+        <Cell col={1} row={1} colSpan={6} rowSpan={6} zIndex={0}>
+          <GradientBlock
+            direction="135deg"
+            stops={[
+              { color: 'var(--theme-purple)', position: 0 },
+              { color: 'var(--theme-cyan)', position: 40 },
+              { color: 'transparent', position: 80 },
+            ]}
+            opacity={0.4}
+          />
+        </Cell>
+
+        <Cell col={1} row={1} zIndex={1}>
+          <IconQuad icons={{ tl: 'google-cardboard', tr: 'cube-focus' }} showDivider={false} />
+        </Cell>
+        <Cell col={2} row={1} zIndex={1}>
+          <IconQuad icons={{ tl: 'virtual-reality', tr: 'globe' }} showDivider={false} />
+        </Cell>
+        <Cell col={6} row={5} zIndex={1}>
+          <IconQuad icons={{ tr: 'crane', br: 'hard-hat' }} showDivider={false} opacity={0.6} />
+        </Cell>
+        <Cell col={6} row={6} zIndex={1}>
+          <IconQuad icons={{ tr: 'cube', br: 'blueprint' }} showDivider={false} opacity={0.6} />
+        </Cell>
+
+        <Cell col={1} row={5} colSpan={2} rowSpan={2} zIndex={1}>
+          <div className="w-full h-full transition-all duration-700 ease-out group-hover:filter-[drop-shadow(0_0_8cqi_var(--theme-cyan))]">
+            <TextBlock fontSize={22.5} padding={2}>XR</TextBlock>
+          </div>
+        </Cell>
+        <Cell col={3} row={5} colSpan={3} zIndex={1}>
+          <TextBlock fontSize={7} fontWeight={750} mono uppercase letterSpacing="0.1em" padding={1.5} align="start">
+            Extended Reality
+          </TextBlock>
+        </Cell>
+        <Cell col={3} row={6} colSpan={3} zIndex={1}>
+          <div className="flex items-center w-full h-full select-none" style={{ paddingInline: '1.5cqi', fontSize: '3cqi' }}>
+            <span>
+              <span className="font-bold text-theme-white">VR: </span>
+              <span className="text-theme-white">Virtual Reality</span><br />
+              <span className="font-bold text-theme-white">AR: </span>
+              <span className="text-theme-white">Augmented Reality</span>
+            </span>
+          </div>
+        </Cell>
+      </FaceGridNew>
+    </div>
+  ),
+};
+
+/* ------------------------------------------------------------------ */
+/*  23 · HOVER: LAYERED REVEAL (COMBINED)                              */
+/*  Image zoom + gradient shift + grid brighten + icon scatter +       */
+/*  XR glow. Full layered depth effect.                                */
+/* ------------------------------------------------------------------ */
+
+// ─── 23 · Hover — Layered Reveal (Combined) ─────────────────────────────────
+export const HoverLayeredReveal: Story = {
+  name: '23 – Hover: Layered Reveal (Combined)',
+  render: () => (
+    <div className="group">
+      <FaceGridNew className="bg-black!">
+        <div className="transition-opacity duration-600 ease-out group-hover:opacity-0" style={{ gridColumn: '1 / -1', gridRow: '1 / -1' }}>
+          <GridLines opacity={0.15} />
+        </div>
+        <div className="opacity-0 transition-opacity duration-600 ease-out group-hover:opacity-100" style={{ gridColumn: '1 / -1', gridRow: '1 / -1' }}>
+          <GridLines opacity={0.4} />
+        </div>
+
+        <Cell col={1} row={1} colSpan={6} rowSpan={6} zIndex={0}>
+          <div className="w-full h-full transition-transform duration-700 ease-out group-hover:scale-110">
+            <ImageBlock src="/images/experiments/vr02.png" alt="VR headset" mask="fade-down" />
+          </div>
+        </Cell>
+        <Cell col={1} row={1} colSpan={6} rowSpan={6} zIndex={0}>
+          <div className="w-full h-full transition-opacity duration-700 ease-out group-hover:opacity-0">
+            <GradientBlock
+              direction="135deg"
+              stops={[
+                { color: 'var(--theme-purple)', position: 0 },
+                { color: 'var(--theme-cyan)', position: 40 },
+                { color: 'transparent', position: 80 },
+              ]}
+              opacity={0.4}
+            />
+          </div>
+        </Cell>
+        <Cell col={1} row={1} colSpan={6} rowSpan={6} zIndex={0}>
+          <div className="w-full h-full opacity-0 transition-opacity duration-700 ease-out group-hover:opacity-100">
+            <GradientBlock
+              direction="160deg"
+              stops={[
+                { color: 'var(--theme-cyan)', position: 0 },
+                { color: 'var(--theme-purple)', position: 45 },
+                { color: 'transparent', position: 85 },
+              ]}
+              opacity={0.55}
+            />
+          </div>
+        </Cell>
+
+        <Cell col={1} row={1} zIndex={1}>
+          <div className="w-full h-full transition-transform duration-500 ease-out group-hover:-translate-x-[1cqi] group-hover:-translate-y-[1cqi]">
+            <IconQuad icons={{ tl: 'google-cardboard', tr: 'cube-focus' }} showDivider={false} />
+          </div>
+        </Cell>
+        <Cell col={2} row={1} zIndex={1}>
+          <div className="w-full h-full transition-transform duration-500 ease-out delay-75 group-hover:-translate-y-[1.5cqi]">
+            <IconQuad icons={{ tl: 'virtual-reality', tr: 'globe' }} showDivider={false} />
+          </div>
+        </Cell>
+        <Cell col={6} row={5} zIndex={1}>
+          <div className="w-full h-full transition-transform duration-500 ease-out delay-75 group-hover:translate-x-[1cqi]">
+            <IconQuad icons={{ tr: 'crane', br: 'hard-hat' }} showDivider={false} opacity={0.6} />
+          </div>
+        </Cell>
+        <Cell col={6} row={6} zIndex={1}>
+          <div className="w-full h-full transition-transform duration-500 ease-out delay-150 group-hover:translate-x-[1.5cqi] group-hover:translate-y-[1cqi]">
+            <IconQuad icons={{ tr: 'cube', br: 'blueprint' }} showDivider={false} opacity={0.6} />
+          </div>
+        </Cell>
+
+        <Cell col={1} row={5} colSpan={2} rowSpan={2} zIndex={1}>
+          <div className="w-full h-full transition-all duration-700 ease-out group-hover:filter-[drop-shadow(0_0_8cqi_var(--theme-cyan))]">
+            <TextBlock fontSize={22.5} padding={2}>XR</TextBlock>
+          </div>
+        </Cell>
+        <Cell col={3} row={5} colSpan={3} zIndex={1}>
+          <TextBlock fontSize={7} fontWeight={750} mono uppercase letterSpacing="0.1em" padding={1.5} align="start">
+            Extended Reality
+          </TextBlock>
+        </Cell>
+        <Cell col={3} row={6} colSpan={3} zIndex={1}>
+          <div className="flex items-center w-full h-full select-none" style={{ paddingInline: '1.5cqi', fontSize: '3cqi' }}>
+            <span>
+              <span className="font-bold text-theme-white">VR: </span>
+              <span className="text-theme-white">Virtual Reality</span><br />
+              <span className="font-bold text-theme-white">AR: </span>
+              <span className="text-theme-white">Augmented Reality</span>
+            </span>
+          </div>
+        </Cell>
+      </FaceGridNew>
+    </div>
   ),
 };

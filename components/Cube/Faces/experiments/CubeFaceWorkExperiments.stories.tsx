@@ -84,6 +84,7 @@ type Story = StoryObj;
 /*  Two rows of three 2×3 blocks — no gaps, pure imagery.             */
 /* ------------------------------------------------------------------ */
 
+// ─── 1 · Image Mosaic ───────────────────────────────────────────────────────
 export const ImageMosaic: Story = {
   name: '1 – Image Mosaic',
   render: () => (
@@ -119,6 +120,7 @@ export const ImageMosaic: Story = {
 /*  image opacity — the grid structure becomes a design element.       */
 /* ------------------------------------------------------------------ */
 
+// ─── 2 · Image Grid with Lines ──────────────────────────────────────────────
 export const ImageGridWithLines: Story = {
   name: '2 – Image Grid with Lines',
   render: () => (
@@ -153,6 +155,7 @@ export const ImageGridWithLines: Story = {
 /*  2×2 thumbnails filling the L-shaped remainder.                    */
 /* ------------------------------------------------------------------ */
 
+// ─── 3 · Hero + Thumbnails ──────────────────────────────────────────────────
 export const HeroThumbnails: Story = {
   name: '3 – Hero + Thumbnails',
   render: () => (
@@ -192,6 +195,7 @@ export const HeroThumbnails: Story = {
 /*  Dark gradient at the bottom of each tile for readability.          */
 /* ------------------------------------------------------------------ */
 
+// ─── 4 · Labelled Mosaic ────────────────────────────────────────────────────
 export const LabelledMosaic: Story = {
   name: '4 – Labelled Mosaic',
   render: () => (
@@ -315,6 +319,7 @@ export const LabelledMosaic: Story = {
 /*  unifies the palette while keeping the imagery visible beneath.     */
 /* ------------------------------------------------------------------ */
 
+// ─── 5 · Gradient Mosaic ────────────────────────────────────────────────────
 export const GradientMosaic: Story = {
   name: '5 – Gradient Mosaic',
   render: () => (
@@ -420,6 +425,7 @@ export const GradientMosaic: Story = {
 /*  Image fades right, project name sits on the right side.            */
 /* ------------------------------------------------------------------ */
 
+// ─── 6 · Strip Layout ───────────────────────────────────────────────────────
 export const StripLayout: Story = {
   name: '6 – Strip Layout',
   render: () => (
@@ -495,6 +501,7 @@ export const StripLayout: Story = {
 /*  block with "Work" icons and the section heading.                   */
 /* ------------------------------------------------------------------ */
 
+// ─── 7 · Icon + Image Quad ──────────────────────────────────────────────────
 export const IconImageQuad: Story = {
   name: '7 – Icon + Image Quad',
   render: () => (
@@ -565,6 +572,7 @@ export const IconImageQuad: Story = {
 /*  bottom-left, scattered project image peeks, grid lines visible.   */
 /* ------------------------------------------------------------------ */
 
+// ─── 8 · Dark Portfolio ─────────────────────────────────────────────────────
 export const DarkPortfolio: Story = {
   name: '8 – Dark Portfolio',
   render: () => (
@@ -669,6 +677,7 @@ export const DarkPortfolio: Story = {
 /*  different set — showing portfolio breadth.                         */
 /* ------------------------------------------------------------------ */
 
+// ─── 9 · Hover — Image Swap ─────────────────────────────────────────────────
 export const HoverImageSwap: Story = {
   name: '9 – Hover: Image Swap',
   render: () => (
@@ -730,6 +739,7 @@ export const HoverImageSwap: Story = {
 /*  darken each tile and project names slide/fade in.                  */
 /* ------------------------------------------------------------------ */
 
+// ─── 10 · Hover — Reveal Labels ─────────────────────────────────────────────
 export const HoverRevealLabels: Story = {
   name: '10 – Hover: Reveal Labels',
   render: () => (
@@ -849,6 +859,7 @@ export const HoverRevealLabels: Story = {
 /*  through. A multi-colour stripe bar cuts across at the mid-point.   */
 /* ------------------------------------------------------------------ */
 
+// ─── 11 · Strip + Colour Block ──────────────────────────────────────────────
 export const StripColourBlock: Story = {
   name: '11 – Strip + Colour Block',
   render: () => (
@@ -958,6 +969,7 @@ export const StripColourBlock: Story = {
 /*  Refs: Slowerpace cassette tracklisting / K.Flay FML artwork.      */
 /* ------------------------------------------------------------------ */
 
+// ─── 12 · Acid Colour Block ─────────────────────────────────────────────────
 export const AcidColourBlock: Story = {
   name: '12 – Acid Colour Block',
   render: () => (
@@ -1213,6 +1225,7 @@ function pickRandomColor() {
   return THEME_COLORS[Math.floor(Math.random() * THEME_COLORS.length)];
 }
 
+// ─── 13 · Acid Icons ────────────────────────────────────────────────────────
 export const AcidIcons: Story = {
   name: '13 – Acid Icons',
   render: () => {
@@ -1482,6 +1495,7 @@ export const AcidIcons: Story = {
 /*  theme colour background. Uniform, systematic, poster-ready.        */
 /* ------------------------------------------------------------------ */
 
+// ─── 14 · Acid Icons (Consistent) ───────────────────────────────────────────
 export const AcidIconsConsistent: Story = {
   name: '14 – Acid Icons (Consistent)',
   render: () => {
@@ -1715,6 +1729,7 @@ export const AcidIconsConsistent: Story = {
 /*  bottom-right. 100% black grid lines. Random bg colour.             */
 /* ------------------------------------------------------------------ */
 
+// ─── 15 · Acid Colour + Icons (No Images) ───────────────────────────────────
 export const AcidNoImages: Story = {
   name: '15 – Acid Colour + Icons (No Images)',
   render: () => {
@@ -1885,6 +1900,7 @@ export const AcidNoImages: Story = {
 /*  StripeBars component instead of inline markup.                     */
 /* ------------------------------------------------------------------ */
 
+// ─── 16 · Acid Flat — Text Top-Left ─────────────────────────────────────────
 export const AcidFlatTextTopLeft: Story = {
   name: '16 – Acid Flat — Text Top-Left',
   render: () => {
