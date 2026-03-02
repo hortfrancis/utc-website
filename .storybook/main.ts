@@ -9,7 +9,7 @@ const config: StorybookConfig = {
     head.replace(/<title>.*?<\/title>/, '<title>UTC Design System – Storybook</title>'),
   staticDirs: ['../public'],
   addons: [
-    '@chromatic-com/storybook',
+    // '@chromatic-com/storybook',
     '@storybook/addon-a11y',
     '@storybook/addon-docs',
     '@storybook/addon-onboarding',

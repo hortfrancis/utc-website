@@ -8,3 +8,8 @@ const nextConfig: NextConfig = {
 const withMDX = createMDX({});
 
 export default withMDX(nextConfig);
+
+const isStorybook = process.env.STORYBOOK === '1' || process.env.STORYBOOK_BUILD === '1';
+if (!isStorybook) {
+  void import('@opennextjs/cloudflare').then((m) => m.initOpenNextCloudflareForDev());
+}
