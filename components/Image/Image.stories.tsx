@@ -56,11 +56,11 @@ export const Default: Story = {
   },
 };
 
-/** Bare image — no frame, no border. */
-export const Bare: Story = {
+/** Framed without a visible border. */
+export const WithoutBorders: Story = {
   args: {
     ...SAMPLE,
-    framed: false,
+    borderSides: [],
   },
 };
 
@@ -69,5 +69,23 @@ export const WithRoundedCorners: Story = {
   args: {
     ...SAMPLE,
     roundedCorners: ['top-left', 'bottom-right'],
+  },
+};
+
+/** Blend mode against a solid coloured background. */
+export const BlendModeColoured: Story = {
+  args: {
+    ...SAMPLE,
+    background: 'bg-theme-cyan',
+    className: 'mix-blend-luminosity',
+  },
+};
+
+/** Blend mode against a gradient background. */
+export const BlendModeGradient: Story = {
+  args: {
+    ...SAMPLE,
+    background: 'bg-linear-to-r from-theme-orange to-theme-purple',
+    className: 'mix-blend-luminosity',
   },
 };
