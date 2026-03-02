@@ -19,6 +19,8 @@ export interface StripeBarsProps {
   zIndex?: number;
 }
 
+const NAME = 'cube-face-stripe-bars';
+
 const DEFAULT_BARS: StripeBarDef[] = [
   {
     row: 2,
@@ -56,7 +58,7 @@ export default function StripeBars({
 }: StripeBarsProps) {
   return (
     <div
-      data-component="StripeBars"
+      data-component={NAME}
       style={{
         gridColumn: '1 / -1',
         gridRow: '1 / -1',

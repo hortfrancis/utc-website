@@ -1,6 +1,6 @@
 import type { Meta, StoryObj } from '@storybook/nextjs';
 import FaceGrid from '../FaceGrid';
-import { Cell, TextBlock } from '../primitives';
+import { Cell, TextBlock, StripeBars, GridLines, IconQuad } from '../primitives';
 
 /* ================================================================== */
 /*                                                                     */
@@ -46,8 +46,8 @@ type Story = StoryObj;
 /* ================================================================== */
 
 // ─── 1 · Placeholder ────────────────────────────────────────────────────────
-export const Placeholder: Story = {
-  name: '1 – Placeholder',
+export const Basic: Story = {
+  name: '1 – Basic',
   render: () => (
     <FaceGrid>
       <Cell col={1} row={1} colSpan={6} rowSpan={6}>
@@ -55,6 +55,68 @@ export const Placeholder: Story = {
           Placeholder
         </TextBlock>
       </Cell>
+    </FaceGrid>
+  ),
+};
+
+/* ------------------------------------------------------------------ */
+/*  2 · MINIMAL CORNER                                                 */
+/*  Simple text only: "NEWS" bottom-left, "Newsletter" / "Videos"     */
+/*  top-right. Add elements from this baseline.                         */
+/* ------------------------------------------------------------------ */
+
+// ─── 2 · Minimal Corner ─────────────────────────────────────────────────────
+export const MultipleElements: Story = {
+  name: '2 – Multiple Elements',
+  render: () => (
+    <FaceGrid>
+      <GridLines color="var(--theme-cyan)" opacity={0.2} />
+      {/* Top-left icons */}
+      <Cell col={1} row={1}>
+        <IconQuad
+          icons={{ tl: 'cube', tr: 'sparkle', bl: 'rocket' }}
+          showDivider={false}
+          color="var(--theme-cyan)"
+        />
+      </Cell>
+      {/* Top-right labels */}
+      <Cell col={5} row={1} colSpan={2}>
+        <div className="flex flex-col items-end justify-start w-full h-full select-none" style={{ padding: '2cqi' }}>
+          <span className="text-theme-cyan/50 font-bold tracking-wider" style={{ fontSize: '5cqi' }}>Placeholder</span>
+          <span className="text-theme-orange/50 font-bold tracking-wider mt-0.5" style={{ fontSize: '5cqi' }}>Placeholder</span>
+          <span className="text-theme-green font-bold tracking-wider mt-0.5" style={{ fontSize: '5cqi' }}>Placeholder</span>
+        </div>
+      </Cell>
+
+      {/* Hero type — bottom-left */}
+      <Cell col={1} row={4} colSpan={5} rowSpan={2}>
+        <TextBlock
+          fontSize={16}
+          color="var(--theme-magenta)"
+          fontWeight={900}
+          letterSpacing="-0.04em"
+          align="start"
+          padding={2}
+        >
+          Placeholder
+        </TextBlock>
+      </Cell>
+
+      <StripeBars
+        bars={[
+          {
+            row: 4.5,
+            colors: [
+              'var(--theme-green)',
+              'var(--theme-magenta)',
+              'var(--theme-orange)',
+              'var(--theme-purple)',
+              'var(--theme-cyan)',
+              'var(--theme-orange)',
+            ],
+          },
+        ]}
+      />
     </FaceGrid>
   ),
 };
