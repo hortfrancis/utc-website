@@ -15,7 +15,7 @@ import type { FacePosition } from './Cube';
  * - Tab visibility awareness (pauses when tab is hidden)
  */
 const meta = {
-  title: 'Organisms/Cube',
+  title: 'Cube',
   component: Cube,
   parameters: {
     layout: 'fullscreen',

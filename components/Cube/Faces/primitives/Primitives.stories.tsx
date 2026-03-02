@@ -9,7 +9,7 @@ import {
   TextBlock,
   IconQuad,
   IconSingle,
-} from '../primitives';
+} from '.';
 
 /* ================================================================== */
 /*                                                                     */
@@ -30,7 +30,7 @@ import {
 /* ================================================================== */
 
 const meta = {
-  title: 'Experiments/Cube Face Primitives',
+  title: 'Cube/Face Primitives',
   parameters: {
     layout: 'centered',
     docs: {
