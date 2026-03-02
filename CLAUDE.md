@@ -145,6 +145,16 @@ they will cause runtime errors.
 
 ---
 
+## Storybook + OpenNext/Cloudflare — `workerd` hang
+
+Never add unconditional side-effects to `next.config.ts` that start long-running
+processes. `@storybook/nextjs` evaluates the config at build time — anything that
+spawns a child process (e.g. `initOpenNextCloudflareForDev()` → `workerd`) will
+keep Node alive and the build will hang. Always gate behind `STORYBOOK_BUILD` /
+`STORYBOOK` env vars. Full writeup: [`docs/storybook-workerd-hang.md`](docs/storybook-workerd-hang.md).
+
+---
+
 ## General conventions
 
 - **TypeScript** throughout — no `any`, no implicit types on component props.

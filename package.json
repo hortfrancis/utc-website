@@ -7,14 +7,16 @@
     "dev": "next dev --turbopack",
     "start": "next start",
     "lint": "next lint",
-    "storybook": "storybook dev -p 6006",
-    "build-storybook": "storybook build",
     "typecheck": "tsc --noEmit",
     "smoke": "npm run typecheck && npm run build && npm run build-storybook",
     "prepare": "husky",
     "preview": "opennextjs-cloudflare build && opennextjs-cloudflare preview",
     "deploy": "opennextjs-cloudflare build && opennextjs-cloudflare deploy",
     "upload": "opennextjs-cloudflare build && opennextjs-cloudflare upload",
+    "storybook": "storybook dev -p 6006",
+    "build-storybook": "STORYBOOK_BUILD=1 storybook build --disable-telemetry",
+    "preview-storybook": "npm run build-storybook && wrangler dev --config workers/storybook/wrangler.jsonc",
+    "deploy-storybook": "npm run build-storybook && wrangler deploy --config workers/storybook/wrangler.jsonc",
     "cf-typegen": "wrangler types --env-interface CloudflareEnv cloudflare-env.d.ts"
   },
   "dependencies": {

@@ -9,4 +9,7 @@ const withMDX = createMDX({});
 
 export default withMDX(nextConfig);
 
-import('@opennextjs/cloudflare').then(m => m.initOpenNextCloudflareForDev());
+const isStorybook = process.env.STORYBOOK === '1' || process.env.STORYBOOK_BUILD === '1';
+if (!isStorybook) {
+  void import('@opennextjs/cloudflare').then((m) => m.initOpenNextCloudflareForDev());
+}
