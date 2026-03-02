@@ -89,7 +89,7 @@ this breaks `overflow-hidden` clipping and `cqi` unit resolution.
   <Cell col={1} row={5} colSpan={3} zIndex={1}>
     <TextBlock fontSize={22}>XR</TextBlock>
   </Cell>
-  <StripeBars />
+  <Cell col={1} row={2} colSpan={6} zIndex={5}><StripeBars /></Cell>
 </FaceGrid>
 
 // ❌ wrong — breaks clipping and cqi units
@@ -115,7 +115,7 @@ for working examples of every primitive.
 | `TextBlock` | CQI-scaled text — uses `fontSize` (not `size`), children not `text` prop |
 | `IconQuad` | 4 icons — `icons={{ tl, tr, bl, br }}` object, not an array |
 | `IconSingle` | Single centred icon — `name`, `color`, `weight`, `iconSize` |
-| `StripeBars` | Thin horizontal colour bars at row boundaries — must be a direct `FaceGrid` child |
+| `StripeBars` | Thin horizontal colour bar — fills its `Cell`, place with `<Cell>` like any content primitive |
 
 ### Icon names
 

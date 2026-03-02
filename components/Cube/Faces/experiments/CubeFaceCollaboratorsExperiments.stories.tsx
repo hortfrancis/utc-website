@@ -220,9 +220,9 @@ export const ColourBlock: Story = {
       </Cell>
 
       {/* Stripe bar — C1-C6 / R3/R4 boundary */}
-      <StripeBars
-        bars={[{ row: 3, colors: ['var(--theme-orange)', 'var(--theme-magenta)', 'var(--theme-cyan)', 'var(--theme-purple)'] }]}
-      />
+      <Cell col={1} row={3} colSpan={6} zIndex={1}>
+        <StripeBars colors={['var(--theme-orange)', 'var(--theme-magenta)', 'var(--theme-cyan)', 'var(--theme-purple)']} />
+      </Cell>
 
       {/* Overlaid "PEOPLE" type */}
       <Cell col={1} row={1} colSpan={6} rowSpan={6} zIndex={2}>
@@ -318,9 +318,9 @@ export const InfoCard: Story = {
       </Cell>
 
       {/* Stripe accent — top of R6 */}
-      <StripeBars
-        bars={[{ row: 5, colors: ['var(--theme-magenta)', 'var(--theme-orange)', 'var(--theme-cyan)', 'var(--theme-green)'] }]}
-      />
+      <Cell col={1} row={5} colSpan={6} zIndex={1}>
+        <StripeBars colors={['var(--theme-magenta)', 'var(--theme-orange)', 'var(--theme-cyan)', 'var(--theme-green)']} />
+      </Cell>
 
       {/* Bottom CTA bar — R6 */}
       <Cell col={1} colSpan={6} row={6} zIndex={2}>
@@ -442,7 +442,8 @@ export const IconQuadShowcase: Story = {
         </TextBlock>
       </Cell>
 
-      <StripeBars />
+      <Cell col={1} row={2} colSpan={6} zIndex={5}><StripeBars /></Cell>
+      <Cell col={1} row={4} colSpan={6} zIndex={5}><StripeBars colors={['var(--theme-green)', 'var(--theme-magenta)', 'var(--theme-orange)', 'var(--theme-purple)', 'var(--theme-cyan)', 'var(--theme-orange)']} /></Cell>
     </FaceGrid>
   ),
 };
@@ -547,7 +548,8 @@ export const PortraitsIconQuad: Story = {
         </div>
       </Cell>
 
-      <StripeBars />
+      <Cell col={1} row={2} colSpan={6} zIndex={5}><StripeBars /></Cell>
+      <Cell col={1} row={4} colSpan={6} zIndex={5}><StripeBars colors={['var(--theme-green)', 'var(--theme-magenta)', 'var(--theme-orange)', 'var(--theme-purple)', 'var(--theme-cyan)', 'var(--theme-orange)']} /></Cell>
     </FaceGrid>
   ),
 };

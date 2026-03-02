@@ -727,35 +727,27 @@ export const IconSingleDemo: Story = {
 
 // ─── 9 · StripeBars ─────────────────────────────────────────────────────────
 /*
- * Thin horizontal colour-stripe bars placed across the full face width.
- * Each bar sits at a row boundary and consists of equal-width colour
- * segments. Must be a DIRECT child of FaceGrid — not inside a Cell.
- * Self-positions using gridColumn/gridRow span internally.
+ * Thin horizontal colour-stripe bar. Fills its parent Cell — use <Cell>
+ * to control grid position, exactly like every other content primitive.
  *
  * Props:
- *   bars?      — StripeBarDef[]. Default: two bars at rows 2 and 4
- *                with the standard acid palette.
- *                StripeBarDef: { row: number, colors: string[] }
- *                  row    — boundary after which row the bar appears
- *                           (e.g. row=2 → between rows 2 and 3)
- *                  colors — ordered CSS colours, left → right
- *                           (6 segments recommended, one per grid column)
- *   thickness? — bar height in cqi. Default: ~3.33 (20% of one grid row)
- *   zIndex?    — stacking order. Default: 5
+ *   colors?        — ordered CSS colours, left → right.
+ *                    Default: standard 6-colour acid palette.
+ *   thickness?     — bar height in cqi. Default: ~3.33 (20% of one grid row)
+ *   verticalAlign? — 'start' (top of cell, default) | 'center' | 'end'
+ *                    Use 'center' to sit on the row mid-line,
+ *                    'end' to sit on the lower row boundary.
  *
  * Usage:
- *   <FaceGrid>
- *     <StripeBars />   // default — two acid-palette bars at rows 2 and 4
- *   </FaceGrid>
+ *   // Bar at the top of row 2 (default)
+ *   <Cell col={1} row={2} colSpan={6} zIndex={5}>
+ *     <StripeBars />
+ *   </Cell>
  *
- *   <FaceGrid>
- *     <StripeBars
- *       bars={[{ row: 3, colors: ['var(--theme-cyan)', 'var(--theme-magenta)', ...] }]}
- *       thickness={5}
- *     />
- *   </FaceGrid>
- *
- * ⚠ StripeBars must be a direct FaceGrid child, not wrapped in a Cell.
+ *   // Bar centred within row 5 — sits on the row 4/5 mid-line
+ *   <Cell col={1} row={5} colSpan={6} zIndex={5}>
+ *     <StripeBars verticalAlign="center" />
+ *   </Cell>
  */
 export const StripeBarsDemo: Story = {
   name: '9 – StripeBars',
@@ -763,7 +755,6 @@ export const StripeBarsDemo: Story = {
     <FaceGrid className="bg-theme-black!">
       <GridLines opacity={0.08} />
 
-      {/* Background content so bars visually overlay something */}
       <Cell col={1} row={1} colSpan={6} rowSpan={6}>
         <GradientBlock
           direction="135deg"
@@ -775,66 +766,68 @@ export const StripeBarsDemo: Story = {
         />
       </Cell>
 
-      {/* Default StripeBars — zero config, acid palette at rows 2 and 4 */}
-      <StripeBars />
+      {/* R1 — default acid palette, start (default) */}
+      <Cell col={1} row={1} colSpan={6} zIndex={5}>
+        <StripeBars />
+      </Cell>
 
-      {/* Custom bar at row 1 — thicker, paired colours */}
-      <StripeBars
-        bars={[
-          {
-            row: 1,
-            colors: [
-              'var(--theme-cyan)',
-              'var(--theme-cyan)',
-              'var(--theme-magenta)',
-              'var(--theme-magenta)',
-              'var(--theme-orange)',
-              'var(--theme-orange)',
-            ],
-          },
-        ]}
-        thickness={6}
-        zIndex={6}
-      />
+      {/* R2–R4 — verticalAlign: start / center / end */}
+      <Cell col={1} row={2} colSpan={4} zIndex={5}>
+        <StripeBars colors={['var(--theme-magenta)', 'var(--theme-magenta)', 'var(--theme-magenta)', 'var(--theme-magenta)']} verticalAlign="start" />
+      </Cell>
+      <Cell col={1} row={3} colSpan={4} zIndex={5}>
+        <StripeBars colors={['var(--theme-magenta)', 'var(--theme-magenta)', 'var(--theme-magenta)', 'var(--theme-magenta)']} verticalAlign="center" />
+      </Cell>
+      <Cell col={1} row={4} colSpan={4} zIndex={5}>
+        <StripeBars colors={['var(--theme-magenta)', 'var(--theme-magenta)', 'var(--theme-magenta)', 'var(--theme-magenta)']} verticalAlign="end" />
+      </Cell>
 
-      {/* Custom bar at row 5 — monochrome green, thin */}
-      <StripeBars
-        bars={[
-          {
-            row: 5,
-            colors: [
-              'var(--theme-green)',
-              'var(--theme-green)',
-              'var(--theme-green)',
-              'var(--theme-green)',
-              'var(--theme-green)',
-              'var(--theme-green)',
-            ],
-          },
-        ]}
-        thickness={2}
-        zIndex={6}
-      />
+      {/* R5 — thick custom bar */}
+      <Cell col={1} row={5} colSpan={6} zIndex={5}>
+        <StripeBars
+          colors={['var(--theme-cyan)', 'var(--theme-cyan)', 'var(--theme-orange)', 'var(--theme-orange)', 'var(--theme-green)', 'var(--theme-green)']}
+          thickness={6}
+        />
+      </Cell>
+
+      {/* R6 — thin monochrome bar */}
+      <Cell col={1} row={6} colSpan={6} zIndex={5}>
+        <StripeBars
+          colors={['var(--theme-green)', 'var(--theme-green)', 'var(--theme-green)', 'var(--theme-green)', 'var(--theme-green)', 'var(--theme-green)']}
+          thickness={2}
+          verticalAlign="center"
+        />
+      </Cell>
 
       {/* Labels */}
       <Cell col={1} row={1} colSpan={6} zIndex={10}>
-        <TextBlock fontSize={3} opacity={0.45} mono uppercase letterSpacing="0.1em" padding={1} align="start">
-          row 1 — custom (thick)
+        <TextBlock fontSize={3} opacity={0.4} mono uppercase letterSpacing="0.1em" padding={1} align="start">
+          default
         </TextBlock>
       </Cell>
-      <Cell col={1} row={2} colSpan={6} zIndex={10}>
-        <TextBlock fontSize={3} opacity={0.45} mono uppercase letterSpacing="0.1em" padding={1} align="start">
-          row 2 — default
+      <Cell col={5} row={2} colSpan={2} zIndex={10}>
+        <TextBlock fontSize={3} opacity={0.4} mono uppercase letterSpacing="0.1em" align="start" padding={1}>
+          start
         </TextBlock>
       </Cell>
-      <Cell col={1} row={4} colSpan={6} zIndex={10}>
-        <TextBlock fontSize={3} opacity={0.45} mono uppercase letterSpacing="0.1em" padding={1} align="start">
-          row 4 — default
+      <Cell col={5} row={3} colSpan={2} zIndex={10}>
+        <TextBlock fontSize={3} opacity={0.4} mono uppercase letterSpacing="0.1em" align="center" padding={1}>
+          center
+        </TextBlock>
+      </Cell>
+      <Cell col={5} row={4} colSpan={2} zIndex={10}>
+        <TextBlock fontSize={3} opacity={0.4} mono uppercase letterSpacing="0.1em" align="end" padding={1}>
+          end
         </TextBlock>
       </Cell>
       <Cell col={1} row={5} colSpan={6} zIndex={10}>
-        <TextBlock fontSize={3} opacity={0.45} mono uppercase letterSpacing="0.1em" padding={1} align="start">
-          row 5 — custom (thin)
+        <TextBlock fontSize={3} opacity={0.4} mono uppercase letterSpacing="0.1em" padding={1} align="start">
+          thick
+        </TextBlock>
+      </Cell>
+      <Cell col={1} row={6} colSpan={6} zIndex={10}>
+        <TextBlock fontSize={3} opacity={0.4} mono uppercase letterSpacing="0.1em" padding={1} align="start">
+          thin · center
         </TextBlock>
       </Cell>
     </FaceGrid>

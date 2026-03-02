@@ -102,21 +102,9 @@ export const MultipleElements: Story = {
         </TextBlock>
       </Cell>
 
-      <StripeBars
-        bars={[
-          {
-            row: 4.5,
-            colors: [
-              'var(--theme-green)',
-              'var(--theme-magenta)',
-              'var(--theme-orange)',
-              'var(--theme-purple)',
-              'var(--theme-cyan)',
-              'var(--theme-orange)',
-            ],
-          },
-        ]}
-      />
+      <Cell col={1} row={5} colSpan={6} zIndex={5}>
+        <StripeBars colors={['var(--theme-green)', 'var(--theme-magenta)', 'var(--theme-orange)', 'var(--theme-purple)', 'var(--theme-cyan)', 'var(--theme-orange)']} verticalAlign="center" />
+      </Cell>
     </FaceGrid>
   ),
 };

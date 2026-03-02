@@ -113,7 +113,8 @@ export default function Work() {
           />
         </Cell>
 
-        <StripeBars />
+        <Cell col={1} row={2} colSpan={6} zIndex={5}><StripeBars /></Cell>
+        <Cell col={1} row={4} colSpan={6} zIndex={5}><StripeBars colors={['var(--theme-green)', 'var(--theme-magenta)', 'var(--theme-orange)', 'var(--theme-purple)', 'var(--theme-cyan)', 'var(--theme-orange)']} /></Cell>
 
         {/* ── Centre zone: "Work" ──────────────────────────────── */}
         <Cell col={1} row={3} colSpan={6} rowSpan={2} zIndex={3}>
