@@ -49,7 +49,7 @@ const IMG = {
 /* ------------------------------------------------------------------ */
 
 const meta = {
-  title: 'Experiments/Cube Face Work',
+  title: 'Experiments/Cube Faces/Work',
   parameters: {
     layout: 'centered',
     docs: {

@@ -27,7 +27,7 @@ import Icon from '../../../Icon/Icon';
 /* ================================================================== */
 
 const meta = {
-  title: 'Experiments/Cube Face Collaborators',
+  title: 'Experiments/Cube Faces/Collaborators',
   parameters: {
     layout: 'centered',
     docs: {

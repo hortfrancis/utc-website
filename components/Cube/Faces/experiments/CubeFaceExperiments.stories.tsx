@@ -52,7 +52,7 @@ function FaceGrid({
  * Content: "XR: Extended Reality" · "AR: Augmented Reality" · "VR: Virtual Reality"
  */
 const meta = {
-  title: 'Experiments/Cube Face XR',
+  title: 'Experiments/Cube Faces/XR',
   parameters: {
     layout: 'centered',
     docs: {

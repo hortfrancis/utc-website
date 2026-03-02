@@ -16,7 +16,7 @@ import { Cell, TextBlock } from '../primitives';
 /* ================================================================== */
 
 const meta = {
-  title: 'Experiments/Cube Face News',
+  title: 'Experiments/Cube Faces/News',
   parameters: {
     layout: 'centered',
     docs: {
