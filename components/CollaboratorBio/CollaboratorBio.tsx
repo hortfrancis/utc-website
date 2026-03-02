@@ -149,6 +149,9 @@ export default function CollaboratorBio({
   const hasInstagram = Boolean(instagram);
   const hasContactRow = hasEmail || hasWeb || hasLinkedin || hasInstagram;
 
+  // Remove https:// and /
+  const displayedWebsite = web ? web.replace('https://', '').replace('www.', '').replace('/', '') : undefined;
+
   return (
     <div
       data-testid={COLLABORATOR_BIO_DATA_TESTID}
@@ -208,7 +211,7 @@ export default function CollaboratorBio({
         {hasContactRow && (
           <Frame borderSides={['left', 'right', 'bottom']} className="px-4 py-2 text-sm leading-6 sm:leading-5 flex flex-wrap items-center gap-x-3 gap-y-1">
             {hasEmail && email && <Anchor href={`mailto:${email}`}>{email}</Anchor>}
-            {hasWeb && web && <Anchor href={normaliseWebHref(web)}>{web}</Anchor>}
+            {hasWeb && web && <Anchor href={normaliseWebHref(web)}>{displayedWebsite}</Anchor>}
             {hasLinkedin && linkedin && (
               <Anchor href={normaliseWebHref(linkedin)} aria-label="LinkedIn">
                 <Icon name="linkedin" size={16} className="inline-block align-middle" />
