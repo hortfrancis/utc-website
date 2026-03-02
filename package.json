@@ -15,8 +15,8 @@
     "upload": "opennextjs-cloudflare build && opennextjs-cloudflare upload",
     "storybook": "storybook dev -p 6006",
     "build-storybook": "STORYBOOK_BUILD=1 storybook build --disable-telemetry",
-    "preview-storybook": "npm run build-storybook && wrangler dev --config workers/storybook/wrangler.jsonc",
-    "deploy-storybook": "npm run build-storybook && wrangler deploy --config workers/storybook/wrangler.jsonc",
+    "preview-storybook": "npm run build-storybook && cd workers/storybook && npx wrangler dev",
+    "deploy-storybook": "npm run build-storybook && cd workers/storybook && npx wrangler deploy",
     "cf-typegen": "wrangler types --env-interface CloudflareEnv cloudflare-env.d.ts"
   },
   "dependencies": {
