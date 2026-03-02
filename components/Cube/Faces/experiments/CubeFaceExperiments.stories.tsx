@@ -1140,7 +1140,7 @@ export const FullComposition: Story = {
         <TextBlock fontSize={22.5} padding={2}>XR</TextBlock>
       </Cell>
       <Cell col={3} row={5} colSpan={4} zIndex={1}>
-        <TextBlock fontSize={7} fontWeight={750} mono uppercase letterSpacing="0.1em" opacity={0.7} padding={1.5} align="start">
+        <TextBlock fontSize={7} fontWeight={750} mono uppercase letterSpacing="0.1em" opacity={0.7} padding={1.5} alignHorizontal="start" alignVertical="start">
           Extended Reality
         </TextBlock>
       </Cell>
@@ -1203,7 +1203,7 @@ export const FullCompositionV2: Story = {
         <TextBlock fontSize={22.5} padding={2}>XR</TextBlock>
       </Cell>
       <Cell col={3} row={5} colSpan={3} zIndex={1}>
-        <TextBlock fontSize={7} fontWeight={750} mono uppercase letterSpacing="0.1em" padding={1.5} align="start">
+        <TextBlock fontSize={7} fontWeight={750} mono uppercase letterSpacing="0.1em" padding={1.5} alignHorizontal="start" alignVertical="start">
           Extended Reality
         </TextBlock>
       </Cell>
@@ -1269,7 +1269,7 @@ export const HoverImageParallax: Story = {
           <TextBlock fontSize={22.5} padding={2}>XR</TextBlock>
         </Cell>
         <Cell col={3} row={5} colSpan={3} zIndex={1}>
-          <TextBlock fontSize={7} fontWeight={750} mono uppercase letterSpacing="0.1em" padding={1.5} align="start">
+          <TextBlock fontSize={7} fontWeight={750} mono uppercase letterSpacing="0.1em" padding={1.5} alignHorizontal="start" alignVertical="start">
             Extended Reality
           </TextBlock>
         </Cell>
@@ -1348,7 +1348,7 @@ export const HoverGradientShift: Story = {
           <TextBlock fontSize={22.5} padding={2}>XR</TextBlock>
         </Cell>
         <Cell col={3} row={5} colSpan={3} zIndex={1}>
-          <TextBlock fontSize={7} fontWeight={750} mono uppercase letterSpacing="0.1em" padding={1.5} align="start">
+          <TextBlock fontSize={7} fontWeight={750} mono uppercase letterSpacing="0.1em" padding={1.5} alignHorizontal="start" alignVertical="start">
             Extended Reality
           </TextBlock>
         </Cell>
@@ -1417,7 +1417,7 @@ export const HoverGridPulse: Story = {
           <TextBlock fontSize={22.5} padding={2}>XR</TextBlock>
         </Cell>
         <Cell col={3} row={5} colSpan={3} zIndex={1}>
-          <TextBlock fontSize={7} fontWeight={750} mono uppercase letterSpacing="0.1em" padding={1.5} align="start">
+          <TextBlock fontSize={7} fontWeight={750} mono uppercase letterSpacing="0.1em" padding={1.5} alignHorizontal="start" alignVertical="start">
             Extended Reality
           </TextBlock>
         </Cell>
@@ -1489,7 +1489,7 @@ export const HoverIconScatter: Story = {
           <TextBlock fontSize={22.5} padding={2}>XR</TextBlock>
         </Cell>
         <Cell col={3} row={5} colSpan={3} zIndex={1}>
-          <TextBlock fontSize={7} fontWeight={750} mono uppercase letterSpacing="0.1em" padding={1.5} align="start">
+          <TextBlock fontSize={7} fontWeight={750} mono uppercase letterSpacing="0.1em" padding={1.5} alignHorizontal="start" alignVertical="start">
             Extended Reality
           </TextBlock>
         </Cell>
@@ -1555,7 +1555,7 @@ export const HoverXRGlow: Story = {
           </div>
         </Cell>
         <Cell col={3} row={5} colSpan={3} zIndex={1}>
-          <TextBlock fontSize={7} fontWeight={750} mono uppercase letterSpacing="0.1em" padding={1.5} align="start">
+          <TextBlock fontSize={7} fontWeight={750} mono uppercase letterSpacing="0.1em" padding={1.5} alignHorizontal="start" alignVertical="start">
             Extended Reality
           </TextBlock>
         </Cell>
@@ -1652,7 +1652,7 @@ export const HoverLayeredReveal: Story = {
           </div>
         </Cell>
         <Cell col={3} row={5} colSpan={3} zIndex={1}>
-          <TextBlock fontSize={7} fontWeight={750} mono uppercase letterSpacing="0.1em" padding={1.5} align="start">
+          <TextBlock fontSize={7} fontWeight={750} mono uppercase letterSpacing="0.1em" padding={1.5} alignHorizontal="start" alignVertical="start">
             Extended Reality
           </TextBlock>
         </Cell>

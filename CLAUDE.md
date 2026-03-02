@@ -36,9 +36,14 @@ whenever a primitive is modified.
 components/Cube/Faces/experiments/
   CubeFaceXRExperiments.stories.tsx         ← formerly CubeFaceExperiments
   CubeFaceWorkExperiments.stories.tsx
+  CubeFaceWorkAcidFlatExperiments.stories.tsx   ← split from Work (file size)
   CubeFaceCollaboratorsExperiments.stories.tsx
   CubeFaceNewsExperiments.stories.tsx
 ```
+
+When a section's experiment file gets too large, split by layout family:
+`CubeFace{Section}{Subcategory}Experiments.stories.tsx` (e.g. Acid Flat).
+Storybook title nests under the section: `Experiments/Cube Face Work/Acid Flat`.
 
 These are **sandboxed layout explorations** — visual ideas for how a cube face
 might look. They use the primitives, but their purpose is creative exploration,
@@ -111,7 +116,7 @@ for working examples of every primitive.
 | `GridLines` | Decorative 6×6 border overlay |
 | `ColorBlock` | Solid colour fill |
 | `GradientBlock` | Linear gradient — takes `stops` array, not `fromColor`/`toColor` |
-| `ImageBlock` | Image with optional `mask` fade direction |
+| `ImageBlock` | Image with optional `mask` fade direction, `mixBlendMode` for layering |
 | `TextBlock` | CQI-scaled text — uses `fontSize` (not `size`), children not `text` prop |
 | `IconQuad` | 4 icons — `icons={{ tl, tr, bl, br }}` object, not an array |
 | `IconSingle` | Single centred icon — `name`, `color`, `weight`, `iconSize` |
@@ -133,6 +138,7 @@ they will cause runtime errors.
 |------|----------------|
 | `CubeFaceExperiments.stories.tsx` | `Experiments/Cube Face XR` |
 | `CubeFaceWorkExperiments.stories.tsx` | `Experiments/Cube Face Work` |
+| `CubeFaceWorkAcidFlatExperiments.stories.tsx` | `Experiments/Cube Face Work/Acid Flat` |
 | `CubeFaceCollaboratorsExperiments.stories.tsx` | `Experiments/Cube Face Collaborators` |
 | `CubeFaceNewsExperiments.stories.tsx` | `Experiments/Cube Face News` |
 | `primitives/Primitives.stories.tsx` | `Cube/Face Primitives` |

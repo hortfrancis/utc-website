@@ -221,7 +221,7 @@ export const LabelledMosaic: Story = {
           letterSpacing="0.1em"
           fontWeight={700}
           padding={1}
-          align="start"
+          alignHorizontal="start" alignVertical="start"
         >
           Construct.AR
         </TextBlock>
@@ -248,7 +248,7 @@ export const LabelledMosaic: Story = {
           letterSpacing="0.1em"
           fontWeight={700}
           padding={1}
-          align="start"
+          alignHorizontal="start" alignVertical="start"
         >
           Pop.XR
         </TextBlock>
@@ -275,7 +275,7 @@ export const LabelledMosaic: Story = {
           letterSpacing="0.1em"
           fontWeight={700}
           padding={1}
-          align="start"
+          alignHorizontal="start" alignVertical="start"
         >
           Tracing the Footprint
         </TextBlock>
@@ -302,7 +302,7 @@ export const LabelledMosaic: Story = {
           letterSpacing="0.1em"
           fontWeight={700}
           padding={1}
-          align="start"
+          alignHorizontal="start" alignVertical="start"
         >
           BT Urban.AR
         </TextBlock>
@@ -435,7 +435,7 @@ export const StripLayout: Story = {
         <ImageBlock src={IMG.construct} alt="Construct.AR" mask="fade-right" />
       </Cell>
       <Cell col={4} row={1} colSpan={3} zIndex={1}>
-        <TextBlock fontSize={2.8} mono uppercase letterSpacing="0.08em" fontWeight={700} padding={0.8} align="end">
+        <TextBlock fontSize={2.8} mono uppercase letterSpacing="0.08em" fontWeight={700} padding={0.8} alignHorizontal="end" alignVertical="end">
           Construct.AR
         </TextBlock>
       </Cell>
@@ -445,7 +445,7 @@ export const StripLayout: Story = {
         <ImageBlock src={IMG.popXr} alt="Pop.XR" mask="fade-right" />
       </Cell>
       <Cell col={4} row={2} colSpan={3} zIndex={1}>
-        <TextBlock fontSize={2.8} mono uppercase letterSpacing="0.08em" fontWeight={700} padding={0.8} align="end">
+        <TextBlock fontSize={2.8} mono uppercase letterSpacing="0.08em" fontWeight={700} padding={0.8} alignHorizontal="end" alignVertical="end">
           Pop.XR
         </TextBlock>
       </Cell>
@@ -455,7 +455,7 @@ export const StripLayout: Story = {
         <ImageBlock src={IMG.btUrban} alt="BT Urban.AR" mask="fade-right" />
       </Cell>
       <Cell col={4} row={3} colSpan={3} zIndex={1}>
-        <TextBlock fontSize={2.8} mono uppercase letterSpacing="0.08em" fontWeight={700} padding={0.8} align="end">
+        <TextBlock fontSize={2.8} mono uppercase letterSpacing="0.08em" fontWeight={700} padding={0.8} alignHorizontal="end" alignVertical="end">
           BT Urban.AR
         </TextBlock>
       </Cell>
@@ -465,7 +465,7 @@ export const StripLayout: Story = {
         <ImageBlock src={IMG.tracing} alt="Tracing the Footprint" mask="fade-right" />
       </Cell>
       <Cell col={4} row={4} colSpan={3} zIndex={1}>
-        <TextBlock fontSize={2.4} mono uppercase letterSpacing="0.08em" fontWeight={700} padding={0.8} align="end">
+        <TextBlock fontSize={2.4} mono uppercase letterSpacing="0.08em" fontWeight={700} padding={0.8} alignHorizontal="end" alignVertical="end">
           Tracing the Footprint
         </TextBlock>
       </Cell>
@@ -475,7 +475,7 @@ export const StripLayout: Story = {
         <ImageBlock src={IMG.sammys} alt="Sammy's Christmas Adventure" mask="fade-right" />
       </Cell>
       <Cell col={4} row={5} colSpan={3} zIndex={1}>
-        <TextBlock fontSize={2.4} mono uppercase letterSpacing="0.08em" fontWeight={700} padding={0.8} align="end">
+        <TextBlock fontSize={2.4} mono uppercase letterSpacing="0.08em" fontWeight={700} padding={0.8} alignHorizontal="end" alignVertical="end">
           Sammy&apos;s Christmas
         </TextBlock>
       </Cell>
@@ -485,7 +485,7 @@ export const StripLayout: Story = {
         <ImageBlock src={IMG.btMfg} alt="BT Manufacturing Showcase" mask="fade-right" />
       </Cell>
       <Cell col={4} row={6} colSpan={3} zIndex={1}>
-        <TextBlock fontSize={2.8} mono uppercase letterSpacing="0.08em" fontWeight={700} padding={0.8} align="end">
+        <TextBlock fontSize={2.8} mono uppercase letterSpacing="0.08em" fontWeight={700} padding={0.8} alignHorizontal="end" alignVertical="end">
           BT Mfg Showcase
         </TextBlock>
       </Cell>
@@ -646,7 +646,7 @@ export const DarkPortfolio: Story = {
           letterSpacing="0.1em"
           opacity={0.7}
           padding={1.5}
-          align="start"
+          alignHorizontal="start" alignVertical="start"
         >
           Our Projects
         </TextBlock>
@@ -764,7 +764,7 @@ export const HoverRevealLabels: Story = {
         {/* Tile 1 — hover label */}
         <Cell col={1} row={3} colSpan={3} zIndex={2}>
           <div className="w-full h-full opacity-0 translate-y-[2cqi] transition-all duration-500 ease-out group-hover:opacity-100 group-hover:translate-y-0">
-            <TextBlock fontSize={3.5} mono uppercase letterSpacing="0.08em" fontWeight={700} padding={1} align="start">
+            <TextBlock fontSize={3.5} mono uppercase letterSpacing="0.08em" fontWeight={700} padding={1} alignHorizontal="start" alignVertical="start">
               Construct.AR
             </TextBlock>
           </div>
@@ -789,7 +789,7 @@ export const HoverRevealLabels: Story = {
         {/* Tile 2 — hover label */}
         <Cell col={4} row={3} colSpan={3} zIndex={2}>
           <div className="w-full h-full opacity-0 translate-y-[2cqi] transition-all duration-500 ease-out delay-75 group-hover:opacity-100 group-hover:translate-y-0">
-            <TextBlock fontSize={3.5} mono uppercase letterSpacing="0.08em" fontWeight={700} padding={1} align="start">
+            <TextBlock fontSize={3.5} mono uppercase letterSpacing="0.08em" fontWeight={700} padding={1} alignHorizontal="start" alignVertical="start">
               Pop.XR
             </TextBlock>
           </div>
@@ -814,7 +814,7 @@ export const HoverRevealLabels: Story = {
         {/* Tile 3 — hover label */}
         <Cell col={1} row={6} colSpan={3} zIndex={2}>
           <div className="w-full h-full opacity-0 translate-y-[2cqi] transition-all duration-500 ease-out delay-100 group-hover:opacity-100 group-hover:translate-y-0">
-            <TextBlock fontSize={3} mono uppercase letterSpacing="0.08em" fontWeight={700} padding={1} align="start">
+            <TextBlock fontSize={3} mono uppercase letterSpacing="0.08em" fontWeight={700} padding={1} alignHorizontal="start" alignVertical="start">
               Tracing the Footprint
             </TextBlock>
           </div>
@@ -839,7 +839,7 @@ export const HoverRevealLabels: Story = {
         {/* Tile 4 — hover label */}
         <Cell col={4} row={6} colSpan={3} zIndex={2}>
           <div className="w-full h-full opacity-0 translate-y-[2cqi] transition-all duration-500 ease-out delay-150 group-hover:opacity-100 group-hover:translate-y-0">
-            <TextBlock fontSize={3.5} mono uppercase letterSpacing="0.08em" fontWeight={700} padding={1} align="start">
+            <TextBlock fontSize={3.5} mono uppercase letterSpacing="0.08em" fontWeight={700} padding={1} alignHorizontal="start" alignVertical="start">
               BT Urban.AR
             </TextBlock>
           </div>
@@ -908,32 +908,32 @@ export const StripColourBlock: Story = {
 
       {/* ── Layer 2: project name labels — right side ──────────────── */}
       <Cell col={4} row={1} colSpan={3} zIndex={2}>
-        <TextBlock fontSize={2.8} mono uppercase letterSpacing="0.08em" fontWeight={700} padding={0.8} align="end">
+        <TextBlock fontSize={2.8} mono uppercase letterSpacing="0.08em" fontWeight={700} padding={0.8} alignHorizontal="end" alignVertical="end">
           Construct.AR
         </TextBlock>
       </Cell>
       <Cell col={4} row={2} colSpan={3} zIndex={2}>
-        <TextBlock fontSize={2.8} mono uppercase letterSpacing="0.08em" fontWeight={700} padding={0.8} align="end">
+        <TextBlock fontSize={2.8} mono uppercase letterSpacing="0.08em" fontWeight={700} padding={0.8} alignHorizontal="end" alignVertical="end">
           Pop.XR
         </TextBlock>
       </Cell>
       <Cell col={4} row={3} colSpan={3} zIndex={2}>
-        <TextBlock fontSize={2.8} mono uppercase letterSpacing="0.08em" fontWeight={700} padding={0.8} align="end">
+        <TextBlock fontSize={2.8} mono uppercase letterSpacing="0.08em" fontWeight={700} padding={0.8} alignHorizontal="end" alignVertical="end">
           BT Urban.AR
         </TextBlock>
       </Cell>
       <Cell col={4} row={4} colSpan={3} zIndex={2}>
-        <TextBlock fontSize={2.4} mono uppercase letterSpacing="0.08em" fontWeight={700} padding={0.8} align="end">
+        <TextBlock fontSize={2.4} mono uppercase letterSpacing="0.08em" fontWeight={700} padding={0.8} alignHorizontal="end" alignVertical="end">
           Tracing the Footprint
         </TextBlock>
       </Cell>
       <Cell col={4} row={5} colSpan={3} zIndex={2}>
-        <TextBlock fontSize={2.4} mono uppercase letterSpacing="0.08em" fontWeight={700} padding={0.8} align="end">
+        <TextBlock fontSize={2.4} mono uppercase letterSpacing="0.08em" fontWeight={700} padding={0.8} alignHorizontal="end" alignVertical="end">
           Sammy&apos;s Christmas
         </TextBlock>
       </Cell>
       <Cell col={4} row={6} colSpan={3} zIndex={2}>
-        <TextBlock fontSize={2.8} mono uppercase letterSpacing="0.08em" fontWeight={700} padding={0.8} align="end">
+        <TextBlock fontSize={2.8} mono uppercase letterSpacing="0.08em" fontWeight={700} padding={0.8} alignHorizontal="end" alignVertical="end">
           BT Mfg Showcase
         </TextBlock>
       </Cell>
@@ -1022,7 +1022,7 @@ export const AcidColourBlock: Story = {
       </Cell>
       {/* Label: tiny black mono, bottom of cell */}
       <Cell col={3} row={2} colSpan={2} zIndex={2}>
-        <TextBlock fontSize={2.8} mono uppercase letterSpacing="0.15em" fontWeight={900} color="var(--theme-black)" padding={0.6} align="center">
+        <TextBlock fontSize={2.8} mono uppercase letterSpacing="0.15em" fontWeight={900} color="var(--theme-black)" padding={0.6} >
           Pop.XR
         </TextBlock>
       </Cell>
@@ -1078,7 +1078,7 @@ export const AcidColourBlock: Story = {
 
       {/* ── Centre zone R3-R4: huge "Work" ───────────────────────── */}
       <Cell col={1} row={3} colSpan={6} rowSpan={2} zIndex={3}>
-        <TextBlock fontSize={30} fontWeight={900} padding={0} align="center">
+        <TextBlock fontSize={30} fontWeight={900} padding={0}>
           Work
         </TextBlock>
       </Cell>
@@ -1124,13 +1124,13 @@ export const AcidColourBlock: Story = {
       </Cell>
       {/* Label: top-left, tiny black */}
       <Cell col={1} row={5} colSpan={2} zIndex={2}>
-        <TextBlock fontSize={2.5} mono uppercase letterSpacing="0.12em" fontWeight={900} color="var(--theme-black)" padding={0.6} align="start">
+        <TextBlock fontSize={2.5} mono uppercase letterSpacing="0.12em" fontWeight={900} color="var(--theme-black)" padding={0.6} alignHorizontal="start" alignVertical="start">
           Tracing
         </TextBlock>
       </Cell>
       {/* Sub-label: bottom-left in white */}
       <Cell col={1} row={6} colSpan={2} zIndex={2}>
-        <TextBlock fontSize={2} mono uppercase letterSpacing="0.1em" fontWeight={700} color="var(--theme-white)" padding={0.6} opacity={0.5} align="start">
+        <TextBlock fontSize={2} mono uppercase letterSpacing="0.1em" fontWeight={700} color="var(--theme-white)" padding={0.6} opacity={0.5} alignHorizontal="start" alignVertical="start">
           the Footprint
         </TextBlock>
       </Cell>
@@ -1170,7 +1170,7 @@ export const AcidColourBlock: Story = {
       </Cell>
       {/* Label: oversized, bleeds */}
       <Cell col={5} row={5} colSpan={2} zIndex={2}>
-        <TextBlock fontSize={3} mono uppercase letterSpacing="0.08em" fontWeight={900} color="var(--theme-black)" padding={0.6} align="end">
+        <TextBlock fontSize={3} mono uppercase letterSpacing="0.08em" fontWeight={900} color="var(--theme-black)" padding={0.6} alignHorizontal="end" alignVertical="end">
           BT Mfg
         </TextBlock>
       </Cell>
@@ -1298,7 +1298,7 @@ export const AcidIcons: Story = {
         </Cell>
         {/* Label: bottom centre of cell */}
         <Cell col={3} row={2} colSpan={2} zIndex={2}>
-          <TextBlock fontSize={2.5} mono uppercase letterSpacing="0.12em" fontWeight={900} color="var(--theme-black)" padding={0.6} align="center">
+          <TextBlock fontSize={2.5} mono uppercase letterSpacing="0.12em" fontWeight={900} color="var(--theme-black)" padding={0.6} >
             Pop.XR
           </TextBlock>
         </Cell>
@@ -1346,7 +1346,7 @@ export const AcidIcons: Story = {
 
         {/* ── Centre zone: "Work" ────────────────────────────────── */}
         <Cell col={1} row={3} colSpan={6} rowSpan={2} zIndex={3}>
-          <TextBlock fontSize={30} fontWeight={900} color="var(--theme-black)" padding={0} align="center">
+          <TextBlock fontSize={30} fontWeight={900} color="var(--theme-black)" padding={0}>
             Work
           </TextBlock>
         </Cell>
@@ -1406,7 +1406,7 @@ export const AcidIcons: Story = {
         </Cell>
         {/* Label: bottom of cell */}
         <Cell col={1} row={6} colSpan={2} zIndex={2}>
-          <TextBlock fontSize={2.5} mono uppercase letterSpacing="0.12em" fontWeight={900} color="var(--theme-black)" padding={0.6} align="start">
+          <TextBlock fontSize={2.5} mono uppercase letterSpacing="0.12em" fontWeight={900} color="var(--theme-black)" padding={0.6} alignHorizontal="start" alignVertical="start">
             Tracing the Footprint
           </TextBlock>
         </Cell>
@@ -1476,7 +1476,7 @@ export const AcidIcons: Story = {
         </Cell>
         {/* Label: top-right */}
         <Cell col={5} row={5} colSpan={2} zIndex={2}>
-          <TextBlock fontSize={2.5} mono uppercase letterSpacing="0.12em" fontWeight={900} color="var(--theme-black)" padding={0.6} align="end">
+          <TextBlock fontSize={2.5} mono uppercase letterSpacing="0.12em" fontWeight={900} color="var(--theme-black)" padding={0.6} alignHorizontal="end" alignVertical="end">
             BT Mfg Showcase
           </TextBlock>
         </Cell>
@@ -1515,7 +1515,7 @@ export const AcidIconsConsistent: Story = {
           </Cell>
           {/* Text — top-right */}
           <Cell col={2} row={1} zIndex={2}>
-            <TextBlock fontSize={2.5} mono uppercase letterSpacing="0.12em" fontWeight={900} color="var(--theme-white)" padding={0.5} align="end">
+            <TextBlock fontSize={2.5} mono uppercase letterSpacing="0.12em" fontWeight={900} color="var(--theme-white)" padding={0.5} alignHorizontal="end" alignVertical="end">
               Construct.AR
             </TextBlock>
           </Cell>
@@ -1543,7 +1543,7 @@ export const AcidIconsConsistent: Story = {
           </Cell>
           {/* Text — top-right */}
           <Cell col={4} row={1} zIndex={2}>
-            <TextBlock fontSize={2.5} mono uppercase letterSpacing="0.12em" fontWeight={900} color="var(--theme-black)" padding={0.5} align="end">
+            <TextBlock fontSize={2.5} mono uppercase letterSpacing="0.12em" fontWeight={900} color="var(--theme-black)" padding={0.5} alignHorizontal="end" alignVertical="end">
               Pop.XR
             </TextBlock>
           </Cell>
@@ -1571,7 +1571,7 @@ export const AcidIconsConsistent: Story = {
           </Cell>
           {/* Text — top-right */}
           <Cell col={6} row={1} zIndex={2}>
-            <TextBlock fontSize={2.5} mono uppercase letterSpacing="0.12em" fontWeight={900} color="var(--theme-black)" padding={0.5} align="end">
+            <TextBlock fontSize={2.5} mono uppercase letterSpacing="0.12em" fontWeight={900} color="var(--theme-black)" padding={0.5} alignHorizontal="end" alignVertical="end">
               BT Urban.AR
             </TextBlock>
           </Cell>
@@ -1595,7 +1595,7 @@ export const AcidIconsConsistent: Story = {
 
           {/* ── Centre zone: "Work" ──────────────────────────────── */}
           <Cell col={1} row={3} colSpan={6} rowSpan={2} zIndex={3}>
-            <TextBlock fontSize={30} fontWeight={900} color="var(--theme-black)" padding={0} align="center">
+            <TextBlock fontSize={30} fontWeight={900} color="var(--theme-black)" padding={0}>
               Work
             </TextBlock>
           </Cell>
@@ -1641,7 +1641,7 @@ export const AcidIconsConsistent: Story = {
           </Cell>
           {/* Text — top-right */}
           <Cell col={2} row={5} zIndex={2}>
-            <TextBlock fontSize={2.5} mono uppercase letterSpacing="0.12em" fontWeight={900} color="var(--theme-black)" padding={0.5} align="end">
+            <TextBlock fontSize={2.5} mono uppercase letterSpacing="0.12em" fontWeight={900} color="var(--theme-black)" padding={0.5} alignHorizontal="end" alignVertical="end">
               Tracing
             </TextBlock>
           </Cell>
@@ -1669,7 +1669,7 @@ export const AcidIconsConsistent: Story = {
           </Cell>
           {/* Text — top-right */}
           <Cell col={4} row={5} zIndex={2}>
-            <TextBlock fontSize={2.5} mono uppercase letterSpacing="0.12em" fontWeight={900} color="var(--theme-white)" padding={0.5} align="end">
+            <TextBlock fontSize={2.5} mono uppercase letterSpacing="0.12em" fontWeight={900} color="var(--theme-white)" padding={0.5} alignHorizontal="end" alignVertical="end">
               Sammy&apos;s Xmas
             </TextBlock>
           </Cell>
@@ -1697,7 +1697,7 @@ export const AcidIconsConsistent: Story = {
           </Cell>
           {/* Text — top-right */}
           <Cell col={6} row={5} zIndex={2}>
-            <TextBlock fontSize={2.5} mono uppercase letterSpacing="0.12em" fontWeight={900} color="var(--theme-black)" padding={0.5} align="end">
+            <TextBlock fontSize={2.5} mono uppercase letterSpacing="0.12em" fontWeight={900} color="var(--theme-black)" padding={0.5} alignHorizontal="end" alignVertical="end">
               BT Mfg
             </TextBlock>
           </Cell>
@@ -1744,7 +1744,7 @@ export const AcidNoImages: Story = {
             <ColorBlock color="var(--theme-purple)" />
           </Cell>
           <Cell col={2} row={1} zIndex={2}>
-            <TextBlock fontSize={2.5} mono uppercase letterSpacing="0.12em" fontWeight={900} color="var(--theme-white)" padding={0.5} align="end">
+            <TextBlock fontSize={2.5} mono uppercase letterSpacing="0.12em" fontWeight={900} color="var(--theme-white)" padding={0.5} alignHorizontal="end" alignVertical="end">
               Construct.AR
             </TextBlock>
           </Cell>
@@ -1762,7 +1762,7 @@ export const AcidNoImages: Story = {
             <ColorBlock color="var(--theme-cyan)" />
           </Cell>
           <Cell col={4} row={1} zIndex={2}>
-            <TextBlock fontSize={2.5} mono uppercase letterSpacing="0.12em" fontWeight={900} color="var(--theme-black)" padding={0.5} align="end">
+            <TextBlock fontSize={2.5} mono uppercase letterSpacing="0.12em" fontWeight={900} color="var(--theme-black)" padding={0.5} alignHorizontal="end" alignVertical="end">
               Pop.XR
             </TextBlock>
           </Cell>
@@ -1780,7 +1780,7 @@ export const AcidNoImages: Story = {
             <ColorBlock color="var(--theme-orange)" />
           </Cell>
           <Cell col={6} row={1} zIndex={2}>
-            <TextBlock fontSize={2.5} mono uppercase letterSpacing="0.12em" fontWeight={900} color="var(--theme-black)" padding={0.5} align="end">
+            <TextBlock fontSize={2.5} mono uppercase letterSpacing="0.12em" fontWeight={900} color="var(--theme-black)" padding={0.5} alignHorizontal="end" alignVertical="end">
               BT Urban.AR
             </TextBlock>
           </Cell>
@@ -1798,7 +1798,7 @@ export const AcidNoImages: Story = {
 
           {/* ── Centre zone: "Work" ──────────────────────────────── */}
           <Cell col={1} row={3} colSpan={6} rowSpan={2} zIndex={3}>
-            <TextBlock fontSize={30} fontWeight={900} color="var(--theme-black)" padding={0} align="center">
+            <TextBlock fontSize={30} fontWeight={900} color="var(--theme-black)" padding={0}>
               Work
             </TextBlock>
           </Cell>
@@ -1840,7 +1840,7 @@ export const AcidNoImages: Story = {
             <ColorBlock color="var(--theme-green)" />
           </Cell>
           <Cell col={2} row={5} zIndex={2}>
-            <TextBlock fontSize={2.5} mono uppercase letterSpacing="0.12em" fontWeight={900} color="var(--theme-black)" padding={0.5} align="end">
+            <TextBlock fontSize={2.5} mono uppercase letterSpacing="0.12em" fontWeight={900} color="var(--theme-black)" padding={0.5} alignHorizontal="end" alignVertical="end">
               Tracing
             </TextBlock>
           </Cell>
@@ -1858,7 +1858,7 @@ export const AcidNoImages: Story = {
             <ColorBlock color="var(--theme-magenta)" />
           </Cell>
           <Cell col={4} row={5} zIndex={2}>
-            <TextBlock fontSize={2.5} mono uppercase letterSpacing="0.12em" fontWeight={900} color="var(--theme-white)" padding={0.5} align="end">
+            <TextBlock fontSize={2.5} mono uppercase letterSpacing="0.12em" fontWeight={900} color="var(--theme-white)" padding={0.5} alignHorizontal="end" alignVertical="end">
               Sammy&apos;s Xmas
             </TextBlock>
           </Cell>
@@ -1876,7 +1876,7 @@ export const AcidNoImages: Story = {
             <ColorBlock color="var(--theme-orange)" />
           </Cell>
           <Cell col={6} row={5} zIndex={2}>
-            <TextBlock fontSize={2.5} mono uppercase letterSpacing="0.12em" fontWeight={900} color="var(--theme-black)" padding={0.5} align="end">
+            <TextBlock fontSize={2.5} mono uppercase letterSpacing="0.12em" fontWeight={900} color="var(--theme-black)" padding={0.5} alignHorizontal="end" alignVertical="end">
               BT Mfg
             </TextBlock>
           </Cell>
@@ -1896,216 +1896,3 @@ export const AcidNoImages: Story = {
   },
 };
 
-/* ------------------------------------------------------------------ */
-/*  16 · ACID FLAT — TEXT TOP-LEFT (StripeBars refactor)               */
-/*  Same as 15 but text labels top-left aligned. Uses the extracted    */
-/*  StripeBars component instead of inline markup.                     */
-/* ------------------------------------------------------------------ */
-
-// ─── 16 · Acid Flat — Text Top-Left ─────────────────────────────────────────
-export const AcidFlatTextTopLeft: Story = {
-  name: '16 – Acid Flat — Text Top-Left',
-  render: () => {
-    const bg = pickRandomColor();
-    return (
-      <div style={{ backgroundColor: bg }} className="w-full h-full">
-        <FaceGrid className="bg-transparent!">
-
-          {/* C1 · Construct.AR · purple */}
-          <Cell col={1} row={1} colSpan={2} rowSpan={2}>
-            <ColorBlock color="var(--theme-purple)" />
-          </Cell>
-          <Cell col={1} row={1} colSpan={2} zIndex={2}>
-            <TextBlock fontSize={2.5} mono uppercase letterSpacing="0.12em" fontWeight={900} color="var(--theme-black)" padding={0.5} align="start">
-              Construct.AR
-            </TextBlock>
-          </Cell>
-          <Cell col={2} row={2} zIndex={2}>
-            <IconQuad
-              icons={{ tl: PROJECT_ICONS.construct[0], tr: PROJECT_ICONS.construct[1], bl: PROJECT_ICONS.construct[2], br: PROJECT_ICONS.construct[3] }}
-              showDivider={false}
-              color="var(--theme-white)"
-              opacity={1}
-            />
-          </Cell>
-          <Cell col={1} row={2} zIndex={2}>
-            <div className="w-full h-full overflow-hidden">
-              <div style={{ transform: 'scale(2)', transformOrigin: 'center', width: '100%', height: '100%' }}>
-                <ImageBlock src={IMG.construct} alt="Construct.AR" />
-              </div>
-            </div>
-          </Cell>
-
-          {/* C2 · Pop.XR · cyan */}
-          <Cell col={3} row={1} colSpan={2} rowSpan={2}>
-            <ColorBlock color="var(--theme-cyan)" />
-          </Cell>
-          <Cell col={3} row={1} colSpan={2} zIndex={2}>
-            <TextBlock fontSize={2.5} mono uppercase letterSpacing="0.12em" fontWeight={900} color="var(--theme-black)" padding={0.5} align="start">
-              Pop.XR
-            </TextBlock>
-          </Cell>
-          <Cell col={3} row={2} zIndex={2}>
-            <div className="w-full h-full overflow-hidden">
-              <div style={{ transform: 'scale(2)', transformOrigin: 'center', width: '100%', height: '100%' }}>
-                <ImageBlock src={IMG.popXr} alt="Pop.XR" />
-              </div>
-            </div>
-          </Cell>
-          <Cell col={4} row={2} zIndex={2}>
-            <IconQuad
-              icons={{ tl: PROJECT_ICONS.popXr[0], tr: PROJECT_ICONS.popXr[1], bl: PROJECT_ICONS.popXr[2], br: PROJECT_ICONS.popXr[3] }}
-              showDivider={false}
-              color="var(--theme-black)"
-              opacity={1}
-            />
-          </Cell>
-
-          {/* C3 · BT Urban.AR · orange */}
-          <Cell col={5} row={1} colSpan={2} rowSpan={2}>
-            <ColorBlock color="var(--theme-orange)" />
-          </Cell>
-          <Cell col={5} row={1} colSpan={2} zIndex={2}>
-            <TextBlock fontSize={2.5} mono uppercase letterSpacing="0.12em" fontWeight={900} color="var(--theme-black)" padding={0.5} align="start">
-              BT Urban.AR
-            </TextBlock>
-          </Cell>
-          <Cell col={5} row={2} zIndex={2}>
-            <div className="w-full h-full overflow-hidden">
-              <div style={{ transform: 'scale(2)', transformOrigin: 'center', width: '100%', height: '100%' }}>
-                <ImageBlock src={IMG.btUrban} alt="BT Urban.AR" />
-              </div>
-            </div>
-          </Cell>
-          <Cell col={6} row={2} zIndex={2}>
-            <IconQuad
-              icons={{ tl: PROJECT_ICONS.btUrban[0], tr: PROJECT_ICONS.btUrban[1], bl: PROJECT_ICONS.btUrban[2], br: PROJECT_ICONS.btUrban[3] }}
-              showDivider={false}
-              color="var(--theme-black)"
-              opacity={1}
-            />
-          </Cell>
-
-          <Cell col={1} row={2} colSpan={6} zIndex={5}><StripeBars /></Cell>
-          <Cell col={1} row={4} colSpan={6} zIndex={5}><StripeBars colors={['var(--theme-green)', 'var(--theme-magenta)', 'var(--theme-orange)', 'var(--theme-purple)', 'var(--theme-cyan)', 'var(--theme-orange)']} /></Cell>
-
-          {/* ── Centre zone: "Work" ──────────────────────────────── */}
-          <Cell col={1} row={3} colSpan={6} rowSpan={2} zIndex={3}>
-            <TextBlock fontSize={30} fontWeight={900} color="var(--theme-white)" padding={0} align="center">
-              Work
-            </TextBlock>
-          </Cell>
-
-          {/* Metadata — left gutter */}
-          <Cell col={1} row={3} zIndex={4}>
-            <div className="w-full h-full flex flex-col items-start justify-center" style={{ paddingInline: '1cqi', gap: '0.4cqi' }}>
-              <span style={{ fontSize: '1.8cqi', fontFamily: 'monospace', textTransform: 'uppercase', letterSpacing: '0.1em', color: 'var(--theme-black)', opacity: 0.4 }}>
-                UTC
-              </span>
-              <span style={{ fontSize: '1.8cqi', fontFamily: 'monospace', textTransform: 'uppercase', letterSpacing: '0.1em', color: 'var(--theme-black)', opacity: 0.4 }}>
-                08
-              </span>
-            </div>
-          </Cell>
-
-          {/* Dock Stories — drifting vertical label */}
-          <Cell col={6} row={4} zIndex={4}>
-            <div className="w-full h-full flex items-end justify-end" style={{ padding: '0.8cqi' }}>
-              <span style={{
-                writingMode: 'vertical-rl',
-                fontSize: '2cqi',
-                fontFamily: 'monospace',
-                textTransform: 'uppercase',
-                letterSpacing: '0.15em',
-                fontWeight: 700,
-                color: 'var(--theme-black)',
-                opacity: 0.35,
-              }}>
-                Dock Stories
-              </span>
-            </div>
-          </Cell>
-
-          {/* ── Bottom row: 3 × 2×2 cells ────────────────────────── */}
-
-          {/* C4 · Tracing the Footprint · green */}
-          <Cell col={1} row={5} colSpan={2} rowSpan={2}>
-            <ColorBlock color="var(--theme-green)" />
-          </Cell>
-          <Cell col={1} row={5} colSpan={2} zIndex={2}>
-            <TextBlock fontSize={2.5} mono uppercase letterSpacing="0.12em" fontWeight={900} color="var(--theme-black)" padding={0.5} align="start">
-              Tracing
-            </TextBlock>
-          </Cell>
-          <Cell col={1} row={6} zIndex={2}>
-            <div className="w-full h-full overflow-hidden">
-              <div style={{ transform: 'scale(2)', transformOrigin: 'center', width: '100%', height: '100%' }}>
-                <ImageBlock src={IMG.tracing} alt="Tracing the Footprint" />
-              </div>
-            </div>
-          </Cell>
-          <Cell col={2} row={6} zIndex={2}>
-            <IconQuad
-              icons={{ tl: PROJECT_ICONS.tracing[0], tr: PROJECT_ICONS.tracing[1], bl: PROJECT_ICONS.tracing[2], br: PROJECT_ICONS.tracing[3] }}
-              showDivider={false}
-              color="var(--theme-black)"
-              opacity={1}
-            />
-          </Cell>
-
-          {/* C5 · Sammy's Christmas · magenta */}
-          <Cell col={3} row={5} colSpan={2} rowSpan={2}>
-            <ColorBlock color="var(--theme-magenta)" />
-          </Cell>
-          <Cell col={3} row={5} colSpan={2} zIndex={2}>
-            <TextBlock fontSize={2.5} mono uppercase letterSpacing="0.12em" fontWeight={900} color="var(--theme-black)" padding={0.5} align="start">
-              Sammy&apos;s Xmas
-            </TextBlock>
-          </Cell>
-          <Cell col={3} row={6} zIndex={2}>
-            <div className="w-full h-full overflow-hidden">
-              <div style={{ transform: 'scale(2)', transformOrigin: 'center', width: '100%', height: '100%' }}>
-                <ImageBlock src={IMG.sammys} alt="Sammy's Christmas Adventure" />
-              </div>
-            </div>
-          </Cell>
-          <Cell col={4} row={6} zIndex={2}>
-            <IconQuad
-              icons={{ tl: PROJECT_ICONS.sammys[0], tr: PROJECT_ICONS.sammys[1], bl: PROJECT_ICONS.sammys[2], br: PROJECT_ICONS.sammys[3] }}
-              showDivider={false}
-              color="var(--theme-white)"
-              opacity={1}
-            />
-          </Cell>
-
-          {/* C6 · BT Manufacturing · orange */}
-          <Cell col={5} row={5} colSpan={2} rowSpan={2}>
-            <ColorBlock color="var(--theme-orange)" />
-          </Cell>
-          <Cell col={5} row={5} colSpan={2} zIndex={2}>
-            <TextBlock fontSize={2.5} mono uppercase letterSpacing="0.12em" fontWeight={900} color="var(--theme-black)" padding={0.5} align="start">
-              BT Mfg
-            </TextBlock>
-          </Cell>
-          <Cell col={5} row={6} zIndex={2}>
-            <div className="w-full h-full overflow-hidden">
-              <div style={{ transform: 'scale(2)', transformOrigin: 'center', width: '100%', height: '100%' }}>
-                <ImageBlock src={IMG.btMfg} alt="BT Manufacturing Showcase" />
-              </div>
-            </div>
-          </Cell>
-          <Cell col={6} row={6} zIndex={2}>
-            <IconQuad
-              icons={{ tl: PROJECT_ICONS.btMfg[0], tr: PROJECT_ICONS.btMfg[1], bl: PROJECT_ICONS.btMfg[2], br: PROJECT_ICONS.btMfg[3] }}
-              showDivider={false}
-              color="var(--theme-black)"
-              opacity={1}
-            />
-          </Cell>
-
-          <GridLines color="var(--theme-black)" opacity={1} />
-        </FaceGrid>
-      </div>
-    );
-  },
-};

@@ -51,7 +51,7 @@ export const Basic: Story = {
   render: () => (
     <FaceGrid>
       <Cell col={1} row={1} colSpan={6} rowSpan={6}>
-        <TextBlock fontSize={18} color="var(--theme-cyan)" fontWeight={700} align="center" padding={4}>
+        <TextBlock fontSize={18} color="var(--theme-cyan)" fontWeight={700} padding={4}>
           Placeholder
         </TextBlock>
       </Cell>
@@ -95,7 +95,8 @@ export const MultipleElements: Story = {
           color="var(--theme-magenta)"
           fontWeight={900}
           letterSpacing="-0.04em"
-          align="start"
+          alignHorizontal="start"
+          alignVertical="start"
           padding={2}
         >
           Placeholder

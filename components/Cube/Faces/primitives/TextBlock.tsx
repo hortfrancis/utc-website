@@ -13,8 +13,10 @@ export interface TextBlockProps {
   mono?: boolean;
   /** Uppercase transform. */
   uppercase?: boolean;
-  /** Flex alignment within the cell. Default: 'center'. */
-  align?: 'start' | 'center' | 'end';
+  /** Horizontal alignment (justifyContent). Default: 'center'. */
+  alignHorizontal?: 'start' | 'center' | 'end';
+  /** Vertical alignment (alignItems). Default: 'center'. */
+  alignVertical?: 'start' | 'center' | 'end';
   /** Padding in cqi units. Default: 0. */
   padding?: number;
   children?: React.ReactNode;
@@ -32,7 +34,8 @@ export default function TextBlock({
   letterSpacing = '-0.04em',
   mono = false,
   uppercase = false,
-  align = 'center',
+  alignHorizontal = 'center',
+  alignVertical = 'center',
   padding = 0,
   children,
 }: TextBlockProps) {
@@ -43,8 +46,8 @@ export default function TextBlock({
       data-component="TextBlock"
       className="flex w-full h-full select-none"
       style={{
-        alignItems: alignMap[align],
-        justifyContent: alignMap[align],
+        alignItems: alignMap[alignVertical],
+        justifyContent: alignMap[alignHorizontal],
         padding: padding ? `${padding}cqi` : undefined,
       }}
     >

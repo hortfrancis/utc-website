@@ -97,12 +97,12 @@ export const GridLinesDemo: Story = {
 
       {/* Labels */}
       <Cell col={1} row={6} colSpan={3} zIndex={10}>
-        <TextBlock fontSize={3} opacity={0.5} mono uppercase letterSpacing="0.1em" padding={1} align="start">
+        <TextBlock fontSize={3} opacity={0.5} mono uppercase letterSpacing="0.1em" padding={1} alignHorizontal="start" alignVertical="start">
           default
         </TextBlock>
       </Cell>
       <Cell col={4} row={6} colSpan={3} zIndex={10}>
-        <TextBlock fontSize={3} color="var(--theme-cyan)" opacity={0.7} mono uppercase letterSpacing="0.1em" padding={1} align="start">
+        <TextBlock fontSize={3} color="var(--theme-cyan)" opacity={0.7} mono uppercase letterSpacing="0.1em" padding={1} alignHorizontal="start" alignVertical="start">
           cyan 0.4
         </TextBlock>
       </Cell>
@@ -318,22 +318,22 @@ export const GradientBlockDemo: Story = {
 
       {/* Labels */}
       <Cell col={1} row={4} colSpan={2} zIndex={2}>
-        <TextBlock fontSize={3} opacity={0.5} mono uppercase letterSpacing="0.08em" padding={1} align="start">
+        <TextBlock fontSize={3} opacity={0.5} mono uppercase letterSpacing="0.08em" padding={1} alignHorizontal="start" alignVertical="start">
           to bottom
         </TextBlock>
       </Cell>
       <Cell col={3} row={2} colSpan={2} zIndex={2}>
-        <TextBlock fontSize={3} opacity={0.5} mono uppercase letterSpacing="0.08em" padding={1} align="start">
+        <TextBlock fontSize={3} opacity={0.5} mono uppercase letterSpacing="0.08em" padding={1} alignHorizontal="start" alignVertical="start">
           to right
         </TextBlock>
       </Cell>
       <Cell col={3} row={4} colSpan={2} zIndex={2}>
-        <TextBlock fontSize={3} opacity={0.5} mono uppercase letterSpacing="0.08em" padding={1} align="start">
+        <TextBlock fontSize={3} opacity={0.5} mono uppercase letterSpacing="0.08em" padding={1} alignHorizontal="start" alignVertical="start">
           135deg
         </TextBlock>
       </Cell>
       <Cell col={1} row={5} colSpan={4} zIndex={2}>
-        <TextBlock fontSize={3} opacity={0.5} mono uppercase letterSpacing="0.08em" padding={1} align="start">
+        <TextBlock fontSize={3} opacity={0.5} mono uppercase letterSpacing="0.08em" padding={1} alignHorizontal="start" alignVertical="start">
           no position (even)
         </TextBlock>
       </Cell>
@@ -348,13 +348,16 @@ export const GradientBlockDemo: Story = {
  * or a smaller Cell for a cropped region.
  *
  * Props:
- *   src        — image URL (required)
- *   alt        — alt text (required)
- *   mask?      — 'fade-down' | 'fade-up' | 'fade-left' | 'fade-right'
- *                Applies a black→transparent CSS mask so the image fades
- *                out at that edge.
- *   objectFit? — CSS object-fit. Default: 'cover'
- *   opacity?   — 0–1. Default: 1
+ *   src             — image URL (required)
+ *   alt             — alt text (required)
+ *   mask?           — 'fade-down' | 'fade-up' | 'fade-left' | 'fade-right'
+ *                      Applies a black→transparent CSS mask so the image fades
+ *                      out at that edge.
+ *   objectFit?      — CSS object-fit. Default: 'cover'
+ *   objectPosition? — CSS object-position. Controls which part is visible
+ *                      when cropped (e.g. 'top left', '20% 80%').
+ *   opacity?        — 0–1. Default: 1
+ *   scale?          — Zoom factor. E.g. 2 = 2× center crop, clipped to cell.
  *
  * Usage:
  *   <Cell col={1} row={1} colSpan={6} rowSpan={6}>
@@ -390,23 +393,140 @@ export const ImageBlockDemo: Story = {
 
       {/* Labels */}
       <Cell col={1} row={1} colSpan={3} zIndex={2}>
-        <TextBlock fontSize={3} opacity={0.7} mono uppercase letterSpacing="0.08em" padding={1} align="start">
+        <TextBlock fontSize={3} opacity={0.7} mono uppercase letterSpacing="0.08em" padding={1} alignHorizontal="start" alignVertical="start">
           fade-down
         </TextBlock>
       </Cell>
       <Cell col={4} row={1} colSpan={3} zIndex={2}>
-        <TextBlock fontSize={3} opacity={0.7} mono uppercase letterSpacing="0.08em" padding={1} align="start">
+        <TextBlock fontSize={3} opacity={0.7} mono uppercase letterSpacing="0.08em" padding={1} alignHorizontal="start" alignVertical="start">
           fade-up
         </TextBlock>
       </Cell>
       <Cell col={1} row={4} colSpan={3} zIndex={2}>
-        <TextBlock fontSize={3} opacity={0.7} mono uppercase letterSpacing="0.08em" padding={1} align="start">
+        <TextBlock fontSize={3} opacity={0.7} mono uppercase letterSpacing="0.08em" padding={1} alignHorizontal="start" alignVertical="start">
           fade-right
         </TextBlock>
       </Cell>
       <Cell col={4} row={4} colSpan={3} zIndex={2}>
-        <TextBlock fontSize={3} opacity={0.7} mono uppercase letterSpacing="0.08em" padding={1} align="start">
+        <TextBlock fontSize={3} opacity={0.7} mono uppercase letterSpacing="0.08em" padding={1} alignHorizontal="start" alignVertical="start">
           fade-left
+        </TextBlock>
+      </Cell>
+    </FaceGrid>
+  ),
+};
+
+// ─── 5b · ImageBlock scale ───────────────────────────────────────────────────
+/*
+ * scale — Zooms the image (center crop). Useful for project thumbnails
+ *         where you want a tighter framing. objectPosition — Adjusts
+ *         which part of the image is visible when cropped.
+ */
+export const ImageBlockScale: Story = {
+  name: '5b – ImageBlock scale & objectPosition',
+  render: () => (
+    <FaceGrid className="bg-theme-black!">
+      <Cell col={1} row={1} colSpan={2} rowSpan={2}>
+        <ImageBlock src="/images/experiments/vr01.png" alt="VR headset" scale={2} />
+      </Cell>
+      <Cell col={3} row={1} colSpan={2} rowSpan={2}>
+        <ImageBlock
+          src="/images/experiments/vr01.png"
+          alt="VR headset"
+          scale={2}
+          objectPosition="top left"
+        />
+      </Cell>
+      <Cell col={5} row={1} colSpan={2} rowSpan={2}>
+        <ImageBlock
+          src="/images/experiments/vr01.png"
+          alt="VR headset"
+          scale={1.5}
+          objectPosition="bottom right"
+        />
+      </Cell>
+      <GridLines opacity={0.12} />
+      <Cell col={1} row={1} colSpan={2} zIndex={2}>
+        <TextBlock fontSize={2.5} opacity={0.7} mono uppercase letterSpacing="0.08em" padding={0.5} alignHorizontal="start" alignVertical="start">
+          scale=2 (center)
+        </TextBlock>
+      </Cell>
+      <Cell col={3} row={1} colSpan={2} zIndex={2}>
+        <TextBlock fontSize={2.5} opacity={0.7} mono uppercase letterSpacing="0.08em" padding={0.5} alignHorizontal="start" alignVertical="start">
+          scale=2, objectPosition=top left
+        </TextBlock>
+      </Cell>
+      <Cell col={5} row={1} colSpan={2} zIndex={2}>
+        <TextBlock fontSize={2.5} opacity={0.7} mono uppercase letterSpacing="0.08em" padding={0.5} alignHorizontal="start" alignVertical="start">
+          scale=1.5, objectPosition=bottom right
+        </TextBlock>
+      </Cell>
+    </FaceGrid>
+  ),
+};
+
+// ─── 5c · ImageBlock mixBlendMode ────────────────────────────────────────────
+/*
+ * mixBlendMode — CSS mix-blend-mode. Blends the image with content behind it.
+ *                Use a ColorBlock (or similar) in a Cell behind the ImageBlock
+ *                to see the effect. Works with scale — blend mode is applied
+ *                on the outer wrapper when scale is used (transform creates a
+ *                stacking context that would otherwise isolate descendants).
+ */
+export const ImageBlockMixBlendMode: Story = {
+  name: '5c – ImageBlock mixBlendMode',
+  render: () => (
+    <FaceGrid className="bg-theme-black!">
+      {/* multiply — darkens, typical duotone / screen-print look */}
+      <Cell col={1} row={1} colSpan={2} rowSpan={2}>
+        <ColorBlock color="var(--theme-purple)" />
+      </Cell>
+      <Cell col={1} row={1} colSpan={2} rowSpan={2}>
+        <ImageBlock
+          src="/images/experiments/vr01.png"
+          alt="VR headset"
+          scale={2}
+          mixBlendMode="multiply"
+        />
+      </Cell>
+      {/* screen — lightens */}
+      <Cell col={3} row={1} colSpan={2} rowSpan={2}>
+        <ColorBlock color="var(--theme-cyan)" />
+      </Cell>
+      <Cell col={3} row={1} colSpan={2} rowSpan={2}>
+        <ImageBlock
+          src="/images/experiments/vr01.png"
+          alt="VR headset"
+          scale={2}
+          mixBlendMode="screen"
+        />
+      </Cell>
+      {/* overlay — contrast */}
+      <Cell col={5} row={1} colSpan={2} rowSpan={2}>
+        <ColorBlock color="var(--theme-orange)" />
+      </Cell>
+      <Cell col={5} row={1} colSpan={2} rowSpan={2}>
+        <ImageBlock
+          src="/images/experiments/vr01.png"
+          alt="VR headset"
+          scale={2}
+          mixBlendMode="overlay"
+        />
+      </Cell>
+      <GridLines opacity={0.12} />
+      <Cell col={1} row={1} colSpan={2} zIndex={2}>
+        <TextBlock fontSize={2.5} opacity={0.7} mono uppercase letterSpacing="0.08em" padding={0.5} alignHorizontal="start" alignVertical="start">
+          multiply
+        </TextBlock>
+      </Cell>
+      <Cell col={3} row={1} colSpan={2} zIndex={2}>
+        <TextBlock fontSize={2.5} opacity={0.7} mono uppercase letterSpacing="0.08em" padding={0.5} alignHorizontal="start" alignVertical="start">
+          screen
+        </TextBlock>
+      </Cell>
+      <Cell col={5} row={1} colSpan={2} zIndex={2}>
+        <TextBlock fontSize={2.5} opacity={0.7} mono uppercase letterSpacing="0.08em" padding={0.5} alignHorizontal="start" alignVertical="start">
+          overlay
         </TextBlock>
       </Cell>
     </FaceGrid>
@@ -426,7 +546,8 @@ export const ImageBlockDemo: Story = {
  *   letterSpacing? — CSS letter-spacing string. Default: '-0.04em'
  *   mono?          — enables monospace axis (Recursive MONO 1). Default: false
  *   uppercase?     — text-transform: uppercase. Default: false
- *   align?         — 'start' | 'center' | 'end'. Default: 'center'
+ *   alignHorizontal? — 'start' | 'center' | 'end'. Default: 'center'
+ *   alignVertical?   — 'start' | 'center' | 'end'. Default: 'center'
  *                    Controls both flex alignment and text placement.
  *   padding?       — padding in cqi units. Default: 0
  *   children       — text content (required)
@@ -436,7 +557,7 @@ export const ImageBlockDemo: Story = {
  *     <TextBlock fontSize={20} padding={2}>XR</TextBlock>
  *   </Cell>
  *   <Cell col={1} row={3} colSpan={6}>
- *     <TextBlock fontSize={4} mono uppercase letterSpacing="0.15em" align="start" padding={2}>
+ *     <TextBlock fontSize={4} mono uppercase letterSpacing="0.15em" alignHorizontal="start" alignVertical="start" padding={2}>
  *       Extended Reality
  *     </TextBlock>
  *   </Cell>
@@ -464,13 +585,13 @@ export const TextBlockDemo: Story = {
           fontWeight={700}
           opacity={0.6}
           padding={1.5}
-          align="start"
+          alignHorizontal="start" alignVertical="start"
         >
           Extended Reality
         </TextBlock>
       </Cell>
 
-      {/* body scale — fontWeight=400, loose letterSpacing, align="start" */}
+      {/* body scale — fontWeight=400, loose letterSpacing, alignHorizontal="start" alignVertical="start" */}
       <Cell col={1} row={3} colSpan={6} rowSpan={2}>
         <TextBlock
           fontSize={3.5}
@@ -478,7 +599,7 @@ export const TextBlockDemo: Story = {
           letterSpacing="0"
           opacity={0.55}
           padding={2}
-          align="start"
+          alignHorizontal="start" alignVertical="start"
         >
           Immersive experiences bridging
           <br />
@@ -486,7 +607,7 @@ export const TextBlockDemo: Story = {
         </TextBlock>
       </Cell>
 
-      {/* color — accent cyan, align="start" */}
+      {/* color — accent cyan, alignHorizontal="start" alignVertical="start" */}
       <Cell col={1} row={5} colSpan={3}>
         <TextBlock
           fontSize={4}
@@ -495,13 +616,13 @@ export const TextBlockDemo: Story = {
           uppercase
           letterSpacing="0.1em"
           padding={1.5}
-          align="start"
+          alignHorizontal="start" alignVertical="start"
         >
           VR · AR
         </TextBlock>
       </Cell>
 
-      {/* align="end" — right-aligned */}
+      {/* alignHorizontal="end" alignVertical="end" — right-aligned */}
       <Cell col={4} row={5} colSpan={3}>
         <TextBlock
           fontSize={4}
@@ -510,7 +631,7 @@ export const TextBlockDemo: Story = {
           uppercase
           letterSpacing="0.1em"
           padding={1.5}
-          align="end"
+          alignHorizontal="end" alignVertical="end"
         >
           MR · XR
         </TextBlock>
@@ -801,32 +922,32 @@ export const StripeBarsDemo: Story = {
 
       {/* Labels */}
       <Cell col={1} row={1} colSpan={6} zIndex={10}>
-        <TextBlock fontSize={3} opacity={0.4} mono uppercase letterSpacing="0.1em" padding={1} align="start">
+        <TextBlock fontSize={3} opacity={0.4} mono uppercase letterSpacing="0.1em" padding={1} alignHorizontal="start" alignVertical="start">
           default
         </TextBlock>
       </Cell>
       <Cell col={5} row={2} colSpan={2} zIndex={10}>
-        <TextBlock fontSize={3} opacity={0.4} mono uppercase letterSpacing="0.1em" align="start" padding={1}>
+        <TextBlock fontSize={3} opacity={0.4} mono uppercase letterSpacing="0.1em" alignHorizontal="start" alignVertical="start" padding={1}>
           start
         </TextBlock>
       </Cell>
       <Cell col={5} row={3} colSpan={2} zIndex={10}>
-        <TextBlock fontSize={3} opacity={0.4} mono uppercase letterSpacing="0.1em" align="center" padding={1}>
+        <TextBlock fontSize={3} opacity={0.4} mono uppercase letterSpacing="0.1em" padding={1}>
           center
         </TextBlock>
       </Cell>
       <Cell col={5} row={4} colSpan={2} zIndex={10}>
-        <TextBlock fontSize={3} opacity={0.4} mono uppercase letterSpacing="0.1em" align="end" padding={1}>
+        <TextBlock fontSize={3} opacity={0.4} mono uppercase letterSpacing="0.1em" alignHorizontal="end" alignVertical="end" padding={1}>
           end
         </TextBlock>
       </Cell>
       <Cell col={1} row={5} colSpan={6} zIndex={10}>
-        <TextBlock fontSize={3} opacity={0.4} mono uppercase letterSpacing="0.1em" padding={1} align="start">
+        <TextBlock fontSize={3} opacity={0.4} mono uppercase letterSpacing="0.1em" padding={1} alignHorizontal="start" alignVertical="start">
           thick
         </TextBlock>
       </Cell>
       <Cell col={1} row={6} colSpan={6} zIndex={10}>
-        <TextBlock fontSize={3} opacity={0.4} mono uppercase letterSpacing="0.1em" padding={1} align="start">
+        <TextBlock fontSize={3} opacity={0.4} mono uppercase letterSpacing="0.1em" padding={1} alignHorizontal="start" alignVertical="start">
           thin · center
         </TextBlock>
       </Cell>

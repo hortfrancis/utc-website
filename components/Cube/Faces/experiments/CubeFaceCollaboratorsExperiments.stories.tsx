@@ -85,7 +85,7 @@ export const GridTypography: Story = {
           color="var(--theme-magenta)"
           fontWeight={900}
           letterSpacing="-0.04em"
-          align="start"
+          alignHorizontal="start" alignVertical="start"
           padding={2}
         >
           COLLAB
@@ -299,7 +299,7 @@ export const InfoCard: Story = {
           opacity={0.5}
           fontWeight={400}
           letterSpacing="0"
-          align="start"
+          alignHorizontal="start" alignVertical="start"
           padding={2}
         >
           The people who shape our work.{'\n'}
@@ -375,7 +375,7 @@ export const MinimalCorner: Story = {
           color="var(--theme-magenta)"
           fontWeight={900}
           letterSpacing="-0.04em"
-          align="start"
+          alignHorizontal="start" alignVertical="start"
           padding={2}
         >
           COLLAB
@@ -531,7 +531,7 @@ export const PortraitsIconQuad: Story = {
           color="var(--theme-white)"
           fontWeight={900}
           letterSpacing="-0.04em"
-          align="start"
+          alignHorizontal="start" alignVertical="start"
           padding={2}
         >
           COLLAB

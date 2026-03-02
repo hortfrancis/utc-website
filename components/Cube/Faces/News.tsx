@@ -29,7 +29,7 @@ export default function News() {
           color="var(--theme-magenta)"
           fontWeight={900}
           letterSpacing="-0.04em"
-          align="start"
+          alignHorizontal="start" alignVertical="start"
           padding={2}
         >
           NEWS

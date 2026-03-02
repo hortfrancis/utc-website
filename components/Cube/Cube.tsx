@@ -27,7 +27,7 @@ export type FacePosition = "front" | "back" | "left" | "right" | "top" | "bottom
 export const FACE_LABELS: Record<FacePosition, string> = {
   front: "Work",
   back: "News",
-  left: "Vision",
+  left: "Collaborators",
   right: "Showcase",
   top: "XR",
   bottom: "Hamster",

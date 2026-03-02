@@ -30,9 +30,9 @@ const SECTION_CONTENT: Record<FacePosition, SectionContent> = {
     href: '/work',
   },
   left: {
-    title: 'Vision',
+    title: 'Collaborators',
     description:
-      'Our mission, team, and the ideas that drive us. Technology should serve people, not the other way around.',
+      'The people and partners who shape our work. Freelancers, creative collaborators, and organisations we build with.',
     href: '/about',
   },
   back: {

@@ -55,7 +55,7 @@ export default function Work() {
           <ColorBlock color="var(--theme-purple)" />
         </Cell>
         <Cell col={1} row={1} colSpan={2} zIndex={2}>
-          <TextBlock fontSize={2.5} mono uppercase letterSpacing="0.12em" fontWeight={900} color="var(--theme-black)" padding={0.5} align="start">
+          <TextBlock fontSize={2.5} mono uppercase letterSpacing="0.12em" fontWeight={900} color="var(--theme-black)" padding={0.5} alignHorizontal="start" alignVertical="start">
             Construct.AR
           </TextBlock>
         </Cell>
@@ -76,7 +76,7 @@ export default function Work() {
           <ColorBlock color="var(--theme-cyan)" />
         </Cell>
         <Cell col={3} row={1} colSpan={2} zIndex={2}>
-          <TextBlock fontSize={2.5} mono uppercase letterSpacing="0.12em" fontWeight={900} color="var(--theme-black)" padding={0.5} align="start">
+          <TextBlock fontSize={2.5} mono uppercase letterSpacing="0.12em" fontWeight={900} color="var(--theme-black)" padding={0.5} alignHorizontal="start" alignVertical="start">
             Pop.XR
           </TextBlock>
         </Cell>
@@ -97,7 +97,7 @@ export default function Work() {
           <ColorBlock color="var(--theme-orange)" />
         </Cell>
         <Cell col={5} row={1} colSpan={2} zIndex={2}>
-          <TextBlock fontSize={2.5} mono uppercase letterSpacing="0.12em" fontWeight={900} color="var(--theme-black)" padding={0.5} align="start">
+          <TextBlock fontSize={2.5} mono uppercase letterSpacing="0.12em" fontWeight={900} color="var(--theme-black)" padding={0.5} alignHorizontal="start" alignVertical="start">
             BT Urban.AR
           </TextBlock>
         </Cell>
@@ -118,7 +118,7 @@ export default function Work() {
 
         {/* ── Centre zone: "Work" ──────────────────────────────── */}
         <Cell col={1} row={3} colSpan={6} rowSpan={2} zIndex={3}>
-          <TextBlock fontSize={30} fontWeight={900} color="var(--theme-white)" padding={0} align="center">
+          <TextBlock fontSize={30} fontWeight={900} color="var(--theme-white)" padding={0}>
             Work
           </TextBlock>
         </Cell>
@@ -160,7 +160,7 @@ export default function Work() {
           <ColorBlock color="var(--theme-green)" />
         </Cell>
         <Cell col={1} row={5} colSpan={2} zIndex={2}>
-          <TextBlock fontSize={2.5} mono uppercase letterSpacing="0.12em" fontWeight={900} color="var(--theme-black)" padding={0.5} align="start">
+          <TextBlock fontSize={2.5} mono uppercase letterSpacing="0.12em" fontWeight={900} color="var(--theme-black)" padding={0.5} alignHorizontal="start" alignVertical="start">
             Tracing
           </TextBlock>
         </Cell>
@@ -181,7 +181,7 @@ export default function Work() {
           <ColorBlock color="var(--theme-magenta)" />
         </Cell>
         <Cell col={3} row={5} colSpan={2} zIndex={2}>
-          <TextBlock fontSize={2.5} mono uppercase letterSpacing="0.12em" fontWeight={900} color="var(--theme-black)" padding={0.5} align="start">
+          <TextBlock fontSize={2.5} mono uppercase letterSpacing="0.12em" fontWeight={900} color="var(--theme-black)" padding={0.5} alignHorizontal="start" alignVertical="start">
             Sammy&apos;s Xmas
           </TextBlock>
         </Cell>
@@ -202,7 +202,7 @@ export default function Work() {
           <ColorBlock color="var(--theme-orange)" />
         </Cell>
         <Cell col={5} row={5} colSpan={2} zIndex={2}>
-          <TextBlock fontSize={2.5} mono uppercase letterSpacing="0.12em" fontWeight={900} color="var(--theme-black)" padding={0.5} align="start">
+          <TextBlock fontSize={2.5} mono uppercase letterSpacing="0.12em" fontWeight={900} color="var(--theme-black)" padding={0.5} alignHorizontal="start" alignVertical="start">
             BT Mfg
           </TextBlock>
         </Cell>

@@ -88,7 +88,7 @@ export default function XR() {
           uppercase
           letterSpacing="0.1em"
           padding={1.5}
-          align="start"
+          alignHorizontal="start" alignVertical="start"
         >
           Extended Reality
         </TextBlock>
