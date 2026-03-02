@@ -6,9 +6,31 @@ at the start of every session. It describes the conventions for this codebase.
 
 ---
 
-## Storybook Experiment Files
+## Storybook Stories — Two Distinct Categories
 
-Stories for Cube face experiments live in:
+There are two fundamentally different kinds of stories in this codebase.
+**Do not confuse them.**
+
+---
+
+### 1 · Primitive reference stories
+
+```
+components/Cube/Faces/primitives/
+  Primitives.stories.tsx
+```
+
+These are **living documentation** for the actual primitive components.
+They import and render the real `Cell`, `TextBlock`, `ImageBlock`, etc. directly.
+If a primitive's API changes, these stories are expected to break — that is the point.
+They are the source of truth for how primitives work and should be kept up to date
+whenever a primitive is modified.
+
+**Do not put explorations or layout experiments here.**
+
+---
+
+### 2 · Experiment stories
 
 ```
 components/Cube/Faces/experiments/
@@ -16,10 +38,15 @@ components/Cube/Faces/experiments/
   CubeFaceWorkExperiments.stories.tsx
   CubeFaceCollaboratorsExperiments.stories.tsx
   CubeFaceNewsExperiments.stories.tsx
-
-components/Cube/Faces/primitives/
-  Primitives.stories.tsx                     ← Cube Face Primitives (formerly CubeFaceSystemExperiments)
 ```
+
+These are **sandboxed layout explorations** — visual ideas for how a cube face
+might look. They use the primitives, but their purpose is creative exploration,
+not documentation. They should never import internal component logic directly
+(no reaching into component source to access private helpers, etc.).
+
+The key property of experiments is that they are **loosely coupled** — they
+should not break when internal component implementation details change.
 
 ### Story naming
 
@@ -108,7 +135,7 @@ they will cause runtime errors.
 | `CubeFaceWorkExperiments.stories.tsx` | `Experiments/Cube Face Work` |
 | `CubeFaceCollaboratorsExperiments.stories.tsx` | `Experiments/Cube Face Collaborators` |
 | `CubeFaceNewsExperiments.stories.tsx` | `Experiments/Cube Face News` |
-| `primitives/Primitives.stories.tsx` | `Experiments/Cube Face Primitives` |
+| `primitives/Primitives.stories.tsx` | `Cube/Face Primitives` |
 
 ---
 

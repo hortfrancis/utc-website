@@ -9,23 +9,30 @@ import {
   TextBlock,
   IconQuad,
   IconSingle,
+  StripeBars,
 } from '.';
 
 /* ================================================================== */
 /*                                                                     */
-/*  Cube Face System Experiments                                       */
+/*  Cube Face Primitives                                               */
 /*                                                                     */
 /*  Modular, reusable primitives for composing cube face layouts.      */
 /*  All sizing uses cqi (container query inline) units so faces        */
 /*  scale responsively with the cube size.                             */
 /*                                                                     */
-/*  Primitives:                                                        */
-/*    <Cell>       — grid positioning (col, row, spans)                */
-/*    <GridLines>  — decorative 6×6 border overlay                     */
-/*    <ColorBlock> — solid colour fill                                 */
-/*    <ImageBlock> — image with optional gradient mask                 */
-/*    <TextBlock>  — cqi-sized text                                    */
-/*    <IconQuad>   — 4 icons in one cell with + divider                */
+/*  One story per primitive — each story is a self-contained           */
+/*  reference showing the full prop surface via labelled examples.     */
+/*                                                                     */
+/*  Primitives (in compositional order):                               */
+/*    1  <GridLines>     — decorative 6×6 border overlay               */
+/*    2  <Cell>          — grid positioning (col, row, spans, zIndex)  */
+/*    3  <ColorBlock>    — solid colour fill                           */
+/*    4  <GradientBlock> — linear gradient fill                        */
+/*    5  <ImageBlock>    — image with directional gradient mask        */
+/*    6  <TextBlock>     — cqi-sized text, many typographic props      */
+/*    7  <IconQuad>      — 4 icons in one cell with + divider          */
+/*    8  <IconSingle>    — single centred icon                         */
+/*    9  <StripeBars>    — thin horizontal colour stripe bars          */
 /*                                                                     */
 /* ================================================================== */
 
@@ -36,9 +43,9 @@ const meta = {
     docs: {
       description: {
         component:
-          'Modular primitives for cube face layouts. 300px square frame. ' +
-          'All sizing uses cqi units — 1cqi = 1% of the face width/height. ' +
-          'One grid cell ≈ 16.67cqi.',
+          'Modular primitives for cube face layouts. Rendered in a 300px square frame. ' +
+          'All sizing uses cqi units — 1cqi = 1% of the face width. ' +
+          'One grid cell ≈ 16.67cqi. Never use px/rem/% for element sizing inside FaceGrid.',
       },
     },
   },
@@ -59,196 +66,403 @@ type Story = StoryObj;
 /*  STORIES                                                            */
 /* ================================================================== */
 
-/* ------------------------------------------------------------------ */
-/*  1 · GRID LINES                                                     */
-/*  Demonstrates the decorative GridLines overlay on a dark face.      */
-/* ------------------------------------------------------------------ */
-
-// ─── 1 · GridLines ─────────────────────────────────────────────────────────────
+// ─── 1 · GridLines ──────────────────────────────────────────────────────────
+/*
+ * Decorative 6×6 border overlay. Spans the full face automatically.
+ * Place early in the DOM so content layers on top.
+ *
+ * Props:
+ *   color?   — CSS colour value. Default: var(--theme-white)
+ *   opacity? — 0–1. Default: 0.2
+ *
+ * Usage:
+ *   <FaceGrid>
+ *     <GridLines />                                    // white, 0.2 opacity
+ *     <GridLines color="var(--theme-cyan)" opacity={0.4} />
+ *   </FaceGrid>
+ */
 export const GridLinesDemo: Story = {
   name: '1 – GridLines',
   render: () => (
     <FaceGrid className="bg-theme-black!">
-      <GridLines />
+      {/* Left half — default (white, 0.2) */}
+      <div style={{ gridColumn: '1 / span 3', gridRow: '1 / -1' }}>
+        <GridLines />
+      </div>
+
+      {/* Right half — custom color + higher opacity */}
+      <div style={{ gridColumn: '4 / -1', gridRow: '1 / -1' }}>
+        <GridLines color="var(--theme-cyan)" opacity={0.4} />
+      </div>
+
+      {/* Labels */}
+      <Cell col={1} row={6} colSpan={3} zIndex={10}>
+        <TextBlock fontSize={3} opacity={0.5} mono uppercase letterSpacing="0.1em" padding={1} align="start">
+          default
+        </TextBlock>
+      </Cell>
+      <Cell col={4} row={6} colSpan={3} zIndex={10}>
+        <TextBlock fontSize={3} color="var(--theme-cyan)" opacity={0.7} mono uppercase letterSpacing="0.1em" padding={1} align="start">
+          cyan 0.4
+        </TextBlock>
+      </Cell>
     </FaceGrid>
   ),
 };
 
-/* ------------------------------------------------------------------ */
-/*  2 · CELL PLACEMENT                                                 */
-/*  Coloured blocks at various positions showing the grid system.      */
-/* ------------------------------------------------------------------ */
-
-// ─── 2 · Cell Placement ────────────────────────────────────────────────────────
+// ─── 2 · Cell ───────────────────────────────────────────────────────────────
+/*
+ * Grid positioning primitive. Place it at any col/row with optional spans.
+ * The 6×6 grid runs col 1–6, row 1–6. Use integer values only.
+ *
+ * Props:
+ *   col        — column start, 1–6 (required)
+ *   row        — row start, 1–6 (required)
+ *   colSpan?   — columns to span. Default: 1
+ *   rowSpan?   — rows to span. Default: 1
+ *   zIndex?    — explicit stacking order (for overlapping cells)
+ *   className? — passthrough className
+ *
+ * Usage:
+ *   <Cell col={1} row={1} />                           // single cell, top-left
+ *   <Cell col={1} row={1} colSpan={6} rowSpan={6} />  // full face
+ *   <Cell col={3} row={2} colSpan={2} rowSpan={3} zIndex={1} />
+ */
 export const CellPlacement: Story = {
-  name: '2 – Cell Placement',
+  name: '2 – Cell',
   render: () => (
     <FaceGrid className="bg-theme-black!">
-      <GridLines opacity={0.1} />
+      <GridLines opacity={0.08} />
 
-      {/* Single cell — top-left */}
+      {/* col=1 row=1 — single cell, top-left */}
       <Cell col={1} row={1}>
         <ColorBlock color="var(--theme-cyan)" />
       </Cell>
 
-      {/* 2×1 span — top-right area */}
-      <Cell col={5} row={1} colSpan={2}>
+      {/* colSpan=2 — two-column span */}
+      <Cell col={3} row={1} colSpan={2}>
         <ColorBlock color="var(--theme-orange)" />
       </Cell>
 
-      {/* 2×2 block — centre */}
-      <Cell col={3} row={3} colSpan={2} rowSpan={2}>
+      {/* colSpan=2 rowSpan=2 — square block */}
+      <Cell col={2} row={3} colSpan={2} rowSpan={2}>
         <ColorBlock color="var(--theme-purple)" />
       </Cell>
 
-      {/* Full row — bottom */}
+      {/* rowSpan=3 — tall column */}
+      <Cell col={5} row={2} rowSpan={3}>
+        <ColorBlock color="var(--theme-green)" opacity={0.7} />
+      </Cell>
+
+      {/* colSpan=6 — full-width row */}
       <Cell col={1} row={6} colSpan={6}>
-        <ColorBlock color="var(--theme-magenta)" opacity={0.6} />
+        <ColorBlock color="var(--theme-magenta)" opacity={0.5} />
       </Cell>
 
-      {/* 1×3 column — left side */}
-      <Cell col={1} row={2} rowSpan={3}>
-        <ColorBlock color="var(--theme-green)" opacity={0.5} />
+      {/* zIndex — overlapping cells: cyan (zIndex=2) renders above orange (zIndex=1) */}
+      <Cell col={4} row={4} colSpan={2} rowSpan={2} zIndex={2}>
+        <ColorBlock color="var(--theme-cyan)" opacity={0.5} />
+      </Cell>
+      <Cell col={5} row={3} colSpan={2} rowSpan={2} zIndex={1}>
+        <ColorBlock color="var(--theme-orange)" opacity={0.5} />
       </Cell>
     </FaceGrid>
   ),
 };
 
-/* ------------------------------------------------------------------ */
-/*  3 · ICON QUAD                                                      */
-/*  Four-icon cells with plus divider, various configurations.         */
-/* ------------------------------------------------------------------ */
-
-// ─── 3 · IconQuad ──────────────────────────────────────────────────────────────
-export const IconQuadDemo: Story = {
-  name: '3 – IconQuad',
+// ─── 3 · ColorBlock ─────────────────────────────────────────────────────────
+/*
+ * Fills its parent Cell with a solid colour. Simplest fill primitive.
+ *
+ * Props:
+ *   color      — CSS colour or theme var (required)
+ *   opacity?   — 0–1. Default: 1
+ *   className? — passthrough className
+ *
+ * Usage:
+ *   <Cell col={1} row={1}>
+ *     <ColorBlock color="var(--theme-cyan)" />
+ *   </Cell>
+ *   <Cell col={1} row={1} colSpan={3}>
+ *     <ColorBlock color="var(--theme-purple)" opacity={0.4} />
+ *   </Cell>
+ */
+export const ColorBlockDemo: Story = {
+  name: '3 – ColorBlock',
   render: () => (
     <FaceGrid className="bg-theme-black!">
-      <GridLines opacity={0.1} />
+      <GridLines opacity={0.08} />
 
-      {/* All four quadrants filled */}
-      <Cell col={1} row={1}>
-        <IconQuad
-          icons={{
-            tl: 'google-cardboard',
-            tr: 'virtual-reality',
-            bl: 'cube-focus',
-            br: 'globe',
-          }}
-        />
+      {/* Row 1 — opacity=1 (full), each theme colour */}
+      <Cell col={1} row={1}><ColorBlock color="var(--theme-cyan)" /></Cell>
+      <Cell col={2} row={1}><ColorBlock color="var(--theme-magenta)" /></Cell>
+      <Cell col={3} row={1}><ColorBlock color="var(--theme-orange)" /></Cell>
+      <Cell col={4} row={1}><ColorBlock color="var(--theme-green)" /></Cell>
+      <Cell col={5} row={1}><ColorBlock color="var(--theme-purple)" /></Cell>
+      <Cell col={6} row={1}><ColorBlock color="var(--theme-white)" /></Cell>
+
+      {/* Row 2 — opacity=0.6 */}
+      <Cell col={1} row={2}><ColorBlock color="var(--theme-cyan)" opacity={0.6} /></Cell>
+      <Cell col={2} row={2}><ColorBlock color="var(--theme-magenta)" opacity={0.6} /></Cell>
+      <Cell col={3} row={2}><ColorBlock color="var(--theme-orange)" opacity={0.6} /></Cell>
+      <Cell col={4} row={2}><ColorBlock color="var(--theme-green)" opacity={0.6} /></Cell>
+      <Cell col={5} row={2}><ColorBlock color="var(--theme-purple)" opacity={0.6} /></Cell>
+      <Cell col={6} row={2}><ColorBlock color="var(--theme-white)" opacity={0.6} /></Cell>
+
+      {/* Row 3 — opacity=0.25 */}
+      <Cell col={1} row={3}><ColorBlock color="var(--theme-cyan)" opacity={0.25} /></Cell>
+      <Cell col={2} row={3}><ColorBlock color="var(--theme-magenta)" opacity={0.25} /></Cell>
+      <Cell col={3} row={3}><ColorBlock color="var(--theme-orange)" opacity={0.25} /></Cell>
+      <Cell col={4} row={3}><ColorBlock color="var(--theme-green)" opacity={0.25} /></Cell>
+      <Cell col={5} row={3}><ColorBlock color="var(--theme-purple)" opacity={0.25} /></Cell>
+      <Cell col={6} row={3}><ColorBlock color="var(--theme-white)" opacity={0.25} /></Cell>
+
+      {/* Rows 4–5 — spanning cells at low opacity (background use-case) */}
+      <Cell col={1} row={4} colSpan={3} rowSpan={2}>
+        <ColorBlock color="var(--theme-cyan)" opacity={0.12} />
+      </Cell>
+      <Cell col={4} row={4} colSpan={3} rowSpan={2}>
+        <ColorBlock color="var(--theme-magenta)" opacity={0.12} />
       </Cell>
 
-      {/* Two icons, no divider */}
-      <Cell col={3} row={1}>
-        <IconQuad
-          icons={{ tl: 'hard-hat', br: 'blueprint' }}
-          showDivider={false}
-          opacity={0.6}
-        />
-      </Cell>
-
-      {/* Single icon — prominent, no quad */}
-      <Cell col={5} row={1}>
-        <IconSingle
-          name="rocket"
-          color="var(--theme-cyan)"
-        />
-      </Cell>
-
-      {/* Different weight */}
-      <Cell col={1} row={3}>
-        <IconQuad
-          icons={{
-            tl: 'camera',
-            tr: 'paintbrush',
-            bl: 'code',
-            br: 'browsers',
-          }}
-          weight="light"
-          color="var(--theme-orange)"
-          dividerColor="var(--theme-orange)"
-        />
-      </Cell>
-
-      {/* Large icons — multi-cell span */}
-      <Cell col={3} row={3} colSpan={2} rowSpan={2}>
-        <IconQuad
-          icons={{
-            tl: 'cube',
-            tr: 'atom',
-            bl: 'lightning',
-            br: 'sparkle',
-          }}
-          iconSize={10}
-          centered
-          color="var(--theme-purple)"
-          dividerColor="var(--theme-purple)"
-        />
-      </Cell>
-
-      {/* Single icon variants — row 5 */}
-      <Cell col={1} row={5}>
-        <IconSingle
-          name="globe"
-          color="var(--theme-green)"
-          weight="duotone"
-        />
-      </Cell>
-      <Cell col={2} row={5}>
-        <IconSingle
-          name="cube-transparent"
-          color="var(--theme-green)"
-          opacity={0.6}
-          iconSize={10}
-        />
-      </Cell>
-
-      {/* Subtle background icons */}
-      <Cell col={5} row={5} colSpan={2} rowSpan={2}>
-        <IconQuad
-          icons={{
-            tl: 'newspaper',
-            tr: 'megaphone',
-            bl: 'chat',
-            br: 'rss',
-          }}
-          opacity={0.3}
-          color="var(--theme-magenta)"
-          dividerColor="var(--theme-magenta)"
-        />
+      {/* Row 6 — label */}
+      <Cell col={1} row={6} colSpan={6} zIndex={2}>
+        <TextBlock fontSize={3} opacity={0.4} mono uppercase letterSpacing="0.12em">
+          opacity · 1.0 → 0.6 → 0.25
+        </TextBlock>
       </Cell>
     </FaceGrid>
   ),
 };
 
-/* ------------------------------------------------------------------ */
-/*  4 · TEXT BLOCK                                                     */
-/*  CQI-sized text at various scales.                                  */
-/* ------------------------------------------------------------------ */
+// ─── 4 · GradientBlock ──────────────────────────────────────────────────────
+/*
+ * Fills its parent Cell with a CSS linear gradient.
+ * Use inside a Cell for cell-scoped gradients, or full-spanning for
+ * a face-wide colour overlay.
+ *
+ * Props:
+ *   stops      — GradientStop[] — at least 2 required.
+ *                Each stop: { color: string, position?: number }
+ *                position is 0–100 (percentage); omit to distribute evenly.
+ *   direction? — CSS gradient direction. Default: 'to bottom'
+ *                Accepts: 'to right', 'to bottom', '45deg', '135deg', etc.
+ *   opacity?   — 0–1. Default: 1
+ *   className? — passthrough className
+ *
+ * Usage:
+ *   <Cell col={1} row={1} colSpan={6} rowSpan={6}>
+ *     <GradientBlock
+ *       direction="to bottom"
+ *       stops={[
+ *         { color: 'var(--theme-purple)', position: 0 },
+ *         { color: 'transparent', position: 100 },
+ *       ]}
+ *     />
+ *   </Cell>
+ */
+export const GradientBlockDemo: Story = {
+  name: '4 – GradientBlock',
+  render: () => (
+    <FaceGrid className="bg-theme-black!">
+      <GridLines opacity={0.08} />
 
-// ─── 4 · TextBlock ─────────────────────────────────────────────────────────────
+      {/* direction: 'to bottom' — purple → transparent */}
+      <Cell col={1} row={1} colSpan={2} rowSpan={4}>
+        <GradientBlock
+          direction="to bottom"
+          stops={[
+            { color: 'var(--theme-purple)', position: 0 },
+            { color: 'transparent', position: 100 },
+          ]}
+        />
+      </Cell>
+
+      {/* direction: 'to right' — cyan → transparent */}
+      <Cell col={3} row={1} colSpan={4} rowSpan={2}>
+        <GradientBlock
+          direction="to right"
+          stops={[
+            { color: 'var(--theme-cyan)', position: 0 },
+            { color: 'transparent', position: 100 },
+          ]}
+        />
+      </Cell>
+
+      {/* direction: '135deg' — multi-stop */}
+      <Cell col={3} row={3} colSpan={4} rowSpan={2}>
+        <GradientBlock
+          direction="135deg"
+          stops={[
+            { color: 'var(--theme-magenta)', position: 0 },
+            { color: 'var(--theme-orange)', position: 50 },
+            { color: 'var(--theme-cyan)', position: 100 },
+          ]}
+          opacity={0.8}
+        />
+      </Cell>
+
+      {/* Evenly distributed stops — no position values */}
+      <Cell col={1} row={5} colSpan={6} rowSpan={2}>
+        <GradientBlock
+          direction="to right"
+          stops={[
+            { color: 'var(--theme-purple)' },
+            { color: 'var(--theme-cyan)' },
+            { color: 'var(--theme-orange)' },
+            { color: 'var(--theme-green)' },
+          ]}
+          opacity={0.6}
+        />
+      </Cell>
+
+      {/* Labels */}
+      <Cell col={1} row={4} colSpan={2} zIndex={2}>
+        <TextBlock fontSize={3} opacity={0.5} mono uppercase letterSpacing="0.08em" padding={1} align="start">
+          to bottom
+        </TextBlock>
+      </Cell>
+      <Cell col={3} row={2} colSpan={2} zIndex={2}>
+        <TextBlock fontSize={3} opacity={0.5} mono uppercase letterSpacing="0.08em" padding={1} align="start">
+          to right
+        </TextBlock>
+      </Cell>
+      <Cell col={3} row={4} colSpan={2} zIndex={2}>
+        <TextBlock fontSize={3} opacity={0.5} mono uppercase letterSpacing="0.08em" padding={1} align="start">
+          135deg
+        </TextBlock>
+      </Cell>
+      <Cell col={1} row={5} colSpan={4} zIndex={2}>
+        <TextBlock fontSize={3} opacity={0.5} mono uppercase letterSpacing="0.08em" padding={1} align="start">
+          no position (even)
+        </TextBlock>
+      </Cell>
+    </FaceGrid>
+  ),
+};
+
+// ─── 5 · ImageBlock ─────────────────────────────────────────────────────────
+/*
+ * Image that fills its parent Cell. Supports directional gradient masks
+ * for fade effects. Wrap in a full-spanning Cell for a background image,
+ * or a smaller Cell for a cropped region.
+ *
+ * Props:
+ *   src        — image URL (required)
+ *   alt        — alt text (required)
+ *   mask?      — 'fade-down' | 'fade-up' | 'fade-left' | 'fade-right'
+ *                Applies a black→transparent CSS mask so the image fades
+ *                out at that edge.
+ *   objectFit? — CSS object-fit. Default: 'cover'
+ *   opacity?   — 0–1. Default: 1
+ *
+ * Usage:
+ *   <Cell col={1} row={1} colSpan={6} rowSpan={6}>
+ *     <ImageBlock src="/images/experiments/vr01.png" alt="VR" mask="fade-down" />
+ *   </Cell>
+ */
+export const ImageBlockDemo: Story = {
+  name: '5 – ImageBlock',
+  render: () => (
+    <FaceGrid className="bg-theme-black!">
+
+      {/* mask="fade-down" — image fades out toward the bottom */}
+      <Cell col={1} row={1} colSpan={3} rowSpan={3}>
+        <ImageBlock src="/images/experiments/vr01.png" alt="VR headset" mask="fade-down" />
+      </Cell>
+
+      {/* mask="fade-up" — image fades out toward the top */}
+      <Cell col={4} row={1} colSpan={3} rowSpan={3}>
+        <ImageBlock src="/images/experiments/vr01.png" alt="VR headset" mask="fade-up" />
+      </Cell>
+
+      {/* mask="fade-right" — image fades out toward the right */}
+      <Cell col={1} row={4} colSpan={3} rowSpan={3}>
+        <ImageBlock src="/images/experiments/vr01.png" alt="VR headset" mask="fade-right" />
+      </Cell>
+
+      {/* mask="fade-left" — image fades out toward the left */}
+      <Cell col={4} row={4} colSpan={3} rowSpan={3}>
+        <ImageBlock src="/images/experiments/vr01.png" alt="VR headset" mask="fade-left" />
+      </Cell>
+
+      <GridLines opacity={0.12} />
+
+      {/* Labels */}
+      <Cell col={1} row={1} colSpan={3} zIndex={2}>
+        <TextBlock fontSize={3} opacity={0.7} mono uppercase letterSpacing="0.08em" padding={1} align="start">
+          fade-down
+        </TextBlock>
+      </Cell>
+      <Cell col={4} row={1} colSpan={3} zIndex={2}>
+        <TextBlock fontSize={3} opacity={0.7} mono uppercase letterSpacing="0.08em" padding={1} align="start">
+          fade-up
+        </TextBlock>
+      </Cell>
+      <Cell col={1} row={4} colSpan={3} zIndex={2}>
+        <TextBlock fontSize={3} opacity={0.7} mono uppercase letterSpacing="0.08em" padding={1} align="start">
+          fade-right
+        </TextBlock>
+      </Cell>
+      <Cell col={4} row={4} colSpan={3} zIndex={2}>
+        <TextBlock fontSize={3} opacity={0.7} mono uppercase letterSpacing="0.08em" padding={1} align="start">
+          fade-left
+        </TextBlock>
+      </Cell>
+    </FaceGrid>
+  ),
+};
+
+// ─── 6 · TextBlock ──────────────────────────────────────────────────────────
+/*
+ * CQI-scaled text element. Renders a flex container that fills its Cell.
+ * Font size is always in cqi so text scales with the face container.
+ *
+ * Props:
+ *   fontSize       — size in cqi units (required). Typical range: 3–25.
+ *   color?         — CSS colour. Default: var(--theme-white)
+ *   opacity?       — 0–1. Default: 1
+ *   fontWeight?    — numeric weight. Default: 900
+ *   letterSpacing? — CSS letter-spacing string. Default: '-0.04em'
+ *   mono?          — enables monospace axis (Recursive MONO 1). Default: false
+ *   uppercase?     — text-transform: uppercase. Default: false
+ *   align?         — 'start' | 'center' | 'end'. Default: 'center'
+ *                    Controls both flex alignment and text placement.
+ *   padding?       — padding in cqi units. Default: 0
+ *   children       — text content (required)
+ *
+ * Usage:
+ *   <Cell col={1} row={1} colSpan={6} rowSpan={2}>
+ *     <TextBlock fontSize={20} padding={2}>XR</TextBlock>
+ *   </Cell>
+ *   <Cell col={1} row={3} colSpan={6}>
+ *     <TextBlock fontSize={4} mono uppercase letterSpacing="0.15em" align="start" padding={2}>
+ *       Extended Reality
+ *     </TextBlock>
+ *   </Cell>
+ */
 export const TextBlockDemo: Story = {
-  name: '4 – TextBlock',
+  name: '6 – TextBlock',
   render: () => (
     <FaceGrid className="bg-theme-black!">
-      <GridLines opacity={0.1} />
+      <GridLines opacity={0.06} />
 
-      {/* Large heading — spans 3 cols */}
+      {/* fontSize: large heading — 20cqi, default fontWeight 900 */}
       <Cell col={1} row={1} colSpan={3} rowSpan={2}>
-        <TextBlock fontSize={20} padding={2}>
+        <TextBlock fontSize={20} padding={1.5}>
           XR
         </TextBlock>
       </Cell>
 
-      {/* Mono uppercase — smaller */}
-      <Cell col={4} row={1} colSpan={3}>
+      {/* mono + uppercase + letterSpacing — label / eyebrow style */}
+      <Cell col={4} row={1} colSpan={3} rowSpan={2}>
         <TextBlock
-          fontSize={5}
+          fontSize={4.5}
           mono
           uppercase
           letterSpacing="0.15em"
-          fontWeight={750}
-          opacity={0.7}
+          fontWeight={700}
+          opacity={0.6}
           padding={1.5}
           align="start"
         >
@@ -256,13 +470,13 @@ export const TextBlockDemo: Story = {
         </TextBlock>
       </Cell>
 
-      {/* Body-scale text */}
-      <Cell col={1} row={4} colSpan={6} rowSpan={2}>
+      {/* body scale — fontWeight=400, loose letterSpacing, align="start" */}
+      <Cell col={1} row={3} colSpan={6} rowSpan={2}>
         <TextBlock
           fontSize={3.5}
           fontWeight={400}
           letterSpacing="0"
-          opacity={0.6}
+          opacity={0.55}
           padding={2}
           align="start"
         >
@@ -272,8 +486,8 @@ export const TextBlockDemo: Story = {
         </TextBlock>
       </Cell>
 
-      {/* Accent colour */}
-      <Cell col={1} row={6} colSpan={2}>
+      {/* color — accent cyan, align="start" */}
+      <Cell col={1} row={5} colSpan={3}>
         <TextBlock
           fontSize={4}
           color="var(--theme-cyan)"
@@ -286,87 +500,342 @@ export const TextBlockDemo: Story = {
           VR · AR
         </TextBlock>
       </Cell>
-    </FaceGrid>
-  ),
-};
 
-/* ------------------------------------------------------------------ */
-/*  5 · IMAGE BLOCK                                                    */
-/*  Image with gradient mask options.                                  */
-/* ------------------------------------------------------------------ */
-
-// ─── 5 · ImageBlock ────────────────────────────────────────────────────────────
-export const ImageBlockDemo: Story = {
-  name: '5 – ImageBlock',
-  render: () => (
-    <FaceGrid className="bg-theme-black!">
-      {/* Full-face image with fade-down mask */}
-      <Cell col={1} row={1} colSpan={6} rowSpan={6}>
-        <ImageBlock
-          src="/images/experiments/vr02.png"
-          alt="VR headset"
-          mask="fade-down"
-        />
+      {/* align="end" — right-aligned */}
+      <Cell col={4} row={5} colSpan={3}>
+        <TextBlock
+          fontSize={4}
+          opacity={0.35}
+          mono
+          uppercase
+          letterSpacing="0.1em"
+          padding={1.5}
+          align="end"
+        >
+          MR · XR
+        </TextBlock>
       </Cell>
 
-      <GridLines opacity={0.15} />
-
-      {/* Text on top of the faded image */}
-      <Cell col={1} row={5} colSpan={2} rowSpan={2}>
-        <TextBlock fontSize={22.5} padding={2}>
-          XR
+      {/* fontWeight=200 — ultra-thin, wide tracking */}
+      <Cell col={1} row={6} colSpan={6}>
+        <TextBlock
+          fontSize={5}
+          fontWeight={200}
+          letterSpacing="0.25em"
+          uppercase
+          opacity={0.3}
+        >
+          urban tech creative
         </TextBlock>
       </Cell>
     </FaceGrid>
   ),
 };
 
-/* ------------------------------------------------------------------ */
-/*  6 · GRADIENT BLOCK                                                 */
-/*  Demonstrates GradientBlock as a standalone overlay.                */
-/* ------------------------------------------------------------------ */
-
-// ─── 6 · GradientBlock ─────────────────────────────────────────────────────────
-export const GradientBlockDemo: Story = {
-  name: '6 – GradientBlock',
+// ─── 7 · IconQuad ───────────────────────────────────────────────────────────
+/*
+ * Four icons arranged in a 2×2 layout within one Cell, with an optional
+ * Phosphor `plus` icon centred as a visual divider.
+ *
+ * Props:
+ *   icons           — { tl?, tr?, bl?, br? } — IconName per quadrant.
+ *                     Omit a key to leave that quadrant empty.
+ *   centered?       — centre icons within quadrants instead of corner-anchoring.
+ *                     Default: false
+ *   showDivider?    — show the plus divider. Default: true
+ *   color?          — icon colour. Default: var(--theme-white)
+ *   weight?         — Phosphor weight for icons. Default: 'fill'
+ *   opacity?        — overall opacity 0–1. Default: 1
+ *   iconSize?       — icon size in cqi. Default: 5
+ *   dividerSize?    — divider as % of cell. Default: 50
+ *   dividerOpacity? — 0–1. Default: 0.5
+ *   dividerWeight?  — Phosphor weight for divider. Default: 'thin'
+ *   dividerColor?   — overrides color for the divider only
+ *
+ * Usage:
+ *   <Cell col={1} row={1}>
+ *     <IconQuad icons={{ tl: 'cube', tr: 'atom', bl: 'lightning', br: 'sparkle' }} />
+ *   </Cell>
+ */
+export const IconQuadDemo: Story = {
+  name: '7 – IconQuad',
   render: () => (
     <FaceGrid className="bg-theme-black!">
-      <GridLines opacity={0.1} />
+      <GridLines opacity={0.08} />
 
-      {/* Full-face diagonal gradient — purple → cyan → transparent */}
+      {/* All 4 quadrants — default props (white, fill, divider) */}
+      <Cell col={1} row={1}>
+        <IconQuad
+          icons={{ tl: 'google-cardboard', tr: 'virtual-reality', bl: 'cube-focus', br: 'globe' }}
+        />
+      </Cell>
+
+      {/* showDivider=false — 2 icons, no plus divider */}
+      <Cell col={2} row={1}>
+        <IconQuad
+          icons={{ tl: 'hard-hat', br: 'blueprint' }}
+          showDivider={false}
+          opacity={0.6}
+        />
+      </Cell>
+
+      {/* weight='light' + custom color + matching dividerColor */}
+      <Cell col={3} row={1}>
+        <IconQuad
+          icons={{ tl: 'camera', tr: 'paintbrush', bl: 'code', br: 'browsers' }}
+          weight="light"
+          color="var(--theme-orange)"
+          dividerColor="var(--theme-orange)"
+        />
+      </Cell>
+
+      {/* weight='duotone' + cyan */}
+      <Cell col={4} row={1}>
+        <IconQuad
+          icons={{ tl: 'newspaper', tr: 'megaphone', bl: 'chat', br: 'rss' }}
+          weight="duotone"
+          color="var(--theme-cyan)"
+          dividerColor="var(--theme-cyan)"
+          opacity={0.8}
+        />
+      </Cell>
+
+      {/* opacity=0.2 — subtle background texture, larger icons in 2×2 cell */}
+      <Cell col={5} row={1} colSpan={2} rowSpan={2}>
+        <IconQuad
+          icons={{ tl: 'atom', tr: 'circuit-board', bl: 'brain', br: 'flask' }}
+          opacity={0.2}
+          color="var(--theme-purple)"
+          dividerColor="var(--theme-purple)"
+          iconSize={7}
+        />
+      </Cell>
+
+      {/* colSpan=2 rowSpan=2 + iconSize=10 — large icons in bigger cell */}
+      <Cell col={1} row={2} colSpan={2} rowSpan={2}>
+        <IconQuad
+          icons={{ tl: 'cube', tr: 'atom', bl: 'lightning', br: 'sparkle' }}
+          iconSize={10}
+          color="var(--theme-purple)"
+          dividerColor="var(--theme-purple)"
+        />
+      </Cell>
+
+      {/* centered=true — icons centred in quadrants, not corner-anchored */}
+      <Cell col={3} row={2} colSpan={2} rowSpan={2}>
+        <IconQuad
+          icons={{ tl: 'rocket', tr: 'planet', bl: 'star', br: 'sparkle' }}
+          centered
+          color="var(--theme-cyan)"
+          dividerColor="var(--theme-cyan)"
+          dividerOpacity={0.25}
+        />
+      </Cell>
+
+      {/* dividerSize=70 + dividerWeight='regular' — prominent divider */}
+      <Cell col={1} row={4} colSpan={3} rowSpan={3}>
+        <IconQuad
+          icons={{ tl: 'globe', tr: 'broadcast', bl: 'wifi', br: 'monitor' }}
+          iconSize={8}
+          color="var(--theme-green)"
+          dividerColor="var(--theme-green)"
+          dividerSize={70}
+          dividerOpacity={0.2}
+          dividerWeight="regular"
+        />
+      </Cell>
+
+      {/* showDivider=false + opacity=0.15 — ghost background layer */}
+      <Cell col={4} row={3} colSpan={3} rowSpan={4}>
+        <IconQuad
+          icons={{ tl: 'pencil', tr: 'palette', bl: 'film-strip', br: 'image' }}
+          iconSize={9}
+          opacity={0.15}
+          color="var(--theme-magenta)"
+          showDivider={false}
+        />
+      </Cell>
+    </FaceGrid>
+  ),
+};
+
+// ─── 8 · IconSingle ─────────────────────────────────────────────────────────
+/*
+ * A single icon centred within a Cell. Intended for cells where one icon
+ * is the focal point. Sized larger than IconQuad icons by default.
+ *
+ * Props:
+ *   name      — IconName from the registry (required)
+ *   color?    — CSS colour. Default: var(--theme-white)
+ *   weight?   — 'thin'|'light'|'regular'|'bold'|'fill'|'duotone'
+ *               Default: 'fill'
+ *   opacity?  — 0–1. Default: 1
+ *   iconSize? — size in cqi units. Default: 12 (~72% of one cell)
+ *
+ * Usage:
+ *   <Cell col={1} row={1}>
+ *     <IconSingle name="rocket" color="var(--theme-cyan)" />
+ *   </Cell>
+ *   <Cell col={1} row={1} colSpan={2} rowSpan={2}>
+ *     <IconSingle name="globe" iconSize={20} weight="duotone" />
+ *   </Cell>
+ */
+export const IconSingleDemo: Story = {
+  name: '8 – IconSingle',
+  render: () => (
+    <FaceGrid className="bg-theme-black!">
+      <GridLines opacity={0.08} />
+
+      {/* weight variants — thin → light → regular → bold → fill → duotone */}
+      <Cell col={1} row={1}><IconSingle name="cube" weight="thin" opacity={0.8} /></Cell>
+      <Cell col={2} row={1}><IconSingle name="cube" weight="light" opacity={0.8} /></Cell>
+      <Cell col={3} row={1}><IconSingle name="cube" weight="regular" opacity={0.8} /></Cell>
+      <Cell col={4} row={1}><IconSingle name="cube" weight="bold" opacity={0.8} /></Cell>
+      <Cell col={5} row={1}><IconSingle name="cube" weight="fill" /></Cell>
+      <Cell col={6} row={1}><IconSingle name="cube" weight="duotone" /></Cell>
+
+      {/* color variants */}
+      <Cell col={1} row={2}><IconSingle name="rocket" color="var(--theme-cyan)" /></Cell>
+      <Cell col={2} row={2}><IconSingle name="rocket" color="var(--theme-magenta)" /></Cell>
+      <Cell col={3} row={2}><IconSingle name="rocket" color="var(--theme-orange)" /></Cell>
+      <Cell col={4} row={2}><IconSingle name="rocket" color="var(--theme-green)" /></Cell>
+      <Cell col={5} row={2}><IconSingle name="rocket" color="var(--theme-purple)" /></Cell>
+      <Cell col={6} row={2}><IconSingle name="rocket" color="var(--theme-white)" opacity={0.4} /></Cell>
+
+      {/* opacity fade */}
+      <Cell col={1} row={3}><IconSingle name="sparkle" color="var(--theme-cyan)" opacity={1} /></Cell>
+      <Cell col={2} row={3}><IconSingle name="sparkle" color="var(--theme-cyan)" opacity={0.7} /></Cell>
+      <Cell col={3} row={3}><IconSingle name="sparkle" color="var(--theme-cyan)" opacity={0.4} /></Cell>
+      <Cell col={4} row={3}><IconSingle name="sparkle" color="var(--theme-cyan)" opacity={0.2} /></Cell>
+      <Cell col={5} row={3}><IconSingle name="sparkle" color="var(--theme-cyan)" opacity={0.1} /></Cell>
+      <Cell col={6} row={3}><IconSingle name="sparkle" color="var(--theme-cyan)" opacity={0.05} /></Cell>
+
+      {/* iconSize in spanning cells — larger cell = room for bigger icon */}
+      <Cell col={1} row={4} colSpan={2} rowSpan={3}>
+        <IconSingle name="globe" color="var(--theme-green)" iconSize={20} weight="duotone" />
+      </Cell>
+      <Cell col={3} row={4} colSpan={2} rowSpan={3}>
+        <IconSingle name="virtual-reality" color="var(--theme-purple)" iconSize={18} />
+      </Cell>
+      {/* Default iconSize=12 in same 2×3 cell — appears smaller for comparison */}
+      <Cell col={5} row={4} colSpan={2} rowSpan={3}>
+        <IconSingle name="brain" color="var(--theme-magenta)" iconSize={12} />
+      </Cell>
+    </FaceGrid>
+  ),
+};
+
+// ─── 9 · StripeBars ─────────────────────────────────────────────────────────
+/*
+ * Thin horizontal colour-stripe bars placed across the full face width.
+ * Each bar sits at a row boundary and consists of equal-width colour
+ * segments. Must be a DIRECT child of FaceGrid — not inside a Cell.
+ * Self-positions using gridColumn/gridRow span internally.
+ *
+ * Props:
+ *   bars?      — StripeBarDef[]. Default: two bars at rows 2 and 4
+ *                with the standard acid palette.
+ *                StripeBarDef: { row: number, colors: string[] }
+ *                  row    — boundary after which row the bar appears
+ *                           (e.g. row=2 → between rows 2 and 3)
+ *                  colors — ordered CSS colours, left → right
+ *                           (6 segments recommended, one per grid column)
+ *   thickness? — bar height in cqi. Default: ~3.33 (20% of one grid row)
+ *   zIndex?    — stacking order. Default: 5
+ *
+ * Usage:
+ *   <FaceGrid>
+ *     <StripeBars />   // default — two acid-palette bars at rows 2 and 4
+ *   </FaceGrid>
+ *
+ *   <FaceGrid>
+ *     <StripeBars
+ *       bars={[{ row: 3, colors: ['var(--theme-cyan)', 'var(--theme-magenta)', ...] }]}
+ *       thickness={5}
+ *     />
+ *   </FaceGrid>
+ *
+ * ⚠ StripeBars must be a direct FaceGrid child, not wrapped in a Cell.
+ */
+export const StripeBarsDemo: Story = {
+  name: '9 – StripeBars',
+  render: () => (
+    <FaceGrid className="bg-theme-black!">
+      <GridLines opacity={0.08} />
+
+      {/* Background content so bars visually overlay something */}
       <Cell col={1} row={1} colSpan={6} rowSpan={6}>
         <GradientBlock
           direction="135deg"
           stops={[
             { color: 'var(--theme-purple)', position: 0 },
-            { color: 'var(--theme-cyan)', position: 50 },
-            { color: 'transparent', position: 100 },
+            { color: 'transparent', position: 60 },
           ]}
-          opacity={0.6}
+          opacity={0.25}
         />
       </Cell>
 
-      {/* Cell-scoped gradient — magenta → orange */}
-      <Cell col={1} row={5} colSpan={3} rowSpan={2}>
-        <GradientBlock
-          direction="to right"
-          stops={[
-            { color: 'var(--theme-magenta)' },
-            { color: 'var(--theme-orange)' },
-          ]}
-        />
-      </Cell>
+      {/* Default StripeBars — zero config, acid palette at rows 2 and 4 */}
+      <StripeBars />
 
-      {/* Vertical gradient — green → transparent */}
-      <Cell col={5} row={1} colSpan={2} rowSpan={4}>
-        <GradientBlock
-          direction="to bottom"
-          stops={[
-            { color: 'var(--theme-green)' },
-            { color: 'transparent' },
-          ]}
-          opacity={0.5}
-        />
+      {/* Custom bar at row 1 — thicker, paired colours */}
+      <StripeBars
+        bars={[
+          {
+            row: 1,
+            colors: [
+              'var(--theme-cyan)',
+              'var(--theme-cyan)',
+              'var(--theme-magenta)',
+              'var(--theme-magenta)',
+              'var(--theme-orange)',
+              'var(--theme-orange)',
+            ],
+          },
+        ]}
+        thickness={6}
+        zIndex={6}
+      />
+
+      {/* Custom bar at row 5 — monochrome green, thin */}
+      <StripeBars
+        bars={[
+          {
+            row: 5,
+            colors: [
+              'var(--theme-green)',
+              'var(--theme-green)',
+              'var(--theme-green)',
+              'var(--theme-green)',
+              'var(--theme-green)',
+              'var(--theme-green)',
+            ],
+          },
+        ]}
+        thickness={2}
+        zIndex={6}
+      />
+
+      {/* Labels */}
+      <Cell col={1} row={1} colSpan={6} zIndex={10}>
+        <TextBlock fontSize={3} opacity={0.45} mono uppercase letterSpacing="0.1em" padding={1} align="start">
+          row 1 — custom (thick)
+        </TextBlock>
+      </Cell>
+      <Cell col={1} row={2} colSpan={6} zIndex={10}>
+        <TextBlock fontSize={3} opacity={0.45} mono uppercase letterSpacing="0.1em" padding={1} align="start">
+          row 2 — default
+        </TextBlock>
+      </Cell>
+      <Cell col={1} row={4} colSpan={6} zIndex={10}>
+        <TextBlock fontSize={3} opacity={0.45} mono uppercase letterSpacing="0.1em" padding={1} align="start">
+          row 4 — default
+        </TextBlock>
+      </Cell>
+      <Cell col={1} row={5} colSpan={6} zIndex={10}>
+        <TextBlock fontSize={3} opacity={0.45} mono uppercase letterSpacing="0.1em" padding={1} align="start">
+          row 5 — custom (thin)
+        </TextBlock>
       </Cell>
     </FaceGrid>
   ),
