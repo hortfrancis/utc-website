@@ -102,13 +102,15 @@ const DEFAULT_ICONS: readonly [IconName, IconName, IconName] = [
 export interface CollaboratorBioProps {
   name: string;
   role: string;
-  relationship: string;
+  org?: string;
   /** Bio content — supports Markdown via MDX children (paragraphs, **bold**, *italic*). */
   children: React.ReactNode;
   photoSrc: string;
   photoAlt?: string;
   email?: string;
   web?: string;
+  linkedin?: string;
+  instagram?: string;
   icons?: readonly [IconName, IconName, IconName];
   imageBackground?: CollaboratorBioImageBackground;
   headerGradient?: CollaboratorBioHeaderGradient;
@@ -127,12 +129,14 @@ function normaliseWebHref(url: string) {
 export default function CollaboratorBio({
   name,
   role,
-  relationship,
+  org,
   children,
   photoSrc,
   photoAlt,
   email,
   web,
+  instagram,
+  linkedin,
   icons = DEFAULT_ICONS,
   imageBackground = 'theme-orange',
   headerGradient = 'theme-orange-theme-purple',
@@ -141,7 +145,9 @@ export default function CollaboratorBio({
 }: CollaboratorBioProps) {
   const hasEmail = Boolean(email);
   const hasWeb = Boolean(web);
-  const hasContactRow = hasEmail || hasWeb;
+  const hasLinkedin = Boolean(linkedin);
+  const hasInstagram = Boolean(instagram);
+  const hasContactRow = hasEmail || hasWeb || hasLinkedin || hasInstagram;
 
   return (
     <div
@@ -186,10 +192,8 @@ export default function CollaboratorBio({
           <Frame borderSides={['top', 'right']} className="flex items-stretch -mt-0.5">
             <div className="px-4 py-2">
               <p className="text-sm text-theme-black">
-                <span className="font-bold">{role}</span>
-                <span className="hidden sm:inline"> · </span>
-                <br className="sm:hidden" />
-                {relationship}
+                <span className="font-bold">{role}{org && ':'}</span>
+                {org && <> {org}</>}
               </p>
             </div>
           </Frame>
@@ -202,13 +206,19 @@ export default function CollaboratorBio({
         </Frame>
 
         {hasContactRow && (
-          <Frame borderSides={['left', 'right', 'bottom']} className="px-4 py-2 text-sm leading-6 sm:leading-5">
+          <Frame borderSides={['left', 'right', 'bottom']} className="px-4 py-2 text-sm leading-6 sm:leading-5 flex flex-wrap items-center gap-x-3 gap-y-1">
             {hasEmail && email && <Anchor href={`mailto:${email}`}>{email}</Anchor>}
-
-            {hasEmail && hasWeb && <span className="hidden sm:inline text-theme-black"> · </span>}
-            {hasEmail && hasWeb && <br className="sm:hidden" />}
-
             {hasWeb && web && <Anchor href={normaliseWebHref(web)}>{web}</Anchor>}
+            {hasLinkedin && linkedin && (
+              <Anchor href={normaliseWebHref(linkedin)} aria-label="LinkedIn">
+                <Icon name="linkedin" size={16} className="inline-block align-middle" />
+              </Anchor>
+            )}
+            {hasInstagram && instagram && (
+              <Anchor href={normaliseWebHref(instagram)} aria-label="Instagram">
+                <Icon name="instagram" size={16} className="inline-block align-middle" />
+              </Anchor>
+            )}
           </Frame>
         )}
       </div>

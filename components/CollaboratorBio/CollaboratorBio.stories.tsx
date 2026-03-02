@@ -5,7 +5,7 @@ import CollaboratorBio from './CollaboratorBio';
  * Collaborator bio card used for collaborators and partners.
  *
  * - Responsive stack: image column on top (mobile), left (desktop)
- * - Shared gradient header with name and role/relationship
+ * - Shared gradient header with name and role/org
  * - Configurable 3-icon strip and color tokens
  */
 const meta = {
@@ -36,7 +36,7 @@ type Story = StoryObj<typeof meta>;
 const BASE_ARGS = {
   name: 'Bob Blobson',
   role: 'Technical Consultant',
-  relationship: 'Freelancer',
+  org: 'Freelancer',
   children: 'Bob Blobson is the premier viscosity consultant working in this field. He brings his whole self to work.',
   photoSrc: '/images/experiments/collaborator-bio-example01.png',
   email: 'bob@blobshappening.org.uk',
