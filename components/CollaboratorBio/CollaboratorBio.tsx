@@ -7,13 +7,6 @@ import Image from '../Image';
 
 export const COLLABORATOR_BIO_DATA_TESTID = 'CollaboratorBio';
 
-export type CollaboratorBioImageBackground =
-  | 'theme-orange'
-  | 'theme-green'
-  | 'theme-cyan'
-  | 'theme-purple'
-  | 'theme-magenta';
-
 export type CollaboratorBioHeaderGradient =
   | 'theme-orange-theme-purple'
   | 'theme-orange-theme-cyan'
@@ -36,6 +29,17 @@ export type CollaboratorBioHeaderGradient =
   | 'theme-magenta-theme-cyan'
   | 'theme-magenta-theme-green';
 
+export type CollaboratorBioImageBackgroundSolid =
+  | 'theme-orange'
+  | 'theme-green'
+  | 'theme-cyan'
+  | 'theme-purple'
+  | 'theme-magenta';
+
+export type CollaboratorBioImageBackground =
+  | CollaboratorBioImageBackgroundSolid
+  | CollaboratorBioHeaderGradient;
+
 export type CollaboratorBioIconColor =
   | 'theme-orange'
   | 'theme-green'
@@ -44,7 +48,7 @@ export type CollaboratorBioIconColor =
   | 'theme-magenta'
   | 'theme-white';
 
-const IMAGE_BACKGROUND_CLASS: Record<CollaboratorBioImageBackground, string> = {
+const IMAGE_BACKGROUND_SOLID_CLASS: Record<CollaboratorBioImageBackgroundSolid, string> = {
   'theme-orange': 'bg-theme-orange',
   'theme-green': 'bg-theme-green',
   'theme-cyan': 'bg-theme-cyan',
@@ -73,6 +77,11 @@ const HEADER_GRADIENT_CLASS: Record<CollaboratorBioHeaderGradient, string> = {
   'theme-magenta-theme-purple': 'bg-linear-to-r from-theme-magenta to-theme-purple',
   'theme-magenta-theme-cyan': 'bg-linear-to-r from-theme-magenta to-theme-cyan',
   'theme-magenta-theme-green': 'bg-linear-to-r from-theme-magenta to-theme-green',
+};
+
+const IMAGE_BACKGROUND_CLASS: Record<CollaboratorBioImageBackground, string> = {
+  ...IMAGE_BACKGROUND_SOLID_CLASS,
+  ...HEADER_GRADIENT_CLASS,
 };
 
 const ICON_COLOR_CLASS: Record<CollaboratorBioIconColor, string> = {

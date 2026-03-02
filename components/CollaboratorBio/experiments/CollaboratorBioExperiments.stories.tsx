@@ -55,15 +55,13 @@ const BOB_LONG = {
   bio: 'Bob Blobson is the premier viscosity consultant working in this field. He brings his whole self to work. With over fifteen years of experience spanning fluid dynamics, polymer rheology, and non-Newtonian flow modelling, Bob has helped organisations across aerospace, food manufacturing, and biotech optimise their processes. He is a regular speaker at international conferences and holds two patents in shear-thinning measurement techniques.',
 };
 
-/* ------------------------------------------------------------------ */
-/*  1. Default                                                         */
-/* ------------------------------------------------------------------ */
-
+// ─── 1 · Default ────────────────────────────────────────────────────────────
 /**
  * **Default** — Primary layout matching the initial design spec:
  * headshot left, name + accent top-right, bio body, coloured status bar.
  */
 export const Default: Story = {
+  name: '1 – Default',
   render: () => (
     <div className="border-4 border-theme-black bg-theme-white grid grid-cols-[auto_1fr] grid-rows-[auto_1fr_auto] max-w-2xl">
       {/* ---- Photo ---- */}
@@ -102,15 +100,13 @@ export const Default: Story = {
   ),
 };
 
-/* ------------------------------------------------------------------ */
-/*  2. With image blend                                                */
-/* ------------------------------------------------------------------ */
-
+// ─── 2 · With Image Blend ───────────────────────────────────────────────────
 /**
  * **With image blend** — Orange background behind the headshot with
  * `mix-blend-multiply` on the image, giving a duotone / screen-printed feel.
  */
 export const WithImageBlend: Story = {
+  name: '2 – With Image Blend',
   render: () => (
     <div className="border-4 border-theme-black bg-theme-white grid grid-cols-[auto_1fr] grid-rows-[auto_1fr_auto] max-w-2xl">
       {/* ---- Photo with blend ---- */}
@@ -149,15 +145,13 @@ export const WithImageBlend: Story = {
   ),
 };
 
-/* ------------------------------------------------------------------ */
-/*  3. Square image                                                    */
-/* ------------------------------------------------------------------ */
-
+// ─── 3 · Square Image ───────────────────────────────────────────────────────
 /**
  * **Square image** — Same layout but with a 1:1 square headshot instead
  * of the 3:4 portrait crop. Includes the luminosity blend.
  */
 export const SquareImage: Story = {
+  name: '3 – Square Image',
   render: () => (
     <div className="border-4 border-theme-black bg-theme-white grid grid-cols-[auto_1fr] grid-rows-[auto_1fr_auto] max-w-2xl">
       {/* ---- Photo (square) ---- */}
@@ -196,15 +190,13 @@ export const SquareImage: Story = {
   ),
 };
 
-/* ------------------------------------------------------------------ */
-/*  4. Image right                                                     */
-/* ------------------------------------------------------------------ */
-
+// ─── 4 · Image Right ────────────────────────────────────────────────────────
 /**
  * **Image right** — Flipped layout: details in stacked Frame boxes on
  * the left, headshot on the right.
  */
 export const ImageRight: Story = {
+  name: '4 – Image Right',
   render: () => (
     <div className="flex flex-col-reverse sm:flex-row max-w-2xl">
       {/* ---- Detail boxes (left column) ---- */}
@@ -241,16 +233,14 @@ export const ImageRight: Story = {
   ),
 };
 
-/* ------------------------------------------------------------------ */
-/*  5. Image right (responsive)                                        */
-/* ------------------------------------------------------------------ */
-
+// ─── 5 · Image Right Responsive ─────────────────────────────────────────────
 /**
  * **Image right (responsive)** — Same concept as ImageRight but fully
  * fluid: percentage-based image width, `min-w-0` on flex children so
  * text can shrink, and `overflow-hidden` on the root to prevent blowout.
  */
 export const ImageRightResponsive: Story = {
+  name: '5 – Image Right Responsive',
   decorators: [
     (Story) => (
       <div className="p-4 sm:p-12 bg-linear-to-r from-(--background-faded-orange) to-(--background-faded-cyan) min-h-64 flex items-center justify-center w-full overflow-hidden">
@@ -294,16 +284,14 @@ export const ImageRightResponsive: Story = {
   ),
 };
 
-/* ------------------------------------------------------------------ */
-/*  6. Image left (framed)                                             */
-/* ------------------------------------------------------------------ */
-
+// ─── 6 · Image Left Framed ──────────────────────────────────────────────────
 /**
  * **Image left (framed)** — Image on the left using the standard `Image`
  * component with its own Frame border. Gradient Frame strip sits to the right
  * of the name to absorb leftover horizontal space.
  */
 export const ImageLeftFramed: Story = {
+  name: '6 – Image Left Framed',
   render: () => (
     <div className="flex max-w-2xl">
       {/* ---- Photo (framed by Image) ---- */}
@@ -357,16 +345,14 @@ export const ImageLeftFramed: Story = {
   ),
 };
 
-/* ------------------------------------------------------------------ */
-/*  7. Image left (curved, gradient role, linked contact)              */
-/* ------------------------------------------------------------------ */
-
+// ─── 7 · Image Left Curved ──────────────────────────────────────────────────
 /**
  * **Image left curved** — Builds on ImageLeftFramed with a rounded
  * top-right corner, a gradient strip next to the role/relationship row,
  * and clickable email/web links.
  */
 export const ImageLeftCurved: Story = {
+  name: '7 – Image Left Curved',
   render: () => (
     <div className="flex max-w-2xl">
       {/* ---- Photo (framed by Image) ---- */}
@@ -431,15 +417,13 @@ export const ImageLeftCurved: Story = {
   ),
 };
 
-/* ------------------------------------------------------------------ */
-/*  8. Image left curved — long bio                                    */
-/* ------------------------------------------------------------------ */
-
+// ─── 8 · Image Left Curved — Long Bio ───────────────────────────────────────
 /**
  * **Image left curved (long bio)** — Same layout as ImageLeftCurved but
  * with a longer bio to test how the card stretches vertically.
  */
 export const ImageLeftCurvedLongBio: Story = {
+  name: '8 – Image Left Curved — Long Bio',
   render: () => (
     <div className="flex max-w-2xl">
       {/* ---- Photo (framed by Image) ---- */}
@@ -504,16 +488,14 @@ export const ImageLeftCurvedLongBio: Story = {
   ),
 };
 
-/* ------------------------------------------------------------------ */
-/*  9. Image left curved — long bio, block below image                 */
-/* ------------------------------------------------------------------ */
-
+// ─── 9 · Image Left Curved — Block Below ────────────────────────────────────
 /**
  * **Image left curved (block below)** — Square image at top-left with a
  * theme-black Frame filling the remaining height below it, keeping the
  * left column visually balanced against a longer bio.
  */
 export const ImageLeftCurvedBlockBelow: Story = {
+  name: '9 – Image Left Curved — Block Below',
   render: () => (
     <div className="flex max-w-2xl">
       {/* ---- Left column: image + block ---- */}
@@ -590,15 +572,13 @@ export const ImageLeftCurvedBlockBelow: Story = {
   ),
 };
 
-/* ------------------------------------------------------------------ */
-/*  10. Image left curved — compact icon strip                         */
-/* ------------------------------------------------------------------ */
-
+// ─── 10 · Image Left Curved — Compact Icons ─────────────────────────────────
 /**
  * **Image left curved (compact icons)** — Same as story 9 but the icon
  * strip is only as tall as the icons themselves, not flex-filling.
  */
 export const ImageLeftCurvedCompactIcons: Story = {
+  name: '10 – Image Left Curved — Compact Icons',
   render: () => (
     <div className="flex max-w-2xl">
       {/* ---- Left column: image + icon strip ---- */}
@@ -676,16 +656,14 @@ export const ImageLeftCurvedCompactIcons: Story = {
   ),
 };
 
-/* ------------------------------------------------------------------ */
-/*  11. Image left curved — shared gradient strip                      */
-/* ------------------------------------------------------------------ */
-
+// ─── 11 · Image Left Curved — Shared Gradient ───────────────────────────────
 /**
  * **Image left curved (shared gradient)** — Name and Role/Relationship
  * rows share a single gradient block on the right instead of separate
  * gradient + black blocks.
  */
 export const ImageLeftCurvedSharedGradient: Story = {
+  name: '11 – Image Left Curved — Shared Gradient',
   render: () => (
     <div className="flex max-w-2xl">
       {/* ---- Left column: image + icon strip ---- */}
@@ -757,10 +735,7 @@ export const ImageLeftCurvedSharedGradient: Story = {
   ),
 };
 
-/* ------------------------------------------------------------------ */
-/*  12. Image left curved — shared gradient (responsive stack)         */
-/* ------------------------------------------------------------------ */
-
+// ─── 12 · Image Left Curved — Shared Gradient Responsive ────────────────────
 /**
  * **Image left curved (shared gradient, responsive stack)** — Based on
  * ImageLeftCurvedSharedGradient, but on narrow viewports the image column
@@ -768,6 +743,7 @@ export const ImageLeftCurvedSharedGradient: Story = {
  * image has a curved top-right corner.
  */
 export const ImageLeftCurvedSharedGradientResponsiveStack: Story = {
+  name: '12 – Image Left Curved — Shared Gradient Responsive',
   render: () => (
     <div className="flex flex-col sm:flex-row max-w-2xl">
       {/* ---- Left column: image + icon strip (stacks above on mobile) ---- */}
@@ -837,10 +813,86 @@ export const ImageLeftCurvedSharedGradientResponsiveStack: Story = {
   ),
 };
 
-/* ------------------------------------------------------------------ */
-/*  13. Image left curved — shared gradient (responsive stack, green)  */
-/* ------------------------------------------------------------------ */
+// ─── 13 · Image Left Curved — Gradient Background Blend ─────────────────────
+/**
+ * **Image with gradient background blend** — Based on
+ * ImageLeftCurvedSharedGradientResponsiveStack, but uses an
+ * orange → purple gradient as the image Frame background instead of a
+ * solid colour, so the `mix-blend-luminosity` image composites directly
+ * against the gradient.
+ */
+export const ImageGradientBackgroundBlend: Story = {
+  name: '13 – Image Left Curved — Gradient Background Blend',
+  render: () => (
+    <div className="flex flex-col sm:flex-row max-w-2xl">
+      {/* ---- Left column: image + icon strip (stacks above on mobile) ---- */}
+      <div className="w-full sm:w-48 shrink-0 flex flex-col self-start">
+        <Image
+          src={BOB_LONG.photoSrc}
+          alt={BOB_LONG.name}
+          width={192}
+          height={192}
+          borderSides={['top', 'left', 'right']}
+          background="bg-linear-to-r from-theme-orange to-theme-purple"
+          containerClassName="aspect-square rounded-tr-3xl sm:rounded-tr-none sm:rounded-tl-3xl sm:border-r-0"
+          className="object-cover h-full mix-blend-luminosity"
+        />
+        <Frame
+          borderSides={[]}
+          background="bg-theme-black"
+          className="flex items-center justify-end gap-2 py-2 pr-2 sm:rounded-bl-3xl"
+        >
+          <Icon name="atom" size={20} className="text-theme-white" />
+          <Icon name="lightning" size={20} className="text-theme-white" />
+          <Icon name="sparkle" size={20} className="text-theme-white" />
+        </Frame>
+      </div>
 
+      {/* ---- Right column ---- */}
+      <div className="flex-1 min-w-0 flex flex-col">
+        {/* Name + Role/Relationship with shared gradient behind both */}
+        <Frame
+          borderSides={['top', 'left', 'right', 'bottom']}
+          background="bg-linear-to-r from-theme-orange to-theme-purple"
+          className="flex flex-col items-start border-t-0 sm:border-t-4 sm:rounded-tr-3xl sm:overflow-hidden"
+        >
+          <Frame borderSides={['right', 'bottom']} className="px-4 py-3 -mt-0.5 -mb-0.5">
+            <h3 className="text-lg sm:text-xl font-bold text-theme-black leading-tight whitespace-nowrap">
+              {BOB_LONG.name}
+            </h3>
+          </Frame>
+
+          <Frame borderSides={['top', 'right']} className="flex items-stretch -mt-0.5">
+            <div className="px-4 py-2">
+              <p className="text-sm text-theme-black">
+                <span className="font-bold">{BOB_LONG.role}</span> · {BOB_LONG.relationship}
+              </p>
+            </div>
+          </Frame>
+        </Frame>
+
+        {/* Bio */}
+        <Frame borderSides={['left', 'right', 'bottom']} className="px-4 py-3 flex-1">
+          <p className="text-sm text-theme-black leading-relaxed">{BOB_LONG.bio}</p>
+        </Frame>
+
+        {/* Contact (linked) */}
+        <Frame borderSides={['left', 'right', 'bottom']} className="px-4 py-2 text-sm leading-6 sm:leading-5">
+          <Anchor href={`mailto:${BOB_LONG.email}`}>
+            {BOB_LONG.email}
+          </Anchor>
+          <span className="hidden sm:inline text-theme-black"> · </span>
+          <br className="sm:hidden" />
+          <Anchor href={`https://${BOB_LONG.web}`}>
+            {BOB_LONG.web}
+          </Anchor>
+        </Frame>
+      </div>
+    </div>
+  ),
+};
+
+// ─── 14 · Image Left Curved — Shared Gradient Responsive (Green) ────────────
 /**
  * **Image left curved (shared gradient, responsive stack, green)** —
  * Based on ImageLeftCurvedSharedGradientResponsiveStack with a green
@@ -848,6 +900,7 @@ export const ImageLeftCurvedSharedGradientResponsiveStack: Story = {
  * theme-green→theme-cyan shared gradient block.
  */
 export const ImageLeftCurvedSharedGradientResponsiveStackGreen: Story = {
+  name: '14 – Image Left Curved — Shared Gradient Responsive (Green)',
   render: () => (
     <div className="flex flex-col sm:flex-row max-w-2xl">
       {/* ---- Left column: image + icon strip (stacks above on mobile) ---- */}
