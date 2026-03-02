@@ -15,7 +15,10 @@ components/Cube/Faces/experiments/
   CubeFaceXRExperiments.stories.tsx         ← formerly CubeFaceExperiments
   CubeFaceWorkExperiments.stories.tsx
   CubeFaceCollaboratorsExperiments.stories.tsx
-  CubeFaceSystemExperiments.stories.tsx     → renamed to "Cube Face Primitives"
+  CubeFaceNewsExperiments.stories.tsx
+
+components/Cube/Faces/primitives/
+  Primitives.stories.tsx                     ← Cube Face Primitives (formerly CubeFaceSystemExperiments)
 ```
 
 ### Story naming
@@ -70,7 +73,7 @@ this breaks `overflow-hidden` clipping and `cqi` unit resolution.
 </FaceGrid>
 ```
 
-See `CubeFaceSystemExperiments.stories.tsx` (title: "Cube Face Primitives")
+See `primitives/Primitives.stories.tsx` (title: "Cube Face Primitives")
 for working examples of every primitive.
 
 ### Available primitives
@@ -104,7 +107,8 @@ they will cause runtime errors.
 | `CubeFaceExperiments.stories.tsx` | `Experiments/Cube Face XR` |
 | `CubeFaceWorkExperiments.stories.tsx` | `Experiments/Cube Face Work` |
 | `CubeFaceCollaboratorsExperiments.stories.tsx` | `Experiments/Cube Face Collaborators` |
-| `CubeFaceSystemExperiments.stories.tsx` | `Experiments/Cube Face Primitives` |
+| `CubeFaceNewsExperiments.stories.tsx` | `Experiments/Cube Face News` |
+| `primitives/Primitives.stories.tsx` | `Experiments/Cube Face Primitives` |
 
 ---
 
