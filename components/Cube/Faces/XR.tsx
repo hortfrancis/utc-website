@@ -88,9 +88,10 @@ export default function XR() {
           uppercase
           letterSpacing="0.1em"
           padding={1.5}
-          alignHorizontal="start" alignVertical="start"
+          alignHorizontal="start" alignVertical="center"
         >
-          Extended Reality
+          Extended<br />
+          Reality
         </TextBlock>
       </Cell>
 
@@ -102,10 +103,10 @@ export default function XR() {
         >
           <span>
             <span className="font-bold text-theme-white">VR: </span>
-            <span className="text-theme-white">Virtual Reality</span>
+            <span className="text-theme-white"><em>Virtual Reality</em></span>
             <br />
             <span className="font-bold text-theme-white">AR: </span>
-            <span className="text-theme-white">Augmented Reality</span>
+            <span className="text-theme-white"><em>Augmented Reality</em></span>
           </span>
         </div>
       </Cell>
