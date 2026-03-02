@@ -24,3 +24,6 @@ export type { IconSingleProps } from './IconSingle';
 
 export { default as StripeBars } from './StripeBars';
 export type { StripeBarsProps } from './StripeBars';
+
+export { default as VerticalTextBlock } from './VerticalTextBlock';
+export type { VerticalTextBlockProps } from './VerticalTextBlock';

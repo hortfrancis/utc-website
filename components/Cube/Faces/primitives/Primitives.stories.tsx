@@ -10,6 +10,7 @@ import {
   IconQuad,
   IconSingle,
   StripeBars,
+  VerticalTextBlock,
 } from '.';
 
 /* ================================================================== */
@@ -32,7 +33,8 @@ import {
 /*    6  <TextBlock>     — cqi-sized text, many typographic props      */
 /*    7  <IconQuad>      — 4 icons in one cell with + divider          */
 /*    8  <IconSingle>    — single centred icon                         */
-/*    9  <StripeBars>    — thin horizontal colour stripe bars          */
+/*    9  <StripeBars>         — thin horizontal colour stripe bars     */
+/*   10  <VerticalTextBlock> — cqi-sized text rotated 90°/−90°        */
 /*                                                                     */
 /* ================================================================== */
 
@@ -949,6 +951,124 @@ export const StripeBarsDemo: Story = {
       <Cell col={1} row={6} colSpan={6} zIndex={10}>
         <TextBlock fontSize={3} opacity={0.4} mono uppercase letterSpacing="0.1em" padding={1} alignHorizontal="start" alignVertical="start">
           thin · center
+        </TextBlock>
+      </Cell>
+    </FaceGrid>
+  ),
+};
+
+// ─── 10 · VerticalTextBlock ──────────────────────────────────────────────────
+/*
+ * CQI-scaled text rendered sideways. Fills its parent Cell — use a tall
+ * Cell (rowSpan ≥ 2) to give the text room to breathe.
+ *
+ * Props:
+ *   fontSize       — size in cqi units (required). Same scale as TextBlock.
+ *   direction?     — 'up' (bottom-to-top, −90°) | 'down' (top-to-bottom, 90°).
+ *                    Default: 'down'
+ *   align?         — 'start' | 'center' | 'end'. Positions text along the
+ *                    column height. Default: 'center'
+ *   color?         — CSS colour. Default: var(--theme-white)
+ *   opacity?       — 0–1. Default: 1
+ *   fontWeight?    — numeric weight. Default: 900
+ *   letterSpacing? — CSS letter-spacing string. Default: '-0.04em'
+ *   mono?          — enables monospace axis (Recursive MONO 1). Default: false
+ *   uppercase?     — text-transform: uppercase. Default: false
+ *   lineHeight?    — unitless multiplier. Default: 1
+ *   children       — text content (required)
+ *
+ * Usage:
+ *   // Left margin label — reads upward
+ *   <Cell col={1} row={1} rowSpan={6}>
+ *     <VerticalTextBlock fontSize={5} direction="up" mono uppercase letterSpacing="0.15em">
+ *       URBAN TECH CREATIVE
+ *     </VerticalTextBlock>
+ *   </Cell>
+ *
+ *   // Acid-style large rotated heading — reads downward
+ *   <Cell col={1} row={1} colSpan={2} rowSpan={4}>
+ *     <VerticalTextBlock fontSize={12} direction="down" align="start">
+ *       XR
+ *     </VerticalTextBlock>
+ *   </Cell>
+ */
+export const VerticalTextBlockDemo: Story = {
+  name: '10 – VerticalTextBlock',
+  render: () => (
+    <FaceGrid className="bg-theme-black!">
+      <GridLines opacity={0.06} />
+
+      {/* direction="up" — bottom-to-top, full column height */}
+      <Cell col={1} row={1} rowSpan={6}>
+        <VerticalTextBlock fontSize={5} direction="up" mono uppercase letterSpacing="0.15em" color="var(--theme-cyan)">
+          URBAN TECH CREATIVE
+        </VerticalTextBlock>
+      </Cell>
+
+      {/* direction="down" — top-to-bottom */}
+      <Cell col={2} row={1} rowSpan={6}>
+        <VerticalTextBlock fontSize={5} direction="down" mono uppercase letterSpacing="0.15em" opacity={0.4}>
+          URBAN TECH CREATIVE
+        </VerticalTextBlock>
+      </Cell>
+
+      {/* Large acid heading — direction="up", align="start" (anchored to top) */}
+      <Cell col={3} row={1} colSpan={2} rowSpan={4}>
+        <VerticalTextBlock fontSize={14} direction="up" align="start" color="var(--theme-magenta)" opacity={0.9}>
+          XR
+        </VerticalTextBlock>
+      </Cell>
+
+      {/* align="end" — text sits at the bottom of the column */}
+      <Cell col={5} row={1} rowSpan={3}>
+        <VerticalTextBlock fontSize={4} direction="up" align="end" mono uppercase letterSpacing="0.1em" color="var(--theme-orange)" opacity={0.8}>
+          2025
+        </VerticalTextBlock>
+      </Cell>
+
+      {/* align="center" (default) — small label centered in a short span */}
+      <Cell col={6} row={1} rowSpan={3}>
+        <VerticalTextBlock fontSize={4} direction="down" align="center" mono uppercase letterSpacing="0.1em" opacity={0.35}>
+          VOL
+        </VerticalTextBlock>
+      </Cell>
+
+      {/* fontWeight=200 — ultra-thin, wide tracking, full height */}
+      <Cell col={5} row={4} colSpan={2} rowSpan={3}>
+        <VerticalTextBlock fontSize={4} direction="up" fontWeight={200} letterSpacing="0.3em" uppercase opacity={0.25}>
+          extended reality
+        </VerticalTextBlock>
+      </Cell>
+
+      {/* Labels */}
+      <Cell col={1} row={6} zIndex={10}>
+        <TextBlock fontSize={2.5} color="var(--theme-cyan)" opacity={0.6} mono uppercase letterSpacing="0.08em" padding={0.5} alignHorizontal="start" alignVertical="end">
+          up
+        </TextBlock>
+      </Cell>
+      <Cell col={2} row={6} zIndex={10}>
+        <TextBlock fontSize={2.5} opacity={0.4} mono uppercase letterSpacing="0.08em" padding={0.5} alignHorizontal="start" alignVertical="end">
+          down
+        </TextBlock>
+      </Cell>
+      <Cell col={3} row={4} colSpan={2} zIndex={10}>
+        <TextBlock fontSize={2.5} color="var(--theme-magenta)" opacity={0.6} mono uppercase letterSpacing="0.08em" padding={0.5} alignHorizontal="start" alignVertical="end">
+          large · align=start
+        </TextBlock>
+      </Cell>
+      <Cell col={5} row={3} zIndex={10}>
+        <TextBlock fontSize={2.5} color="var(--theme-orange)" opacity={0.5} mono uppercase letterSpacing="0.08em" padding={0.5} alignHorizontal="start" alignVertical="end">
+          end
+        </TextBlock>
+      </Cell>
+      <Cell col={6} row={3} zIndex={10}>
+        <TextBlock fontSize={2.5} opacity={0.3} mono uppercase letterSpacing="0.08em" padding={0.5} alignHorizontal="start" alignVertical="end">
+          ctr
+        </TextBlock>
+      </Cell>
+      <Cell col={5} row={6} colSpan={2} zIndex={10}>
+        <TextBlock fontSize={2.5} opacity={0.2} mono uppercase letterSpacing="0.08em" padding={0.5} alignHorizontal="end" alignVertical="end">
+          w=200
         </TextBlock>
       </Cell>
     </FaceGrid>
