@@ -40,7 +40,7 @@ export const Default: Story = {
   args: {
     items: [
       { label: 'Work', path: '/work' },
-      { label: 'Afghan Project', current: true },
+      { label: 'Window to the Soul', current: true },
     ],
   },
 };
