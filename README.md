@@ -1,4 +1,4 @@
-# UTC Website 2025
+# UTC Website
 
 Portfolio website for **Urban Tech Creative** — a studio focused on 3D digital narratives, XR/AR/VR projects, and tech-driven creative work.
 
