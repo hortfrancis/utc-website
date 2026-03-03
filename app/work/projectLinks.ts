@@ -9,4 +9,5 @@ export const workProjectLinks: NavLinkItem[] = [
   { href: '/work/tracing-the-footprint', label: 'Tracing the Footprint', icon: 'paintbrush' },
   { href: '/work/window-to-the-soul', label: 'Window to the Soul', icon: 'paintbrush' },
   { href: '/work/dock-stories', label: 'Dock Stories', icon: 'paintbrush' },
+  { href: '/work/digital-ipswich', label: 'Digital Ipswich', icon: 'paintbrush' },
 ];
