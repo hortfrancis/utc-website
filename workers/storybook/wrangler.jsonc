@@ -1,6 +1,6 @@
 {
   "$schema": "node_modules/wrangler/config-schema.json",
-  "name": "utc-website-2025-storybook",
+  "name": "utc-website-storybook",
   "compatibility_date": "2026-03-02",
   "assets": {
     "directory": "../../storybook-static"
