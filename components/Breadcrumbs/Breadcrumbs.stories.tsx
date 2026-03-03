@@ -1,19 +1,19 @@
 import type { Meta, StoryObj } from '@storybook/nextjs';
-import Breadcrumbs from './Breadcrumbs';
+import Breadcrumbs from '.';
 
 /**
- * Breadcrumb navigation for hierarchical page context.
- * Renders a sequence of links with separators; the current page is plain text.
+ * Breadcrumb navigation as a molecule: Frame (dark, top-right curve) + nav links.
+ * Chevron separators, white text, cyan hover.
  */
 const meta = {
-  title: 'Atoms/Breadcrumbs',
+  title: 'Molecules/Breadcrumbs',
   component: Breadcrumbs,
   parameters: {
     layout: 'centered',
     docs: {
       description: {
         component:
-          'Breadcrumb navigation. Items with `path` render as links; items with `current: true` render as plain text.',
+          'Breadcrumb navigation. Items with `path` render as links; items with `current: true` render as plain text. Renders inside a Frame (theme-black bg, top-right curve).',
       },
     },
   },

@@ -1,6 +1,7 @@
 import type { Meta, StoryObj } from '@storybook/nextjs';
 import { MDXProvider } from '@mdx-js/react';
 import { useMDXComponents } from '@/mdx-components';
+import Breadcrumbs from '@/components/Breadcrumbs';
 import Page from './Page';
 import AboutContent from '@/content/about.mdx';
 
@@ -39,5 +40,22 @@ export const About: Story = {
     <Page>
       <AboutContent />
     </Page>
+  ),
+};
+
+export const WithBreadcrumbs: Story = {
+  args: { children: null },
+  render: () => (
+    <>
+      <Breadcrumbs
+        items={[
+          { label: 'Cube', path: '/' },
+          { label: 'About', current: true },
+        ]}
+      />
+      <Page>
+        <AboutContent />
+      </Page>
+    </>
   ),
 };
