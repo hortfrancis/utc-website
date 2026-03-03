@@ -1,5 +1,5 @@
 import Breadcrumbs from '@/components/Breadcrumbs';
-import Heading from '@/components/Heading';
+import Content from '@/content/work/window-to-the-soul.mdx';
 import Page from '@/components/Page/Page';
 
 export default function WindowToTheSoulShowcasePage() {
@@ -13,10 +13,8 @@ export default function WindowToTheSoulShowcasePage() {
         ]}
       />
       <Page>
-      <Heading level={1}>Window to the Soul</Heading>
-      <p>[Description of Window to the Soul...]</p>
-
-    </Page>
+        <Content />
+      </Page>
     </>
   );
 }
