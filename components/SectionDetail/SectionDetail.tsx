@@ -12,8 +12,10 @@ export const SECTION_DETAIL_DATA_TESTID = 'SectionDetail';
 /** Content for each site section shown in the detail overlay. */
 interface SectionContent {
   title: string;
-  description: string;
+  description: string | string[];
   href: string | null;
+  /** Override the default "Explore" button label. */
+  cta?: string;
 }
 
 const SECTION_CONTENT: Record<FacePosition, SectionContent> = {
@@ -48,9 +50,13 @@ const SECTION_CONTENT: Record<FacePosition, SectionContent> = {
     href: null, // TBD
   },
   bottom: {
-    title: 'Hamster',
-    description: 'You found the easter egg. Nice.',
-    href: null,
+    title: 'Haify the Hamster',
+    description: [
+      'You found the easter egg!',
+      'Help Haify the AI Hamster navigate the digital realm — avoid Pac-Man, Ghosts, Light Cycles and more!',
+    ],
+    href: 'https://hoppinghaify.lovable.app/',
+    cta: 'Play',
   },
 };
 
@@ -92,9 +98,14 @@ export default function SectionDetail({ face, onClose }: SectionDetailProps) {
             className="bg-theme-white p-6 sm:p-8 flex-1"
           >
             <Heading level={2}>{content.title}</Heading>
-            <p className="text-theme-black/70 mb-6 leading-relaxed">
-              {content.description}
-            </p>
+            {(Array.isArray(content.description)
+              ? content.description
+              : [content.description]
+            ).map((text, i) => (
+              <p key={i} className="text-theme-black/70 mb-6 leading-relaxed">
+                {text}
+              </p>
+            ))}
 
             <div className="flex gap-3 justify-end">
               <Button
@@ -106,10 +117,10 @@ export default function SectionDetail({ face, onClose }: SectionDetailProps) {
               {content.href && (
                 <Button
                   variant="primary"
-                  label="Explore"
+                  label={content.cta ?? 'Explore'}
                   icon="arrow-right"
                   href={content.href}
-                  aria-label={`Explore ${content.title}`}
+                  aria-label={`${content.cta ?? 'Explore'} ${content.title}`}
                 />
               )}
             </div>
