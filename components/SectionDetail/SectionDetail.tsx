@@ -36,10 +36,10 @@ const SECTION_CONTENT: Record<FacePosition, SectionContent> = {
     href: '/about',
   },
   back: {
-    title: 'News',
+    title: 'AI',
     description:
-      'Updates, insights, and weekly video content. Stay in the loop with what we\'re building and thinking about.',
-    href: '/news',
+      'Artificial intelligence tools and integrations. Content coming soon.',
+    href: '/ai',
   },
   right: {
     title: 'Showcase',

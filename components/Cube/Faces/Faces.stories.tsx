@@ -1,5 +1,5 @@
 import type { Meta, StoryObj } from '@storybook/nextjs';
-import { XR, Work, Collaborators, News, Showcase, Hamster } from './index';
+import { XR, Work, Collaborators, AI, Showcase, Hamster } from './index';
 
 /**
  * Cube face components. Each face is rendered inside the 3D cube and uses
@@ -46,9 +46,9 @@ export const FaceCollaborators: Story = {
   render: () => <Collaborators />,
 };
 
-export const FaceNews: Story = {
-  name: 'News (back)',
-  render: () => <News />,
+export const FaceAI: Story = {
+  name: 'AI (back)',
+  render: () => <AI />,
 };
 
 export const FaceShowcase: Story = {

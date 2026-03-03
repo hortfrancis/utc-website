@@ -26,7 +26,7 @@ export type FacePosition = "front" | "back" | "left" | "right" | "top" | "bottom
 /** Human-readable label for each cube face / site section. */
 export const FACE_LABELS: Record<FacePosition, string> = {
   front: "Work",
-  back: "News",
+  back: "AI",
   left: "Collaborators",
   right: "Showcase",
   top: "XR",

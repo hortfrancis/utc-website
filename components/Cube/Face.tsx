@@ -1,4 +1,4 @@
-import { XR, Work, Collaborators, News, Showcase, Hamster } from "./Faces";
+import { XR, Work, Collaborators, AI, Showcase, Hamster } from "./Faces";
 
 interface FaceProps {
   position: "front" | "back" | "left" | "right" | "top" | "bottom";
@@ -13,7 +13,7 @@ export default function Face({ position }: FaceProps) {
       {position === "top" && <XR />}
       {position === "front" && <Work />}
       {position === "left" && <Collaborators />}
-      {position === "back" && <News />}
+      {position === "back" && <AI />}
       {position === "right" && <Showcase />}
       {position === "bottom" && <Hamster />}
     </div>
