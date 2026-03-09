@@ -126,12 +126,12 @@ export const GridTypography: Story = {
 /* ------------------------------------------------------------------ */
 
 const AVATARS: { initials: string; color: string; col: number; row: number }[] = [
-  { initials: 'AB', color: 'var(--theme-cyan)',    col: 1, row: 1 },
-  { initials: 'CD', color: 'var(--theme-orange)',  col: 3, row: 1 },
+  { initials: 'AB', color: 'var(--theme-cyan)', col: 1, row: 1 },
+  { initials: 'CD', color: 'var(--theme-orange)', col: 3, row: 1 },
   { initials: 'EF', color: 'var(--theme-magenta)', col: 5, row: 1 },
-  { initials: 'GH', color: 'var(--theme-purple)',  col: 1, row: 3 },
-  { initials: 'IJ', color: 'var(--theme-green)',   col: 3, row: 3 },
-  { initials: 'KL', color: 'var(--theme-cyan)',    col: 5, row: 3 },
+  { initials: 'GH', color: 'var(--theme-purple)', col: 1, row: 3 },
+  { initials: 'IJ', color: 'var(--theme-green)', col: 3, row: 3 },
+  { initials: 'KL', color: 'var(--theme-cyan)', col: 5, row: 3 },
 ];
 
 // ─── 2 · Avatar Grid ────────────────────────────────────────────────────────
@@ -564,10 +564,10 @@ export const PortraitsIconQuad: Story = {
 const TEAM = [
   { src: '/images/collaborators/alex-hort-francis-portrait01.png', alt: 'Alex Hort-Francis', col: 1 as const, row: 1 as const },
   { src: '/images/collaborators/james-lee-burgess-portrait01.png', alt: 'James Lee Burgess', col: 3 as const, row: 1 as const },
-  { src: '/images/collaborators/charlotte-norman01.png',           alt: 'Charlotte Norman',  col: 5 as const, row: 1 as const },
-  { src: '/images/collaborators/jake-bignell01.png',               alt: 'Jake Bignell',      col: 1 as const, row: 3 as const },
-  { src: '/images/collaborators/hannah-houghton01.png',            alt: 'Hannah Houghton',   col: 3 as const, row: 3 as const },
-  { src: '/images/collaborators/sebastian-miller01.png',           alt: 'Sebastian Miller',  col: 5 as const, row: 3 as const },
+  { src: '/images/collaborators/charlotte-norman01.png', alt: 'Charlotte Norman', col: 5 as const, row: 1 as const },
+  { src: '/images/collaborators/jake-bignell01.png', alt: 'Jake Bignell', col: 1 as const, row: 3 as const },
+  { src: '/images/collaborators/hannah-houghton01.png', alt: 'Hannah Houghton', col: 3 as const, row: 3 as const },
+  { src: '/images/collaborators/sebastian-miller01.png', alt: 'Sebastian Miller', col: 5 as const, row: 3 as const },
 ];
 
 // ─── 8 · Portrait Mosaic ─────────────────────────────────────────────────────
@@ -825,10 +825,10 @@ export const SplitDuotone: Story = {
 /* ------------------------------------------------------------------ */
 
 const DIRECTORY = [
-  { name: 'Alex H-F',   role: 'Creative Tech', color: 'var(--theme-cyan)' },
-  { name: 'James L-B',  role: 'Developer',     color: 'var(--theme-magenta)' },
-  { name: 'Steve B',    role: 'Producer',       color: 'var(--theme-orange)' },
-  { name: 'Charlotte N', role: 'Designer',      color: 'var(--theme-green)' },
+  { name: 'Alex H-F', role: 'Creative Tech', color: 'var(--theme-cyan)' },
+  { name: 'James L-B', role: 'Developer', color: 'var(--theme-magenta)' },
+  { name: 'Steve B', role: 'Producer', color: 'var(--theme-orange)' },
+  { name: 'Charlotte N', role: 'Designer', color: 'var(--theme-green)' },
 ];
 
 // ─── 11 · Directory Rows ─────────────────────────────────────────────────────
@@ -1010,10 +1010,10 @@ export const OverlapPortraits: Story = {
 /* ------------------------------------------------------------------ */
 
 const BIO_CARDS = [
-  { src: '/images/collaborators/alex-hort-francis-portrait01.png', name: 'Alex',      color: 'var(--theme-cyan)',    col: 1 as const, row: 1 as const },
-  { src: '/images/collaborators/james-lee-burgess-portrait01.png', name: 'James',     color: 'var(--theme-magenta)', col: 4 as const, row: 1 as const },
-  { src: '/images/collaborators/steve-bjorck01.png',               name: 'Steve',     color: 'var(--theme-orange)',  col: 1 as const, row: 4 as const },
-  { src: '/images/collaborators/tom-dale01.png',                   name: 'Tom',       color: 'var(--theme-green)',   col: 4 as const, row: 4 as const },
+  { src: '/images/collaborators/alex-hort-francis-portrait01.png', name: 'Alex', color: 'var(--theme-cyan)', col: 1 as const, row: 1 as const },
+  { src: '/images/collaborators/james-lee-burgess-portrait01.png', name: 'James', color: 'var(--theme-magenta)', col: 4 as const, row: 1 as const },
+  { src: '/images/collaborators/steve-bjorck01.png', name: 'Steve', color: 'var(--theme-orange)', col: 1 as const, row: 4 as const },
+  { src: '/images/collaborators/tom-dale01.png', name: 'Tom', color: 'var(--theme-green)', col: 4 as const, row: 4 as const },
 ];
 
 // ─── 13 · Quad Bio Cards ─────────────────────────────────────────────────────
@@ -1765,26 +1765,8 @@ export const WideTitleVisibleGrid: Story = {
   name: '20 – Wide Title + Visible Grid',
   render: () => (
     <FaceGrid>
-      <GridLines opacity={0.22} />
 
-      {/* ── Block 1: magenta→purple · luminosity (Alex) ── */}
-      <Cell col={1} row={1} colSpan={3} rowSpan={3}>
-        <GradientBlock
-          direction="to right"
-          stops={[
-            { color: 'var(--theme-magenta)', position: 0 },
-            { color: 'var(--theme-purple)', position: 100 },
-          ]}
-        />
-      </Cell>
-      <Cell col={1} row={1} colSpan={3} rowSpan={3}>
-        <ImageBlock
-          src="/images/collaborators/alex-hort-francis-portrait01.png"
-          alt="Alex Hort-Francis"
-          objectPosition="top"
-          mixBlendMode="luminosity"
-        />
-      </Cell>
+
 
       {/* ── Block 2: cyan→orange · screen (James) ── */}
       <Cell col={4} row={1} colSpan={3} rowSpan={2}>
@@ -1800,8 +1782,8 @@ export const WideTitleVisibleGrid: Story = {
         <ImageBlock
           src="/images/collaborators/james-lee-burgess-portrait01.png"
           alt="James Lee Burgess"
-          objectPosition="top"
-          mixBlendMode="screen"
+          objectPosition="bottom" 
+          mixBlendMode="luminosity"
         />
       </Cell>
 
@@ -1815,11 +1797,11 @@ export const WideTitleVisibleGrid: Story = {
           ]}
         />
       </Cell>
-      <Cell col={4} row={3} colSpan={2} rowSpan={1}>
+      <Cell col={3} row={2} colSpan={2} rowSpan={3}>
         <ImageBlock
-          src="/images/collaborators/charlotte-norman01.png"
+          src="/images/collaborators/steve-bjorck01.png"
           alt="Charlotte Norman"
-          objectPosition="top"
+          objectPosition="bottom"
           mixBlendMode="overlay"
         />
       </Cell>
@@ -1872,12 +1854,21 @@ export const WideTitleVisibleGrid: Story = {
           ]}
         />
       </Cell>
-      <Cell col={4} row={4} colSpan={2} rowSpan={1}>
+      <Cell col={3} row={1} colSpan={2} rowSpan={2}>
         <ImageBlock
           src="/images/collaborators/tom-dale01.png"
           alt="Tom Dale"
           objectPosition="top"
-          mixBlendMode="color-burn"
+          mixBlendMode="hard-light"
+        />
+      </Cell>
+
+      <Cell col={4} row={4} colSpan={2} rowSpan={1}>
+        <ImageBlock
+          src="/images/collaborators/charlotte-norman01.png"
+          alt="Charlotte Norman"
+          objectPosition="top"
+          mixBlendMode="luminosity"
         />
       </Cell>
 
@@ -1886,7 +1877,7 @@ export const WideTitleVisibleGrid: Story = {
         <GradientBlock
           direction="to right"
           stops={[
-            { color: 'var(--theme-cyan)', position: 0 },
+            { color: 'var(--theme-magenta)', position: 0 },
             { color: 'var(--theme-green)', position: 100 },
           ]}
         />
@@ -1896,26 +1887,66 @@ export const WideTitleVisibleGrid: Story = {
           src="/images/collaborators/hannah-houghton01.png"
           alt="Hannah Houghton"
           objectPosition="top"
-          mixBlendMode="soft-light"
+          mixBlendMode="luminosity"
+        />
+      </Cell>
+
+
+      {/* Stripe bar at R3/R4 boundary */}
+      <Cell col={1} row={3} colSpan={6}>
+        <StripeBars colors={['var(--theme-orange)', 'var(--theme-magenta)', 'var(--theme-cyan)', 'var(--theme-purple)']} />
+      </Cell>
+      
+
+      {/* ── Block 1: magenta→purple · luminosity (Alex) ── */}
+      <Cell col={1} row={1} colSpan={3} rowSpan={3}>
+        <GradientBlock
+          direction="to right"
+          stops={[
+            { color: 'var(--theme-magenta)', position: 0 },
+            { color: 'var(--theme-purple)', position: 100 },
+          ]}
         />
       </Cell>
 
       {/* Stripe bar at R3/R4 boundary */}
-      <Cell col={1} row={3} colSpan={6} zIndex={1}>
-        <StripeBars colors={['var(--theme-orange)', 'var(--theme-magenta)', 'var(--theme-cyan)', 'var(--theme-purple)']} />
+      <Cell col={3} row={1} rowSpan={6}>
+        <StripeBars direction="vertical" align="end" colors={['var(--theme-orange)', 'var(--theme-magenta)', 'var(--theme-cyan)', 'var(--theme-purple)']} />
+      </Cell>
+      
+      <Cell col={1} row={1} colSpan={2} rowSpan={3}>
+        <ImageBlock
+          src="/images/collaborators/alex-hort-francis-portrait01.png"
+          alt="Alex Hort-Francis"
+          objectPosition="top"
+          mixBlendMode="luminosity"
+          opacity={0.75}
+        />
       </Cell>
 
       {/* Stripe bar at R5/R6 boundary — bottom half divider */}
       <Cell col={1} row={5} colSpan={6} zIndex={1}>
-        <StripeBars colors={['var(--theme-green)', 'var(--theme-cyan)', 'var(--theme-magenta)', 'var(--theme-orange)', 'var(--theme-purple)', 'var(--theme-green)']} />
+        <StripeBars colors={['var(--theme-green)', 'transparent', 'var(--theme-magenta)', 'var(--theme-orange)', 'var(--theme-purple)', 'var(--theme-green)']} />
       </Cell>
+
+      <Cell col={1} row={3} colSpan={6} zIndex={1}>
+        <StripeBars thickness={6} align='end' colors={['rgba(0, 0, 0, 0.5)', 'var(--theme-black)', 'var(--theme-black)', 'var(--theme-black)', 'var(--theme-black)', 'var(--theme-black)']} />
+      </Cell>
+
+
+      <Cell col={1} row={4} colSpan={6} zIndex={1}>
+        <StripeBars thickness={6} colors={['var(--theme-black)', 'var(--theme-black)', 'var(--theme-black)', 'rgba(0, 0, 0, 0.5)', 'var(--theme-black)', 'rgba(0, 0, 0, 0.5)']} />
+      </Cell>
+
 
       {/* Overlaid "COLLABORATORS" type — full face width */}
       <Cell col={1} row={1} colSpan={6} rowSpan={6} zIndex={2}>
-        <TextBlock fontSize={10} color="var(--theme-white)" fontWeight={900} letterSpacing="-0.05em">
+        <TextBlock fontSize={11} color="var(--theme-white)" fontWeight={900} letterSpacing="0.05em">
           COLLABORATORS
         </TextBlock>
       </Cell>
+
+      <GridLines opacity={0.2} />
     </FaceGrid>
   ),
 };
