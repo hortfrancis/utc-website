@@ -1217,8 +1217,6 @@ export const NetworkMap: Story = {
 /*  16 · SINGLE SPOTLIGHT                                               */
 /*  Full-bleed single portrait with dramatic gradient, large name,   */
 /*  and minimal metadata. Hero treatment for a featured collaborator. */
-/* ------------------------------------------------------------------ */
-
 // ─── 16 · Single Spotlight ───────────────────────────────────────────────────
 export const SingleSpotlight: Story = {
   name: '16 – Single Spotlight',
@@ -1311,6 +1309,781 @@ export const SingleSpotlight: Story = {
           padding={2}
         >
           Creative Technology · XR Development
+        </TextBlock>
+      </Cell>
+    </FaceGrid>
+  ),
+};
+
+/* ------------------------------------------------------------------ */
+/*  17 · COLOUR BLOCK + PORTRAITS                                       */
+/*  Story 3's bold saturated block layout, but each colour field has   */
+/*  a collaborator portrait burned in with multiply blend mode —        */
+/*  duotone / risograph poster energy.                                  */
+/* ------------------------------------------------------------------ */
+
+// ─── 17 · Colour Block + Portraits ──────────────────────────────────────────
+export const ColourBlockPortraits: Story = {
+  name: '17 – Colour Block + Portraits',
+  render: () => (
+    <FaceGrid>
+      {/* ── Block 1: magenta, 3×3 top-left ── */}
+      <Cell col={1} row={1} colSpan={3} rowSpan={3}>
+        <ColorBlock color="var(--theme-magenta)" />
+      </Cell>
+      <Cell col={1} row={1} colSpan={3} rowSpan={3}>
+        <ImageBlock
+          src="/images/collaborators/alex-hort-francis-portrait01.png"
+          alt="Alex Hort-Francis"
+          objectPosition="top"
+          mixBlendMode="multiply"
+        />
+      </Cell>
+
+      {/* ── Block 2: cyan, 3×2 top-right ── */}
+      <Cell col={4} row={1} colSpan={3} rowSpan={2}>
+        <ColorBlock color="var(--theme-cyan)" />
+      </Cell>
+      <Cell col={4} row={1} colSpan={3} rowSpan={2}>
+        <ImageBlock
+          src="/images/collaborators/james-lee-burgess-portrait01.png"
+          alt="James Lee Burgess"
+          objectPosition="top"
+          mixBlendMode="multiply"
+        />
+      </Cell>
+
+      {/* ── Block 3: orange, 2×2 mid-right ── */}
+      <Cell col={4} row={3} colSpan={2} rowSpan={2}>
+        <ColorBlock color="var(--theme-orange)" />
+      </Cell>
+      <Cell col={4} row={3} colSpan={2} rowSpan={2}>
+        <ImageBlock
+          src="/images/collaborators/charlotte-norman01.png"
+          alt="Charlotte Norman"
+          objectPosition="top"
+          mixBlendMode="multiply"
+        />
+      </Cell>
+
+      {/* ── Block 4: purple, 1×4 right column ── */}
+      <Cell col={6} row={3} rowSpan={4}>
+        <ColorBlock color="var(--theme-purple)" />
+      </Cell>
+      <Cell col={6} row={3} rowSpan={4}>
+        <ImageBlock
+          src="/images/collaborators/sebastian-miller01.png"
+          alt="Sebastian Miller"
+          objectPosition="top"
+          mixBlendMode="multiply"
+        />
+      </Cell>
+
+      {/* ── Block 5: green, 3×3 bottom-left ── */}
+      <Cell col={1} row={4} colSpan={3} rowSpan={3}>
+        <ColorBlock color="var(--theme-green)" />
+      </Cell>
+      <Cell col={1} row={4} colSpan={3} rowSpan={3}>
+        <ImageBlock
+          src="/images/collaborators/jake-bignell01.png"
+          alt="Jake Bignell"
+          objectPosition="top"
+          mixBlendMode="multiply"
+        />
+      </Cell>
+
+      {/* ── Block 6: cyan, 2×2 bottom-mid ── */}
+      <Cell col={4} row={5} colSpan={2} rowSpan={2}>
+        <ColorBlock color="var(--theme-cyan)" opacity={0.6} />
+      </Cell>
+      <Cell col={4} row={5} colSpan={2} rowSpan={2}>
+        <ImageBlock
+          src="/images/collaborators/hannah-houghton01.png"
+          alt="Hannah Houghton"
+          objectPosition="top"
+          mixBlendMode="multiply"
+        />
+      </Cell>
+
+      {/* Stripe bar at R3/R4 boundary */}
+      <Cell col={1} row={3} colSpan={6} zIndex={1}>
+        <StripeBars colors={['var(--theme-orange)', 'var(--theme-magenta)', 'var(--theme-cyan)', 'var(--theme-purple)']} />
+      </Cell>
+
+      {/* Overlaid "COLLABORATORS" type */}
+      <Cell col={1} row={1} colSpan={6} rowSpan={6} zIndex={2}>
+        <TextBlock fontSize={6} color="var(--theme-white)" fontWeight={900} letterSpacing="-0.03em">
+          COLLABORATORS
+        </TextBlock>
+      </Cell>
+
+      {/* Bottom-left label badge */}
+      <Cell col={1} row={6} colSpan={3} zIndex={3}>
+        <div className="flex items-end justify-start w-full h-full select-none" style={{ padding: '2cqi' }}>
+          <span className="bg-theme-black/80 text-theme-white font-bold uppercase tracking-wider px-1.5 py-0.5" style={{ fontSize: '2.5cqi' }}>
+            Collaborators
+          </span>
+        </div>
+      </Cell>
+    </FaceGrid>
+  ),
+};
+
+/* ------------------------------------------------------------------ */
+/*  18 · GRADIENT DUOTONE PORTRAITS                                     */
+/*  Story 17 evolved: two-colour gradient backgrounds per block        */
+/*  (CollaboratorBio luminosity pattern), new colour block in the      */
+/*  bottom half filling the gap between orange and cyan rows,          */
+/*  and a light white grid overlay.                                     */
+/* ------------------------------------------------------------------ */
+
+// ─── 18 · Gradient Duotone Portraits ────────────────────────────────────────
+export const GradientDuotonePortraits: Story = {
+  name: '18 – Gradient Duotone Portraits',
+  render: () => (
+    <FaceGrid>
+      <GridLines opacity={0.12} />
+
+      {/* ── Block 1: magenta→purple, 3×3 top-left (Alex) ── */}
+      <Cell col={1} row={1} colSpan={3} rowSpan={3}>
+        <GradientBlock
+          direction="to right"
+          stops={[
+            { color: 'var(--theme-magenta)', position: 0 },
+            { color: 'var(--theme-purple)', position: 100 },
+          ]}
+        />
+      </Cell>
+      <Cell col={1} row={1} colSpan={3} rowSpan={3}>
+        <ImageBlock
+          src="/images/collaborators/alex-hort-francis-portrait01.png"
+          alt="Alex Hort-Francis"
+          objectPosition="top"
+          mixBlendMode="luminosity"
+        />
+      </Cell>
+
+      {/* ── Block 2: cyan→orange, 3×2 top-right (James) ── */}
+      <Cell col={4} row={1} colSpan={3} rowSpan={2}>
+        <GradientBlock
+          direction="to right"
+          stops={[
+            { color: 'var(--theme-cyan)', position: 0 },
+            { color: 'var(--theme-orange)', position: 100 },
+          ]}
+        />
+      </Cell>
+      <Cell col={4} row={1} colSpan={3} rowSpan={2}>
+        <ImageBlock
+          src="/images/collaborators/james-lee-burgess-portrait01.png"
+          alt="James Lee Burgess"
+          objectPosition="top"
+          mixBlendMode="luminosity"
+        />
+      </Cell>
+
+      {/* ── Block 3: orange→magenta, 2×1 mid-right (Charlotte) ── */}
+      <Cell col={4} row={3} colSpan={2} rowSpan={1}>
+        <GradientBlock
+          direction="to right"
+          stops={[
+            { color: 'var(--theme-orange)', position: 0 },
+            { color: 'var(--theme-magenta)', position: 100 },
+          ]}
+        />
+      </Cell>
+      <Cell col={4} row={3} colSpan={2} rowSpan={1}>
+        <ImageBlock
+          src="/images/collaborators/charlotte-norman01.png"
+          alt="Charlotte Norman"
+          objectPosition="top"
+          mixBlendMode="luminosity"
+        />
+      </Cell>
+
+      {/* ── Block 4: purple→cyan, 1×4 right column (Sebastian) ── */}
+      <Cell col={6} row={3} rowSpan={4}>
+        <GradientBlock
+          direction="to bottom"
+          stops={[
+            { color: 'var(--theme-purple)', position: 0 },
+            { color: 'var(--theme-cyan)', position: 100 },
+          ]}
+        />
+      </Cell>
+      <Cell col={6} row={3} rowSpan={4}>
+        <ImageBlock
+          src="/images/collaborators/sebastian-miller01.png"
+          alt="Sebastian Miller"
+          objectPosition="top"
+          mixBlendMode="luminosity"
+        />
+      </Cell>
+
+      {/* ── Block 5: green→cyan, 3×3 bottom-left (Jake) ── */}
+      <Cell col={1} row={4} colSpan={3} rowSpan={3}>
+        <GradientBlock
+          direction="to right"
+          stops={[
+            { color: 'var(--theme-green)', position: 0 },
+            { color: 'var(--theme-cyan)', position: 100 },
+          ]}
+        />
+      </Cell>
+      <Cell col={1} row={4} colSpan={3} rowSpan={3}>
+        <ImageBlock
+          src="/images/collaborators/jake-bignell01.png"
+          alt="Jake Bignell"
+          objectPosition="top"
+          mixBlendMode="luminosity"
+        />
+      </Cell>
+
+      {/* ── Block 6 (new): magenta→orange, 2×1 mid-bottom row (Tom) ── */}
+      <Cell col={4} row={4} colSpan={2} rowSpan={1}>
+        <GradientBlock
+          direction="to right"
+          stops={[
+            { color: 'var(--theme-magenta)', position: 0 },
+            { color: 'var(--theme-orange)', position: 100 },
+          ]}
+        />
+      </Cell>
+      <Cell col={4} row={4} colSpan={2} rowSpan={1}>
+        <ImageBlock
+          src="/images/collaborators/tom-dale01.png"
+          alt="Tom Dale"
+          objectPosition="top"
+          mixBlendMode="luminosity"
+        />
+      </Cell>
+
+      {/* ── Block 7: cyan→green, 2×2 bottom-mid (Hannah) ── */}
+      <Cell col={4} row={5} colSpan={2} rowSpan={2}>
+        <GradientBlock
+          direction="to right"
+          stops={[
+            { color: 'var(--theme-cyan)', position: 0 },
+            { color: 'var(--theme-green)', position: 100 },
+          ]}
+        />
+      </Cell>
+      <Cell col={4} row={5} colSpan={2} rowSpan={2}>
+        <ImageBlock
+          src="/images/collaborators/hannah-houghton01.png"
+          alt="Hannah Houghton"
+          objectPosition="top"
+          mixBlendMode="luminosity"
+        />
+      </Cell>
+
+      {/* Stripe bar at R3/R4 boundary */}
+      <Cell col={1} row={3} colSpan={6} zIndex={1}>
+        <StripeBars colors={['var(--theme-orange)', 'var(--theme-magenta)', 'var(--theme-cyan)', 'var(--theme-purple)']} />
+      </Cell>
+
+      {/* Overlaid "COLLABORATORS" type */}
+      <Cell col={1} row={1} colSpan={6} rowSpan={6} zIndex={2}>
+        <TextBlock fontSize={6} color="var(--theme-white)" fontWeight={900} letterSpacing="-0.03em">
+          COLLABORATORS
+        </TextBlock>
+      </Cell>
+    </FaceGrid>
+  ),
+};
+
+/* ------------------------------------------------------------------ */
+/*  19 · MIXED BLEND MODES                                              */
+/*  Story 18's gradient blocks, but each portrait uses a different     */
+/*  blend mode — every face reads differently, maximum variety.        */
+/* ------------------------------------------------------------------ */
+
+// ─── 19 · Mixed Blend Modes ──────────────────────────────────────────────────
+export const MixedBlendModes: Story = {
+  name: '19 – Mixed Blend Modes',
+  render: () => (
+    <FaceGrid>
+      <GridLines opacity={0.12} />
+
+      {/* ── Block 1: magenta→purple · multiply (Alex) ── */}
+      <Cell col={1} row={1} colSpan={3} rowSpan={3}>
+        <GradientBlock
+          direction="to right"
+          stops={[
+            { color: 'var(--theme-magenta)', position: 0 },
+            { color: 'var(--theme-purple)', position: 100 },
+          ]}
+        />
+      </Cell>
+      <Cell col={1} row={1} colSpan={3} rowSpan={3}>
+        <ImageBlock
+          src="/images/collaborators/alex-hort-francis-portrait01.png"
+          alt="Alex Hort-Francis"
+          objectPosition="top"
+          mixBlendMode="multiply"
+        />
+      </Cell>
+
+      {/* ── Block 2: cyan→orange · screen (James) ── */}
+      <Cell col={4} row={1} colSpan={3} rowSpan={2}>
+        <GradientBlock
+          direction="to right"
+          stops={[
+            { color: 'var(--theme-cyan)', position: 0 },
+            { color: 'var(--theme-orange)', position: 100 },
+          ]}
+        />
+      </Cell>
+      <Cell col={4} row={1} colSpan={3} rowSpan={2}>
+        <ImageBlock
+          src="/images/collaborators/james-lee-burgess-portrait01.png"
+          alt="James Lee Burgess"
+          objectPosition="top"
+          mixBlendMode="screen"
+        />
+      </Cell>
+
+      {/* ── Block 3: orange→magenta · overlay (Charlotte) ── */}
+      <Cell col={4} row={3} colSpan={2} rowSpan={1}>
+        <GradientBlock
+          direction="to right"
+          stops={[
+            { color: 'var(--theme-orange)', position: 0 },
+            { color: 'var(--theme-magenta)', position: 100 },
+          ]}
+        />
+      </Cell>
+      <Cell col={4} row={3} colSpan={2} rowSpan={1}>
+        <ImageBlock
+          src="/images/collaborators/charlotte-norman01.png"
+          alt="Charlotte Norman"
+          objectPosition="top"
+          mixBlendMode="overlay"
+        />
+      </Cell>
+
+      {/* ── Block 4: purple→cyan · hard-light (Sebastian) ── */}
+      <Cell col={6} row={3} rowSpan={4}>
+        <GradientBlock
+          direction="to bottom"
+          stops={[
+            { color: 'var(--theme-purple)', position: 0 },
+            { color: 'var(--theme-cyan)', position: 100 },
+          ]}
+        />
+      </Cell>
+      <Cell col={6} row={3} rowSpan={4}>
+        <ImageBlock
+          src="/images/collaborators/sebastian-miller01.png"
+          alt="Sebastian Miller"
+          objectPosition="top"
+          mixBlendMode="hard-light"
+        />
+      </Cell>
+
+      {/* ── Block 5: green→cyan · luminosity (Jake) ── */}
+      <Cell col={1} row={4} colSpan={3} rowSpan={3}>
+        <GradientBlock
+          direction="to right"
+          stops={[
+            { color: 'var(--theme-green)', position: 0 },
+            { color: 'var(--theme-cyan)', position: 100 },
+          ]}
+        />
+      </Cell>
+      <Cell col={1} row={4} colSpan={3} rowSpan={3}>
+        <ImageBlock
+          src="/images/collaborators/jake-bignell01.png"
+          alt="Jake Bignell"
+          objectPosition="top"
+          mixBlendMode="luminosity"
+        />
+      </Cell>
+
+      {/* ── Block 6: magenta→orange · color-burn (Tom) ── */}
+      <Cell col={4} row={4} colSpan={2} rowSpan={1}>
+        <GradientBlock
+          direction="to right"
+          stops={[
+            { color: 'var(--theme-magenta)', position: 0 },
+            { color: 'var(--theme-orange)', position: 100 },
+          ]}
+        />
+      </Cell>
+      <Cell col={4} row={4} colSpan={2} rowSpan={1}>
+        <ImageBlock
+          src="/images/collaborators/tom-dale01.png"
+          alt="Tom Dale"
+          objectPosition="top"
+          mixBlendMode="color-burn"
+        />
+      </Cell>
+
+      {/* ── Block 7: cyan→green · soft-light (Hannah) ── */}
+      <Cell col={4} row={5} colSpan={2} rowSpan={2}>
+        <GradientBlock
+          direction="to right"
+          stops={[
+            { color: 'var(--theme-cyan)', position: 0 },
+            { color: 'var(--theme-green)', position: 100 },
+          ]}
+        />
+      </Cell>
+      <Cell col={4} row={5} colSpan={2} rowSpan={2}>
+        <ImageBlock
+          src="/images/collaborators/hannah-houghton01.png"
+          alt="Hannah Houghton"
+          objectPosition="top"
+          mixBlendMode="soft-light"
+        />
+      </Cell>
+
+      {/* Stripe bar at R3/R4 boundary */}
+      <Cell col={1} row={3} colSpan={6} zIndex={1}>
+        <StripeBars colors={['var(--theme-orange)', 'var(--theme-magenta)', 'var(--theme-cyan)', 'var(--theme-purple)']} />
+      </Cell>
+
+      {/* Overlaid "COLLABORATORS" type */}
+      <Cell col={1} row={1} colSpan={6} rowSpan={6} zIndex={2}>
+        <TextBlock fontSize={6} color="var(--theme-white)" fontWeight={900} letterSpacing="-0.03em">
+          COLLABORATORS
+        </TextBlock>
+      </Cell>
+    </FaceGrid>
+  ),
+};
+
+/* ------------------------------------------------------------------ */
+/*  20 · WIDE TITLE + VISIBLE GRID                                      */
+/*  Story 19 refined: full-width "COLLABORATORS" title, stronger grid, */
+/*  lighter blend on top-left block, and a second stripe bar           */
+/*  dividing the bottom half.                                           */
+/* ------------------------------------------------------------------ */
+
+// ─── 20 · Wide Title + Visible Grid ─────────────────────────────────────────
+export const WideTitleVisibleGrid: Story = {
+  name: '20 – Wide Title + Visible Grid',
+  render: () => (
+    <FaceGrid>
+      <GridLines opacity={0.22} />
+
+      {/* ── Block 1: magenta→purple · luminosity (Alex) ── */}
+      <Cell col={1} row={1} colSpan={3} rowSpan={3}>
+        <GradientBlock
+          direction="to right"
+          stops={[
+            { color: 'var(--theme-magenta)', position: 0 },
+            { color: 'var(--theme-purple)', position: 100 },
+          ]}
+        />
+      </Cell>
+      <Cell col={1} row={1} colSpan={3} rowSpan={3}>
+        <ImageBlock
+          src="/images/collaborators/alex-hort-francis-portrait01.png"
+          alt="Alex Hort-Francis"
+          objectPosition="top"
+          mixBlendMode="luminosity"
+        />
+      </Cell>
+
+      {/* ── Block 2: cyan→orange · screen (James) ── */}
+      <Cell col={4} row={1} colSpan={3} rowSpan={2}>
+        <GradientBlock
+          direction="to right"
+          stops={[
+            { color: 'var(--theme-cyan)', position: 0 },
+            { color: 'var(--theme-orange)', position: 100 },
+          ]}
+        />
+      </Cell>
+      <Cell col={4} row={1} colSpan={3} rowSpan={2}>
+        <ImageBlock
+          src="/images/collaborators/james-lee-burgess-portrait01.png"
+          alt="James Lee Burgess"
+          objectPosition="top"
+          mixBlendMode="screen"
+        />
+      </Cell>
+
+      {/* ── Block 3: orange→magenta · overlay (Charlotte) ── */}
+      <Cell col={4} row={3} colSpan={2} rowSpan={1}>
+        <GradientBlock
+          direction="to right"
+          stops={[
+            { color: 'var(--theme-orange)', position: 0 },
+            { color: 'var(--theme-magenta)', position: 100 },
+          ]}
+        />
+      </Cell>
+      <Cell col={4} row={3} colSpan={2} rowSpan={1}>
+        <ImageBlock
+          src="/images/collaborators/charlotte-norman01.png"
+          alt="Charlotte Norman"
+          objectPosition="top"
+          mixBlendMode="overlay"
+        />
+      </Cell>
+
+      {/* ── Block 4: purple→cyan · hard-light (Sebastian) ── */}
+      <Cell col={6} row={3} rowSpan={4}>
+        <GradientBlock
+          direction="to bottom"
+          stops={[
+            { color: 'var(--theme-purple)', position: 0 },
+            { color: 'var(--theme-cyan)', position: 100 },
+          ]}
+        />
+      </Cell>
+      <Cell col={6} row={3} rowSpan={4}>
+        <ImageBlock
+          src="/images/collaborators/sebastian-miller01.png"
+          alt="Sebastian Miller"
+          objectPosition="top"
+          mixBlendMode="hard-light"
+        />
+      </Cell>
+
+      {/* ── Block 5: green→cyan · luminosity (Jake) ── */}
+      <Cell col={1} row={4} colSpan={3} rowSpan={3}>
+        <GradientBlock
+          direction="to right"
+          stops={[
+            { color: 'var(--theme-green)', position: 0 },
+            { color: 'var(--theme-cyan)', position: 100 },
+          ]}
+        />
+      </Cell>
+      <Cell col={1} row={4} colSpan={3} rowSpan={3}>
+        <ImageBlock
+          src="/images/collaborators/jake-bignell01.png"
+          alt="Jake Bignell"
+          objectPosition="top"
+          mixBlendMode="luminosity"
+        />
+      </Cell>
+
+      {/* ── Block 6: magenta→orange · color-burn (Tom) ── */}
+      <Cell col={4} row={4} colSpan={2} rowSpan={1}>
+        <GradientBlock
+          direction="to right"
+          stops={[
+            { color: 'var(--theme-magenta)', position: 0 },
+            { color: 'var(--theme-orange)', position: 100 },
+          ]}
+        />
+      </Cell>
+      <Cell col={4} row={4} colSpan={2} rowSpan={1}>
+        <ImageBlock
+          src="/images/collaborators/tom-dale01.png"
+          alt="Tom Dale"
+          objectPosition="top"
+          mixBlendMode="color-burn"
+        />
+      </Cell>
+
+      {/* ── Block 7: cyan→green · soft-light (Hannah) ── */}
+      <Cell col={4} row={5} colSpan={2} rowSpan={2}>
+        <GradientBlock
+          direction="to right"
+          stops={[
+            { color: 'var(--theme-cyan)', position: 0 },
+            { color: 'var(--theme-green)', position: 100 },
+          ]}
+        />
+      </Cell>
+      <Cell col={4} row={5} colSpan={2} rowSpan={2}>
+        <ImageBlock
+          src="/images/collaborators/hannah-houghton01.png"
+          alt="Hannah Houghton"
+          objectPosition="top"
+          mixBlendMode="soft-light"
+        />
+      </Cell>
+
+      {/* Stripe bar at R3/R4 boundary */}
+      <Cell col={1} row={3} colSpan={6} zIndex={1}>
+        <StripeBars colors={['var(--theme-orange)', 'var(--theme-magenta)', 'var(--theme-cyan)', 'var(--theme-purple)']} />
+      </Cell>
+
+      {/* Stripe bar at R5/R6 boundary — bottom half divider */}
+      <Cell col={1} row={5} colSpan={6} zIndex={1}>
+        <StripeBars colors={['var(--theme-green)', 'var(--theme-cyan)', 'var(--theme-magenta)', 'var(--theme-orange)', 'var(--theme-purple)', 'var(--theme-green)']} />
+      </Cell>
+
+      {/* Overlaid "COLLABORATORS" type — full face width */}
+      <Cell col={1} row={1} colSpan={6} rowSpan={6} zIndex={2}>
+        <TextBlock fontSize={10} color="var(--theme-white)" fontWeight={900} letterSpacing="-0.05em">
+          COLLABORATORS
+        </TextBlock>
+      </Cell>
+    </FaceGrid>
+  ),
+};
+
+/* ------------------------------------------------------------------ */
+/*  21 · BURNT OUT + VERTICAL STRIPE                                    */
+/*  Story 20 refined: stronger grid, color-dodge on top-left for       */
+/*  blown-out overexposed look, bottom stripe bar rotated vertical     */
+/*  and repositioned at the col 3/4 boundary.                          */
+/* ------------------------------------------------------------------ */
+
+// ─── 21 · Burnt Out + Vertical Stripe ───────────────────────────────────────
+export const BurntOutVerticalStripe: Story = {
+  name: '21 – Burnt Out + Vertical Stripe',
+  render: () => (
+    <FaceGrid>
+      <GridLines opacity={0.32} />
+
+      {/* ── Block 1: magenta→purple · color-dodge = blown-out (Alex) ── */}
+      <Cell col={1} row={1} colSpan={3} rowSpan={3}>
+        <GradientBlock
+          direction="to right"
+          stops={[
+            { color: 'var(--theme-magenta)', position: 0 },
+            { color: 'var(--theme-purple)', position: 100 },
+          ]}
+        />
+      </Cell>
+      <Cell col={1} row={1} colSpan={3} rowSpan={3}>
+        <ImageBlock
+          src="/images/collaborators/alex-hort-francis-portrait01.png"
+          alt="Alex Hort-Francis"
+          objectPosition="top"
+          mixBlendMode="color-dodge"
+        />
+      </Cell>
+
+      {/* ── Block 2: cyan→orange · screen (James) ── */}
+      <Cell col={4} row={1} colSpan={3} rowSpan={2}>
+        <GradientBlock
+          direction="to right"
+          stops={[
+            { color: 'var(--theme-cyan)', position: 0 },
+            { color: 'var(--theme-orange)', position: 100 },
+          ]}
+        />
+      </Cell>
+      <Cell col={4} row={1} colSpan={3} rowSpan={2}>
+        <ImageBlock
+          src="/images/collaborators/james-lee-burgess-portrait01.png"
+          alt="James Lee Burgess"
+          objectPosition="top"
+          mixBlendMode="screen"
+        />
+      </Cell>
+
+      {/* ── Block 3: orange→magenta · overlay (Charlotte) ── */}
+      <Cell col={4} row={3} colSpan={2} rowSpan={1}>
+        <GradientBlock
+          direction="to right"
+          stops={[
+            { color: 'var(--theme-orange)', position: 0 },
+            { color: 'var(--theme-magenta)', position: 100 },
+          ]}
+        />
+      </Cell>
+      <Cell col={4} row={3} colSpan={2} rowSpan={1}>
+        <ImageBlock
+          src="/images/collaborators/charlotte-norman01.png"
+          alt="Charlotte Norman"
+          objectPosition="top"
+          mixBlendMode="overlay"
+        />
+      </Cell>
+
+      {/* ── Block 4: purple→cyan · hard-light (Sebastian) ── */}
+      <Cell col={6} row={3} rowSpan={4}>
+        <GradientBlock
+          direction="to bottom"
+          stops={[
+            { color: 'var(--theme-purple)', position: 0 },
+            { color: 'var(--theme-cyan)', position: 100 },
+          ]}
+        />
+      </Cell>
+      <Cell col={6} row={3} rowSpan={4}>
+        <ImageBlock
+          src="/images/collaborators/sebastian-miller01.png"
+          alt="Sebastian Miller"
+          objectPosition="top"
+          mixBlendMode="hard-light"
+        />
+      </Cell>
+
+      {/* ── Block 5: green→cyan · luminosity (Jake) ── */}
+      <Cell col={1} row={4} colSpan={3} rowSpan={3}>
+        <GradientBlock
+          direction="to right"
+          stops={[
+            { color: 'var(--theme-green)', position: 0 },
+            { color: 'var(--theme-cyan)', position: 100 },
+          ]}
+        />
+      </Cell>
+      <Cell col={1} row={4} colSpan={3} rowSpan={3}>
+        <ImageBlock
+          src="/images/collaborators/jake-bignell01.png"
+          alt="Jake Bignell"
+          objectPosition="top"
+          mixBlendMode="luminosity"
+        />
+      </Cell>
+
+      {/* ── Block 6: magenta→orange · color-burn (Tom) ── */}
+      <Cell col={4} row={4} colSpan={2} rowSpan={1}>
+        <GradientBlock
+          direction="to right"
+          stops={[
+            { color: 'var(--theme-magenta)', position: 0 },
+            { color: 'var(--theme-orange)', position: 100 },
+          ]}
+        />
+      </Cell>
+      <Cell col={4} row={4} colSpan={2} rowSpan={1}>
+        <ImageBlock
+          src="/images/collaborators/tom-dale01.png"
+          alt="Tom Dale"
+          objectPosition="top"
+          mixBlendMode="color-burn"
+        />
+      </Cell>
+
+      {/* ── Block 7: cyan→green · soft-light (Hannah) ── */}
+      <Cell col={4} row={5} colSpan={2} rowSpan={2}>
+        <GradientBlock
+          direction="to right"
+          stops={[
+            { color: 'var(--theme-cyan)', position: 0 },
+            { color: 'var(--theme-green)', position: 100 },
+          ]}
+        />
+      </Cell>
+      <Cell col={4} row={5} colSpan={2} rowSpan={2}>
+        <ImageBlock
+          src="/images/collaborators/hannah-houghton01.png"
+          alt="Hannah Houghton"
+          objectPosition="top"
+          mixBlendMode="soft-light"
+        />
+      </Cell>
+
+      {/* Horizontal stripe bar at R3/R4 boundary */}
+      <Cell col={1} row={3} colSpan={6} zIndex={1}>
+        <StripeBars colors={['var(--theme-orange)', 'var(--theme-magenta)', 'var(--theme-cyan)', 'var(--theme-purple)']} />
+      </Cell>
+
+      {/* Vertical stripe bar at col 3/4 boundary — full height */}
+      <Cell col={4} row={1} rowSpan={6} zIndex={1}>
+        <StripeBars
+          direction="vertical"
+          colors={['var(--theme-green)', 'var(--theme-cyan)', 'var(--theme-magenta)', 'var(--theme-orange)', 'var(--theme-purple)', 'var(--theme-green)']}
+        />
+      </Cell>
+
+      {/* Overlaid "COLLABORATORS" type — full face width */}
+      <Cell col={1} row={1} colSpan={6} rowSpan={6} zIndex={2}>
+        <TextBlock fontSize={10} color="var(--theme-white)" fontWeight={900} letterSpacing="-0.05em">
+          COLLABORATORS
         </TextBlock>
       </Cell>
     </FaceGrid>

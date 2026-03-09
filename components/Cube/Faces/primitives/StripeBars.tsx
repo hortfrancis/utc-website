@@ -7,10 +7,20 @@ export interface StripeBarsProps {
   /** Bar thickness in cqi units. Default: ~3.33 (20% of one grid square). */
   thickness?: number;
   /**
-   * Vertical position within the Cell.
-   * 'start'  — top edge of cell (default)
-   * 'center' — vertically centred (sits on the row mid-line)
-   * 'end'    — bottom edge of cell (sits on the next row boundary)
+   * Bar orientation. Default: 'horizontal'.
+   * 'horizontal' — thin row with segments side by side (classic)
+   * 'vertical'   — thin column with segments stacked top-to-bottom
+   */
+  direction?: 'horizontal' | 'vertical';
+  /**
+   * Position within the Cell along the cross-axis.
+   * For horizontal bars: vertical position — 'start' (top, default) | 'center' | 'end' (bottom)
+   * For vertical bars:   horizontal position — 'start' (left, default) | 'center' | 'end' (right)
+   */
+  align?: 'start' | 'center' | 'end';
+  /**
+   * @deprecated Use `align` instead.
+   * Vertical position within the Cell (horizontal bars only).
    */
   verticalAlign?: 'start' | 'center' | 'end';
 }
@@ -25,37 +35,51 @@ const DEFAULT_COLORS: string[] = [
 ];
 
 /**
- * Renders a thin horizontal colour-stripe bar.
+ * Renders a thin colour-stripe bar (horizontal or vertical).
  * Fills its parent cell — place inside a `<Cell>` to control position.
  *
  * @example
- * // Bar at the top of row 3
+ * // Horizontal bar at the top of row 3
  * <Cell col={1} row={3} colSpan={6} zIndex={5}>
  *   <StripeBars />
  * </Cell>
  *
- * // Bar centred within row 5 (sits on the row 4/5 mid-line)
- * <Cell col={1} row={5} colSpan={6} zIndex={5}>
- *   <StripeBars verticalAlign="center" />
- * </Cell>
- *
- * // Bar at the bottom edge of row 4 (sits on the row 4/5 boundary)
- * <Cell col={1} row={4} colSpan={6} zIndex={5}>
- *   <StripeBars verticalAlign="end" />
+ * // Vertical bar on the left edge of col 4
+ * <Cell col={4} row={1} rowSpan={6} zIndex={5}>
+ *   <StripeBars direction="vertical" />
  * </Cell>
  */
 export default function StripeBars({
   colors = DEFAULT_COLORS,
   thickness = 100 / 6 * 0.2,
-  verticalAlign = 'start',
+  direction = 'horizontal',
+  align,
+  verticalAlign,
 }: StripeBarsProps) {
+  const resolvedAlign = align ?? verticalAlign ?? 'start';
   const justifyMap = { start: 'flex-start', center: 'center', end: 'flex-end' };
+
+  if (direction === 'vertical') {
+    return (
+      <div
+        data-component="StripeBars"
+        className="flex flex-row w-full h-full pointer-events-none"
+        style={{ justifyContent: justifyMap[resolvedAlign] }}
+      >
+        <div className="flex flex-col h-full" style={{ width: `${thickness}cqi`, flexShrink: 0 }}>
+          {colors.map((color, i) => (
+            <div key={i} style={{ flex: 1, background: color }} />
+          ))}
+        </div>
+      </div>
+    );
+  }
 
   return (
     <div
       data-component="StripeBars"
       className="flex flex-col w-full h-full pointer-events-none"
-      style={{ justifyContent: justifyMap[verticalAlign] }}
+      style={{ justifyContent: justifyMap[resolvedAlign] }}
     >
       <div className="flex w-full" style={{ height: `${thickness}cqi`, flexShrink: 0 }}>
         {colors.map((color, i) => (
