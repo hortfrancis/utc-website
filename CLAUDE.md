@@ -145,6 +145,24 @@ they will cause runtime errors.
 
 ---
 
+## Cube face baking — static image workflow
+
+Cube faces are **pre-rendered to static JPEG images** and committed to the repo (`public/faces/*.jpg`). This avoids GPU compositor black-box artifacts caused by `mix-blend-mode` + `transform-style: preserve-3d` + continuous animation.
+
+When the user asks to "bake", "capture", "snapshot", or "freeze" a face, read and follow:
+
+```
+.cursor/skills/bake-cube-face/SKILL.md
+```
+
+This skill covers:
+- Running `scripts/capture-face.ts` to screenshot a face from Storybook
+- Updating the face component to serve the baked image
+- The favicon capture workflow (`scripts/capture-favicon.ts`)
+- Re-baking after a design change
+
+---
+
 ## Storybook + OpenNext/Cloudflare — `workerd` hang
 
 Never add unconditional side-effects to `next.config.ts` that start long-running
