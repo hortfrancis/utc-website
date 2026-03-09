@@ -1,5 +1,6 @@
 import type { Meta, StoryObj } from '@storybook/nextjs';
 import Logo from '@/components/Logo';
+import Logomark from '@/components/Logo/Logomark';
 import { Pressable } from '@/components/Pressable';
 import { Frame } from '@/components/Frame';
 import Accent from '@/components/Accent';
@@ -195,6 +196,32 @@ export const InAFrameWithCurve: Story = {
         story: 'Logo in a Frame with only the bottom-right corner rounded — mimics the stamp/badge style cut.',
       },
     },
+  },
+};
+
+/**
+ * Favicon capture source — 128×128 white square with the logomark centred.
+ * Screenshot this story at deviceScaleFactor:2 to produce a 256×256 app/icon.png.
+ * Use: npx tsx scripts/capture-face.ts favicon
+ */
+export const FaviconCapture: Story = {
+  name: 'Favicon Capture',
+  render: () => (
+    <div
+      style={{
+        width: 128,
+        height: 128,
+        background: 'var(--theme-white)',
+        display: 'flex',
+        alignItems: 'center',
+        justifyContent: 'center',
+      }}
+    >
+      <Logomark cubeSize={96} />
+    </div>
+  ),
+  parameters: {
+    layout: 'fullscreen',
   },
 };
 

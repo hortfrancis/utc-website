@@ -1,5 +1,5 @@
 /**
- * Captures a static PNG snapshot of a cube face from Storybook.
+ * Captures a static JPEG snapshot of a cube face from Storybook.
  *
  * Usage:
  *   npx tsx scripts/capture-face.ts <face>
@@ -9,7 +9,9 @@
  *   npx tsx scripts/capture-face.ts work
  *
  * Requires Storybook to be running on localhost:6006 (`npm run storybook`).
- * Output is written to public/faces/<face>.png at 600×600px (300px @2x retina).
+ * Output is written to public/faces/<face>.jpg at 600×600px (300px @2x retina).
+ *
+ * For the favicon, use scripts/capture-favicon.ts instead.
  */
 
 import { chromium } from 'playwright';
@@ -21,12 +23,12 @@ const OUTPUT_DIR = path.join(process.cwd(), 'public', 'faces');
 
 /** Map of face name → Storybook story ID */
 const FACE_STORY_IDS: Record<string, string> = {
-  xr: 'cube-faces--face-xr',
-  work: 'cube-faces--face-work',
-  ai: 'cube-faces--face-a-i',
+  xr:            'cube-faces--face-xr',
+  work:          'cube-faces--face-work',
+  ai:            'cube-faces--face-a-i',
   collaborators: 'cube-faces--face-collaborators',
-  showcase: 'cube-faces--face-showcase',
-  hamster: 'cube-faces--face-hamster',
+  showcase:      'cube-faces--face-showcase',
+  hamster:       'cube-faces--face-hamster',
 };
 
 async function captureFace(faceName: string): Promise<void> {
@@ -59,7 +61,7 @@ async function captureFace(faceName: string): Promise<void> {
   await root.waitFor({ state: 'visible' });
 
   // Playwright element.screenshot() supports 'png' and 'jpeg' only (no WebP).
-  // JPEG at q90 gives ~50-60% size reduction vs PNG with no visible quality loss
+  // JPEG at q90 gives ~70-84% size reduction vs PNG with no visible quality loss
   // for the solid-background face designs (none require transparency).
   const screenshot = await root.screenshot({ type: 'jpeg', quality: 90 });
 
