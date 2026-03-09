@@ -116,5 +116,5 @@ const XRDesign = () => (
 );
 
 export default function XR() {
-  return <img src="/faces/xr.png" alt="" className="w-full h-full object-cover block" />;
+  return <img src="/faces/xr.jpg" alt="" className="w-full h-full object-cover block" />;
 }

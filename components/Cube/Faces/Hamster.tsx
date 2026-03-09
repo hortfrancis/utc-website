@@ -35,5 +35,5 @@ const HamsterDesign = () => (
 );
 
 export default function Hamster() {
-  return <img src="/faces/hamster.png" alt="" className="w-full h-full object-cover block" />;
+  return <img src="/faces/hamster.jpg" alt="" className="w-full h-full object-cover block" />;
 }

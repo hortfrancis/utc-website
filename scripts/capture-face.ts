@@ -58,9 +58,12 @@ async function captureFace(faceName: string): Promise<void> {
   const root = page.locator('#storybook-root > *').first();
   await root.waitFor({ state: 'visible' });
 
-  const screenshot = await root.screenshot({ type: 'png' });
+  // Playwright element.screenshot() supports 'png' and 'jpeg' only (no WebP).
+  // JPEG at q90 gives ~50-60% size reduction vs PNG with no visible quality loss
+  // for the solid-background face designs (none require transparency).
+  const screenshot = await root.screenshot({ type: 'jpeg', quality: 90 });
 
-  const outPath = path.join(OUTPUT_DIR, `${faceName}.png`);
+  const outPath = path.join(OUTPUT_DIR, `${faceName}.jpg`);
   writeFileSync(outPath, screenshot);
 
   await browser.close();

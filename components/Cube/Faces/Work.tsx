@@ -129,5 +129,5 @@ const WorkDesign = () => (
 );
 
 export default function Work() {
-  return <img src="/faces/work.png" alt="" className="w-full h-full object-cover block" />;
+  return <img src="/faces/work.jpg" alt="" className="w-full h-full object-cover block" />;
 }
