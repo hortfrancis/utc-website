@@ -55,10 +55,14 @@ async function captureTarget(target: typeof TARGETS[number]): Promise<void> {
   // Let CSS 3D transforms and fonts settle
   await page.waitForTimeout(800);
 
+  // Wait for the logomark to be visible
   const root = page.locator('#storybook-root > *').first();
   await root.waitFor({ state: 'visible' });
 
-  const screenshot = await root.screenshot({ type: 'png' });
+  // Screenshot the full page (not just the element) — the container is viewport-filling
+  // so the page IS the icon. This avoids clipping from the CSS layout box, which the
+  // 3D-transformed cube overflows visually.
+  const screenshot = await page.screenshot({ type: 'png' });
   writeFileSync(target.outputPath, screenshot);
 
   await browser.close();
