@@ -20,7 +20,7 @@ const meta = {
   tags: ['autodocs'],
   decorators: [
     (Story) => (
-      <div className="w-[200px] h-[200px] overflow-hidden rounded border border-theme-black/20">
+      <div className="w-[300px] h-[300px] overflow-hidden rounded border border-theme-black/20">
         <Story />
       </div>
     ),
