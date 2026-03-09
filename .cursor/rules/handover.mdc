@@ -6,33 +6,51 @@ globs:
 
 # Session Handover
 
-Last updated: 2026-02-07 (session 2)
+Last updated: 2026-03-09 (session 3)
 
 ## What happened this session
 
-Major refactor of the interactive component layer, splitting concerns between a behavioral utility and a visual molecule:
+Performance fix for the 3D cube (GPU black-box artifacts) plus favicon replacement.
 
-1. **Pressable utility** (`components/Pressable/`) — new zero-visual-opinion component that handles element selection: `<Link>` for internal navigation, `<a target="_blank">` for external URLs, `<button>` for actions. Extracted from the old Button. Props: `href?`, `onClick?`, `onMouseEnter?`, `onMouseLeave?`, `children`, `className?`, `aria-label?`, `data-testid?`. Stories in `Utilities/Pressable`.
+### 1. Cube face baking — GPU fix
 
-2. **Button molecule rewrite** (`components/Button/Button.tsx`) — completely rewritten as a self-contained, opinionated interactive button. No longer wraps Frame; renders its own borders, backgrounds, hover, active, and focus styling. Uses Pressable internally. Three semantic variants:
-   - `primary` — black bg, white text, rounded-br-2xl, hover cyan (main action)
-   - `secondary` — transparent bg, black border, rounded-bl-2xl, hover cyan (supporting action)
-   - `tertiary` — no border/bg, hover cyan bg (low-emphasis, borderless)
-   - All variants: `active:translate-y-1` press-down feedback (100ms), magenta focus ring
-   - Supports `label`, `icon` (IconName), `iconOnly`, `href`, `onClick`
+The cube was causing black-box rendering artifacts in the browser. Root cause: `mix-blend-mode` inside `transform-style: preserve-3d` with continuous RAF animation exhausts the GPU compositor. Fixed by replacing the live face component layouts with static JPEG images captured from Storybook.
 
-3. **Removed interactive prop** from Frame and Accent — both are now purely presentational. The old CSS variable system (`--button-border-color`, `--button-bg`, `--button-accent-from/to`) and `Button.css` are deleted. Hover effects for custom compositions (Logo lockups, NavLinks) now use `group-hover:` on a Pressable wrapper instead.
+**Baked faces (done):** XR (`public/faces/xr.jpg`), Work (`public/faces/work.jpg`), Hamster (`public/faces/hamster.jpg`)
 
-4. **Updated all consumers:**
-   - `SectionDetail` — uses `<Button variant="primary">` / `<Button variant="secondary">` instead of `Button > Frame(interactive)`
-   - `NavLink` — uses Pressable + `group`/`group-hover:bg-theme-cyan` for hover
-   - `SiteHeader` — logo lockup uses Pressable + `group-hover:`
-   - `Logo.stories` — replaced `InAButton` stories with `InAPressable` equivalents
-   - `Frame.stories` — removed `interactive` argType
+**Unbaked faces (still live):** AI, Collaborators, Showcase — these are placeholder layouts with no blend modes, so they're not causing GPU issues.
 
-5. **Button design experiments** (`components/Button/experiments/ButtonExperiments.stories.tsx`) — from the previous session, prototyped multiple button visual styles and focus treatments. Decision: thick magenta outline for focus. These experiments remain as reference.
+**Pattern:** Each baked face component (e.g. `XR.tsx`) returns a plain `<img src="/faces/xr.jpg" ... />`. The original FaceGrid layout is preserved as a named const (`XRDesign`, `WorkDesign`, `HamsterDesign`) so redesign + re-bake is possible without losing the source.
 
-6. **Design system docs updated** (`.cursor/rules/design-system.mdc`) — added Utilities section with Pressable, moved Button from Atoms to Molecules with semantic variant API, documented active press state, removed interactive prop from Frame/Accent docs, replaced "Interactive Signalling" pattern with "Hover with group-hover" and "Focus Ring" patterns.
+**Capture script:** `scripts/capture-face.ts` — runs `npx tsx scripts/capture-face.ts <face>`. Navigates Playwright to the canonical `Cube/Faces` Storybook story, screenshots the face element at 300×300 `@2x DPR` → 600×600 JPEG q90. JPEG (not PNG) gives 70-84% smaller files vs PNG with no visible quality loss on these designs.
+
+**Image format note:** Playwright `element.screenshot()` only supports `png` and `jpeg` — no WebP natively. JPEG at q90 is the pragmatic choice. This project is on Cloudflare/OpenNext where `next/image` WebP conversion requires paid Cloudflare Image Resizing; static JPEG from CDN is simpler and good enough.
+
+**Preload hints:** `app/page.tsx` uses `ReactDOM.preload()` to hoist preload hints for all three baked face images so they fetch in parallel with other page resources.
+
+**Storybook story size:** `Faces.stories.tsx` decorator bumped from `200px` to `300px` (matches cube max size, so Playwright captures at the correct source resolution).
+
+### 2. Favicon replacement
+
+Replaced the default Vercel triangle (`favicon.ico` — deleted) with the UTC cube logomark.
+
+- `app/icon.png` — 256×256 RGBA PNG, transparent background. Browser tab favicon, auto-registered by Next.js App Router.
+- `app/apple-icon.png` — 180×180 RGBA PNG, transparent background. iOS "Add to Home Screen" touch icon.
+
+**Capture script:** `scripts/capture-favicon.ts` — single command captures both. Navigates Playwright to dedicated Storybook stories (`FaviconCapture`, `AppleFaviconCapture` in `Logo.stories.tsx`), uses `page.screenshot({ type: 'png', omitBackground: true })` for transparency.
+
+**Transparency gotcha (important for future):** Three separate background layers needed clearing before `omitBackground: true` worked:
+1. `html { background: var(--theme-black) }` — app's `globals.css` — cleared via `documentElement.style.background = 'transparent'`
+2. `body.sb-main-fullscreen { background: white }` — Storybook class — cleared by stripping `document.body.className`
+3. Storybook's layout wrapper — `<div style="position: fixed; inset: 0; background: rgb(255,255,255)">` as first child of `#storybook-root`, inline style — cleared via `storybookRoot.firstElementChild.style.background = 'transparent'`. This was the hard one: inline styles can only be overridden by other inline styles, so no stylesheet `!important` approach works.
+
+**Favicon stories:** `FaviconCapture` (128×128 viewport @2x → 256×256) and `AppleFaviconCapture` (90×90 viewport @2x → 180×180) added to `Logo.stories.tsx`. Containers are viewport-filling (`100vw × 100vh`) so `page.screenshot()` captures exactly the viewport, avoiding clipping from the CSS layout box that the 3D-transformed cube visually overflows.
+
+### 3. Cursor skill added
+
+`.cursor/skills/bake-cube-face/SKILL.md` — LM skill for both face baking and favicon capture workflows. Triggered when user says "bake", "capture", "snapshot", or "freeze" a face.
+
+---
 
 ## Current state of the design system
 
@@ -53,38 +71,52 @@ Major refactor of the interactive component layer, splitting concerns between a 
 - **Active/press** = `translate-y-1` downward shift, 100ms (Button built-in)
 - **Focus** = 4px magenta outline, 2px offset (Button built-in; add manually for Pressable compositions)
 
+### Cube face status
+
+| Face | Position | Status |
+|------|----------|--------|
+| XR | top | Baked → `public/faces/xr.jpg`, source in `XRDesign` const |
+| Work | front | Baked → `public/faces/work.jpg`, source in `WorkDesign` const |
+| Hamster | bottom | Baked → `public/faces/hamster.jpg`, source in `HamsterDesign` const |
+| AI | back | Live placeholder — needs design |
+| Collaborators | left | Live placeholder — needs design |
+| Showcase | right | Live placeholder — needs design |
+
+---
+
 ## Immediate next steps
 
-1. **`cta` variant for Button** — discussed but not yet implemented. Would be a level above `primary` for the single most important action on a page. Visual direction: possibly uses the accent gradient (magenta-green) for maximum visual weight. Naming agreed as `cta`.
+1. **Design and bake the AI, Collaborators, Showcase faces** — use Storybook experiments → promote → `npx tsx scripts/capture-face.ts <face>`. These are the remaining undesigned faces.
 
-2. **XR face experiments** — the main creative work queued up. Create 3-4 design variants in `components/Cube/Faces/experiments/`:
-   - Grid Typography: asymmetric type on the 6x6 grid
-   - Pixel Overlay: XR icon pattern as background texture with text overlay
-   - Color Block: solid theme-color cells, acid-poster style
-   - Minimal Corner: negative space, clustered text
-   - Text content: "XR: Extended Reality", "AR: Augmented Reality", "VR: Virtual Reality"
-   - Reference images from the Figma board will help guide the aesthetic
+2. **`cta` variant for Button** — discussed but not yet implemented. Level above `primary`. Visual direction: accent gradient (magenta-green). Naming agreed as `cta`.
 
-3. **Review and combine** — pick elements that work from the experiments, combine into a final XR face design, wire it into `components/Cube/Faces/XR.tsx`.
+3. **Inline link component** — needed eventually; `tertiary` Button is not appropriate for inline text links.
 
-4. **Repeat for other faces** — Work, Vision, News (Showcase last, Hamster is an easter egg).
+---
 
 ## Open decisions
 
-- **`cta` variant visual treatment**: Should it use the accent gradient? How distinct from `primary`? Discussed but deferred.
-- **Inline link component**: User noted tertiary button should not look like an inline link — a separate inline link component will be needed later (not yet built).
-- **Grid gap standardisation**: 4px tight / 8px separated is proposed but not yet confirmed as a design token.
-- **Section icons in NavLinks**: The current CSS grid icons may be replaced with Phosphor icons or another icon set. The grid icons work at large sizes but break at small pixel dimensions.
-- **UIGrid for page layouts**: The LCARS-style grid is ready but not yet used in any actual page layout.
+- **`cta` variant visual treatment**: Accent gradient? How distinct from `primary`? Deferred.
+- **Grid gap standardisation**: 4px tight / 8px separated proposed but not confirmed as a token.
+- **Section icons in NavLinks**: CSS grid icons may be replaced with Phosphor icons (they break at small sizes).
+- **UIGrid for page layouts**: Ready but not yet used in any actual page layout.
+
+---
 
 ## Gotchas
 
-- **Tailwind v4 `translate` vs `transform`**: `translate-y-*` in Tailwind v4 uses the CSS `translate` property, not `transform`. Transition must target `translate`, not `transform`.
-- **Tailwind v4 `outline` with theme colors**: `outline-theme-cyan` doesn't work — must use `outline-[var(--theme-cyan)]` for custom theme colors in outline utilities.
-- **Tailwind v4 `outline-none`**: Sets `outline: 2px solid transparent`, which interferes with `focus-visible` overrides. Use `outline-0` instead.
-- **Storybook story imports**: Always use `import type { Meta, StoryObj } from '@storybook/nextjs'` (the framework package), NOT `@storybook/react`. The `eslint-plugin-storybook` rule `no-renderer-packages` enforces this.
-- **Phosphor icon names**: Not all PascalCase guesses are correct. Verify against `node_modules/@phosphor-icons/react/dist/index.d.ts`. Icon component registry uses kebab-case names.
-- **Vercel build vs local dev**: `next build` runs ESLint and TypeScript checking that `next dev` does not. Always run `npm run build` locally before pushing if lint/type issues are suspected.
+- **Tailwind v4 `translate` vs `transform`**: `translate-y-*` uses CSS `translate` property, not `transform`. Transition must target `translate`.
+- **Tailwind v4 `outline` with theme colors**: `outline-theme-cyan` doesn't work — use `outline-[var(--theme-cyan)]`.
+- **Tailwind v4 `outline-none`**: Sets `outline: 2px solid transparent` which interferes with `focus-visible`. Use `outline-0` instead.
+- **Storybook story imports**: Always `import type { Meta, StoryObj } from '@storybook/nextjs'` — NOT `@storybook/react`. ESLint rule `no-renderer-packages` enforces this.
+- **Phosphor icon names**: Verify against `node_modules/@phosphor-icons/react/dist/index.d.ts`. Registry uses kebab-case.
+- **Vercel/Cloudflare build vs local dev**: `next build` runs ESLint + TypeScript; `next dev` does not. Run `npm run build` before pushing if lint/type issues suspected.
+- **Storybook + workerd hang**: `next.config.ts` gates `initOpenNextCloudflareForDev()` behind `!isStorybook` — never remove this gate or Storybook build hangs.
+- **Playwright `waitUntil: 'networkidle'` times out on Storybook**: Storybook's HMR websocket keeps the network permanently active. Always use `waitUntil: 'load'` in capture scripts.
+- **Playwright `element.screenshot()` clips 3D-transformed content**: CSS 3D transforms cause visual overflow beyond the element's layout box. For the favicon logomark, use `page.screenshot()` with a viewport-filling container instead.
+- **Playwright `omitBackground: true` needs all background layers cleared**: See transparency gotcha above. Three layers, each requiring a different technique.
+
+---
 
 ## Working style notes
 
@@ -96,3 +128,4 @@ The developer (Alex) prefers:
 - Storybook as the primary design tool ("vibe-designing")
 - Clear documentation that serves both humans and LLM agents
 - Having a genuinely good time while building things
+- Direct answers — if something is not worth doing, say so
