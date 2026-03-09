@@ -201,8 +201,8 @@ export const InAFrameWithCurve: Story = {
 
 /**
  * Favicon capture source — 128×128 white square with the logomark centred.
- * Screenshot this story at deviceScaleFactor:2 to produce a 256×256 app/icon.png.
- * Use: npx tsx scripts/capture-face.ts favicon
+ * Screenshot at deviceScaleFactor:2 → 256×256 app/icon.png (browser tab favicon).
+ * Use: npx tsx scripts/capture-favicon.ts
  */
 export const FaviconCapture: Story = {
   name: 'Favicon Capture',
@@ -218,6 +218,32 @@ export const FaviconCapture: Story = {
       }}
     >
       <Logomark cubeSize={96} />
+    </div>
+  ),
+  parameters: {
+    layout: 'fullscreen',
+  },
+};
+
+/**
+ * Apple touch icon capture source — 90×90 white square with the logomark centred.
+ * Screenshot at deviceScaleFactor:2 → 180×180 app/apple-icon.png (iOS home screen).
+ * Use: npx tsx scripts/capture-favicon.ts
+ */
+export const AppleFaviconCapture: Story = {
+  name: 'Apple Favicon Capture',
+  render: () => (
+    <div
+      style={{
+        width: 90,
+        height: 90,
+        background: 'var(--theme-white)',
+        display: 'flex',
+        alignItems: 'center',
+        justifyContent: 'center',
+      }}
+    >
+      <Logomark cubeSize={68} />
     </div>
   ),
   parameters: {

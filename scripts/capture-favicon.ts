@@ -1,18 +1,20 @@
 /**
- * Captures the site favicon from the Storybook FaviconCapture story and writes
- * it to app/icon.png, which Next.js App Router automatically registers as the
- * browser favicon and touch icon.
+ * Captures both favicon assets from Storybook and writes them to app/.
+ * Next.js App Router registers these automatically — no metadata config needed.
  *
  * Usage:
  *   npx tsx scripts/capture-favicon.ts
  *
  * Requires Storybook to be running on localhost:6006 (`npm run storybook`).
- * Output: app/icon.png at 256×256px (128px container @2x retina), PNG.
  *
- * PNG is used (not JPEG) because the logomark has sharp geometric edges and
- * hard colour fills — lossless compression is both smaller and crisper here.
+ * Outputs:
+ *   app/icon.png       — 256×256px  (browser tab favicon, all modern browsers)
+ *   app/apple-icon.png — 180×180px  (iOS "Add to Home Screen" touch icon)
  *
- * Re-run this script whenever the logomark design changes.
+ * PNG is used (not JPEG): the logomark has sharp geometric edges and hard colour
+ * fills — lossless compression is both smaller and crisper here than JPEG.
+ *
+ * Re-run whenever the logomark design changes.
  */
 
 import { chromium } from 'playwright';
@@ -20,20 +22,32 @@ import { writeFileSync } from 'fs';
 import path from 'path';
 
 const STORYBOOK_URL = 'http://localhost:6006';
-const STORY_ID = 'molecules-logo--favicon-capture';
-const OUTPUT_PATH = path.join(process.cwd(), 'app', 'icon.png');
 
-async function captureFavicon(): Promise<void> {
+const TARGETS = [
+  {
+    label: 'icon (256×256)',
+    storyId: 'molecules-logo--favicon-capture',
+    viewport: { width: 128, height: 128 },
+    outputPath: path.join(process.cwd(), 'app', 'icon.png'),
+  },
+  {
+    label: 'apple-icon (180×180)',
+    storyId: 'molecules-logo--apple-favicon-capture',
+    viewport: { width: 90, height: 90 },
+    outputPath: path.join(process.cwd(), 'app', 'apple-icon.png'),
+  },
+] as const;
+
+async function captureTarget(target: typeof TARGETS[number]): Promise<void> {
   const browser = await chromium.launch();
   const context = await browser.newContext({
-    // 2× device pixel ratio → 256×256px output from a 128×128 viewport
     deviceScaleFactor: 2,
-    viewport: { width: 128, height: 128 },
+    viewport: target.viewport,
   });
   const page = await context.newPage();
 
-  const url = `${STORYBOOK_URL}/iframe.html?id=${STORY_ID}&viewMode=story`;
-  console.log(`Navigating to: ${url}`);
+  const url = `${STORYBOOK_URL}/iframe.html?id=${target.storyId}&viewMode=story`;
+  console.log(`Capturing ${target.label}...`);
 
   // 'networkidle' times out on Storybook due to persistent HMR websocket connections
   await page.goto(url, { waitUntil: 'load' });
@@ -45,14 +59,20 @@ async function captureFavicon(): Promise<void> {
   await root.waitFor({ state: 'visible' });
 
   const screenshot = await root.screenshot({ type: 'png' });
-  writeFileSync(OUTPUT_PATH, screenshot);
+  writeFileSync(target.outputPath, screenshot);
 
   await browser.close();
 
-  console.log(`Saved: ${OUTPUT_PATH}`);
+  console.log(`Saved: ${target.outputPath}`);
 }
 
-captureFavicon().catch((err: unknown) => {
+async function run(): Promise<void> {
+  for (const target of TARGETS) {
+    await captureTarget(target);
+  }
+}
+
+run().catch((err: unknown) => {
   console.error(err instanceof Error ? err.message : String(err));
   process.exit(1);
 });
