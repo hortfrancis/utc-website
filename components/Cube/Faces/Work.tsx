@@ -96,34 +96,38 @@ function ProjectCell({
 
 /* ================================================================== */
 
+// Preserved source — restore as the Work() return body to redesign and re-bake
+// eslint-disable-next-line @typescript-eslint/no-unused-vars
+const WorkDesign = () => (
+  <div style={{ backgroundColor: 'var(--theme-black)' }} className="w-full h-full">
+    <FaceGrid className="bg-transparent!">
+
+      <ProjectCell col={1} row={1} color="var(--theme-purple)" title={<>Construct.AR</>} image={IMG.construct} alt="Construct.AR" icons={PROJECT_ICONS.construct} iconColor="var(--theme-white)" />
+      <ProjectCell col={3} row={1} color="var(--theme-orange)" title={<>Pop.XR</>} image={IMG.popXr} alt="Pop.XR" icons={PROJECT_ICONS.popXr} iconColor="var(--theme-white)" />
+      <ProjectCell col={5} row={1} color="var(--theme-green)" title={<>BT Urban.AR</>} image={IMG.btUrban} alt="BT Urban.AR" icons={PROJECT_ICONS.btUrban} iconColor="var(--theme-white)" />
+
+      <ProjectCell col={1} row={5} color="var(--theme-green)" title={<>Tracing <br />the <br />Footprint</>} image={IMG.tracing} alt="Tracing the Footprint" icons={PROJECT_ICONS.tracing} iconColor="var(--theme-white)" />
+      <ProjectCell col={3} row={5} color="var(--theme-magenta)" title={<>Sammy&apos;s <br />Xmas <br />Adventure</>} image={IMG.sammys} alt="Sammy's Christmas Adventure" icons={PROJECT_ICONS.sammys} iconColor="var(--theme-white)" />
+      <ProjectCell col={5} row={5} color="var(--theme-orange)" title={<>BT <br />Manufacturing <br />Showcase</>} image={IMG.btMfg} alt="BT Manufacturing Showcase" icons={PROJECT_ICONS.btMfg} iconColor="var(--theme-white)" />
+
+      <Cell col={1} row={3} colSpan={6}>
+        <StripeBars colors={['var(--theme-green)', 'var(--theme-magenta)', 'var(--theme-orange)', 'var(--theme-purple)', 'var(--theme-cyan)', 'var(--theme-orange)']} />
+      </Cell>
+      <Cell col={1} row={4} colSpan={6}>
+        <StripeBars colors={['var(--theme-green)', 'var(--theme-magenta)', 'var(--theme-orange)', 'var(--theme-purple)', 'var(--theme-cyan)', 'var(--theme-orange)']} />
+      </Cell>
+      <GridLines color="var(--theme-black)" opacity={1} />
+
+      <Cell col={1} row={3} colSpan={6} rowSpan={2}>
+        <TextBlock fontSize={30} fontWeight={900} color="var(--theme-white)" padding={0}>
+          Work
+        </TextBlock>
+      </Cell>
+
+    </FaceGrid>
+  </div>
+);
+
 export default function Work() {
-  return (
-    <div style={{ backgroundColor: 'var(--theme-black)' }} className="w-full h-full">
-      <FaceGrid className="bg-transparent!">
-
-        <ProjectCell col={1} row={1} color="var(--theme-purple)" title={<>Construct.AR</>} image={IMG.construct} alt="Construct.AR" icons={PROJECT_ICONS.construct} iconColor="var(--theme-white)" />
-        <ProjectCell col={3} row={1} color="var(--theme-orange)" title={<>Pop.XR</>} image={IMG.popXr} alt="Pop.XR" icons={PROJECT_ICONS.popXr} iconColor="var(--theme-white)" />
-        <ProjectCell col={5} row={1} color="var(--theme-green)" title={<>BT Urban.AR</>} image={IMG.btUrban} alt="BT Urban.AR" icons={PROJECT_ICONS.btUrban} iconColor="var(--theme-white)" />
-
-        <ProjectCell col={1} row={5} color="var(--theme-green)" title={<>Tracing <br />the <br />Footprint</>} image={IMG.tracing} alt="Tracing the Footprint" icons={PROJECT_ICONS.tracing} iconColor="var(--theme-white)" />
-        <ProjectCell col={3} row={5} color="var(--theme-magenta)" title={<>Sammy&apos;s <br />Xmas <br />Adventure</>} image={IMG.sammys} alt="Sammy's Christmas Adventure" icons={PROJECT_ICONS.sammys} iconColor="var(--theme-white)" />
-        <ProjectCell col={5} row={5} color="var(--theme-orange)" title={<>BT <br />Manufacturing <br />Showcase</>} image={IMG.btMfg} alt="BT Manufacturing Showcase" icons={PROJECT_ICONS.btMfg} iconColor="var(--theme-white)" />
-
-        <Cell col={1} row={3} colSpan={6}>
-          <StripeBars colors={['var(--theme-green)', 'var(--theme-magenta)', 'var(--theme-orange)', 'var(--theme-purple)', 'var(--theme-cyan)', 'var(--theme-orange)']} />
-        </Cell>
-        <Cell col={1} row={4} colSpan={6}>
-          <StripeBars colors={['var(--theme-green)', 'var(--theme-magenta)', 'var(--theme-orange)', 'var(--theme-purple)', 'var(--theme-cyan)', 'var(--theme-orange)']} />
-        </Cell>
-        <GridLines color="var(--theme-black)" opacity={1} />
-
-        <Cell col={1} row={3} colSpan={6} rowSpan={2}>
-          <TextBlock fontSize={30} fontWeight={900} color="var(--theme-white)" padding={0}>
-            Work
-          </TextBlock>
-        </Cell>
-
-      </FaceGrid>
-    </div>
-  );
+  return <img src="/faces/work.png" alt="" className="w-full h-full object-cover block" />;
 }
