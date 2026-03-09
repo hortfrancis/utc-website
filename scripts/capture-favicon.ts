@@ -59,10 +59,23 @@ async function captureTarget(target: typeof TARGETS[number]): Promise<void> {
   const root = page.locator('#storybook-root > *').first();
   await root.waitFor({ state: 'visible' });
 
-  // Screenshot the full page (not just the element) — the container is viewport-filling
-  // so the page IS the icon. This avoids clipping from the CSS layout box, which the
-  // 3D-transformed cube overflows visually.
-  const screenshot = await page.screenshot({ type: 'png' });
+  // Three layers of background need clearing:
+  // 1. html { background: var(--theme-black) } from app globals.css — cleared via class removal
+  // 2. body.sb-main-fullscreen { background: white } from Storybook — cleared by stripping classes
+  // 3. Storybook's layout wrapper: first child of #storybook-root has an inline style
+  //    `background: rgb(255,255,255)` — must clear directly since inline styles need inline overrides
+  await page.evaluate(() => {
+    document.documentElement.style.background = 'transparent';
+    document.body.className = '';
+    document.body.style.background = 'transparent';
+    const storybookRoot = document.getElementById('storybook-root');
+    const layoutWrapper = storybookRoot?.firstElementChild;
+    if (layoutWrapper instanceof HTMLElement) {
+      layoutWrapper.style.background = 'transparent';
+    }
+  });
+
+  const screenshot = await page.screenshot({ type: 'png', omitBackground: true });
   writeFileSync(target.outputPath, screenshot);
 
   await browser.close();

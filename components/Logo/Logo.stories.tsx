@@ -207,14 +207,10 @@ export const InAFrameWithCurve: Story = {
 export const FaviconCapture: Story = {
   name: 'Favicon Capture',
   render: () => (
-    // Viewport-filling so the 3D-transformed cube has room to visually overflow
-    // its CSS layout box without being clipped. Playwright sets the viewport to
-    // 128×128 and screenshots the full page → 256×256 PNG @2x.
     <div
       style={{
         width: '100vw',
         height: '100vh',
-        background: 'var(--theme-white)',
         display: 'flex',
         alignItems: 'center',
         justifyContent: 'center',
@@ -229,7 +225,7 @@ export const FaviconCapture: Story = {
 };
 
 /**
- * Apple touch icon capture source — viewport-filling white square with the logomark centred.
+ * Apple touch icon capture source — viewport-filling transparent background with the logomark centred.
  * Playwright sets viewport to 90×90 @2x → 180×180 app/apple-icon.png (iOS home screen).
  * Use: npx tsx scripts/capture-favicon.ts
  */
@@ -240,7 +236,6 @@ export const AppleFaviconCapture: Story = {
       style={{
         width: '100vw',
         height: '100vh',
-        background: 'var(--theme-white)',
         display: 'flex',
         alignItems: 'center',
         justifyContent: 'center',
