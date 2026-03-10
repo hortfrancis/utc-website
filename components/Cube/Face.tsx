@@ -7,7 +7,7 @@ interface FaceProps {
 export default function Face({ position }: FaceProps) {
   return (
     <div
-      className={`face face--${position}`}
+      className={`face face--${position} bg-theme-black`}
       data-face={position}
     >
       {position === "top" && <XR />}

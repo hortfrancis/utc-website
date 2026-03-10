@@ -12,6 +12,7 @@ export default function Home() {
   preload('/faces/xr.jpg', { as: 'image', fetchPriority: 'high' });
   preload('/faces/work.jpg', { as: 'image', fetchPriority: 'high' });
   preload('/faces/hamster.jpg', { as: 'image', fetchPriority: 'high' });
+  preload('/faces/collaborators.jpg', { as: 'image', fetchPriority: 'high' });
 
   const [activeFace, setActiveFace] = useState<FacePosition | null>(null);
 
