@@ -2,29 +2,47 @@
 
 Use this skill when the user says anything like "bake [face]", "capture [face]", "snapshot [face]", or "freeze [face] as an image".
 
-Baking a face replaces its live React layout (with blend modes, layers, etc.) with a single static PNG captured from Storybook. This eliminates GPU compositor issues caused by `mix-blend-mode` + `transform-style: preserve-3d` in the 3D cube.
+Baking a face replaces its live React layout (with blend modes, layers, etc.) with a single static JPEG captured from Storybook. This eliminates GPU compositor issues caused by `mix-blend-mode` + `transform-style: preserve-3d` in the 3D cube.
 
 ---
 
 ## Prerequisites
 
-- Storybook must be running on `localhost:6006`. Check the terminals folder first — if it's already running, proceed. If not, start it:
-  ```
-  npm run storybook
-  ```
-  Wait until the terminal shows "Storybook started" before continuing.
+**Always start a dedicated Storybook instance for capture on port 6016.** Do not use or kill whatever the user already has running on 6006 — that's their live dev session. Starting on a fixed separate port avoids clashes and port-increment surprises.
+
+```bash
+npm run storybook -- --port 6016 --ci
+```
+
+Wait until the terminal shows "Storybook ready!" before continuing. The `--ci` flag suppresses the browser auto-open.
 
 - `playwright` is installed as a dev dependency and Chromium is installed. If something fails with "browser not found", run:
   ```
   npx playwright install chromium
   ```
+  If the script aborts with no clear error (common on WSL2/Linux), missing system dependencies are likely the cause. Run:
+  ```
+  npx playwright install-deps chromium
+  ```
+
+---
+
+## Step 0 — Promote the design to the face component
+
+The capture script screenshots whatever the face component **currently renders** in Storybook. Before running it, the face component must be showing the final design — not a placeholder or a previously baked image.
+
+Open the face component (see table in Step 2) and make sure its default export renders the live FaceGrid design. If it currently returns a baked `<img>`, swap it back to the design first.
+
+If the final design lives in an experiments story, copy the render function's JSX into the face component as a named const (e.g. `ShowcaseDesign`), and return `<ShowcaseDesign />` from the default export. **Do this before running the capture script.**
 
 ---
 
 ## Step 1 — Run the capture script
 
+Pass the dedicated port via the `STORYBOOK_URL` env var:
+
 ```bash
-npx tsx scripts/capture-face.ts <face>
+STORYBOOK_URL=http://localhost:6016 npx tsx scripts/capture-face.ts <face>
 ```
 
 Valid face names: `xr`, `work`, `ai`, `collaborators`, `showcase`, `hamster`
@@ -61,43 +79,44 @@ Open the face component file:
 | `showcase` | `components/Cube/Faces/Showcase.tsx` |
 | `hamster` | `components/Cube/Faces/Hamster.tsx` |
 
-Replace the exported component function so it returns the baked image. Preserve the existing FaceGrid layout in a separate named constant so it can be restored and re-baked later.
+The design should already be in a named const from Step 0. Now swap the default export to serve the baked image:
 
-**Before:**
+**Before (after Step 0):**
 ```tsx
-export function XR() {
-  return (
-    <FaceGrid>
-      {/* ... complex layers, blend modes, etc. */}
-    </FaceGrid>
-  );
+const ShowcaseDesign = () => (
+  <FaceGrid>
+    {/* ... */}
+  </FaceGrid>
+);
+
+export default function Showcase() {
+  return <ShowcaseDesign />;
 }
 ```
 
 **After:**
 ```tsx
-// Preserved source — restore this to FaceGrid return to redesign and re-bake
-const XRDesign = () => (
+const ShowcaseDesign = () => (
   <FaceGrid>
-    {/* ... complex layers, blend modes, etc. */}
+    {/* ... */}
   </FaceGrid>
 );
 
-export function XR() {
-  return <img src="/faces/xr.jpg" alt="" className="w-full h-full object-cover block" />;
+export default function Showcase() {
+  return <img src="/faces/showcase.jpg" alt="" className="w-full h-full object-cover block" />;
 }
 ```
 
-Apply this pattern for whichever face was baked. The naming convention for the preserved constant is `{FaceName}Design` (e.g. `WorkDesign`, `AIDesign`).
+The naming convention for the preserved const is `{FaceName}Design` (e.g. `WorkDesign`, `AIDesign`, `ShowcaseDesign`).
 
 ---
 
 ## Step 3 — Verify
 
 Tell the user:
-- The path of the saved JPEG (e.g. `public/faces/xr.jpg`)
+- The path of the saved JPEG (e.g. `public/faces/showcase.jpg`)
 - That the face component now renders the baked image
-- How to re-bake: swap `XRDesign` back as the return value, edit the design in Storybook, then run the capture script again
+- How to re-bake: swap `ShowcaseDesign` back as the return value, edit the design in Storybook, then run the capture script again
 
 ---
 
@@ -128,4 +147,4 @@ If the user wants to update a baked face:
 2. Edit the design in Storybook experiments as normal
 3. Promote the final design to the face component's `{FaceName}Design` const
 4. Run `npx tsx scripts/capture-face.ts <face>` again
-5. The `<img>` tag stays the same — the PNG file is simply overwritten
+5. The `<img>` tag stays the same — the JPEG file is simply overwritten
