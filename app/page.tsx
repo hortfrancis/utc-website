@@ -11,6 +11,7 @@ export default function Home() {
   // other page resources rather than being discovered by the browser late.
   preload('/faces/xr.jpg', { as: 'image', fetchPriority: 'high' });
   preload('/faces/work.jpg', { as: 'image', fetchPriority: 'high' });
+  preload('/faces/ai.jpg', { as: 'image', fetchPriority: 'high' });
   preload('/faces/hamster.jpg', { as: 'image', fetchPriority: 'high' });
   preload('/faces/collaborators.jpg', { as: 'image', fetchPriority: 'high' });
 

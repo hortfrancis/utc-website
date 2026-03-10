@@ -18,14 +18,14 @@ import { chromium } from 'playwright';
 import { mkdirSync, writeFileSync } from 'fs';
 import path from 'path';
 
-const STORYBOOK_URL = 'http://localhost:6006';
+const STORYBOOK_URL = process.env.STORYBOOK_URL ?? 'http://localhost:6006';
 const OUTPUT_DIR = path.join(process.cwd(), 'public', 'faces');
 
 /** Map of face name → Storybook story ID */
 const FACE_STORY_IDS: Record<string, string> = {
   xr:            'cube-faces--face-xr',
   work:          'cube-faces--face-work',
-  ai:            'cube-faces--face-a-i',
+  ai:            'cube-faces--face-ai',
   collaborators: 'cube-faces--face-collaborators',
   showcase:      'cube-faces--face-showcase',
   hamster:       'cube-faces--face-hamster',
