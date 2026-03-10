@@ -2120,3 +2120,434 @@ export const BurntOutVerticalStripe: Story = {
     </FaceGrid>
   ),
 };
+
+/* ------------------------------------------------------------------ */
+/*  22 · WIDE TITLE + ICONS                                             */
+/*  Story 20 + skill icons from the collaborators: IconQuad in the    */
+/*  bottom-right corner and a single accent icon on James's block.    */
+/* ------------------------------------------------------------------ */
+
+// ─── 22 · Wide Title + Icons ─────────────────────────────────────────────────
+export const WideTitleIcons: Story = {
+  name: '22 – Wide Title + Icons',
+  render: () => (
+    <FaceGrid>
+
+      {/* ── Block 2: cyan→orange · screen (James) ── */}
+      <Cell col={4} row={1} colSpan={3} rowSpan={2}>
+        <GradientBlock
+          direction="to right"
+          stops={[
+            { color: 'var(--theme-cyan)', position: 0 },
+            { color: 'var(--theme-orange)', position: 100 },
+          ]}
+        />
+      </Cell>
+      <Cell col={4} row={1} colSpan={3} rowSpan={2}>
+        <ImageBlock
+          src="/images/collaborators/james-lee-burgess-portrait01.png"
+          alt="James Lee Burgess"
+          objectPosition="bottom"
+          mixBlendMode="luminosity"
+        />
+      </Cell>
+
+      {/* ── Block 3: orange→magenta · overlay (Charlotte) ── */}
+      <Cell col={4} row={3} colSpan={2} rowSpan={1}>
+        <GradientBlock
+          direction="to right"
+          stops={[
+            { color: 'var(--theme-orange)', position: 0 },
+            { color: 'var(--theme-magenta)', position: 100 },
+          ]}
+        />
+      </Cell>
+      <Cell col={3} row={2} colSpan={2} rowSpan={3}>
+        <ImageBlock
+          src="/images/collaborators/steve-bjorck01.png"
+          alt="Charlotte Norman"
+          objectPosition="bottom"
+          mixBlendMode="overlay"
+        />
+      </Cell>
+
+      {/* ── Block 4: purple→cyan · hard-light (Sebastian) ── */}
+      <Cell col={6} row={3} rowSpan={4}>
+        <GradientBlock
+          direction="to bottom"
+          stops={[
+            { color: 'var(--theme-purple)', position: 0 },
+            { color: 'var(--theme-cyan)', position: 100 },
+          ]}
+        />
+      </Cell>
+      <Cell col={6} row={3} rowSpan={4}>
+        <ImageBlock
+          src="/images/collaborators/sebastian-miller01.png"
+          alt="Sebastian Miller"
+          objectPosition="top"
+          mixBlendMode="hard-light"
+        />
+      </Cell>
+
+      {/* ── Block 5: green→cyan · luminosity (Jake) ── */}
+      <Cell col={1} row={4} colSpan={3} rowSpan={3}>
+        <GradientBlock
+          direction="to right"
+          stops={[
+            { color: 'var(--theme-green)', position: 0 },
+            { color: 'var(--theme-cyan)', position: 100 },
+          ]}
+        />
+      </Cell>
+      <Cell col={1} row={4} colSpan={3} rowSpan={3}>
+        <ImageBlock
+          src="/images/collaborators/jake-bignell01.png"
+          alt="Jake Bignell"
+          objectPosition="top"
+          mixBlendMode="luminosity"
+        />
+      </Cell>
+
+      {/* ── Block 6: magenta→orange · color-burn (Tom) ── */}
+      <Cell col={4} row={4} colSpan={2} rowSpan={1}>
+        <GradientBlock
+          direction="to right"
+          stops={[
+            { color: 'var(--theme-magenta)', position: 0 },
+            { color: 'var(--theme-orange)', position: 100 },
+          ]}
+        />
+      </Cell>
+      <Cell col={3} row={1} colSpan={2} rowSpan={2}>
+        <ImageBlock
+          src="/images/collaborators/tom-dale01.png"
+          alt="Tom Dale"
+          objectPosition="top"
+          mixBlendMode="hard-light"
+        />
+      </Cell>
+
+      <Cell col={4} row={4} colSpan={2} rowSpan={1}>
+        <ImageBlock
+          src="/images/collaborators/charlotte-norman01.png"
+          alt="Charlotte Norman"
+          objectPosition="top"
+          mixBlendMode="luminosity"
+        />
+      </Cell>
+
+      {/* ── Block 7: cyan→green · soft-light (Hannah) ── */}
+      <Cell col={4} row={5} colSpan={2} rowSpan={2}>
+        <GradientBlock
+          direction="to right"
+          stops={[
+            { color: 'var(--theme-magenta)', position: 0 },
+            { color: 'var(--theme-green)', position: 100 },
+          ]}
+        />
+      </Cell>
+      <Cell col={4} row={5} colSpan={2} rowSpan={2}>
+        <ImageBlock
+          src="/images/collaborators/hannah-houghton01.png"
+          alt="Hannah Houghton"
+          objectPosition="top"
+          mixBlendMode="luminosity"
+        />
+      </Cell>
+
+      {/* Stripe bar at R3/R4 boundary */}
+      <Cell col={1} row={3} colSpan={6}>
+        <StripeBars colors={['var(--theme-orange)', 'var(--theme-magenta)', 'var(--theme-cyan)', 'var(--theme-purple)']} />
+      </Cell>
+
+      {/* ── Block 1: magenta→purple · luminosity (Alex) ── */}
+      <Cell col={1} row={1} colSpan={3} rowSpan={3}>
+        <GradientBlock
+          direction="to right"
+          stops={[
+            { color: 'var(--theme-magenta)', position: 0 },
+            { color: 'var(--theme-purple)', position: 100 },
+          ]}
+        />
+      </Cell>
+
+      {/* Stripe bar at R3/R4 boundary */}
+      <Cell col={3} row={1} rowSpan={6}>
+        <StripeBars direction="vertical" align="end" colors={['var(--theme-orange)', 'var(--theme-magenta)', 'var(--theme-cyan)', 'var(--theme-purple)']} />
+      </Cell>
+
+      <Cell col={1} row={1} colSpan={2} rowSpan={3}>
+        <ImageBlock
+          src="/images/collaborators/alex-hort-francis-portrait01.png"
+          alt="Alex Hort-Francis"
+          objectPosition="top"
+          mixBlendMode="luminosity"
+          opacity={0.75}
+        />
+      </Cell>
+
+      {/* Stripe bar at R5/R6 boundary — bottom half divider */}
+      <Cell col={1} row={5} colSpan={6} zIndex={1}>
+        <StripeBars colors={['var(--theme-green)', 'transparent', 'var(--theme-magenta)', 'var(--theme-orange)', 'var(--theme-purple)', 'var(--theme-green)']} />
+      </Cell>
+
+      <Cell col={1} row={3} colSpan={6} zIndex={1}>
+        <StripeBars thickness={6} align='end' colors={['rgba(0, 0, 0, 0.5)', 'var(--theme-black)', 'var(--theme-black)', 'var(--theme-black)', 'var(--theme-black)', 'var(--theme-black)']} />
+      </Cell>
+
+      <Cell col={1} row={4} colSpan={6} zIndex={1}>
+        <StripeBars thickness={6} colors={['var(--theme-black)', 'var(--theme-black)', 'var(--theme-black)', 'rgba(0, 0, 0, 0.5)', 'var(--theme-black)', 'rgba(0, 0, 0, 0.5)']} />
+      </Cell>
+
+      {/* Overlaid "COLLABORATORS" type — full face width */}
+      <Cell col={1} row={1} colSpan={6} rowSpan={6} zIndex={2}>
+        <TextBlock fontSize={11} color="var(--theme-white)" fontWeight={900} letterSpacing="0.05em">
+          COLLABORATORS
+        </TextBlock>
+      </Cell>
+
+      {/* ── Icons: James's block accent — blueprint at top-right ── */}
+      <Cell col={6} row={1} zIndex={3}>
+        <IconSingle name="blueprint" color="var(--theme-white)" iconSize={10} opacity={0.35} />
+      </Cell>
+
+      {/* ── Icons: quad in bottom-right corner over Hannah + Sebastian ── */}
+      <Cell col={5} row={5} colSpan={2} rowSpan={2} zIndex={3}>
+        <IconQuad
+          icons={{
+            tl: 'hand-waving',
+            tr: 'virtual-reality',
+            bl: 'brain',
+            br: 'sparkle',
+          }}
+          color="var(--theme-white)"
+          opacity={1}
+          iconSize={10}
+          dividerSize={50}
+          dividerOpacity={0.5}
+          dividerWeight="thin"
+          dividerColor="var(--theme-white)"
+        />
+      </Cell>
+
+      <GridLines opacity={0.2} />
+    </FaceGrid>
+  ),
+};
+
+/* ------------------------------------------------------------------ */
+/*  23 · WIDE TITLE + ICON SINGLES                                      */
+/*  Story 20 base: one IconSingle per collaborator block, each using  */
+/*  their first icon from about.mdx. Icons sit at zIndex 3 as bold   */
+/*  accent anchors over the coloured gradient zones.                  */
+/* ------------------------------------------------------------------ */
+
+// ─── 23 · Wide Title + Icon Singles ──────────────────────────────────────────
+export const WideTitleIconSingles: Story = {
+  name: '23 – Wide Title + Icon Singles',
+  render: () => (
+    <FaceGrid>
+
+      {/* ── Block 2: cyan→orange · screen (James) ── */}
+      <Cell col={4} row={1} colSpan={3} rowSpan={2}>
+        <GradientBlock
+          direction="to right"
+          stops={[
+            { color: 'var(--theme-cyan)', position: 0 },
+            { color: 'var(--theme-orange)', position: 100 },
+          ]}
+        />
+      </Cell>
+      <Cell col={4} row={1} colSpan={3} rowSpan={2}>
+        <ImageBlock
+          src="/images/collaborators/james-lee-burgess-portrait01.png"
+          alt="James Lee Burgess"
+          objectPosition="bottom"
+          mixBlendMode="luminosity"
+        />
+      </Cell>
+
+      {/* ── Block 3: orange→magenta · overlay (Steve) ── */}
+      <Cell col={4} row={3} colSpan={2} rowSpan={1}>
+        <GradientBlock
+          direction="to right"
+          stops={[
+            { color: 'var(--theme-orange)', position: 0 },
+            { color: 'var(--theme-magenta)', position: 100 },
+          ]}
+        />
+      </Cell>
+      <Cell col={3} row={2} colSpan={2} rowSpan={3}>
+        <ImageBlock
+          src="/images/collaborators/steve-bjorck01.png"
+          alt="Steve Bjorck"
+          objectPosition="bottom"
+          mixBlendMode="overlay"
+        />
+      </Cell>
+
+      {/* ── Block 4: purple→cyan · hard-light (Sebastian) ── */}
+      <Cell col={6} row={3} rowSpan={4}>
+        <GradientBlock
+          direction="to bottom"
+          stops={[
+            { color: 'var(--theme-purple)', position: 0 },
+            { color: 'var(--theme-cyan)', position: 100 },
+          ]}
+        />
+      </Cell>
+      <Cell col={6} row={3} rowSpan={4}>
+        <ImageBlock
+          src="/images/collaborators/sebastian-miller01.png"
+          alt="Sebastian Miller"
+          objectPosition="top"
+          mixBlendMode="hard-light"
+        />
+      </Cell>
+
+      {/* ── Block 5: green→cyan · luminosity (Jake) ── */}
+      <Cell col={1} row={4} colSpan={3} rowSpan={3}>
+        <GradientBlock
+          direction="to right"
+          stops={[
+            { color: 'var(--theme-green)', position: 0 },
+            { color: 'var(--theme-cyan)', position: 100 },
+          ]}
+        />
+      </Cell>
+      <Cell col={1} row={4} colSpan={3} rowSpan={3}>
+        <ImageBlock
+          src="/images/collaborators/jake-bignell01.png"
+          alt="Jake Bignell"
+          objectPosition="top"
+          mixBlendMode="luminosity"
+        />
+      </Cell>
+
+      {/* ── Block 6: magenta→orange (Tom) ── */}
+      <Cell col={4} row={4} colSpan={2} rowSpan={1}>
+        <GradientBlock
+          direction="to right"
+          stops={[
+            { color: 'var(--theme-magenta)', position: 0 },
+            { color: 'var(--theme-orange)', position: 100 },
+          ]}
+        />
+      </Cell>
+      <Cell col={3} row={1} colSpan={2} rowSpan={2}>
+        <ImageBlock
+          src="/images/collaborators/tom-dale01.png"
+          alt="Tom Dale"
+          objectPosition="top"
+          mixBlendMode="hard-light"
+        />
+      </Cell>
+      <Cell col={4} row={4} colSpan={2} rowSpan={1}>
+        <ImageBlock
+          src="/images/collaborators/charlotte-norman01.png"
+          alt="Charlotte Norman"
+          objectPosition="top"
+          mixBlendMode="luminosity"
+        />
+      </Cell>
+
+      {/* ── Block 7: magenta→green (Hannah) ── */}
+      <Cell col={4} row={5} colSpan={2} rowSpan={2}>
+        <GradientBlock
+          direction="to right"
+          stops={[
+            { color: 'var(--theme-magenta)', position: 0 },
+            { color: 'var(--theme-green)', position: 100 },
+          ]}
+        />
+      </Cell>
+      <Cell col={4} row={5} colSpan={2} rowSpan={2}>
+        <ImageBlock
+          src="/images/collaborators/hannah-houghton01.png"
+          alt="Hannah Houghton"
+          objectPosition="top"
+          mixBlendMode="luminosity"
+        />
+      </Cell>
+
+      {/* Stripe bar at R3/R4 boundary */}
+      <Cell col={1} row={3} colSpan={6}>
+        <StripeBars colors={['var(--theme-orange)', 'var(--theme-magenta)', 'var(--theme-cyan)', 'var(--theme-purple)']} />
+      </Cell>
+
+      {/* ── Block 1: magenta→purple (Alex) ── */}
+      <Cell col={1} row={1} colSpan={3} rowSpan={3}>
+        <GradientBlock
+          direction="to right"
+          stops={[
+            { color: 'var(--theme-magenta)', position: 0 },
+            { color: 'var(--theme-purple)', position: 100 },
+          ]}
+        />
+      </Cell>
+
+      {/* Vertical stripe at col 3 boundary */}
+      <Cell col={3} row={1} rowSpan={6}>
+        <StripeBars direction="vertical" align="end" colors={['var(--theme-orange)', 'var(--theme-magenta)', 'var(--theme-cyan)', 'var(--theme-purple)']} />
+      </Cell>
+
+      <Cell col={1} row={1} colSpan={2} rowSpan={3}>
+        <ImageBlock
+          src="/images/collaborators/alex-hort-francis-portrait01.png"
+          alt="Alex Hort-Francis"
+          objectPosition="top"
+          mixBlendMode="luminosity"
+          opacity={0.75}
+        />
+      </Cell>
+
+      {/* Stripe bars at row boundaries */}
+      <Cell col={1} row={5} colSpan={6} zIndex={1}>
+        <StripeBars colors={['var(--theme-green)', 'transparent', 'var(--theme-magenta)', 'var(--theme-orange)', 'var(--theme-purple)', 'var(--theme-green)']} />
+      </Cell>
+      <Cell col={1} row={3} colSpan={6} zIndex={1}>
+        <StripeBars thickness={6} align="end" colors={['rgba(0,0,0,0.5)', 'var(--theme-black)', 'var(--theme-black)', 'var(--theme-black)', 'var(--theme-black)', 'var(--theme-black)']} />
+      </Cell>
+      <Cell col={1} row={4} colSpan={6} zIndex={1}>
+        <StripeBars thickness={6} colors={['var(--theme-black)', 'var(--theme-black)', 'var(--theme-black)', 'rgba(0,0,0,0.5)', 'var(--theme-black)', 'rgba(0,0,0,0.5)']} />
+      </Cell>
+
+      {/* "COLLABORATORS" title */}
+      <Cell col={1} row={1} colSpan={6} rowSpan={6} zIndex={2}>
+        <TextBlock fontSize={11} color="var(--theme-white)" fontWeight={900} letterSpacing="0.05em">
+          COLLABORATORS
+        </TextBlock>
+      </Cell>
+
+      {/* ── IconSingles — one per collaborator block ── */}
+
+      {/* Alex · code */}
+      <Cell col={1} row={1} zIndex={3}>
+        <IconSingle name="code" color="var(--theme-white)" iconSize={9} opacity={1} />
+      </Cell>
+
+      {/* James · blueprint */}
+      <Cell col={6} row={2} zIndex={3}>
+        <IconSingle name="blueprint" color="var(--theme-white)" iconSize={9} opacity={1} />
+      </Cell>
+
+      {/* Sebastian · browsers */}
+      <Cell col={6} row={6} zIndex={3}>
+        <IconSingle name="browsers" color="var(--theme-white)" iconSize={9} opacity={1} />
+      </Cell>
+
+      {/* Jake · virtual-reality */}
+      <Cell col={1} row={6} zIndex={3}>
+        <IconSingle name="virtual-reality" color="var(--theme-white)" iconSize={9} opacity={1} />
+      </Cell>
+
+      {/* Hannah · chat */}
+      <Cell col={5} row={6} zIndex={3}>
+        <IconSingle name="chat" color="var(--theme-white)" iconSize={9} opacity={1} />
+      </Cell>
+
+      <GridLines opacity={0.2} />
+    </FaceGrid>
+  ),
+};
