@@ -79,6 +79,8 @@ import {
   CopyrightIcon,
 
   // Fun / misc
+  AnchorIcon,
+  FootprintsIcon,
   PawPrintIcon,
   SmileyIcon,
   StarIcon,
@@ -164,6 +166,8 @@ const iconRegistry = {
   'copyright': CopyrightIcon,
 
   // Fun / misc
+  'anchor': AnchorIcon,
+  'footprints': FootprintsIcon,
   'paw-print': PawPrintIcon,
   'smiley': SmileyIcon,
   'star': StarIcon,
