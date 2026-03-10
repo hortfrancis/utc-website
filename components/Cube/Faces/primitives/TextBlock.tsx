@@ -21,7 +21,7 @@ export interface TextBlockProps {
   padding?: number;
   /** Text alignment within the block (for multi-line text). Default: 'left'. */
   textAlign?: 'left' | 'center' | 'right' | 'justify';
-  /** Line height (unitless multiplier of font size). Default: 1. */
+  /** Line height (unitless multiplier of font size). Default: 1.15 (avoids clipping italic/descenders). */
   lineHeight?: number;
   children?: React.ReactNode;
 }
@@ -42,7 +42,7 @@ export default function TextBlock({
   alignVertical = 'center',
   padding = 0,
   textAlign = 'left',
-  lineHeight = 1,
+  lineHeight = 1.15,
   children,
 }: TextBlockProps) {
   const alignMap = { start: 'flex-start', center: 'center', end: 'flex-end' };

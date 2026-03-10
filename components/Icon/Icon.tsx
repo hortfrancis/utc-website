@@ -22,6 +22,7 @@ import {
   MonitorIcon,
   DeviceMobileIcon,
   WifiHighIcon,
+  NetworkIcon,
   LightningIcon,
   BroadcastIcon,
   AtomIcon,
@@ -30,6 +31,7 @@ import {
   BlueprintIcon,
   BrainIcon,
   RobotIcon,
+  HeadCircuitIcon,
   HandWavingIcon,
   CraneIcon,
   DesktopIcon,
@@ -86,10 +88,11 @@ import {
   PlanetIcon,
   AlienIcon,
 
-  // Social
+  // Social / logos
   LinkedinLogoIcon,
   InstagramLogoIcon,
   YoutubeLogoIcon,
+  FediverseLogoIcon,
 } from '@phosphor-icons/react';
 
 const iconRegistry = {
@@ -104,6 +107,7 @@ const iconRegistry = {
   'monitor': MonitorIcon,
   'device-mobile': DeviceMobileIcon,
   'wifi': WifiHighIcon,
+  'network': NetworkIcon,
   'lightning': LightningIcon,
   'broadcast': BroadcastIcon,
   'atom': AtomIcon,
@@ -112,6 +116,7 @@ const iconRegistry = {
   'blueprint': BlueprintIcon,
   'brain': BrainIcon,
   'robot': RobotIcon,
+  'head-circuit': HeadCircuitIcon,
   'hand-waving': HandWavingIcon,
   'crane': CraneIcon,
   'desktop': DesktopIcon,
@@ -172,6 +177,7 @@ const iconRegistry = {
   'linkedin': LinkedinLogoIcon,
   'instagram': InstagramLogoIcon,
   'youtube': YoutubeLogoIcon,
+  'fediverse-logo': FediverseLogoIcon,
 } as const satisfies Record<string, ComponentType<PhosphorIconProps>>;
 
 export type IconName = keyof typeof iconRegistry;
