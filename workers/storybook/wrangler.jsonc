@@ -2,6 +2,7 @@
   "$schema": "node_modules/wrangler/config-schema.json",
   "name": "utc-website-storybook",
   "compatibility_date": "2026-03-02",
+  "workers_dev": true,
   "assets": {
     "directory": "../../storybook-static"
   }
