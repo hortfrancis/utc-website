@@ -2,8 +2,8 @@
 
 Portfolio website for **Urban Tech Creative** — a studio focused on 3D digital narratives, XR/AR/VR projects, and tech-driven creative work.
 
-- Site: [`https://utc-website.alex-hortfrancis.workers.dev`](https://utc-website.alex-hortfrancis.workers.dev/)
-- Storybook: [`https://utc-website-storybook.alex-hortfrancis.workers.dev`](https://utc-website-storybook.alex-hortfrancis.workers.dev/)
+- Site: [**`urbantechcreative.com`**](https://urbantechcreative.com/)
+- Storybook: [`utc-website-storybook.urban-tech-creative.workers.dev`](https://utc-website-storybook.urban-tech-creative.workers.dev/)
 
 ## Tech stack
 
@@ -29,10 +29,10 @@ npm run build        # Production build (runs ESLint + TypeScript checks)
 The site and Storybook are deployed to **Cloudflare Workers** with CD via
 **GitHub Actions** — every push to `main` triggers both deploys.
 
-| What | Script | Worker |
-|------|--------|--------|
-| Next.js site | `npm run deploy` | `utc-website` |
-| Storybook | `npm run deploy-storybook` | `utc-website-storybook` |
+| What         | Script                     | Worker                  |
+| ------------ | -------------------------- | ----------------------- |
+| Next.js site | `npm run deploy`           | `utc-website`           |
+| Storybook    | `npm run deploy-storybook` | `utc-website-storybook` |
 
 The site uses [OpenNext for Cloudflare](https://opennext.js.org/cloudflare) to
 run Next.js on Workers. Storybook is deployed as a plain static-assets Worker.
