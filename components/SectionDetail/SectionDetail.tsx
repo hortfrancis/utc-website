@@ -50,8 +50,6 @@ const SECTION_CONTENT: Record<FacePosition, SectionContent> = {
     description:
       'Featured projects and deep dives. A closer look at the work we\'re most proud of.',
     href: '/work/dock-stories',
-    cta: 'View Dock Stories',
-    hideClose: true,
   },
   bottom: {
     title: 'Haify the Hamster',
