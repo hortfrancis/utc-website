@@ -16,6 +16,8 @@ interface SectionContent {
   href: string | null;
   /** Override the default "Explore" button label. */
   cta?: string;
+  /** Hide the Close button, leaving only the primary CTA. */
+  hideClose?: boolean;
 }
 
 const SECTION_CONTENT: Record<FacePosition, SectionContent> = {
@@ -47,7 +49,9 @@ const SECTION_CONTENT: Record<FacePosition, SectionContent> = {
     title: 'Showcase',
     description:
       'Featured projects and deep dives. A closer look at the work we\'re most proud of.',
-    href: null, // TBD
+    href: '/work/dock-stories',
+    cta: 'View Dock Stories',
+    hideClose: true,
   },
   bottom: {
     title: 'Haify the Hamster',
@@ -108,12 +112,14 @@ export default function SectionDetail({ face, onClose }: SectionDetailProps) {
             ))}
 
             <div className="flex gap-3 justify-end">
-              <Button
-                variant="secondary"
-                label="Close"
-                onClick={onClose}
-                aria-label="Close overlay"
-              />
+              {!content.hideClose && (
+                <Button
+                  variant="secondary"
+                  label="Close"
+                  onClick={onClose}
+                  aria-label="Close overlay"
+                />
+              )}
               {content.href && (
                 <Button
                   variant="primary"
