@@ -10,4 +10,6 @@ export const workProjectLinks: NavLinkItem[] = [
   { href: '/work/window-to-the-soul', label: 'Window to the Soul', icon: 'paintbrush' },
   { href: '/work/dock-stories', label: 'Dock Stories', icon: 'paintbrush' },
   { href: '/work/digital-ipswich', label: 'Digital Ipswich', icon: 'paintbrush' },
+  { href: '/work/cambridge-arts-festival-ar-trail', label: 'Cambridge Arts Festival AR Trail', icon: 'paintbrush' },
+  { href: '/work/building-projection-sammy-the-reindeer', label: 'Building Projection Sammy the Reindeer', icon: 'paintbrush' },
 ];
